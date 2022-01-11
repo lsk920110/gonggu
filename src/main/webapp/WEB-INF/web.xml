@@ -3,6 +3,44 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee https://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
+
+
+
+
+
+	<!-- 서버에서 가장먼저 읽혀지는 파일 -->
+   <!-- 한글 깨짐 방지 -->
+   <!-- 사용할 필터 이름과 연결할 클래스 -->
+   <filter>
+      <filter-name>encodingFilter</filter-name>
+       <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+       <!-- 인코딩 종류 -->
+       <init-param>
+           <param-name>encoding</param-name>
+           <param-value>UTF-8</param-value>
+       </init-param>
+       <!-- 강제 인코딩 여부 -->
+       <init-param>
+           <param-name>forceEncoding</param-name>
+           <param-value>true</param-value>
+       </init-param>
+   </filter>
+   <!-- 어떤 필터를 언제 사용 할 것인가? -->
+   <filter-mapping>
+       <filter-name>encodingFilter</filter-name>
+       <url-pattern>/*</url-pattern>
+   </filter-mapping> 	
+
+
+
+
+
+
+
+
+
+
+
 	<!-- The definition of the Root Spring Container shared by all Servlets and Filters -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
