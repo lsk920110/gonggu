@@ -1,6 +1,6 @@
 package com.gong.gu.dto;
 
-public class wishlistDTO {
+public class WishlistDTO {
 	private String user_id;
 	private int board_no;
 	public String getUser_id() {

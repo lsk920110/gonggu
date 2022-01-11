@@ -1,6 +1,6 @@
 package com.gong.gu.dto;
 
-public class inquiry_additDTO {
+public class Inquiry_additDTO {
 	private int board_no;
 	private String inquiry_category_name;
 	private String inquiry_answer;

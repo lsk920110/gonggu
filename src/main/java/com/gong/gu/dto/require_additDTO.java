@@ -1,6 +1,6 @@
 package com.gong.gu.dto;
 
-public class require_additDTO {
+public class Require_additDTO {
 
 	private int board_no;
 	private String product_category_name;

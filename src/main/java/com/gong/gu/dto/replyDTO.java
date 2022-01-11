@@ -2,7 +2,7 @@ package com.gong.gu.dto;
 
 import java.sql.Date;
 
-public class replyDTO {
+public class ReplyDTO {
 	private int reply_no;
 	private String user_id;
 	private int board_no;

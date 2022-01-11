@@ -2,7 +2,7 @@ package com.gong.gu.dto;
 
 import java.sql.Date;
 
-public class boardDTO {
+public class BoardDTO {
 	private int board_no;
 	private String user_id;
 	private String board_title;

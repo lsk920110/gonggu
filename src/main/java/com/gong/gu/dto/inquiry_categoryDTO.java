@@ -1,6 +1,6 @@
 package com.gong.gu.dto;
 
-public class inquiry_categoryDTO {
+public class Inquiry_categoryDTO {
 	private int inquiry_category_no;
 	private String inquiry_category_name;
 	public int getInquiry_category_no() {

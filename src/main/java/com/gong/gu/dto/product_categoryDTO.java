@@ -1,6 +1,6 @@
 package com.gong.gu.dto;
 
-public class product_categoryDTO {
+public class Product_categoryDTO {
 	private int product_category_no;
 	private String product_category_name;
 	

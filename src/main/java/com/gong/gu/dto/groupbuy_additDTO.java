@@ -2,7 +2,7 @@ package com.gong.gu.dto;
 
 import java.sql.Date;
 
-public class groupbuy_additDTO {
+public class Groupbuy_additDTO {
 	private int board_no;
 	private String product_category_name;
 	private String groupbuy_state;

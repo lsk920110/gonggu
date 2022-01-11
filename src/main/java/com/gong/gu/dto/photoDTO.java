@@ -1,6 +1,6 @@
 package com.gong.gu.dto;
 
-public class photoDTO {
+public class PhotoDTO {
 	private int photo_no;
 	private int board_no;
 	private String photo_oriname;
