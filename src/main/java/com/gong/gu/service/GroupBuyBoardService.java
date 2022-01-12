@@ -49,7 +49,7 @@ public class GroupBuyBoardService {
 		if(idx>0) {
 			page = "redirect:/detail?idx="+idx; //★수정하기 detail page
 			groupbuywrite2(idx,params);
-			saveFile(idx,photos);// 파일 저장 처리	
+			//saveFile(idx,photos);// 파일 저장 처리	
 		}
 		
 		return page;
@@ -58,11 +58,13 @@ public class GroupBuyBoardService {
 	
 	
 	//사진 파일 저장
-	private void saveFile(int idx, MultipartFile[] photos) {
+	private HashMap<String,String> saveFile(MultipartFile[] photos) {  //idx
 		
+		HashMap<String, String> newphotonames = new HashMap<String, String>();
+		
+		int i = 1;
+
 		for(MultipartFile photo : photos) {
-			
-			
 			
 			try {
 				String oriFileName = photo.getOriginalFilename();
@@ -76,6 +78,7 @@ public class GroupBuyBoardService {
 					
 					String ext = oriFileName.substring(index); //확장자(보여주기 시작할 인덱스)
 					String newFileName = System.currentTimeMillis()+ext;//새로운 파일명 생성
+					Thread.sleep(1);//파일 중복 피하기위함
 					logger.info(oriFileName+" => "+newFileName);
 					
 					
@@ -84,9 +87,16 @@ public class GroupBuyBoardService {
 					
 					Path path = Paths.get("C:/upload/"+newFileName); //경로설정
 					Files.write(path, bytes);
-					logger.info(oriFileName+" SAVE OK!");
-					dao.fileWrite(idx,oriFileName,newFileName);//DB에 저장한 파일명을 기록
-					Thread.sleep(1);//파일 중복 피하기위함
+					logger.info(oriFileName+" 컴퓨터에 SAVE");
+					newphotonames.put(Integer.toString(i), newFileName);
+					i++;
+					
+					//dao.fileWrite(oriFileName,newFileName);//DB에 저장한 파일명을 기록 //idx
+					
+					
+					//1.dto 만들어서 new ori 넣고 filewrite 진행
+					//2.생성된 값들을 다시 넣어서 dto 반환
+
 					
 					
 				}
@@ -98,7 +108,7 @@ public class GroupBuyBoardService {
 			}
 		
 		}
-		
+		return newphotonames;
 	}
 	
 	//옵션 DB 글쓰기
@@ -125,6 +135,13 @@ public class GroupBuyBoardService {
 			e.printStackTrace();
 		}
 		
+	}
+
+
+
+	public HashMap<String, String> groupbuyPhotowrite(MultipartFile[] photos) {
+		saveFile(photos);
+		return saveFile(photos);
 	}
 	
 

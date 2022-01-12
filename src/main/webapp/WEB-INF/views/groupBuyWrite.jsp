@@ -49,29 +49,33 @@
 				<th>금액</th>
 				<td><input type="text" name="price"/>원</td>
 			</tr>
-			<tr>
-				<th>내용</th>
-				<td><textarea placeholder="내용을 입력하세요 ." name="board_content"></textarea></td>
-			</tr>
-			<tr>
-				<th>사진</th>
-				<td><input type="file" name="photos" multiple="multiple"/></td>
-			</tr>
-			<tr>
-				<th colspan="2">
-				<button>작성완료</button>
-				<!-- <input type="button" id="regist" value="작성완료"/> -->
-				<input type="button" onclick="location.href='./list'" value="취소" />
-				</th>
-			</tr>
 		</table>
+			<div>
+				내용<br/>
+				<textarea placeholder="내용을 입력하세요 ." name="board_content"></textarea>
+			</div>
+			<div>
+				사진
+						
+				<!-- <input type="file" name="photos" multiple="multiple"/> -->
+			</div>
+			
+			
+			<input type="button" id="open" value="사진추가" />
+			<button>작성완료</button>
+			<input type="button" onclick="location.href='./list'" value="취소" />
+			
+			
 	</form>
 	
 </body>
 <script>
 	
 
+$('#open').click(function(){
+	   win = window.open('groupBuyPhoto','','width=700,height=700'); //주소값,창이름,옵션
 
+	});
 
 
 
