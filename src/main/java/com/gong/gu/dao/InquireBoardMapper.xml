@@ -12,13 +12,20 @@
 		keyProperty="board_no"
 		keyColumn="board_no"
 		parameterType="com.gong.gu.dto.BoardDTO">
-		insert into board(board_title,board_content)values(#{board_title},#{board_content})
+		insert into board(user_id,board_title,board_content,board_name)values('admin01',#{board_title},#{board_content},'문의게시판')
 	</insert>
 	
 	<!-- 문의글 파일올리기 -->
 	<insert id="inqfilewrite">
 		insert into photo(board_no, photo_oriname, photo_newname)VALUES(#{param1},#{param2},#{param3)
 	</insert>
+	
+	<!-- 문의글쓰기 카테고리별 -->
+	<insert id="inqwrite2">
+		insert into inquiry_addit(board_no,inquiry_category_name)
+		values(#{param1},#{param2},#{param3})
+	</insert>
+	
 	
 	<!-- 문의글 수정 -->
 	<update id="inqupdate" parameterType="HashMap">
