@@ -21,6 +21,7 @@ public class MainController {
 	MainService service;
 
 	
+
 	@RequestMapping(value = "/", method = RequestMethod.GET) public String
 	main(Model model) { logger.info("헬로우 JSP");
 	
@@ -29,6 +30,6 @@ public class MainController {
 	
 	return "main";
 	}
-	
+
 
 }
