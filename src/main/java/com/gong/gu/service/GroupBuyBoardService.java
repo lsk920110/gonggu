@@ -115,9 +115,9 @@ public class GroupBuyBoardService {
 			//date Groupbuy_due_date = params.get("due_date");
 			int Groupbuy_target = Integer.parseInt(params.get("Target"));
 			int Groupbuy_unitprice = Integer.parseInt(params.get("price"));
-			//int groupbuy_max = Integer.parseInt(params.get("price"));
+			int groupbuy_max = Integer.parseInt(params.get("Max"));
 			
-			int row = dao.groupbuywrite2(idx,Category,Groupbuy_target,Groupbuy_unitprice,due_date); 
+			int row = dao.groupbuywrite2(idx,Category,Groupbuy_target,Groupbuy_unitprice,due_date,groupbuy_max); 
 			logger.info(" 입력된 건수 : {}",row);
 
 		

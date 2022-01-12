@@ -27,8 +27,8 @@
    </insert>
 
 	<insert id="groupbuywrite2">
-		INSERT INTO groupbuy_addit(board_no,product_category_name,groupbuy_target, groupbuy_unitprice,groupbuy_due_date)
-		VALUES(#{param1},#{param2},#{param3},#{param4},#{param5})
+		INSERT INTO groupbuy_addit(board_no,product_category_name,groupbuy_target, groupbuy_unitprice,groupbuy_due_date,groupbuy_max)
+		VALUES(#{param1},#{param2},#{param3},#{param4},#{param5},#{param6})
 	</insert>
 	
 	

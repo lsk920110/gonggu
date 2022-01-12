@@ -24,14 +24,22 @@ public class GroupBuyBoardController {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired GroupBuyBoardService service;
-
-	//공구게시판 글쓰기
+	
+	//공구게시판 글쓰기 페이지
+	 @RequestMapping(value = "/groupbuywriteForm", method = RequestMethod.GET) 
+	 public String groupbuywriteForm(Model model) { 
+		 logger.info("공구게시판 글쓰기 페이지 요청");
+		 return "groupBuyWrite";
+	}
+	
+	
+	//공구게시판 작성완료
 	@RequestMapping(value = "/groupbuywrite", method = RequestMethod.POST)
 	public String groupbuywrite(Model model, MultipartFile[] photos,
 			@RequestParam HashMap<String, String> params) {
 		
 
-		logger.info("글쓰기 작성완료 요청 : {}",params);
+		logger.info("글쓰기 작성 요청 : {}",params);
 		logger.info("업로드 할 파일 수 : {}",photos.length);
 
 		return service.groupbuywrite(photos,params); //상세보기로 가야하는데 마이바티스에서 내가 방금 insert한 특정 idx를 가져오게 할것임.
