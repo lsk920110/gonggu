@@ -23,7 +23,7 @@
    </insert>
 
    <insert id="fileWrite">
-      INSERT INTO photo(board_no, photo_oriname, photo_newname)VALUES(#{param1},#{param2},#{param3})
+      INSERT INTO photo(photo_oriname, photo_newname)VALUES(#{param1},#{param2})
    </insert>
 
 	<insert id="groupbuywrite2">
