@@ -9,9 +9,13 @@ public class Groupbuy_additDTO {
 	private int groupbuy_target;
 	private Date groupbuy_due_date;
 	private int groupbuy_unitprice;
+	private int groupbuy_max;
 	
 	
-	
+
+	public void setGroupbuy_max(int groupbuy_max) {
+		this.groupbuy_max = groupbuy_max;
+	}
 	public int getBoard_no() {
 		return board_no;
 	}
@@ -49,7 +53,9 @@ public class Groupbuy_additDTO {
 		this.groupbuy_unitprice = groupbuy_unitprice;
 	}
 	
-	
+	public int getGroupbuy_max() {
+		return groupbuy_max;
+	}
 	
 	
 	
