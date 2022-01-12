@@ -24,11 +24,11 @@
             		</select>
              	</th>
              	<!-- 제목 -->
-				<td><input type="text" placeholder="제목을 입력하세요." name="board_title"/></td>
+				<td><input type="text" placeholder="제목을 입력하세요" name="board_title"/></td>
 			</tr>
 
 			<tr>
-				<td><textarea placeholder="내용을 입력하세요 ." name="board_content"></textarea></td>
+				<td><textarea placeholder="내용을 입력하세요 " name="board_content"></textarea></td>
 			</tr>
 			<tr>
 				<td><input type="file" name="photos" multiple="multiple"/></td>
