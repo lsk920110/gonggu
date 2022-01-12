@@ -12,6 +12,7 @@ public class BoardDTO {
 	private String board_exposure;
 	private String board_active;
 	private String board_name;
+	
 	public int getBoard_no() {
 		return board_no;
 	}

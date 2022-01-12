@@ -6,6 +6,32 @@
 <!-- 이 xml이 어떤 interface와 연결되는지 설정 -->
 <mapper namespace="com.gong.gu.dao.InquireBoardDAO">
 
+	<!-- 문의글쓰기 -->
+	<insert id="inqwrite" 
+		useGeneratedKeys="true"
+		keyProperty="board_no"
+		keyColumn="board_no"
+		parameterType="com.gong.gu.dto.BoardDTO">
+		insert into board(board_title,board_content)values(#{board_title},#{board_content})
+	</insert>
+	
+	<!-- 문의글 파일올리기 -->
+	<insert id="inqfilewrite">
+		insert into photo(board_no, photo_oriname, photo_newname)VALUES(#{param1},#{param2},#{param3)
+	</insert>
+	
+	<!-- 문의글 수정 -->
+	<update id="inqupdate" parameterType="HashMap">
+		update board set board_title = #{board_title}
+		,board_content = #{board_content}
+		where board_no = #{board_no}
+	</update>
+	
+	
+
+
+
+
 
 
 
