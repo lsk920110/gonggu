@@ -8,7 +8,7 @@ public class BoardDTO {
 	private String board_title;
 	private String board_content;
 	private Date board_date;
-	private int bHit;
+	private int board_bHit;
 	private String board_exposure;
 	private String board_active;
 	private String board_name;
@@ -44,10 +44,10 @@ public class BoardDTO {
 		this.board_date = board_date;
 	}
 	public int getbHit() {
-		return bHit;
+		return board_bHit;
 	}
 	public void setbHit(int bHit) {
-		this.bHit = bHit;
+		this.board_bHit = bHit;
 	}
 	public String getBoard_exposure() {
 		return board_exposure;
