@@ -33,11 +33,11 @@ public class MemberController {
 	///////////////////////////////////////////////
 	
 	//홈
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Model model) {
-		logger.info("login page 이동");
-		return "login";
-	}
+//	@RequestMapping(value = "/", method = RequestMethod.GET)
+//	public String home(Model model) {
+//		logger.info("login page 이동");
+//		return "login";
+//	}
 	
 	//회원가입
 	@RequestMapping(value = "/joinForm", method = RequestMethod.GET)
