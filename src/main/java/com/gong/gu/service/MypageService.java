@@ -59,4 +59,9 @@ public class MypageService {
 		
 		return orderdetail;
 	}
+
+	public int ordercancel(String order_no) {
+		return dao.ordercancel(order_no);
+
+	}
 }

@@ -20,4 +20,6 @@ public interface MypageDAO {
 
 	HashMap<String, String> orderDetail(String order_no, String loginId);
 
+	int ordercancel(String order_no);
+
 }

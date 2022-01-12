@@ -33,12 +33,23 @@
 	
 	
 	<!-- 임시, 혹은 다른 서비스에 관한것 -->
-<!-- 	<select id="orderlist" resultType="hashmap">
-		SELECT 
-		oi.order_no, oi.order_date, b.board_title, ga.groupbuy_state, oi.order_state , oi.order_quantity , oi.order_etc
-		FROM order_info oi INNER JOIN board b USING (board_no) INNER JOIN groupbuy_addit ga USING (board_no) WHERE oi.user_id = #{param1}
+	<select id="orderDetail" resultType="hashmap">
+	SELECT 
+	oi.order_name , oi.order_address, oi.order_phone, oi.order_no, oi.order_date,oi.order_state , oi.order_quantity , 
+	b.board_no , b.board_title, 
+	ga.groupbuy_state, ga.groupbuy_unitprice
+	FROM order_info oi INNER JOIN board b 
+	USING (board_no) 
+	INNER JOIN groupbuy_addit ga 
+	USING (board_no) WHERE oi.order_no = #{param1};	
 	</select>	
-	 -->
+	
+	
+	<update id="ordercancel">
+	UPDATE order_info SET order_state = '취소완료' WHERE order_no = #{param1}
+	
+	</update>
+
 	
 
 </mapper>

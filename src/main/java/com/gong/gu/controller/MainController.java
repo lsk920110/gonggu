@@ -22,9 +22,13 @@ public class MainController {
 
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET) public String
-	home(Model model) { logger.info("헬로우 JSP");
+	main(Model model) { logger.info("헬로우 JSP");
 	
-	return "home"; }
+	
+	
+	
+	return "main";
+	}
 	
 
 }

@@ -110,18 +110,29 @@ public class MypageController {
 		return "temphome"; 	
 	}
 	
+	//공구관련 정보이기 때문에, GroupBuy 컨트롤러로 옮겨야함
 	@RequestMapping(value = "/orderDetail", method = RequestMethod.GET)
 	public String orderDetail(Model model, @RequestParam String order_no, HttpSession session) { 
 		logger.info("{} 주문번호 상세 요청",order_no);
 		
 
-		/*
-		 * String loginId = (String) session.getAttribute("loginId"); HashMap<String,
-		 * String> orderdetail = service.orderDetail(order_no,loginId);
-		 */
 		
+		String loginId = (String) session.getAttribute("loginId"); 
+		HashMap<String,String> orderdetail = service.orderDetail(order_no,loginId);
+		model.addAttribute("orderdetail",orderdetail);
+		model.addAttribute("frompage","myorderList");
 		return "orderDetail"; 	
-	}	
+	}
+	
+	
+	@RequestMapping(value = "/orderCancel", method = RequestMethod.GET)
+	public String orderCancel(Model model, @RequestParam String order_no) { 
+		logger.info("{} order_no 취소요청",order_no);
+		int row = service.ordercancel(order_no);
+		
+		
+		return "redirect:/orderDetail?order_no="+order_no; 	
+	}
 	
 	
 	
