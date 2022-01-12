@@ -9,6 +9,9 @@ public class Groupbuy_additDTO {
 	private int groupbuy_target;
 	private Date groupbuy_due_date;
 	private int groupbuy_unitprice;
+	
+	
+	
 	public int getBoard_no() {
 		return board_no;
 	}

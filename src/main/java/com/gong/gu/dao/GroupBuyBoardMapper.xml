@@ -6,9 +6,30 @@
 <!-- 이 xml이 어떤 interface와 연결되는지 설정 -->
 <mapper namespace="com.gong.gu.dao.GroupBuyBoardDAO">
 
+   <!-- 조건2
+      useGeneratedKeys="true" <- insert후 키를 가져오는 옵션을 사용할 것인가?
+      keyProperty="idx" <- dto의 어느 필드에 담을 것인가? , 필드에 값을 넣겠다. 필드는 클래스만 받을 수 있다 hashmap은 안된다.
+      keyColumn="idx" <- 어느 컬럼을 가져올 것인가? , DB의 어떤 컬럼에서 값을 가져올지 정하는 값
+   --> 
+   
+   <!-- id= 연결할 DAO의 메서드명  -->
+   <insert id="groupbuywrite"
+      useGeneratedKeys="true"
+      keyProperty="board_no"
+      keyColumn="board_no"
+      parameterType="com.gong.gu.dto.BoardDTO">
+      INSERT INTO board(user_id,board_title,board_content,board_name)VALUES('admin01',#{board_title},#{board_content},'공구게시판')
+      
+   </insert>
 
+   <insert id="fileWrite">
+      INSERT INTO photo(board_no, photo_oriname, photo_newname)VALUES(#{param1},#{param2},#{param3})
+   </insert>
 
-
-
-
+	<insert id="groupbuywrite2">
+		INSERT INTO groupbuy_addit(board_no,product_category_name,groupbuy_target, groupbuy_unitprice,groupbuy_due_date)
+		VALUES(#{param1},#{param2},#{param3},#{param4},#{param5})
+	</insert>
+	
+	
 </mapper>
