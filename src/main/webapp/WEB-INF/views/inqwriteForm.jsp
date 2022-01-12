@@ -10,36 +10,40 @@
 </head>
 <body>
 	<h3>| 문의게시글 작성하기</h3>
-	<form action="inqwrite" method="POST" enctype="multipart/form-data">
-        카테고리
-        <select name = "title" size="1" multiple>
-            <option value="one" selected>배송문의</option>
-            <option value="two" selected>반품/교환/환불</option>
-            <option value="three" selected>주문/결제</option>
-            <option value="four" selected>제품문의</option>
-            <option value="five" selected>회원서비스</option>
-        </select>
+	<form action="inqwrite" method="post" enctype="multipart/form-data">
+		<table>    
+			<tr>
+				<th>
+					<select name="Category">
+                    <option value="" disabled selected>카테고리 선택</option>
+                    <option value="배송문의">배송문의</option>
+                    <option value="반품/교환/환불">반품/교환/환불</option>
+                    <option value="주문/결제">주문/결제</option>
+                    <option value="제품문의">제품문의</option>
+                    <option value="회원서비스">회원서비스</option>
+            		</select>
+             	</th>
+             	<!-- 제목 -->
+				<td><input type="text" placeholder="제목을 입력하세요." name="board_title"/></td>
+			</tr>
 
-		<table>
 			<tr>
-				<td><input type="text" name="title" placeholder="제목을 입력하세요"/></td>
+				<td><textarea placeholder="내용을 입력하세요 ." name="board_content"></textarea></td>
 			</tr>
-			
 			<tr>
-				<td><textarea name="content" placeholder="내용을 입력하세요"></textarea></td>
+				<td><input type="file" name="photos" multiple="multiple"/></td>
 			</tr>
-		
-			
 			<tr>
 				<th colspan="2">
-					<button>등록</button>
-					<input type="button" onclick="location.href='./'" value="취소"/>
+				<button>등록</button>
+				<!-- <input type="button" id="regist" value="작성완료"/> -->
+				<input type="button" onclick="location.href='./list'" value="취소" />
 				</th>
 			</tr>
-			
 		</table>
-	
 	</form>
+	
+</body>
   
 </body>
 <script></script>
