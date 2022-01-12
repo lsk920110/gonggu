@@ -47,4 +47,24 @@ public class GroupBuyBoardController {
 	}
 	 
 	
+	//공구게시판 사진 자식창 요청
+	 @RequestMapping(value = "/groupBuyPhoto", method = RequestMethod.GET) 
+	 public String groupBuyPhoto(Model model) { 
+		 logger.info("공구게시판 자식창 요청");
+		 return "groupBuyPhoto";
+	}
+	 
+	
+	//공구 사진 업로드 요청
+	 @RequestMapping(value = "/groupbuyPhotowrite", method = RequestMethod.POST)
+		public String groupbuyPhotowrite(Model model, MultipartFile[] photos) {
+			
+			logger.info("업로드 할 파일 수 : {}",photos.length);
+			HashMap<String, String> photolist = service.groupbuyPhotowrite(photos);
+			logger.info("{}",photolist);
+			model.addAttribute("photolist",photolist);
+			
+			
+			return "groupBuyPhoto";
+		}
 }
