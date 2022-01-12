@@ -17,9 +17,9 @@ public class MypageService {
 	@Autowired MypageDAO dao;
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	public ArrayList<Order_infoDTO> orderlist(String loginId) {
+	public ArrayList<HashMap<String, String>> orderlist(String loginId) {
 		
-		ArrayList<Order_infoDTO> orderList = dao.orderlist(loginId);
+		ArrayList<HashMap<String, String>> orderList = dao.orderlist(loginId);
 		
 		
 		return orderList;
@@ -49,5 +49,14 @@ public class MypageService {
 		MemberDTO myProfile = dao.myprofile(loginId);
 
 		return myProfile;
+	}
+
+	public HashMap<String, String> orderDetail(String order_no, String loginId) {
+		
+		
+		HashMap<String, String> orderdetail = dao.orderDetail(order_no,loginId);
+		
+		
+		return orderdetail;
 	}
 }

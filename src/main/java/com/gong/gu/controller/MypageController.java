@@ -43,7 +43,7 @@ public class MypageController {
 		logger.info("myorderList 요청");
 		String loginId = (String)session.getAttribute("loginId");
 		
-		ArrayList<Order_infoDTO> orderList = service.orderlist(loginId);
+		ArrayList<HashMap<String, String>> orderList = service.orderlist(loginId);
 		model.addAttribute("orderList", orderList);
 		
 		return "myorderList"; 
@@ -90,12 +90,7 @@ public class MypageController {
 		return "myProfile"; 	
 	}
 	
-	@RequestMapping(value = "/temphome", method = RequestMethod.GET)
-	public String loginpage_temp(Model model) { 
-		logger.info("myProfile 요청");
 
-		return "temphome"; 	
-	}	
 	
 	@RequestMapping(value = "/login_temp", method = RequestMethod.GET)
 	public String login_temp(Model model, HttpSession session, @RequestParam String id, @RequestParam String pw) { 
@@ -106,5 +101,28 @@ public class MypageController {
 		model.addAttribute("loginId",loginId);
 		return "redirect:/mypage";
 	}	
+	
+//	여기서부터는 임시 컨트롤러 메서드입니다.
+	@RequestMapping(value = "/temphome", method = RequestMethod.GET)
+	public String loginpage_temp(Model model) { 
+		logger.info("myProfile 요청");
+
+		return "temphome"; 	
+	}
+	
+	@RequestMapping(value = "/orderDetail", method = RequestMethod.GET)
+	public String orderDetail(Model model, @RequestParam String order_no, HttpSession session) { 
+		logger.info("{} 주문번호 상세 요청",order_no);
+		
+
+		String loginId = (String) session.getAttribute("loginId");
+		HashMap<String, String> orderdetail = service.orderDetail(order_no,loginId);
+		
+		return "orderDetail"; 	
+	}	
+	
+	
+	
+	
 		
 }

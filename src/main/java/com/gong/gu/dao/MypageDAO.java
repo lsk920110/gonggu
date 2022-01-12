@@ -8,7 +8,7 @@ import com.gong.gu.dto.Order_infoDTO;
 
 public interface MypageDAO {
 
-	ArrayList<Order_infoDTO> orderlist(String loginId);
+	ArrayList<HashMap<String, String>> orderlist(String loginId);
 
 	ArrayList<HashMap<String, String>> inquirelist(String loginId);
 
@@ -17,5 +17,7 @@ public interface MypageDAO {
 	String login_temp(String id, String pw);
 
 	MemberDTO myprofile(String loginId);
+
+	HashMap<String, String> orderDetail(String order_no, String loginId);
 
 }

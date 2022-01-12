@@ -40,10 +40,10 @@
 		</c:if>
 		<c:forEach var="orl" items="${orderList}" >
 		<tr>
-			<th>${orl.order_no}</th>
+			<th><a href="orderDetail?order_no=${orl.order_no}">${orl.order_no}</a></th>
 			<th>${orl.order_date}</th>
-			<th></th>		
-			<th></th>	
+			<th>${orl.board_title}</th>		
+			<th>${orl.groupbuy_state}</th>	
 			<th>${orl.order_state}</th>		
 			<th>${orl.order_quantity }</th>
 			<th>${orl.order_etc}</th>		

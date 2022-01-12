@@ -6,8 +6,10 @@
 <!-- 이 xml이 어떤 interface와 연결되는지 설정 -->
 <mapper namespace="com.gong.gu.dao.MypageDAO">
 
-	<select id="orderlist" resultType="com.gong.gu.dto.Order_infoDTO">
-		select * from order_info WHERE user_id = #{param1}
+	<select id="orderlist" resultType="hashmap">
+		SELECT 
+		oi.order_no, oi.order_date, b.board_title, ga.groupbuy_state, oi.order_state , oi.order_quantity , oi.order_etc
+		FROM order_info oi INNER JOIN board b USING (board_no) INNER JOIN groupbuy_addit ga USING (board_no) WHERE oi.user_id = #{param1}
 	</select>
 
 	<select id="inquirelist" resultType="hashmap">
@@ -27,5 +29,16 @@
 	<select id="myprofile" resultType="com.gong.gu.dto.MemberDTO">
 	select * from user_info where user_id = #{param1}
 	</select>
+	
+	
+	
+	<!-- 임시, 혹은 다른 서비스에 관한것 -->
+	<select id="orderlist" resultType="hashmap">
+		SELECT 
+		oi.order_no, oi.order_date, b.board_title, ga.groupbuy_state, oi.order_state , oi.order_quantity , oi.order_etc
+		FROM order_info oi INNER JOIN board b USING (board_no) INNER JOIN groupbuy_addit ga USING (board_no) WHERE oi.user_id = #{param1}
+	</select>	
+	
+	
 
 </mapper>
