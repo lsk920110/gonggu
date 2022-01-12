@@ -115,8 +115,10 @@ public class MypageController {
 		logger.info("{} 주문번호 상세 요청",order_no);
 		
 
-		String loginId = (String) session.getAttribute("loginId");
-		HashMap<String, String> orderdetail = service.orderDetail(order_no,loginId);
+		/*
+		 * String loginId = (String) session.getAttribute("loginId"); HashMap<String,
+		 * String> orderdetail = service.orderDetail(order_no,loginId);
+		 */
 		
 		return "orderDetail"; 	
 	}	

@@ -33,12 +33,12 @@
 	
 	
 	<!-- 임시, 혹은 다른 서비스에 관한것 -->
-	<select id="orderlist" resultType="hashmap">
+<!-- 	<select id="orderlist" resultType="hashmap">
 		SELECT 
 		oi.order_no, oi.order_date, b.board_title, ga.groupbuy_state, oi.order_state , oi.order_quantity , oi.order_etc
 		FROM order_info oi INNER JOIN board b USING (board_no) INNER JOIN groupbuy_addit ga USING (board_no) WHERE oi.user_id = #{param1}
 	</select>	
-	
+	 -->
 	
 
 </mapper>
