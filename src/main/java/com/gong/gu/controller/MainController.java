@@ -21,10 +21,12 @@ public class MainController {
 	MainService service;
 
 	
-	@RequestMapping(value = "/", method = RequestMethod.GET) public String
-	home(Model model) { logger.info("헬로우 JSP");
-	
-	return "home"; }
+	/*
+	 * @RequestMapping(value = "/", method = RequestMethod.GET) public String
+	 * home(Model model) { logger.info("헬로우 JSP");
+	 * 
+	 * return "home"; }
+	 */
 	
 
 }
