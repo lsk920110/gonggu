@@ -1,7 +1,10 @@
 package com.gong.gu.controller;
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
+
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.gong.gu.dto.PhotoDTO;
 import com.gong.gu.service.GroupBuyBoardService;
 
 
@@ -26,16 +30,16 @@ public class GroupBuyBoardController {
 	@Autowired GroupBuyBoardService service;
 	
 	//공구게시판 글쓰기 페이지
-	 @RequestMapping(value = "/groupbuywriteForm", method = RequestMethod.GET) 
-	 public String groupbuywriteForm(Model model) { 
+	 @RequestMapping(value = "/groupBuyWriteForm", method = RequestMethod.GET) 
+	 public String groupBuyWriteForm(Model model) { 
 		 logger.info("공구게시판 글쓰기 페이지 요청");
 		 return "groupBuyWrite";
 	}
 	
 	
 	//공구게시판 작성완료
-	@RequestMapping(value = "/groupbuywrite", method = RequestMethod.POST)
-	public String groupbuywrite(Model model, MultipartFile[] photos,
+	@RequestMapping(value = "/groupBuyWrite", method = RequestMethod.POST)
+	public String groupBuyWrite(Model model, MultipartFile[] photos,
 			@RequestParam HashMap<String, String> params) {
 		
 
@@ -56,8 +60,8 @@ public class GroupBuyBoardController {
 	 
 	
 	//공구 사진 업로드 요청
-	 @RequestMapping(value = "/groupbuyPhotowrite", method = RequestMethod.POST)
-		public String groupbuyPhotowrite(Model model, MultipartFile[] photos) {
+	 @RequestMapping(value = "/groupBuyPhotoWrite", method = RequestMethod.POST)
+		public String groupBuyPhotoWrite(Model model, MultipartFile[] photos) {
 			
 			logger.info("업로드 할 파일 수 : {}",photos.length);
 			HashMap<String, String> photolist = service.groupbuyPhotowrite(photos);
@@ -67,4 +71,20 @@ public class GroupBuyBoardController {
 			
 			return "groupBuyPhoto";
 		}
+	 
+	 
+	 //공구 리스트 불러오기
+	 
+	@RequestMapping(value = "/groupBuyList", method = RequestMethod.GET)
+	public String groupBuyList(Model model, HttpSession session) { 
+		logger.info("groupBuyList 요청");
+		
+		//String loginId = (String)session.getAttribute("loginId");		
+		ArrayList<HashMap<String, String>> groupBuyList = service.groupBuyList();
+		model.addAttribute("groupBuyList", groupBuyList);	
+		
+		return "groupBuyList"; 
+		
+	}
+	 
 }

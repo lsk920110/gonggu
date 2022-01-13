@@ -6,6 +6,7 @@ import java.nio.file.Paths;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -17,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.gong.gu.dao.GroupBuyBoardDAO;
 import com.gong.gu.dto.BoardDTO;
+import com.gong.gu.dto.PhotoDTO;
 
 @Service
 public class GroupBuyBoardService {
@@ -111,7 +113,7 @@ public class GroupBuyBoardService {
 		return newphotonames;
 	}
 	
-	//옵션 DB 글쓰기
+	//공구게시글 옵션 DB 글쓰기
 	private void groupbuywrite2(int idx, HashMap<String, String> params){
 		logger.info("옵션 DB 데이터 넣기 : {}",params);
 
@@ -122,7 +124,6 @@ public class GroupBuyBoardService {
 			SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
 			Date due_date = transFormat.parse(from);
 
-			//date Groupbuy_due_date = params.get("due_date");
 			int Groupbuy_target = Integer.parseInt(params.get("Target"));
 			int Groupbuy_unitprice = Integer.parseInt(params.get("price"));
 			int groupbuy_max = Integer.parseInt(params.get("Max"));
@@ -138,11 +139,22 @@ public class GroupBuyBoardService {
 	}
 
 
-
+	//photo 저장
 	public HashMap<String, String> groupbuyPhotowrite(MultipartFile[] photos) {
 		saveFile(photos);
 		return saveFile(photos);
 	}
+
+
+	//공구리스트
+	public ArrayList<HashMap<String, String>> groupBuyList() {
+			
+		ArrayList<HashMap<String, String>> groupBuyList = dao.groupBuyList();
+		
+		return groupBuyList;
 	
+	}
+
+
 
 }

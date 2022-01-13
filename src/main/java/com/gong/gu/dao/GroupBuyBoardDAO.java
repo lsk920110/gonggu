@@ -1,8 +1,11 @@
 package com.gong.gu.dao;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 import com.gong.gu.dto.BoardDTO;
+import com.gong.gu.dto.PhotoDTO;
 
 public interface GroupBuyBoardDAO {
 
@@ -11,5 +14,8 @@ public interface GroupBuyBoardDAO {
 	void fileWrite(String oriFileName, String newFileName);
 
 	int groupbuywrite2(int idx, String category, int groupbuy_target, int groupbuy_unitprice, Date due_date, int groupbuy_max);
+
+	ArrayList<HashMap<String, String>> groupBuyList();
+
 
 }
