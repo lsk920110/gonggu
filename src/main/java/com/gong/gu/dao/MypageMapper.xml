@@ -50,6 +50,26 @@
 	
 	</update>
 
+	<insert id="groupbuywrite2"
+		useGeneratedKeys="true"
+		keyColumn="board_no"
+		keyProperty="board_no"
+		parameterType="com.gong.gu.dto.BoardDTO">
+		INSERT INTO board(user_id,board_title,board_content,board_name)VALUES(#{user_id},#{board_title},#{board_content},#{board_name})
+	</insert>
 	
+	<insert id="groupbuywrite2_gba"
+		parameterType="com.gong.gu.dto.Groupbuy_additDTO">
+		INSERT INTO groupbuy_addit(board_no,groupbuy_unitprice,Groupbuy_max,Groupbuy_due_date,Product_category_name)
+		VALUES(#{board_no},#{groupbuy_unitprice},#{groupbuy_max},#{groupbuy_due_date},#{product_category_name})
+	</insert>	
+
+	<insert id="groupbuywrite2_pho"
+		parameterType="com.gong.gu.dto.PhotoDTO">
+		INSERT INTO photo(board_no,photo_newname,photo_thum)
+		VALUES(#{board_no},#{photo_newname},#{photo_thum})
+	</insert>	
+	
+
 
 </mapper>

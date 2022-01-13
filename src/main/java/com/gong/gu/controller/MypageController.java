@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.gong.gu.dto.BoardDTO;
 import com.gong.gu.dto.MemberDTO;
@@ -135,7 +136,50 @@ public class MypageController {
 	}
 	
 	
+	//사진등록 관련 임시 요청
+	//공구게시판 글쓰기 페이지
+	 @RequestMapping(value = "/groupbuywriteForm2", method = RequestMethod.GET) 
+	 public String groupbuywriteForm2(Model model) { 
+		 logger.info("공구게시판 글쓰기 페이지 요청");
+		 return "groupBuyWrite2";
+	}
 	
+	//공구게시판 사진 자식창 요청
+	 @RequestMapping(value = "/groupBuyPhoto2", method = RequestMethod.GET) 
+	 public String groupBuyPhoto2(Model model) { 
+		 logger.info("공구게시판 자식창 요청");
+		 HashMap<String, String> photolist = new HashMap<String, String>();
+		 model.addAttribute("photolist",photolist);
+		 return "groupBuyPhoto2";
+	}
+	 
 	
+	//공구 사진 업로드 요청
+	 @RequestMapping(value = "/groupbuyPhotowrite2", method = RequestMethod.POST)
+		public String groupbuyPhotowrite2(Model model, MultipartFile[] photos) {
+			
+			logger.info("업로드 할 파일 수 : {}",photos.length);
+			ArrayList<String> photolist = service.groupbuyPhotowrite2(photos);
+			logger.info("{}",photolist);
+			model.addAttribute("photolist",photolist);
+			
+			
+//			return "redirect:/groupbuyPhotowrite2?photolist="+photolist;
+			return "groupBuyPhoto2";
+		}
+	
+	 @RequestMapping(value = "/groupbuywrite2", method = RequestMethod.POST) 
+	 public String groupbuywrite2(Model model, @RequestParam HashMap<String, String> params, HttpSession session) { 
+		 logger.info("공구게시판 글쓰기 페이지 요청");
+		 logger.info("{}",params);
+		 
+		 String board_name = "공구게시판";
+		 String loginId = (String) session.getAttribute("loginId");
+		 service.groupbuywrite2(loginId, params, board_name);
+		 //service.groupbuywrite2();
+		 
+		 
+		 return "/main";
+	}	
 		
 }

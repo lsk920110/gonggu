@@ -56,5 +56,7 @@
 
 	
 </body>
-<script></script>
+<script>
+	console.log("${orderList}");
+</script>
 </html>

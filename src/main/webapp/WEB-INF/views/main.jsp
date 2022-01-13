@@ -28,7 +28,7 @@
 		<tr>
 			<td><a href="./temphome">temphome</a></td>
 			<td><a href="./adminOrderList">adminOrderList</a></td>
-			<td><a href="./groupbuywriteForm">groupbuywriteForm</a></td>
+			<td><a href="./groupBuyList">groupBuyList</a></td>
 			<td><a href="./inqwriteForm">inqwriteForm</a></td>
 			<td><a href="./InquireBoardlist">InquireBoardlist</a></td>
 			<td><a href="./login">login</a></td>
