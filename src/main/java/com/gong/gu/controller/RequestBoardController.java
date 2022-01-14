@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.gong.gu.service.RequestBoardService;
 
@@ -21,11 +23,16 @@ public class RequestBoardController {
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	/*
-	 * @RequestMapping(value = "/", method = RequestMethod.GET) public String
-	 * home(Model model) { logger.info("헬로우 JSP");
-	 * 
-	 * return "home"; }
-	 */
 	
+	// 요청글쓰기 페이지 요청
+	 @RequestMapping(value = "/reqwriteForm", method = RequestMethod.GET) 
+	 public String ReqwriteForm(Model model) { 
+		 logger.info("요청글쓰기 페이지 요청"); 
+		 return "reqwriteForm";
+	 }
+	 
+
+	 
+	 
+	 
 }

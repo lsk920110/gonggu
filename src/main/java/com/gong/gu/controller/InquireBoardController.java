@@ -29,14 +29,15 @@ public class InquireBoardController {
 	
 	// 문의글쓰기 페이지 요청
 	 @RequestMapping(value = "/inqwriteForm", method = RequestMethod.GET) 
-	 public String home(Model model) { 
+	 public String inqwriteForm(Model model) { 
 		 logger.info("문의글쓰기 페이지 요청");
 		 return "inqwriteForm";
 	}
 	 
 	// 문의글쓰기 요청
 	 @RequestMapping(value = "/inqwrite", method = RequestMethod.POST) 
-	 public String inqwrite(Model model, MultipartFile[] photos, @RequestParam HashMap<String, String> params) { 
+	 public String inqwrite(Model model, MultipartFile[] photos, 
+			 @RequestParam HashMap<String, String> params) { 
 		 logger.info("문의글쓰기 요청 : {}", params);
 		 logger.info("업로드 할 파일의 수 : {}",photos.length);
 		 return service.inqwrite(photos,params);
@@ -45,9 +46,9 @@ public class InquireBoardController {
 	
 	 // 문의글 수정페이지 요청
 	 @RequestMapping(value = "/inqupdateForm", method = RequestMethod.GET) 
-	 public String inqupdateForm(Model model) { 
-		 logger.info("문의글 수정페이지 요청");
-		 return "inqupdateForm"; 
+	 public String inqupdateForm(Model model, @RequestParam String idx) { 
+		 logger.info("inqupdateForm : {}",idx);
+		 return service.inqupdateForm(model,idx);
 	}
 	 
 	 
@@ -61,10 +62,7 @@ public class InquireBoardController {
 	}
 	 
 
-	 
-	 
-	 
-	 
+	
 	
 	
 }

@@ -6,14 +6,15 @@ import com.gong.gu.dto.BoardDTO;
 
 public interface InquireBoardDAO {
 
-	void inqwrite(BoardDTO dto);
+	BoardDTO inquireBoardDetail(String idx); // 문의게시글 상세정보
 	
-	void fileWrite(int idx, String oriFileName, String newFileName);
+	void inqwrite(BoardDTO dto); // 문의게시글쓰기
+	
+	int inqfilewrite(int idx, String oriFileName, String newFileName); // 문의게시글 파일저장
 
-	int inqwrite2(int idx, String category);
+	int inqwrite2(int idx, String category); // 문의게시글 카테고리
 
-	int update(HashMap<String, String> params);
-	
-	
+	int inqupdate(HashMap<String, String> params); // 문의게시글 수정
+
 
 }

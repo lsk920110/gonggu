@@ -10,7 +10,7 @@
 </head>
 <body>
 	<h3>| 문의게시글 작성하기</h3>
-	<form action="inqwrite" method="post" enctype="multipart/form-data">
+	<form action="inqupdate" method="post" enctype="multipart/form-data">
 		<table>    
 			<tr>
 				<th>

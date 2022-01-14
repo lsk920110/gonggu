@@ -6,7 +6,6 @@
  <meta charset="UTF-8">
  <title>Insert title here</title>
  <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
- <style></style>
 </head>
 <body>
 	<h3>| 문의게시글 작성하기</h3>
@@ -23,14 +22,15 @@
                     <option value="회원서비스">회원서비스</option>
             		</select>
              	</th>
-             	<!-- 제목 -->
 				<td><input type="text" placeholder="제목을 입력하세요" name="board_title"/></td>
 			</tr>
 
 			<tr>
+				<th></th>
 				<td><textarea placeholder="내용을 입력하세요 " name="board_content"></textarea></td>
 			</tr>
 			<tr>
+				<th></th>
 				<td><input type="file" name="photos" multiple="multiple"/></td>
 			</tr>
 			<tr>
