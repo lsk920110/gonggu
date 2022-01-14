@@ -172,4 +172,48 @@ public class MypageService {
 		
 		
 	}
+
+	public HashMap<String, String> orderConfirmPage(int board_no, String loginId) {
+		//user_info 에서 user_name,user_address,user_phone,
+		//board JOIN groupbuy_addit 에서 board_no, board_title, unit_price
+		HashMap<String, String> user_info = dao.orderConfirm_user(loginId);
+		logger.info("회원정보 가져오기 {}",user_info);
+		HashMap<String, String> board = dao.orderConfirm_board(board_no);
+		logger.info("회원정보 가져오기 {}",board);
+
+		HashMap<String, String>orderConfirm_info = new HashMap<String, String>();
+		orderConfirm_info.putAll(user_info);
+		orderConfirm_info.putAll(board);
+		logger.info("합채결과 {}",orderConfirm_info);
+		
+		
+		return orderConfirm_info;
+	}
+
+	public Order_infoDTO orderrequest(HashMap<String, String> params, String loginId) {
+		Order_infoDTO orderDTO = new Order_infoDTO();
+		orderDTO.setUser_id(loginId);
+		orderDTO.setOrder_name(params.get("user_name"));
+		orderDTO.setOrder_address(params.get("user_address"));
+		orderDTO.setOrder_phone(params.get("user_phone"));
+		orderDTO.setBoard_no(Integer.parseInt(params.get("board_no")));
+		orderDTO.setOrder_quantity(params.get("order_quantity"));
+		
+		dao.orderrequest(orderDTO);
+		
+		return orderDTO;
+	}
+
+	public HashMap<String, Object> emailIdentify(String email) {
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		String overlayd = dao.emailIdentify(email);
+		boolean emailTF = overlayd == null? false : true;
+		
+		
+		
+		map.put("emailTF", emailTF);
+		
+		return map;
+	}
 }

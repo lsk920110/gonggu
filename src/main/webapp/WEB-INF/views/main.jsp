@@ -24,14 +24,18 @@
 			<th>요청게시판</th>
 			<th>문의게시판</th>
 			<th>회원관련</th>
+			<th>임시 주문확인 연결</th>
+			
 		</tr>
 		<tr>
-			<td><a href="./temphome">temphome</a></td>
+			<td><a href="./mypage">mypage</a></td>
 			<td><a href="./adminOrderList">adminOrderList</a></td>
 			<td><a href="./groupBuyList">groupBuyList</a></td>
 			<td><a href="./inqwriteForm">inqwriteForm</a></td>
 			<td><a href="./InquireBoardlist">InquireBoardlist</a></td>
 			<td><a href="./loginMain">login</a></td>
+			<td><a href="./orderConfirmPage">orderConfirmPage</a></td>
+			
 		</tr>		
 	
 	

@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.gong.gu.dto.BoardDTO;
@@ -32,10 +33,14 @@ public class MypageController {
 
 	
 	@RequestMapping(value = "/mypage", method = RequestMethod.GET)
-	public String home(Model model) { 
+	public String home(Model model, HttpSession session) { 
 		logger.info("헬로우 JSP");
+		String page = "redirect:/";
+		if(session.getAttribute("loginId") != null) {
+			page = "redirect:/myorderList";
+		}
 	
-		return "redirect:/myorderList"; 
+		return page; 
 		
 	}
 	
@@ -43,11 +48,13 @@ public class MypageController {
 	public String myorderList(Model model, HttpSession session) { 
 		logger.info("myorderList 요청");
 		String loginId = (String)session.getAttribute("loginId");
-		
-		ArrayList<HashMap<String, String>> orderList = service.orderlist(loginId);
-		model.addAttribute("orderList", orderList);
-		
-		return "myorderList"; 
+		String page = "/";
+		if(loginId != null) {
+			ArrayList<HashMap<String, String>> orderList = service.orderlist(loginId);
+			model.addAttribute("orderList", orderList);	
+			page = "myorderList";
+		}
+		return page; 
 		
 	}
 	
@@ -105,7 +112,7 @@ public class MypageController {
 	
 	//공구관련 정보이기 때문에, GroupBuy 컨트롤러로 옮겨야함
 	@RequestMapping(value = "/orderDetail", method = RequestMethod.GET)
-	public String orderDetail(Model model, @RequestParam String order_no, HttpSession session) { 
+	public String orderDetail(Model model, @RequestParam String order_no, @RequestParam String frompage ,HttpSession session) { 
 		logger.info("{} 주문번호 상세 요청",order_no);
 		
 
@@ -113,7 +120,7 @@ public class MypageController {
 		String loginId = (String) session.getAttribute("loginId"); 
 		HashMap<String,String> orderdetail = service.orderDetail(order_no,loginId);
 		model.addAttribute("orderdetail",orderdetail);
-		model.addAttribute("frompage","myorderList");
+		model.addAttribute("frompage",frompage);
 		return "orderDetail"; 	
 	}
 	
@@ -175,11 +182,75 @@ public class MypageController {
 	}	
 	 
 	 
-	 
+	 	//메인페이지에서 로그인페이지로 연결
 		@RequestMapping(value = "/loginMain", method = RequestMethod.GET)
 		public String loginMain(Model model) {
 			logger.info("login page 이동");
 			return "login";
+		}
+		
+		
+		//공구상세 -> 공구신청버튼 -> 주문자정보확인
+		@RequestMapping(value = "/orderConfirmPage", method = RequestMethod.GET)
+		public String orderConfirmPage(Model model, HttpSession session) {
+			logger.info("orderConfirmPage 이동");
+			//구매수량
+			String order_quantity = "15";			
+			//board_no (공구게시글)
+			int board_no = 49;
+			//sessionId
+			String loginId = (String) session.getAttribute("loginId");
+			HashMap<String, String> confirminfo = service.orderConfirmPage(board_no,loginId);
+			confirminfo.put("order_quantity", order_quantity);
+			logger.info("모델에 태우기 전 마지막 확인 {}",confirminfo);
+			model.addAttribute("confirminfo",confirminfo);
+			
+			return "orderConfirm";
+		}		
+		
+		
+	 	//주문요청 -> DB저장 -> detail 페이지로 연결
+		@RequestMapping(value = "/orderRequest", method = RequestMethod.GET)
+		public String orderRequest(Model model, @RequestParam HashMap<String, String> params, HttpSession session) {
+			logger.info("주문신청 중입니다.(DB로) {}",params);
+			String loginId = (String) session.getAttribute("loginId");
+			Order_infoDTO orderDTO = new Order_infoDTO();
+			orderDTO = service.orderrequest(params,loginId);
+			model.addAttribute("order_no",orderDTO.getOrder_no());
+			model.addAttribute("loginId",loginId);
+			model.addAttribute("frompage","groupbuy_detail");
+			
+			return "redirect:/orderDetail";
+		}
+		
+		
+		@RequestMapping(value = "/groupbuy_detail", method = RequestMethod.GET)
+		public String groupbuy_detail(Model model, @RequestParam HashMap<String, String> params, HttpSession session) {
+			logger.info("임시 공구 detail입니다.");
+			
+			return "groupbuy_detail_temp";
+		}	
+		
+		
+		
+		@RequestMapping(value = "/emailPage", method = RequestMethod.GET)
+		public String emailPage(Model model) {
+			logger.info("email입니다.");
+			
+			return "emailPage";
+		}		
+
+		
+		
+		
+		@RequestMapping(value="/overlayemail" , method = RequestMethod.GET)
+		@ResponseBody
+		public HashMap<String, Object> overlayemail(@RequestParam String email) {
+			logger.info("email 중복조회 : {}",email);
+			HashMap<String, Object> emailIdentify = service.emailIdentify(email);
+
+			
+			return emailIdentify;
 		}
 		
 }

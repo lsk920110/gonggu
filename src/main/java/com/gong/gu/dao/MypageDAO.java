@@ -31,4 +31,12 @@ public interface MypageDAO {
 
 	void groupbuywrite2_pho(PhotoDTO photodto);
 
+	HashMap<String, String> orderConfirm_user(String loginId);
+
+	HashMap<String, String> orderConfirm_board(int board_no);
+
+	void orderrequest(Order_infoDTO orderDTO);
+
+	String emailIdentify(String email);
+
 }

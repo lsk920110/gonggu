@@ -70,6 +70,28 @@
 		VALUES(#{board_no},#{photo_newname},#{photo_thum})
 	</insert>	
 	
+	<select id="orderConfirm_user" resultType="hashmap">
+		select user_name,user_address,user_phone from user_info where user_id=#{param1}
+	</select>
+	<select id="orderConfirm_board" resultType="hashmap">
+		SELECT board_no,board_title,groupbuy_unitprice FROM board INNER JOIN groupbuy_addit USING (board_no) WHERE board_no = #{param1}
+	</select>
 
+	<insert id="orderrequest"
+		useGeneratedKeys="true"
+		keyColumn="order_no"
+		keyProperty="order_no"
+		parameterType="com.gong.gu.dto.Order_infoDTO">
+		INSERT INTO order_info(user_id,order_name,order_address,order_phone,Board_no,order_quantity)
+		VALUES
+		(#{user_id},#{order_name},#{order_address},#{order_phone},#{board_no},#{order_quantity})
+	
+	</insert>
+	
+	
+	<select id="emailIdentify" resultType="string">
+	SELECT user_email FROM user_info WHERE user_email = #{param1}
+	
+	</select>
 
 </mapper>
