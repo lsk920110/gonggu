@@ -6,7 +6,27 @@
 <!-- 이 xml이 어떤 interface와 연결되는지 설정 -->
 <mapper namespace="com.gong.gu.dao.AdminDAO">
 
+   <select id="adOrderList" resultType="hashMap">
+      SELECT * FROM board INNER JOIN order_info USING (board_no) INNER JOIN groupbuy_addit USING (board_no) where board_name = 'G'
+   </select>
 
+   <select id="adInquiry" resultType="hashMap">
+      SELECT * FROM board INNER JOIN inquiry_addit USING (board_no)
+   </select>
+
+   <select id="adRequire" resultType="hashMap">
+      SELECT * FROM board inner JOIN require_addit USING (board_no)
+   </select>
+   
+   
+   <update id="adminInquiry_update">
+   		UPDATE board SET board_exposure = #{param2},board_active=#{param3} WHERE board_no = #{param1};
+   </update>
+
+	<update id="adminInquiry_update2">
+	
+		UPDATE inquiry_addit SET inquiry_answer = #{param2} WHERE board_no = #{param1}; 
+	</update>
 
 
 

@@ -31,7 +31,7 @@
 			<td><a href="./groupBuyList">groupBuyList</a></td>
 			<td><a href="./inqwriteForm">inqwriteForm</a></td>
 			<td><a href="./InquireBoardlist">InquireBoardlist</a></td>
-			<td><a href="./login">login</a></td>
+			<td><a href="./loginMain">login</a></td>
 		</tr>		
 	
 	

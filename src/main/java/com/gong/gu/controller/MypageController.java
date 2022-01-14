@@ -93,15 +93,7 @@ public class MypageController {
 	
 
 	
-	@RequestMapping(value = "/login_temp", method = RequestMethod.GET)
-	public String login_temp(Model model, HttpSession session, @RequestParam String id, @RequestParam String pw) { 
-		logger.info("로그인 요청");
-		String loginId = service.login_temp(id,pw);
-		logger.info(loginId);
-		session.setAttribute("loginId", loginId);
-		model.addAttribute("loginId",loginId);
-		return "redirect:/mypage";
-	}	
+
 	
 //	여기서부터는 임시 컨트롤러 메서드입니다.
 	@RequestMapping(value = "/temphome", method = RequestMethod.GET)
@@ -181,5 +173,13 @@ public class MypageController {
 		 
 		 return "/main";
 	}	
+	 
+	 
+	 
+		@RequestMapping(value = "/loginMain", method = RequestMethod.GET)
+		public String loginMain(Model model) {
+			logger.info("login page 이동");
+			return "login";
+		}
 		
 }
