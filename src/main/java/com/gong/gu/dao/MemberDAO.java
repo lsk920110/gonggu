@@ -13,6 +13,7 @@ public interface MemberDAO {
 
 	int login(String user_id, String user_pw);
 	
-	int idfind(String user_name, String user_birth, String user_email);
-
+	int idfind(String user_id, String user_name, String user_birth, String user_email);
+	
+	
 }

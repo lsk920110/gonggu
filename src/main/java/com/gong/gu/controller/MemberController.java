@@ -74,7 +74,7 @@ public class MemberController {
 		session.removeAttribute("loginId");
 		return "redirect:/";
 	}
-	//여기 까지 이상무 
+
 	//중복아이디 체크 overlay == id
 	@RequestMapping(value = "/overlay", method = RequestMethod.GET)
 	@ResponseBody 
@@ -91,13 +91,6 @@ public class MemberController {
 		return service.join(param);
 	}
 	
-	//아이디 찾기
-	@RequestMapping(value = "/idfind", method = RequestMethod.GET)
-	public String idfind(Model model) {
-		logger.info("idfind page 이동");
-		return "idfind";
-	}
-	
 	//비밀번호  찾기 
 	@RequestMapping(value = "/pwfind", method = RequestMethod.GET)
 	public String pwfind(Model model) {
@@ -105,7 +98,7 @@ public class MemberController {
 		return "pwfind";
 	}
 	
-	//리스트 페이지
+	//리스트 페이지 실제 구현될 페이지가 아님 , 로그아웃 기능 확인을 위해 만듬 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String list(Model model, HttpSession session) {
 		logger.info("list.jsp로 이동");
@@ -119,26 +112,14 @@ public class MemberController {
 		return page; 
 	} 
 	
-	@RequestMapping(value = "/idfind", method = RequestMethod.POST)
-    @ResponseBody 
-    public HashMap<String, Object> idfind(
-            @RequestParam String user_name, @RequestParam String user_birth,
-            @RequestParam String user_email, HttpSession session) {
-        logger.info("idfind 체크:{} / {} ", user_name, user_birth);
-        int success = service.idfind(user_name,user_birth,user_email);
-        logger.info("idfind 성공 여부:{}", success);
-        HashMap<String, Object> map 
-            = new HashMap<String, Object>();
-        
-        if (success>0) {
-            session.setAttribute("findidInfo", user_name);
-            map.put("findidInfo", user_name);
-        }
-        map.put("success", success);    
-        return map;
-    }
+	
+	//아이디 찾기
+	 @RequestMapping(value = "/idfind", method = RequestMethod.GET)
+	public String idfind(Model model) {
+		logger.info("idfind page 이동");
+		return "idfind";
+	}
 
-	  
 	
 	
 	

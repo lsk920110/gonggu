@@ -13,6 +13,8 @@
 	}
 	</style>
 </head>
+<body>
+<!--  취소버튼 생성할 것 > 취소하면 로그인 화면으로 이동  -->
 <h3>비밀번호 찾기</h3>
 	<table>
 		<tr>
@@ -51,7 +53,7 @@ $('#findpw').click(function() {
 			if (data.success>0) {
 				alert('고객님의 비밀번호는 '+ data.loginId+'입니다.');
 				/*위 코딩문 수정 예정 */
-				location.href = './login'; /*아이디 찾은 후 로그인 화면으로 이동*/
+				location.href = './loginMain';
 			}else{
 				alert('입력하신 정보가 일치 하지 않습니다. 다시 확인 후 입력바랍니다.');
 			}

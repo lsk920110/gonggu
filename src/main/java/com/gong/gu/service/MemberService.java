@@ -38,15 +38,7 @@ public class MemberService {
 	public int login(String user_id, String user_pw) {
 		return dao.login(user_id, user_pw);
 	}
-
-	public int idfind(String user_name, String user_birth, String user_email) {
-		return dao.idfind(user_name, user_birth, user_email);
-		
-	}
-
-
-
-
+	
 	
 	
 }

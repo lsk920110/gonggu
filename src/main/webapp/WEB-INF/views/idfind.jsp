@@ -14,6 +14,7 @@
 	</style>
 </head>
 <body>
+<!--  취소버튼 생성할 것 > 취소하면 로그인 화면으로 이동  -->
 <h3>아이디 찾기</h3>
 	<table>
 		<tr>
@@ -43,10 +44,10 @@
 </body>
 <script>
 $('#idfind').click(function() {
-	var user_name = $('#user_name').val();
-	var user_birth = $('#user_birth').val();	
-	var user_email = $('#user_email').val();
-	console.log(user_name+'/'+user_birth +'/'+user_email);
+	var user_name = $('input[name="user_name"]').val();
+	var user_birth = $('input[name="user_birth"]').val();   
+	var user_email = $('input[name="user_email"]').val();
+	// console.log(user_name+'/'+user_birth +'/'+user_email);
 	
 	$.ajax({
 		type:'post',
@@ -56,7 +57,7 @@ $('#idfind').click(function() {
 		success : function (data) {
 			if (data.success>0) {
 				alert('고객님의 아이디는 '+ data.findidInfo+'입니다.');
-				location.href = './list';
+				location.href = './loginMain';
 			}else{
 				alert('입력하신 정보가 일치 하지 않습니다. 다시 확인 후 입력바랍니다.');
 			}

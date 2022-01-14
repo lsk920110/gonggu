@@ -11,11 +11,13 @@
 </head>
 <body>
 <!-- 회원가입페이지 구현 덜된 기능 
+0. gender 라디오 버튼 최초 지정 상태 만들기 
 1. 약관 및 비밀번호 확인 란은  CSS로 만들것 
-2. 로그인 기능에 문제 없으면 하이퍼링크 로그인페이지로 이동  (2군데 수정바람, 현 list.jsp로 해놓음) 
+2. 하이퍼링크 > 로그인페이지 이상없을시 ./login으로 수정 바람 ; loginMain수정 및 이동완료 확인! 
 3. 이메일인증 기능 추가
 4. 부트스트랩 
 - 버튼 이쁘게 
+5. 아이디/ 비밀번호 기준 넣기.....................
 
 ※ 문제점 
 성별을 선택하지 않아도 워닝이 안뜨고 가입이 되버림 -->
@@ -92,8 +94,7 @@
 		<tr>
 			<th colspan = "4">
 			<input type = "button" id = "regist" value = "가입"/>
-			<input type= "button" id= "cansel" value = "취소" onclick="location.href='list'"/>
-			<!-- login 페이지 이상없을 경우 하이퍼링크 주소 수정  -->
+			<input type= "button" id= "cansel" value = "취소" onclick="location.href='loginMain'"/>
 			</th>
 		</tr>
 		</div>
@@ -170,8 +171,7 @@ $("#regist").click(function() {
 					console.log(data);
 					if (data.success == 1) {
 						alert('회원가입을 축하 드립니다.');
-						location.href = './';
-					//2. 로그인 기능에 문제 없으면 하이퍼링크 로그인으로 이동으로 변경
+						location.href = './loginMain';
 					}else {
 						alert('회원 가입에 실패 했습니다. 다시 시도해주세요');
 		
