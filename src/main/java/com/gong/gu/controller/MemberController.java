@@ -38,7 +38,7 @@ public class MemberController {
 //		logger.info("login page 이동");
 //		return "login";
 //	}
-	
+
 	//회원가입
 	@RequestMapping(value = "/joinForm", method = RequestMethod.GET)
 	public String joinForm(Model model) {
@@ -78,9 +78,9 @@ public class MemberController {
 	//중복아이디 체크 overlay == id
 	@RequestMapping(value = "/overlay", method = RequestMethod.GET)
 	@ResponseBody 
-	public HashMap<String, Object> overlay(@RequestParam String id) {
-		logger.info("중복 아이디 체크:{}",id);
-		return service.overlay(id);
+	public HashMap<String, Object> overlay(@RequestParam String user_id) {
+		logger.info("중복 아이디 체크:{}",user_id);
+		return service.overlay(user_id);
 	}
 	
 	//회원가입 
@@ -117,9 +117,28 @@ public class MemberController {
 			page = "list";
 		} 
 		return page; 
-
 	} 
 	
+	@RequestMapping(value = "/idfind", method = RequestMethod.POST)
+    @ResponseBody 
+    public HashMap<String, Object> idfind(
+            @RequestParam String user_name, @RequestParam String user_birth,
+            @RequestParam String user_email, HttpSession session) {
+        logger.info("idfind 체크:{} / {} ", user_name, user_birth);
+        int success = service.idfind(user_name,user_birth,user_email);
+        logger.info("idfind 성공 여부:{}", success);
+        HashMap<String, Object> map 
+            = new HashMap<String, Object>();
+        
+        if (success>0) {
+            session.setAttribute("findidInfo", user_name);
+            map.put("findidInfo", user_name);
+        }
+        map.put("success", success);    
+        return map;
+    }
+
+	  
 	
 	
 	

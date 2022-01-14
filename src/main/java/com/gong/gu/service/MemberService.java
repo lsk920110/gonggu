@@ -13,15 +13,15 @@ import com.gong.gu.dto.MemberDTO;
 
 @Service
 public class MemberService {
-	@Autowired MemberDAO dao;
 	
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
+	
+	@Autowired MemberDAO dao;
 
-	public HashMap<String, Object> overlay(String id) {
-		
+	public HashMap<String, Object> overlay(String user_id) {
 		logger.info("중복 체크 서비스 도착!!");
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		String overlayId  = dao.overlay(id);
+		String overlayId  = dao.overlay(user_id);
 		logger.info("중복 아아디 여부:{}",overlayId);
 		boolean overlay = overlayId == null? false : true;
 		map.put("overlay", overlay);
@@ -38,7 +38,13 @@ public class MemberService {
 	public int login(String user_id, String user_pw) {
 		return dao.login(user_id, user_pw);
 	}
-	
+
+	public int idfind(String user_name, String user_birth, String user_email) {
+		return dao.idfind(user_name, user_birth, user_email);
+		
+	}
+
+
 
 
 	

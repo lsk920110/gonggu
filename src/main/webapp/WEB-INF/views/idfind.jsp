@@ -36,27 +36,27 @@
 		</tr>	
 			<tr>
 				<th colspan="2">
-				<input type = "button" id = "findid" value = "아이디찾기"/>
+				<input type = "button" id = "idfind" value = "아이디찾기"/>
 				</th>
 			</tr>
 		</table>
 </body>
 <script>
-$('#findid').click(function() {
+$('#idfind').click(function() {
 	var user_name = $('#user_name').val();
 	var user_birth = $('#user_birth').val();	
 	var user_email = $('#user_email').val();
 	console.log(user_name+'/'+user_birth +'/'+user_email);
-
+	
 	$.ajax({
-		type:'POST',
-		url : 'findid',
+		type:'post',
+		url : 'idfind',
 		data:{'user_name':user_name,'user_birth':user_birth, 'user_email':user_email},
 		dataType : 'JSON',
 		success : function (data) {
 			if (data.success>0) {
-				alert('고객님의 아이디는 '+ data.loginId+'입니다.');
-				location.href = './login'; /*아이디 찾은 후 로그인 화면으로 이동*/
+				alert('고객님의 아이디는 '+ data.findidInfo+'입니다.');
+				location.href = './list';
 			}else{
 				alert('입력하신 정보가 일치 하지 않습니다. 다시 확인 후 입력바랍니다.');
 			}

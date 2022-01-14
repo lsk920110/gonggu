@@ -6,11 +6,19 @@
 	<title>Insert title here</title>
 	<script src = "https://code.jquery.com/jquery-3.5.0.min.js"></script>
 	<style>
-
 	</style>
 	<h2>회원가입</h2>
 </head>
 <body>
+<!-- 회원가입페이지 구현 덜된 기능 
+1. 약관 및 비밀번호 확인 란은  CSS로 만들것 
+2. 로그인 기능에 문제 없으면 하이퍼링크 로그인페이지로 이동  (2군데 수정바람, 현 list.jsp로 해놓음) 
+3. 이메일인증 기능 추가
+4. 부트스트랩 
+- 버튼 이쁘게 
+
+※ 문제점 
+성별을 선택하지 않아도 워닝이 안뜨고 가입이 되버림 -->
 	<table>
 		<tr>
 			<th>아이디</th>
@@ -26,40 +34,9 @@
 			</td>
 		</tr>
 		<tr>
-			<th>비밀번호 확인</th>
-			<td>
-				<input type = "password" name = "user_pwchecked"/>
-			</td>
-		</tr>
-		<tr>
 			<th>이름</th>
 			<td>
 				<input type = "text" name = "user_name"/>
-			</td>
-		</tr>
-		<tr>
-			<th>생년월일</th>
-			<td>
-				<input type = "text" name = "user_birth"/>
-			</td>
-		</tr>
-		<tr>
-			<th>주소</th>
-			<td>
-				<input type = "text" name = "user_address"/>
-			</td>
-		</tr>
-		<tr>
-			<th>휴대폰번호</th>
-			<td>
-				<input type = "text" name = "user_phone"/>
-			</td>
-		</tr>
-		<tr>
-			<th>이메일주소</th>
-			<td>
-				<input type = "text" name = "user_email"/>
-				<input type = "button" id = "certification" value = "인증"/>
 			</td>
 		</tr>
 		<tr>
@@ -70,12 +47,29 @@
 			</td>
 		</tr>
 		<tr>
-		<th>약관</th>
+			<th>생년월일</th>
 			<td>
-				<input type = "text"/>
-				</br>
-				<input type = "radio" name = "terms" value = "agree"/>동의
-				<input type = "radio" name = "terms" value = "disagree"/>비동의
+				<input type = "text" name = "user_birth"/>예시)1900-00-00
+			</td>
+		</tr>
+		<tr>
+			<th>이메일주소</th>
+			<td>
+				<input type = "text" name = "user_email"/>
+				<input type = "button" id = "certification" value = "인증"/>
+				<!-- 3. 이메일인증 기능 추가 -->
+			</td>
+		</tr>
+		<tr>
+			<th>휴대폰번호</th>
+			<td>
+				<input type = "text" name = "user_phone"/>예시)010-1111-2222
+			</td>
+		</tr>
+		<tr>
+			<th>주소</th>
+			<td>
+				<input type = "text" name = "user_address"/>
 			</td>
 		</tr>
 		<tr>
@@ -84,12 +78,25 @@
 				<input type = "text" name = "user_admin"/>
 			</td>
 		</tr>
+		
+		<!-- <tr>
+		 <th>약관</th>
+			<td>
+				<input type = "text"/>
+				</br>
+				<input type = "radio" name = "terms" value = "agree"/>동의
+				<input type = "radio" name = "terms" value = "disagree"/>비동의
+			</td>
+		</tr> -->
+		<div class = "button">
 		<tr>
-			<th colspan = "2">
-			<input type = "button" id = "regist" value = "가입" onclick = "location.href='login'"/>
-			<input type= "button" id= "cansel" value = "취소" onclick = "location.href='login'"/>
+			<th colspan = "4">
+			<input type = "button" id = "regist" value = "가입"/>
+			<input type= "button" id= "cansel" value = "취소" onclick="location.href='list'"/>
+			<!-- login 페이지 이상없을 경우 하이퍼링크 주소 수정  -->
 			</th>
 		</tr>
+		</div>
 	</table>
 </body>
 <script>
@@ -102,7 +109,6 @@ $("#regist").click(function() {
 		console.log('회원가입 시작');
 		var $user_id = $('input[name="user_id"]');
 		var $user_pw = $('input[name="user_pw"]');
-		var $user_pwchecked = $('input[name="user_pwchecked"]');
 		var $user_name = $('input[name="user_name"]');
 		var $user_gender = $('input[name="user_gender"]:checked');
 		var $user_birth = $('input[name="user_birth"]');		
@@ -111,7 +117,7 @@ $("#regist").click(function() {
 		var $user_address = $('input[name="user_address"]');
 		var $user_admin = $('input[name="user_admin"]');
 		
-		//console.log($gender);
+		console.log($user_gender);
 		
 		if($user_id.val() == '') {
 			alert('아이디를 입력 해주세요');
@@ -119,15 +125,12 @@ $("#regist").click(function() {
 		}else if ($user_pw.val() == '') {
 			alert('비밀번호를 입력 해주세요');
 			$user_pw.focus();
-		}else if ($user_pwchecked.val() == '') {
-			alert('비밀번호를 재 입력 해주세요');
-			$user_pwchecked.focus();
 		}else if ($user_name.val() == '') {
 			alert('이름을 입력 해주세요');
 			$user_name.focus();
 		}else if ($user_gender.val() == '') {
 			alert('성별을 선택 하세요');
-			$user_gender.focus();				
+			$user_gender.focus();	
 		}else if ($user_birth.val() == '') {
 			alert('생년월일을 입력하세요');
 			$user_birth.focus();
@@ -147,7 +150,7 @@ $("#regist").click(function() {
 			console.log('서버 전송 시작');
 			
 			var param = {'user_id':$user_id.val()};
-			param.user_pw = $user_pw.val(); 
+			param.user_pw = $user_pw.val();
 			param['user_name'] = $user_name.val();
 			param.user_gender = $user_gender.val(); 
 			param.user_birth = $user_birth.val(); 
@@ -168,6 +171,7 @@ $("#regist").click(function() {
 					if (data.success == 1) {
 						alert('회원가입을 축하 드립니다.');
 						location.href = './';
+					//2. 로그인 기능에 문제 없으면 하이퍼링크 로그인으로 이동으로 변경
 					}else {
 						alert('회원 가입에 실패 했습니다. 다시 시도해주세요');
 		
@@ -185,7 +189,6 @@ $("#regist").click(function() {
 		$('input[name="user_id"]').focus();
 	}		
 });
-
 
 $('#overlay').click(function() {
 	console.log('중복 체크 시작!!');  
@@ -214,7 +217,6 @@ $('#overlay').click(function() {
 		}		
 	});		
 });
-
 
 </script>
 </html>
