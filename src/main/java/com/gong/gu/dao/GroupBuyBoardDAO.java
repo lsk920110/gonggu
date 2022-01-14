@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.HashMap;
 
 import com.gong.gu.dto.BoardDTO;
-import com.gong.gu.dto.PhotoDTO;
 
 public interface GroupBuyBoardDAO {
 
@@ -16,6 +15,10 @@ public interface GroupBuyBoardDAO {
 	int groupbuywrite2(int idx, String category, int groupbuy_target, int groupbuy_unitprice, Date due_date, int groupbuy_max);
 
 	ArrayList<HashMap<String, String>> groupBuyList();
+
+	ArrayList<HashMap<String, String>> categoryCheck(String param);
+
+	String wishlist(String loginId);
 
 
 }

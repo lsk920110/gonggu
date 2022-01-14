@@ -14,9 +14,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.gong.gu.dto.PhotoDTO;
 import com.gong.gu.service.GroupBuyBoardService;
 
 
@@ -73,18 +73,49 @@ public class GroupBuyBoardController {
 		}
 	 
 	 
-	 //공구 리스트 불러오기
+	 //공구 리스트 불러오기	
+	 @RequestMapping(value = "/groupBuyList", method = RequestMethod.GET)
+		public String myorderList(Model model, HttpSession session) { 
+			logger.info("groupBuyList 요청");
+			
+			//String loginId = (String)session.getAttribute("loginId");
+			//logger.info("로그인 아이디 : "+loginId);
+			
+			String loginId = "admin01";
+			if(loginId != null) {
+				String wishlist = service.wishlist(loginId);
+				logger.info(wishlist);
+				model.addAttribute("wishlist", wishlist);
+			}
+			
+			
+			ArrayList<HashMap<String, String>> groupBuyList = service.groupBuyList();
+			
+			model.addAttribute("groupBuyList", groupBuyList);
+			
+			return "groupBuyList"; 
+			
+		}
 	 
-	@RequestMapping(value = "/groupBuyList", method = RequestMethod.GET)
-	public String groupBuyList(Model model, HttpSession session) { 
-		logger.info("groupBuyList 요청");
+	 
+	 
+	//카테고리 조회
+	@RequestMapping(value = "/categoryCheck", method = RequestMethod.GET)
+	@ResponseBody
+	public HashMap<String, Object> categoryCheck(@RequestParam String param) {
 		
-		//String loginId = (String)session.getAttribute("loginId");		
-		ArrayList<HashMap<String, String>> groupBuyList = service.groupBuyList();
-		model.addAttribute("groupBuyList", groupBuyList);	
+		logger.info("카테고리 조회 체크:{}",param);
 		
-		return "groupBuyList"; 
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		
+		ArrayList<HashMap<String, String>> groupBuyList = service.categoryCheck(param);		
+		
+		logger.info("리스트 : {}",groupBuyList);
+		
+		map.put("list", groupBuyList);
+		
+		return map;
 	}
-	 
+	
+	
 }

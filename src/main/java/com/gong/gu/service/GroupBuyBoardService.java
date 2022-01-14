@@ -3,7 +3,6 @@ package com.gong.gu.service;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -14,11 +13,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.gong.gu.dao.GroupBuyBoardDAO;
 import com.gong.gu.dto.BoardDTO;
-import com.gong.gu.dto.PhotoDTO;
 
 @Service
 public class GroupBuyBoardService {
@@ -148,12 +150,28 @@ public class GroupBuyBoardService {
 
 	//공구리스트
 	public ArrayList<HashMap<String, String>> groupBuyList() {
-			
 		ArrayList<HashMap<String, String>> groupBuyList = dao.groupBuyList();
+		return groupBuyList;
+	}
+
+
+	//카테고리 체크
+	@RequestMapping(value = "/categoryCheck", method = RequestMethod.GET)
+	public @ResponseBody ArrayList<HashMap<String, String>> categoryCheck(String param) {
+		
+		ArrayList<HashMap<String, String>> groupBuyList = dao.categoryCheck(param);
 		
 		return groupBuyList;
-	
 	}
+
+
+
+	public String wishlist(String loginId) {
+		
+		return dao.wishlist(loginId);
+	}
+
+
 
 
 

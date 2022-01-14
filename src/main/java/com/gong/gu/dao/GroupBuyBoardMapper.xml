@@ -31,17 +31,46 @@
 		VALUES(#{param1},#{param2},#{param3},#{param4},#{param5},#{param6})
 	</insert>
 	
-	
+
+
+
+
+
+
+	<!-- 공구리스트 불러오기 -->
 	<select id="groupBuyList" resultType="hashmap">
 		
-		SELECT  b.board_no, b.board_title, p.photo_newname, ga.groupbuy_state, ga.groupbuy_target, ga.groupbuy_unitprice, oi.order_quantity, w.user_id FROM board b
-		LEFT JOIN groupbuy_addit ga USING (board_no)  
-		LEFT JOIN order_info oi USING (board_no)
+		SELECT b.board_no, b.board_title, p.photo_newname, ga.groupbuy_state, ga.groupbuy_target, ga.groupbuy_unitprice, sum(oi.order_quantity) as sum
+		FROM board b
+		LEFT JOIN groupbuy_addit ga USING (board_no)
 		LEFT JOIN photo p USING (board_no)
-		LEFT JOIN wishlist w USING (board_no)
-		where p.photo_thum = 'Y' and oi.order_state != '취소완료'
-		ORDER BY b.board_no DESC
+		left join order_info oi USING (board_no)
+		where p.photo_thum = 'Y' and board_exposure = 'Y' and (oi.order_state = '신청완료' or oi.order_state is null)
+		group by board_no 
+		ORDER BY b.board_no DESC;
 				
+	</select>
+	
+	<!-- 카테고리별 공구리스트 불러오기 -->
+	<select id="categoryCheck" resultType="hashmap">
+	
+		SELECT 
+		b.board_no, b.board_title, p.photo_newname, ga.groupbuy_state, ga.groupbuy_target, ga.groupbuy_unitprice, sum(oi.order_quantity) as sum
+		FROM board b
+		LEFT JOIN groupbuy_addit ga
+		USING (board_no)
+		LEFT JOIN photo p
+		USING (board_no)
+		left join order_info oi USING (board_no)
+		where p.photo_thum = 'Y' and board_exposure = 'Y' and (oi.order_state = '신청완료' or oi.order_state is null) and product_category_name = '생활/건강'
+		group by board_no 
+		ORDER BY b.board_no DESC;
+				
+	</select>
+	
+	<!-- 찜여부확인 -->
+	<select id="wishlist" resultType="String" >
+		SELECT board_no FROM wishlist WHERE user_id = #{param1}
 	</select>
 	
 	

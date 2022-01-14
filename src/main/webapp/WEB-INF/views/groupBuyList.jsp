@@ -7,59 +7,139 @@
 	<script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
 	<style>
 	.category{
-		cursor: pointer
+		cursor: pointer;
+		
 	}
 	#board1{
-		width: 200px;
+		width: 255px;
+		display: inline;
+	}
+	
+	#boardimg{
+		width: 255px;
+		height: 300px;
+	}
+	#boardtitle{
+		font-size: 20px;
+		text-decoration:none; /*<a> 태그의 기본 꾸밈 효과(밑줄 등)을 없애기*/
+		color: black; 
+		font-weight : bold;
+	}
+	
+	#heart{
+		width: 30px;
+		height: 30px;
 		
 	}
 	</style>
 </head>
 <body>
-	<!-- 진입하자마자 전체 공구 리스트 불러오기 -->
+
+
     <div>
-        <img class="category" src="resources/img/생활건강.png" alt="생활건강">
-        <img class="category" src="resources/img/스포츠레저.png" alt="스포츠레저">
-        <img class="category" src="resources/img/가구인테리어.png" alt="가구인테리어">
-        <img class="category" src="resources/img/디지털가전.png" alt="디지털가전">
+        <img class="category" src="resources/img/생활건강.png"  alt="생활/건강">
+        <img class="category" src="resources/img/스포츠레저.png" alt="스포츠/레저">
+        <img class="category" src="resources/img/가구인테리어.png" alt="가구/인테리어">
+        <img class="category" src="resources/img/디지털가전.png" alt="디지털/가전">
         <img class="category" src="resources/img/패션.png" alt="패션">
-        <img class="category" src="resources/img/화장품미용.png" alt="화장품미용">
-        <img class="category" src="resources/img/출산육아.png" alt="출산육아">
+        <img class="category" src="resources/img/화장품미용.png" alt="화장품/미용">
+        <img class="category" src="resources/img/출산육아.png" alt="출산/육아">
         <img class="category" src="resources/img/식품.png" alt="식품">
-        <img class="category" src="resources/img/여가생활.png" alt="여가생활">
+        <img class="category" src="resources/img/여가생활.png" alt="여가/생활">
         <img class="category" src="resources/img/기타.png" alt="기타">
     </div>
 
-    <div>
-        <div id=board1>
+    
+        <div id="board1">
 				
 		<c:forEach items="${groupBuyList}" var="list">
 		
 			
 			${list.groupbuy_state}<br/>
 			<a>
-			<img src="<c:url value='${list.photo_newname}'/>"alt="상품이미지"/> 
+			<img id="boardimg" src="/photo/${list.photo_newname}" alt="상품이미지"/> 
 			</a><br/>
-			<a href="detail?board_no=${list.board_no}">${list.board_title}</a><br/>
+			<a id="boardtitle" href="detail?board_no=${list.board_no}">${list.board_title}</a><br/>
+		
+			<img id="heart" src="resources/img/빈하트.png" alt="찜하트">
+	
 			<p>가격 : ${list.groupbuy_unitprice}원<p>
 			
-			<progress value="${list.order_quantity}" max="${list.groupbuy_target}"></progress>
-			<p style="font-size:11px">신청수량:${list.order_quantity}개 / 목표수량:${list.groupbuy_target}개 </p>
-			${list.user_id}
-			
-				
+		<c:if test="${list.sum eq null}">
+			<progress value="0" max="${list.groupbuy_target}"></progress>
+			<p style="font-size:11px">신청수량:0개 / 목표수량:${list.groupbuy_target}개 </p>		
+		</c:if>
+		<c:if test="${list.sum != null}">
+			<progress value="${list.sum}" max="${list.groupbuy_target}"></progress>
+			<p style="font-size:11px">신청수량:${list.sum}개 / 목표수량:${list.groupbuy_target}개 </p>		
+		</c:if>
+							
 		</c:forEach>
-
 
         </div>
 
-    </div>
+   
 
 	
 </body>
 <script>
-	
 
+	
+	/*
+	if(${wishlist} == {groupBuyList.board_no}){
+		 $('#main').attr('src','resources/img/검정하트.png');
+	}
+	*/
+
+
+	
+	$('.category').click(function(){
+		
+		
+		
+ 		var param = $(this).attr('alt');
+ 		
+		console.log(param);
+			
+		
+		$.ajax({
+			type:'GET',
+			url:'categoryCheck',
+			data: {'param':param},
+			dataType:'JSON',
+			success:function(data){
+				console.log(data.list);
+				
+				if(data.list == ''){
+					alert('해당 카테고리 게시글이 없습니다.');
+					location.href='./groupBuyList';
+				}else{
+				$('#board1').empty();
+				listDraw(data.list);
+				}
+			},	
+			error:function(e){
+				console.log(e);
+				alert('서버에 문제가 발생했습니다.');
+			}
+		});
+		
+		
+ 	});
+
+	
+	
+	function listDraw(list){
+		
+		var content = '';
+		
+		for (var i = 0; i < list.length; i++){
+			content += list[i].groupbuy_state+'<br/>'; 
+			content += '<a><img src="/photo/'+list[i].photo_newname+'" alt="상품이미지"/></a>';
+		}
+		
+		$('#board1').append(content); 
+	}
 
 </script>
 </html>
