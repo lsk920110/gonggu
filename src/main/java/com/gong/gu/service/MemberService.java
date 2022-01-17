@@ -35,10 +35,16 @@ public class MemberService {
 		return map;		
 	}
 
-	public int login(String user_id, String user_pw) {
+	public HashMap<String, String> login(String user_id, String user_pw) {
 		return dao.login(user_id, user_pw);
 	}
 	
-	
-	
+	public String findid(String user_name, String user_birth, String user_email) {
+		return dao.findid(user_name, user_birth, user_email);
+	}
+
+	public String findpw(String user_id, String user_email) {
+		return dao.findpw(user_id, user_email);
+	}
+
 }

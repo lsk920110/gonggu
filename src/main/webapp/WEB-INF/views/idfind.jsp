@@ -9,7 +9,7 @@
 	table, th, td {
 		border: 1px solid black;
 		border-collapse: collapse;
-		padding : 5px 10px; 
+		padding : 5px 10px;  
 	}	
 	</style>
 </head>
@@ -20,8 +20,8 @@
 		<tr>
 			<th>이름</th>
 			<td>
-				<input type = "text" name = "user_name"/>
-			</td>
+    				<input type = "text" name = "user_name"/> 
+			</td>   
 		</tr>
 		<tr>
 			<th>생년월일</th>
@@ -38,35 +38,43 @@
 			<tr>
 				<th colspan="2">
 				<input type = "button" id = "idfind" value = "아이디찾기"/>
+				<input type = "button" id = "idfindcan" value = "취소" 
+					onclick = "location.href='loginMain'"/>
 				</th>
 			</tr>
 		</table>
+			<tr><th>비밀번호를 잊으셨나요?</th> 
+		<input type = "button" id = "fingpass" value = "비밀번호 찾기" 
+			onclick = "location.href='pwfind'"/>
+		</tr>
 </body>
 <script>
-$('#idfind').click(function() {
+ $('#idfind').click(function() {
+
 	var user_name = $('input[name="user_name"]').val();
 	var user_birth = $('input[name="user_birth"]').val();   
 	var user_email = $('input[name="user_email"]').val();
-	// console.log(user_name+'/'+user_birth +'/'+user_email);
+	console.log(user_name+'/'+user_birth +'/'+user_email);
 	
 	$.ajax({
-		type:'post',
-		url : 'idfind',
-		data:{'user_name':user_name,'user_birth':user_birth, 'user_email':user_email},
+		type:'POST',
+		url : 'findid',
+		data:{'user_name':user_name,
+				'user_birth':user_birth, 
+				'user_email':user_email},
 		dataType : 'JSON',
 		success : function (data) {
-			if (data.success>0) {
-				alert('고객님의 아이디는 '+ data.findidInfo+'입니다.');
+			if (data.success != '아이디없음') {
+				alert('고객님의 아이디는 '+ data.success+'입니다.');
 				location.href = './loginMain';
 			}else{
 				alert('입력하신 정보가 일치 하지 않습니다. 다시 확인 후 입력바랍니다.');
-			}
+			}34
 		},
 		error : function (e) {
 			console.log(e);
-		}
+		}  
 	});
-}); 	
-
+ }); 	
 </script>
 </html>

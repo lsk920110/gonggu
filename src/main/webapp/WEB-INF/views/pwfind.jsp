@@ -33,26 +33,29 @@
 			
 			<tr>
 				<th colspan="2">
-				<input type = "button" id = "findpw" value = "비밀번호찾기"/>
+				<input type = "button" id = "pwfind" value = "비밀번호찾기"/>
+				<input type = "button" id = "pwfindcan" value = "취소" 
+					onclick = "location.href='loginMain'"/>
 				</th>
 			</tr>
 		</table>
 </body>
 <script>
-$('#findpw').click(function() {
-	var user_id = $('#user_id').val();
-	var user_email = $('#user_email').val();	
-	console.log(user_id+'/'+user_email);
+$('#pwfind').click(function() {
 
+	var user_id = $('input[name="user_id"]').val();
+	var user_email = $('input[name="user_email"]').val();
+	console.log(user_id+'/'+user_email);
+	
 	$.ajax({
 		type:'POST',
 		url : 'findpw',
-		data:{'user_id':user_id,'user_email':user_email},
+		data:{'user_id':user_id,
+				'user_email':user_email},
 		dataType : 'JSON',
 		success : function (data) {
-			if (data.success>0) {
-				alert('고객님의 비밀번호는 '+ data.loginId+'입니다.');
-				/*위 코딩문 수정 예정 */
+			if (data.success != '일치하는 정보가 없습니다.') {
+				alert('고객님의 비밀번호는 '+ data.success+'입니다.');
 				location.href = './loginMain';
 			}else{
 				alert('입력하신 정보가 일치 하지 않습니다. 다시 확인 후 입력바랍니다.');
@@ -60,9 +63,8 @@ $('#findpw').click(function() {
 		},
 		error : function (e) {
 			console.log(e);
-		}
+		}  
 	});
-}); 
-
+ }); 
 </script>
 </html>

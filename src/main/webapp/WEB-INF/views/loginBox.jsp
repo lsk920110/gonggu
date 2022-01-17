@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <div id="login"></div>
 <script>
+//특이사항 없고, 나중에 list랑 연결해주면됨 
 	var loginId = "${sessionScope.loginId}";
 	
 	if(loginId != ""){

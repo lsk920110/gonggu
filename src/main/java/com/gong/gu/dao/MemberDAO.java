@@ -11,9 +11,10 @@ public interface MemberDAO {
 
 	int join(HashMap<String, String> param);
 
-	int login(String user_id, String user_pw);
+	HashMap<String, String> login(String user_id, String user_pw);
 	
-	int idfind(String user_id, String user_name, String user_birth, String user_email);
-	
-	
+	String findid(String user_name, String user_birth, String user_email);
+
+	String findpw(String user_id, String user_email);
+	   
 }

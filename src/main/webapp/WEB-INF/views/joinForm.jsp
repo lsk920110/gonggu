@@ -45,7 +45,7 @@
 			<th>성별</th>
 			<td>
 				<input type = "radio" name = "user_gender" value = "남"/>남  &nbsp;&nbsp;&nbsp;&nbsp; 
-				<input type = "radio" name = "user_gender" value = "여"/>여
+				<input type = "radio" name = "user_gender" value = "여"/>여				
 			</td>
 		</tr>
 		<tr>
@@ -78,6 +78,7 @@
 			<th>관리자</th>
 			<td>
 				<input type = "text" name = "user_admin"/>
+				
 			</td>
 		</tr>
 		

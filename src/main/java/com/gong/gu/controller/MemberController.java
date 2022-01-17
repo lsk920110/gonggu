@@ -1,6 +1,7 @@
 package com.gong.gu.controller;
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
@@ -24,20 +25,6 @@ public class MemberController {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired MemberService service;
-	/*
-	 * @RequestMapping(value = "/", method = RequestMethod.GET) public String
-	 * home(Model model) { logger.info("헬로우 JSP");
-	 * 
-	 * return "home"; }
-	 */
-	///////////////////////////////////////////////
-	
-	//홈
-//	@RequestMapping(value = "/", method = RequestMethod.GET)
-//	public String home(Model model) {
-//		logger.info("login page 이동");
-//		return "login";
-//	}
 
 	//회원가입
 	@RequestMapping(value = "/joinForm", method = RequestMethod.GET)
@@ -53,20 +40,27 @@ public class MemberController {
             @RequestParam String user_id, @RequestParam String user_pw,
             HttpSession session) {
         logger.info("로그인 체크:{} / {}", user_id, user_pw);
-        
-        int success = service.login(user_id,user_pw);
+        HashMap<String, String> success = service.login(user_id,user_pw);     
         logger.info("로그인 성공 여부:{}", success);
-        HashMap<String, Object> map 
-            = new HashMap<String, Object>();
-        
-        if (success>0) {
-            session.setAttribute("loginId", user_id);
-            map.put("loginId", user_id);
-        }
-        map.put("success", success);    
+        HashMap<String, Object> map = new HashMap<String, Object>();    
+        /*if (success != null) {
+        	map.put("success", success);    
+        } else {
+        	map.put("success", "일치하는 정보가 없습니다.");
+        }*/ 
+        if (success != null) {
+        	map.put("success", success); 
+        	map.put("loginId",success.get("user_id"));
+        	map.put("admin", success.get("user_admin"));     
+        	session.setAttribute("loginId", success.get("user_id"));
+        	session.setAttribute("admin", success.get("user_admin"));
+        logger.info("로그인 아이디 : {} / 관리자여부 : {}",success.get("user_id"),success.get("user_admin"));
+        }else{
+			/* map.put("success",null);*/
+		}
         return map;
-    }
-
+	}
+	
 	//로그아웃 
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(Model model, HttpSession session) {
@@ -111,16 +105,56 @@ public class MemberController {
 		} 
 		return page; 
 	} 
-	
-	
-	//아이디 찾기
-	 @RequestMapping(value = "/idfind", method = RequestMethod.GET)
+	//아이디 찾기 페이지로 
+	@RequestMapping(value = "/idfind")
 	public String idfind(Model model) {
 		logger.info("idfind page 이동");
 		return "idfind";
+		
 	}
+	//아이디 찾기 기능 구현 
+	@RequestMapping(value = "/findid")
+    @ResponseBody 
+    public HashMap<String, Object> findid(
+            @RequestParam String user_name, @RequestParam String user_birth,
+            @RequestParam String user_email, Object user_id, HttpSession session) {
+		logger.info("로그인 체크:{} / {}", user_name, user_birth);
+		/*이 아래서 부터 진행이 안됨 */
+        String success = service.findid(user_name, user_birth, user_email);
+        logger.info("아이디 찾기 여부 성공:{}", success);
+        HashMap<String, Object> map 
+            = new HashMap<String, Object>();
+        
+        if (success != null) {
+        	map.put("success", success);    
+        } else {
+        	map.put("success", "아이디없음");
+        }
+        return map;
+    }
+	
+	//비밀번호 찾기 기능 구현 
+	@RequestMapping(value = "/findpw")
+    @ResponseBody 
+    public HashMap<String, Object> findpw(
+            @RequestParam String user_id
+            ,@RequestParam String user_email, Object user_pw, HttpSession session) {
+		logger.info("비밀번호 확인시 필수 정보 체크:{} / {}", user_id, user_email);
 
+        String success = service.findpw(user_id, user_email);
+        //success안에는 pw가 들어가 있는 것임 
+        logger.info("비밀번호 찾기 여부 성공:{}", success);
+        HashMap<String, Object> map 
+            = new HashMap<String, Object>();
+        
+        if (success != null) {
+        	map.put("success", success);    
+        } else {
+        	map.put("success", "일치하는 정보가 없습니다.");
+        }
+        return map;
+    }
 	
 	
-	
+	 
 }
