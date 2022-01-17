@@ -137,6 +137,12 @@ public class AdminController {
          @RequestParam String cancelR ,  @RequestParam String board_no) {
       logger.info("{} 게시글 취소요청 {}",board_no, cancelR);
       	int success = service.gbcancel(board_no,cancelR);
+      	
+      	if(success > 0) {
+      		logger.info("{} 취소 완료 , 삭제사유 : {}",board_no,cancelR);      		
+      	} else {
+      		logger.info("취소 실패");
+      	}
       
 
       return "redirect:/admingroupbuylist";//

@@ -42,11 +42,15 @@
 	</update>
 	
 	<update id="gbcancel_no">
-	UPDATE groupbuy_addit SET gourpguy_state = '공구취소' WHERE board_no = #{param1}
+	UPDATE board SET board_active = 'N' WHERE board_no = #{param1}
+	</update>
+	
+	<update id="gbcancel_no_act">
+	UPDATE groupbuy_addit SET groupbuy_state = '공구실패' WHERE board_no = #{param1}
 	</update>
 	
 	<update id="gbcancel_R">
-	UPDATE order_info SET order_etc = #{param1} 
+	UPDATE order_info SET order_etc = #{param2} WHERE board_no = #{param1}
 	</update>
 	
 </mapper>

@@ -53,9 +53,10 @@ public void adminGroupbuy_update(String strKey, String exp, String act, String s
 
 public int gbcancel(String board_no, String cancelR) {
 	int gbcancel_no = dao.gbcancel_no(board_no);
-	int gbcancel_R = dao.gbcancel_R(cancelR);
+	int gbcancel_no_act = dao.gbcancel_no_act(board_no);
+	int gbcancel_R = dao.gbcancel_R(board_no,cancelR);
 
-	return gbcancel_no + gbcancel_R;
+	return gbcancel_no + gbcancel_no_act + gbcancel_R;
 	
 	
 }

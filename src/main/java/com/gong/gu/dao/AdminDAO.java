@@ -23,7 +23,10 @@ public interface AdminDAO {
 
 	int gbcancel_no(String board_no);
 
-	int gbcancel_R(String cancelR);
+	int gbcancel_no_act(String board_no);
+
+	int gbcancel_R(String board_no, String cancelR);
+
 
 
 

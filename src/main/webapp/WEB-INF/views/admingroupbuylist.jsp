@@ -97,7 +97,19 @@
                      </select>
                   </th>
                   <th>
-                  	<input type="button" value="강제취소" onclick="cancel(this)" style="background-color : #f44336"/>
+                  	<c:choose>
+                  		<c:when test="${adgroupbuy.groupbuy_state eq '공구완료'}">
+                  			공구완료
+                  		</c:when>
+                  		<c:when test="${adgroupbuy.groupbuy_state eq '공구실패'}">
+                  			공구실패
+                  		</c:when>
+                  		<c:when test="${adgroupbuy.groupbuy_state eq '모집중'}">                  		
+		                  	<input type="button" value="강제취소" onclick="cancel(this)" style="background-color : #f44336"/>                  		
+                  		</c:when>
+                  	
+                  	</c:choose>
+
                   
                   </th>
                   <th style="display: none">
