@@ -65,24 +65,24 @@
 				
 				<c:choose>
 					<c:when test="${list.groupbuy_state eq '공구완료'}">
-						<a href="detail?board_no=${list.board_no}">
+						<a href="groupbuydetail?board_no=${list.board_no}">
 							<img style="filter:grayscale(100%)" id="boardimg" src="/photo/${list.photo_newname}" alt="상품이미지"/> 
 						</a><br/>
 					</c:when>
 					<c:when test="${list.groupbuy_state eq '공구실패'}">
-						<a href="detail?board_no=${list.board_no}">
+						<a href="groupbuydetail?board_no=${list.board_no}">
 							<img style="filter:grayscale(100%)" id="boardimg" src="/photo/${list.photo_newname}" alt="상품이미지"/> 
 						</a><br/>
 					</c:when>
 					<c:otherwise> 
-						<a href="detail?board_no=${list.board_no}">
+						<a href="groupbuydetail?board_no=${list.board_no}">
 							<img id="boardimg" src="/photo/${list.photo_newname}" alt="상품이미지"/> 
 						</a><br/>
 					</c:otherwise> 
 				</c:choose>  
 				
 				
-				<a id="boardtitle" href="detail?board_no=${list.board_no}">${list.board_title}</a><br/>
+				<a id="boardtitle" href="groupbuydetail?board_no=${list.board_no}">${list.board_title}</a><br/>
 			   
 			   
 			    <input type="text" value="${list.board_no}"/>
@@ -208,10 +208,10 @@
 	$('.category').click(function(){
 		
  		var param = $(this).attr('alt');
- 		
 		console.log(param);
+ 		location.href='./groupBuyList?category='+param;
 
-		$.ajax({
+/* 		$.ajax({
 			type:'GET',
 			url:'categoryCheck',
 			data: {'param':param},
@@ -231,7 +231,7 @@
 				console.log(e);
 				alert('서버에 문제가 발생했습니다.');
 			}
-		});
+		}); */
 		
 		
  	});

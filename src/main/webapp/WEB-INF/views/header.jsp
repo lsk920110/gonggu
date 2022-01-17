@@ -194,13 +194,7 @@
         </div>
     </body>
     <script>
-    $('#bar_three').click(function(){
-	    $('body').animate({scrollTop:0},400);
-    });
-
-    $('#search_icon').click(function(){
-        window.location.href = 'https://hianna.tistory.com';
-    })
+    
     $("#MainLogo").click(function(){//페이지 이동  
         parent.location.href=$(this).attr("loc");//부모창에서 여는 방법//attr로 loc속성을 가져온다.
     });

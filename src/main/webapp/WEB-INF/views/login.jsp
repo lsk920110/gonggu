@@ -47,7 +47,7 @@ $('#login').click(function() {
 			console.log("로그인된 아이디 :" + data.loginId);
 			console.log("관리자여부 : "+data.admin);
 				alert(data.loginId+'님 반갑습니다.');
-				location.href = './list'; 
+				location.href = './'; 
 				//메인페이지 명으로 수정 예정
 			}else{
 				alert('아이디 또는 패스워드가 일치 하지 않습니다.');

@@ -75,8 +75,9 @@ public class GroupBuyBoardController {
 	 
 	 //공구 리스트 불러오기	
 	 @RequestMapping(value = "/groupBuyList", method = RequestMethod.GET)
-		public String groupBuyList(Model model, HttpSession session) { 
+		public String groupBuyList(Model model, HttpSession session, @RequestParam String category) { 
 			logger.info("groupBuyList 요청");
+			logger.info("{}",category);
 			
 			//String loginId = (String)session.getAttribute("loginId");
 			
@@ -86,22 +87,25 @@ public class GroupBuyBoardController {
 			String list = "";
 			
 			//찜 목록 확인 - loginId에 해당하는 Board_no 반환
-			if(loginId != null) {
-				ArrayList<String> wishlist = service.wishlist(loginId);
-				logger.info("찜목록 : {}",wishlist);
-				for (int i = 0; i < wishlist.size(); i++) {
-					list += wishlist.get(i);
-					list += "/";
-				}
-				
-				
-				model.addAttribute("wishlist", list);
+//			if(loginId != null) {
+//				ArrayList<String> wishlist = service.wishlist(loginId);
+//				logger.info("찜목록 : {}",wishlist);
+//				for (int i = 0; i < wishlist.size(); i++) {
+//					list += wishlist.get(i);
+//					list += "/";
+//				}
+//				
+//				
+//				model.addAttribute("wishlist", list);
+//			}
+//			
+			if(category.equals("all")) {
+				ArrayList<HashMap<String, String>> groupBuyList = service.groupBuyList();
+				model.addAttribute("groupBuyList", groupBuyList);				
+			} else {
+				ArrayList<HashMap<String, String>> groupBuyList2 = service.groupBuyList2(category);
+				model.addAttribute("groupBuyList", groupBuyList2);								
 			}
-			
-			
-			ArrayList<HashMap<String, String>> groupBuyList = service.groupBuyList();
-			
-			model.addAttribute("groupBuyList", groupBuyList);
 			
 			return "groupBuyList"; 
 			

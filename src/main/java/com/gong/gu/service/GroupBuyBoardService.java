@@ -198,6 +198,13 @@ public class GroupBuyBoardService {
 
 
 
+	public ArrayList<HashMap<String, String>> groupBuyList2(String category) {
+		ArrayList<HashMap<String, String>> groupBuyList2 = dao.groupBuyList2(category);
+		return groupBuyList2;
+	}
+
+
+
 
 
 

@@ -27,5 +27,7 @@ public interface GroupBuyBoardDAO {
 
 	String wishlist2(String board_no, String loginId);
 
+	ArrayList<HashMap<String, String>> groupBuyList2(String category);
+
 
 }

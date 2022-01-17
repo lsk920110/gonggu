@@ -37,7 +37,7 @@
 		<tr>
 			<td><a href="./mypage">mypage</a></td>
 			<td><a href="./adminOrderList">adminOrderList</a></td>
-			<td><a href="./groupBuyList">groupBuyList</a></td>
+			<td><a href="./groupBuyList?category=all">groupBuyList</a></td>
 			<td><a href="./">request</a></td>
 			<td><a href="./inquireBoardList">inquireBoardList</a></td>
 			<td><a href="./loginMain">login</a></td>

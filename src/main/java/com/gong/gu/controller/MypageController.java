@@ -260,6 +260,17 @@ public class MypageController {
 		}
 		
 		
+		@RequestMapping(value = "/groupbuydetail", method = RequestMethod.GET)
+		public String groupbuydetail(Model model, @RequestParam String board_no) {
+			logger.info("공구 상세 페이지입니다.");
+			
+			return "gonggu_detail";
+		}		
+		
+		
+		
+		
+		
 
 		
 }
