@@ -205,15 +205,22 @@ public class MypageService {
 	}
 
 	public HashMap<String, Object> emailIdentify(String email) {
-		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		String overlayd = dao.emailIdentify(email);
 		boolean emailTF = overlayd == null? false : true;
-		
-		
-		
 		map.put("emailTF", emailTF);
+		return map;
+	}
+
+	public HashMap<String, Object> profileUpdate(HashMap<String, String> userupdate) {
+		logger.info("파라메터가 서비스에 도착함? {}",userupdate);
+		int row = dao.profileUpdate(userupdate);	
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("success", row);
+		logger.info("성공했니? {}",row);
 		
 		return map;
 	}
+
+	
 }

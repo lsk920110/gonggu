@@ -4,8 +4,35 @@
 >
 <!-- xml 이름상관 없음. *.xml로 설정했으니까 -->
 <!-- 이 xml이 어떤 interface와 연결되는지 설정 -->
-<mapper namespace="com.gong.gu.dao.RequestDAO">
+<mapper namespace="com.gong.gu.dao.RequestBoardDAO">
 
+	<!-- 요청글쓰기 -->
+	<insert id="reqwrite" 
+		useGeneratedKeys="true"
+		keyProperty="board_no"
+		keyColumn="board_no"
+		parameterType="com.gong.gu.dto.BoardDTO">
+		insert into board
+			(user_id,board_title,board_content,board_name)
+		values
+			('admin01',#{board_title},#{board_content},'요청게시판')
+	</insert>
+	
+	<!-- 요청글 파일올리기 -->
+	<insert id="reqfilewrite">
+		insert into photo
+			(board_no, photo_oriname, photo_newname)
+		VALUES
+			(#{param1},#{param2},#{param3})
+	</insert>
+	
+	<!-- 요청글쓰기 카테고리별 -->
+	<insert id="reqwrite2">
+		insert into require_addit
+			(board_no, product_category_name)
+		values
+			(#{param1},#{param2})
+	</insert>
 
 
 

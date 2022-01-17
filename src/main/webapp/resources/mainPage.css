@@ -1,0 +1,69 @@
+@charset "UTF-8";
+
+
+table{
+	width: 500px;
+}
+
+table, th, td{
+	border: 1px solid black;
+	border-collapse: collapse;
+	padding: 5px 10px;
+}
+
+td{
+	text-align: center;
+}
+
+input[type='text']{
+	width: 100%;
+}
+
+textarea{
+	width: 100%;
+	height: 150px;
+	resize: none;
+}
+
+button {
+	margin: 5px;
+}
+.animation_canvas {/*실제로 보여지는 위치*/
+				overflow:hidden;/*보여지지 않는 부분을 가려라*/
+				position: relative;/*옆 사진과 관계*/
+				width :1887px;
+				height :650px;
+			}
+			.slider_panel{
+				width: 9435px;
+				height: auto;
+				position:relative
+			}
+			.slider_image{
+				float : left;
+				width: 1887px;
+				height:650px;
+			}
+			.slider_image:hover{
+				cursor: pointer;
+				opacity: 0.7;
+			}
+			.control_panel{
+				position:absolute;
+				top:600px; 
+				left :880px;
+				height :13px;
+				overflow:hidden
+			}
+			.control_button{
+				width :12px;
+				height:46px; 
+				position:relative;
+				float: left;
+				cursor:pointer;
+				background: url('/photo/point_button.png');
+			}
+			/*버튼이 원래 세로로 되어 있음 즉 버튼이 총 10개 보여지는 버튼은 5개*/
+			.control_button:hover{top:-16px;}
+			.control_button.select{top:-31px;}
+			/*background: url('/photo/point_button.png');*/

@@ -27,7 +27,10 @@
 		<table>
 			<tr>
 				<th>아이디</th>
-				<td>${myProfile.user_id}</td>
+				<td>
+				${myProfile.user_id}
+				<input type="hidden" name="id" value="${myProfile.user_id}"/>
+				</td>
 			</tr>
 			<tr>
 				<th>비밀번호</th>
@@ -189,12 +192,13 @@
 	$('#emailIdbtn').click(function(){
 		$('#emailIdnum').val();
 		if($('#emailIdnum').val() == certifinum){
-			certifinum_check == true;
+			certifinum_check = true;
 			alert('이메일 인증 성공!');
 			$('#emailIdnum').attr('type','hidden');
+			$('#emailIdbtn').attr('type','hidden');
 
 		} else {
-			certifinum_check == false;
+			certifinum_check = false;
 			alert('인증번호좀 똑바로 입력해주세요');
 		}		
 	});
@@ -206,6 +210,8 @@
 	
 	//
 	$('#submit').click(function(){
+
+		var $id = $('input[name="id"]');
 		var $pw = $('input[name="pw"]');
 		var $name = $('input[name="name"]');
 		var $birth = $('input[name="birth"]');
@@ -234,10 +240,36 @@
 		} else if(!certifinum_check){
 			alert('메일 인증이나 하세요');
 		} else{
+			var userupdate = {};
+			userupdate.user_id = $id.val();
+			userupdate.user_pw = $pw.val();
+			userupdate.user_name = $name.val();
+			userupdate.user_birth = $birth.val();
+			userupdate.user_address = $address.val();
+			userupdate.user_phone = $phone.val();
+			userupdate.user_email = $email.val();
+			console.log(userupdate);
 			
-			
-			
+	 	
+			$.ajax({
+				type:'get',
+				url :'profileupdate',
+				data : userupdate,
+				dataType:'json',
+				success:function(data){
+					console.log(data);
+					if(data.success >0 ){
+						alert('정보 수정이 완료되었습니다.');						
+					}
+				},
+				error:function(e){
+					
+				}
+			});
+		 
 		}
+		
+	
 	});
 	
 	

@@ -6,29 +6,93 @@
 <!-- 이 xml이 어떤 interface와 연결되는지 설정 -->
 <mapper namespace="com.gong.gu.dao.AdminDAO">
 
+	<!-- 1. 전체 주문리스트 불러오기 -->
    <select id="adOrderList" resultType="hashMap">
-      SELECT * FROM board INNER JOIN order_info USING (board_no) INNER JOIN groupbuy_addit USING (board_no) where board_name = 'G'
+      SELECT * FROM board INNER JOIN order_info USING (board_no) INNER JOIN groupbuy_addit USING (board_no) where board_name = '공구게시판'
    </select>
-
-   <select id="adInquiry" resultType="hashMap">
+	
+	<!-- 2. 전체 문의게시글 리시트 불러오기 -->
+	<select id="adInquiry" resultType="hashMap">
       SELECT * FROM board INNER JOIN inquiry_addit USING (board_no)
    </select>
 
-   <select id="adRequire" resultType="hashMap">
+	<!-- 3. 전체 요청게시글 리스트 불러오기 -->
+	<select id="adRequire" resultType="hashMap">
       SELECT * FROM board inner JOIN require_addit USING (board_no)
    </select>
-   
-   
-   <update id="adminInquiry_update">
-   		UPDATE board SET board_exposure = #{param2},board_active=#{param3} WHERE board_no = #{param1};
+
+	<!-- 4. 전체 문의 게시글 변경된 데이터 값 보내기 -->
+	<update id="adminInquiry_update">
+   		UPDATE board 
+   		SET board_exposure = #{param2}, 
+   		board_active = #{param3} 
+   		WHERE board_no = #{param1}
    </update>
 
 	<update id="adminInquiry_update2">
-	
-		UPDATE inquiry_addit SET inquiry_answer = #{param2} WHERE board_no = #{param1}; 
+		UPDATE inquiry_addit 
+		SET inquiry_answer = #{param2} 
+		WHERE board_no = #{param1}
+	</update>
+
+
+	<!-- 5. 전체 요청 게시글 변경된 데이터 값 보내기 -->
+	<update id="adRequire_update">
+   		UPDATE board 
+   		SET board_exposure = #{param2}, 
+   		board_active = #{param3} 
+   		WHERE board_no = #{param1}
+   </update>
+
+	<update id="adRequire_update2">
+		UPDATE require_addit 
+		SET board_select = #{param2} 
+		WHERE board_no = #{param1}
 	</update>
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 승규님 작성 -->
+	<select id="adgroupbuylist" resultType="hashmap">
+	select * from board inner join groupbuy_addit using (board_no)
+	</select>
+
+   <update id="adminGroupbuy_update">
+   		UPDATE board SET board_exposure = #{param2},board_active=#{param3} WHERE board_no = #{param1};
+   </update>
+
+	<update id="adminGroupbuy_update2">
+	
+		UPDATE groupbuy_addit SET groupbuy_state = #{param2} WHERE board_no = #{param1}; 
+	</update>
+	
+	<update id="gbcancel_no">
+	UPDATE board SET board_active = 'N' WHERE board_no = #{param1}
+	</update>
+	
+	<update id="gbcancel_no_act">
+	UPDATE groupbuy_addit SET groupbuy_state = '공구실패' WHERE board_no = #{param1}
+	</update>
+	
+	<update id="gbcancel_R">
+	UPDATE order_info SET order_etc = #{param2} WHERE board_no = #{param1}
+	</update>
+	
+	<select id="adminuserlist" resultType="hashmap">
+	SELECT * FROM user_info
+	</select>
+	
 </mapper>

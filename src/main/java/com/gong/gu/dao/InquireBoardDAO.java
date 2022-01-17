@@ -1,12 +1,13 @@
 package com.gong.gu.dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.gong.gu.dto.BoardDTO;
+import com.gong.gu.dto.PhotoDTO;
 
 public interface InquireBoardDAO {
 
-	BoardDTO inquireBoardDetail(String idx); // 문의게시글 상세정보
 	
 	void inqwrite(BoardDTO dto); // 문의게시글쓰기
 	
@@ -16,5 +17,15 @@ public interface InquireBoardDAO {
 
 	int inqupdate(HashMap<String, String> params); // 문의게시글 수정
 
+	ArrayList<BoardDTO> list();
 
+	void upHit(String board_no);
+
+	BoardDTO detail(String board_no);
+
+	void exposure(String board_no);
+
+	ArrayList<PhotoDTO> photolist(String board_no);
+
+	HashMap<String, String> inqboardetail(String board_no);
 }

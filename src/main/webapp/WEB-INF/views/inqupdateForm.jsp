@@ -6,7 +6,14 @@
  <meta charset="UTF-8">
  <title>Insert title here</title>
  <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
- <style></style>
+ <style>
+ 	table ,th,td {
+ 		border : 1px solid black;
+ 		border-collapse : collapse;
+ 		padding : 5px;
+ 	}
+ 
+ </style>
 </head>
 <body>
 	<h3>| 문의게시글 작성하기</h3>
@@ -26,28 +33,32 @@
              	<!-- 제목 -->
 				<td>
 					<input type="hidden" name="board_no"/>
-					<input type="text" name="board_title" value="${dto.board_title}"/>
+					<input type="text" name="board_title" value="${inqboardetail.board_title}"/>
 				</td>
 			</tr>
 
 			<tr>
-				<td>
-					<textarea name="board_content">${dto.board_content}</textarea>
+				<td colspan="2">
+					<textarea name="board_content">${inqboardetail.board_content}</textarea>
 				</td>
 			</tr>
 			<tr>
 				<td>
-					<input type="file" name="photos" multiple="multiple"/>
-					<c:forEach items="${photos}" var="photo">
-						<img src="/photo/${photo.newFileName}" width="250"/>
+					<c:forEach items="${photolist}" var="photo">
+						<br/><a class="delphoto" id="${photo.photo_newname}">"${photo.photo_oriname}"</a>
 					</c:forEach>
+				</td>
+				<td>
+					<input type="file" name="photos" multiple="multiple"/><br/>
+					<input type="button" onclick="photodel()" value="삭제"/>
+					<input type="hidden" name="delphoto" value=""/>
 				</td>
 			</tr>
 			<tr>
 				<th colspan="2">
 				<button>수정</button>
 				<!-- <input type="button" id="regist" value="작성완료"/> -->
-				<input type="button" onclick="location.href='./'" value="취소" />
+				<input type="button" onclick="location.href='./inquireBoardDetail?board_no=${inqboardetail.board_no }'"value="취소" />
 				</th>
 			</tr>
 		</table>
@@ -56,5 +67,18 @@
 </body>
   
 </body>
-<script></script>
+<script>
+function photodel(){
+	var $delphoto = $('.delphoto');
+	
+	for (var i = 0; i < $delphoto.length; i++) {
+		console.log($delphoto[i].id);
+		
+	}
+	
+}
+
+
+
+</script>
 </html>
