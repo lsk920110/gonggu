@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <html>
 <head>
 	<meta charset="UTF-8">
@@ -26,10 +27,10 @@
 		font-weight : bold;
 	}
 	
-	#heart{
+	.heart{
 		width: 30px;
 		height: 30px;
-		
+		cursor: pointer;
 	}
 	</style>
 </head>
@@ -51,71 +52,179 @@
 
     
         <div id="board1">
-				
-		<c:forEach items="${groupBuyList}" var="list">
-		
-			
-			${list.groupbuy_state}<br/>
-			<a>
-			<img id="boardimg" src="/photo/${list.photo_newname}" alt="상품이미지"/> 
-			</a><br/>
-			<a id="boardtitle" href="detail?board_no=${list.board_no}">${list.board_title}</a><br/>
-		
-			<img id="heart" src="resources/img/빈하트.png" alt="찜하트">
+        
+        <c:set var="wish_list" value="${wishlist}"/>
+        
 	
-			<p>가격 : ${list.groupbuy_unitprice}원<p>
+			<c:forEach items="${groupBuyList}" var="list">
 			
-		<c:if test="${list.sum eq null}">
-			<progress value="0" max="${list.groupbuy_target}"></progress>
-			<p style="font-size:11px">신청수량:0개 / 목표수량:${list.groupbuy_target}개 </p>		
-		</c:if>
-		<c:if test="${list.sum != null}">
-			<progress value="${list.sum}" max="${list.groupbuy_target}"></progress>
-			<p style="font-size:11px">신청수량:${list.sum}개 / 목표수량:${list.groupbuy_target}개 </p>		
-		</c:if>
-							
-		</c:forEach>
+			<c:set var="board__no" value="${list.board_no}"/>
+			
+				${list.groupbuy_state}<br/>
+				
+				
+				<c:choose>
+					<c:when test="${list.groupbuy_state eq '공구완료'}">
+						<a href="detail?board_no=${list.board_no}">
+							<img style="filter:grayscale(100%)" id="boardimg" src="/photo/${list.photo_newname}" alt="상품이미지"/> 
+						</a><br/>
+					</c:when>
+					<c:when test="${list.groupbuy_state eq '공구실패'}">
+						<a href="detail?board_no=${list.board_no}">
+							<img style="filter:grayscale(100%)" id="boardimg" src="/photo/${list.photo_newname}" alt="상품이미지"/> 
+						</a><br/>
+					</c:when>
+					<c:otherwise> 
+						<a href="detail?board_no=${list.board_no}">
+							<img id="boardimg" src="/photo/${list.photo_newname}" alt="상품이미지"/> 
+						</a><br/>
+					</c:otherwise> 
+				</c:choose>  
+				
+				
+				<a id="boardtitle" href="detail?board_no=${list.board_no}">${list.board_title}</a><br/>
+			   
+			   
+			    <input type="text" value="${list.board_no}"/>
+			    <input type="hidden" value="${list.board_no}"/>
+				
+				
+				<c:choose>
+					<c:when test="${fn:contains(wish_list, board__no)}">
+						<img class="heart" src="resources/img/검정하트.png" alt="찜 검정하트">
+					</c:when>
+					
+					<c:otherwise> 
+						<img class="heart" src="resources/img/빈하트.png" alt="찜 빈하트">
+					</c:otherwise> 
+				</c:choose>  
+	
+	
+				<p>가격 : ${list.groupbuy_unitprice}원<p>
+				
+				<c:if test="${list.sum eq null}">
+					<progress value="0" max="${list.groupbuy_target}"></progress>
+					<p style="font-size:11px">신청수량:0개 / 목표수량:${list.groupbuy_target}개 </p>		
+				</c:if>
+				
+				<c:if test="${list.sum ne null}">
+					<progress value="${list.sum}" max="${list.groupbuy_target}"></progress>
+					<p style="font-size:11px">신청수량:${list.sum}개 / 목표수량:${list.groupbuy_target}개 </p>		
+				</c:if>
+								
+			</c:forEach>
 
         </div>
 
-   
 
 	
 </body>
 <script>
 
+	//하트 클릭 시 찜 추가/삭제
+	$('.heart').click(function(){
+		
+		if('${loginId}' == ''){ //비회원이면 로그인 페이지로 이동
+			location.href='./loginMain';
+		}else{
+					
+			var loginId = '${loginId}';
+			var board_no = $(this).prev().val();
+			
+			console.log("로그인 아이디 : "+loginId);
+			console.log("게시글 번호 : "+board_no);
+			
+			var param = {'loginId':loginId,'board_no':board_no};
+			console.log(param);
+			
+			
+			var thissrc = $(this).attr('src');
+			
+			if(thissrc == 'resources/img/빈하트.png'){
+				$(this).attr('src','resources/img/검정하트.png');
+			}else{
+				$(this).attr('src','resources/img/빈하트.png');
+			}
+			
+			
+			
+			$.ajax({
+				type:'POST',
+				url:'wishListChange',
+				data: param,
+				dataType:'JSON',
+				success:function(data){
+					if(data.success == 1){
+						console.log('찜 추가');
+						
+					}
+					if(data.row2 == 1){
+						console.log('찜 삭제');
+					}
+				},	
+				error:function(e){
+					console.log(e);
+					alert('서버에 문제가 발생했습니다.');
+				}
+			}); 
+	       
+	
+		}
+	});
+	
+	
+	
 	
 	/*
-	if(${wishlist} == {groupBuyList.board_no}){
-		 $('#main').attr('src','resources/img/검정하트.png');
-	}
-	*/
-
-
 	
+	$('.heart1').click(function(){
+		console.log('빈하트 클릭')
+		
+		if('${loginId}' == ''){ //비회원이면 로그인 페이지로 이동
+			location.href='./loginMain';
+		}else{
+					
+			var loginId = '${loginId}';
+			var board_no = $(this).prev().val();
+			
+			console.log("로그인 아이디 : "+loginId);
+			console.log("게시글 번호 : "+board_no);
+			
+			
+			
+			
+		}
+		
+		
+		
+		
+	});
+	
+	*/
+	
+	
+	
+	//카테고리 조회 클릭 시  
 	$('.category').click(function(){
-		
-		
 		
  		var param = $(this).attr('alt');
  		
 		console.log(param);
-			
-		
+
 		$.ajax({
 			type:'GET',
 			url:'categoryCheck',
 			data: {'param':param},
 			dataType:'JSON',
 			success:function(data){
-				console.log(data.list);
+				console.log(data.categorylist);
 				
-				if(data.list == ''){
+				if(data.categorylist == ''){
 					alert('해당 카테고리 게시글이 없습니다.');
 					location.href='./groupBuyList';
 				}else{
-				$('#board1').empty();
-				listDraw(data.list);
+					//$('#board1').empty();
+					listDraw(data.categorylist);
 				}
 			},	
 			error:function(e){
@@ -128,18 +237,49 @@
  	});
 
 	
-	
-	function listDraw(list){
+	//카테고리별 리스트 append
+	function listDraw(categorylist){
 		
+		/*
 		var content = '';
 		
+		//수정★)리스트 완성하면 똑같이 배열로 넣을것
 		for (var i = 0; i < list.length; i++){
 			content += list[i].groupbuy_state+'<br/>'; 
 			content += '<a><img src="/photo/'+list[i].photo_newname+'" alt="상품이미지"/></a>';
 		}
 		
 		$('#board1').append(content); 
-	}
+		
+		
+		var param = [];
+		categorylist;
+		
+		
+		$.ajax({
+			type:'GET',
+			url:'groupBuyList',
+			data: param,
+			dataType:'JSON',
+			success:function(data){
+				if(data.success == 1){
+					console.log('찜 추가');
+					
+				}
+				if(data.row2 == 1){
+					console.log('찜 삭제');
+				}
+			},	
+			error:function(e){
+				console.log(e);
+				alert('서버에 문제가 발생했습니다.');
+			}
+		}); 
+		
+		*/
+	};
+	
+	
 
 </script>
 </html>

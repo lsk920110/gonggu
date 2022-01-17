@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.HashMap;
 
 import com.gong.gu.dto.BoardDTO;
+import com.gong.gu.dto.WishlistDTO;
 
 public interface GroupBuyBoardDAO {
 
@@ -18,7 +19,13 @@ public interface GroupBuyBoardDAO {
 
 	ArrayList<HashMap<String, String>> categoryCheck(String param);
 
-	String wishlist(String loginId);
+	ArrayList<String> wishlist(String loginId);
+
+	int wishList_Insert(String loginId, String board_no);
+
+	int wishList_delete(String board_no, String loginId);
+
+	String wishlist2(String board_no, String loginId);
 
 
 }

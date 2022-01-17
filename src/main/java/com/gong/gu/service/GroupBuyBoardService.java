@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.gong.gu.dao.GroupBuyBoardDAO;
 import com.gong.gu.dto.BoardDTO;
+import com.gong.gu.dto.WishlistDTO;
 
 @Service
 public class GroupBuyBoardService {
@@ -165,11 +166,39 @@ public class GroupBuyBoardService {
 	}
 
 
-
-	public String wishlist(String loginId) {
+	//찜 목록 확인
+	public ArrayList<String> wishlist(String loginId) {
 		
 		return dao.wishlist(loginId);
 	}
+
+
+
+	public int wishList_Insert(String loginId, String board_no) {
+		
+		int row = dao.wishList_Insert(loginId,board_no);
+		logger.info(" 입력된 건수 : {}",row);
+		return row;
+	}
+
+
+
+	public int wishList_delete(String board_no, String loginId) {
+		
+		return dao.wishList_delete(board_no,loginId);
+		
+	}
+
+
+
+	public String wishlist2(String loginId, String board_no) {
+		String wishlist2 = dao.wishlist2(board_no,loginId);
+		return wishlist2;
+	}
+
+
+
+
 
 
 

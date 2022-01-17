@@ -75,17 +75,27 @@ public class GroupBuyBoardController {
 	 
 	 //공구 리스트 불러오기	
 	 @RequestMapping(value = "/groupBuyList", method = RequestMethod.GET)
-		public String myorderList(Model model, HttpSession session) { 
+		public String groupBuyList(Model model, HttpSession session) { 
 			logger.info("groupBuyList 요청");
 			
 			//String loginId = (String)session.getAttribute("loginId");
-			//logger.info("로그인 아이디 : "+loginId);
 			
 			String loginId = "admin01";
+			logger.info("로그인 아이디 : "+loginId);
+			model.addAttribute("loginId", loginId);
+			String list = "";
+			
+			//찜 목록 확인 - loginId에 해당하는 Board_no 반환
 			if(loginId != null) {
-				String wishlist = service.wishlist(loginId);
-				logger.info(wishlist);
-				model.addAttribute("wishlist", wishlist);
+				ArrayList<String> wishlist = service.wishlist(loginId);
+				logger.info("찜목록 : {}",wishlist);
+				for (int i = 0; i < wishlist.size(); i++) {
+					list += wishlist.get(i);
+					list += "/";
+				}
+				
+				
+				model.addAttribute("wishlist", list);
 			}
 			
 			
@@ -116,6 +126,42 @@ public class GroupBuyBoardController {
 		
 		return map;
 	}
+	
+	
+	//찜 추가/삭제
+	@RequestMapping(value = "/wishListChange", method = RequestMethod.POST)
+	@ResponseBody
+	public HashMap<String, Object> wishListChange(@RequestParam String loginId, @RequestParam String board_no) {
+		
+		logger.info("로그인아이디: {}",loginId);
+		logger.info("게시글 번호 : {}",board_no);
+		
+		
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		//찜 목록 확인
+		 String wishlist2 = service.wishlist2(loginId,board_no);
+		
+		 logger.info(wishlist2);
+		 
+		 if(wishlist2 != null) { //찜목록에 있음
+			 int row2 = service.wishList_delete(board_no,loginId);
+			 map.put("row2", row2);
+			 
+		 }else {
+			 
+			 int row = service.wishList_Insert(loginId,board_no);
+			 map.put("success",row);
+		 }
+		 
+		//select-> loginid랑 board_no 일치하는게 있는지??
+		//if 존재하면 -> DB로 가서 delete
+		//존재하지않으면 -> insert
+
+		return map;
+	}
+	
 	
 	
 }

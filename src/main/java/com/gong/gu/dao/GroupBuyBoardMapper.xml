@@ -74,4 +74,19 @@
 	</select>
 	
 	
+	<!-- 찜 추가/삭제 -->
+	
+	<!-- 찜 하트 클릭 시 찜여부확인 -->
+	<select id="wishlist2" resultType="String" >
+		SELECT board_no FROM wishlist WHERE board_no = #{param1} AND user_id = #{param2}
+	</select>
+	
+	<insert id="wishList_Insert" >
+		INSERT INTO wishlist(user_id,board_no) VALUES (#{param1}, #{param2})
+	</insert>
+	
+	<delete id="wishList_delete">
+		DELETE FROM wishlist WHERE board_no = #{param1} AND user_id = #{param2}
+	</delete>
+	
 </mapper>
