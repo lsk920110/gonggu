@@ -39,4 +39,8 @@ public interface MypageDAO {
 
 	String emailIdentify(String email);
 
+	int profileUpdate(HashMap<String, String> userupdate);
+
+	ArrayList<HashMap<String, String>> adminuserlist();
+
 }

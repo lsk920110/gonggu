@@ -73,5 +73,13 @@
 	</select>
 	
 	
+	
+	<select id="inqboardetail" resultType="hashmap">
+		SELECT *
+		FROM board b INNER JOIN inquiry_addit ia 
+		USING (board_no) WHERE board_no = #{param1}
+
+	</select>
+	
 
 </mapper>

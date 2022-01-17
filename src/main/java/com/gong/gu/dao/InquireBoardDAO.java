@@ -8,7 +8,6 @@ import com.gong.gu.dto.PhotoDTO;
 
 public interface InquireBoardDAO {
 
-	BoardDTO inquireBoardDetail(String idx); // 문의게시글 상세정보
 	
 	void inqwrite(BoardDTO dto); // 문의게시글쓰기
 	
@@ -27,4 +26,6 @@ public interface InquireBoardDAO {
 	void exposure(String board_no);
 
 	ArrayList<PhotoDTO> photolist(String board_no);
+
+	HashMap<String, String> inqboardetail(String board_no);
 }

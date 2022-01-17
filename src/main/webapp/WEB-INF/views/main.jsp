@@ -31,8 +31,8 @@
 			<td><a href="./mypage">mypage</a></td>
 			<td><a href="./adminOrderList">adminOrderList</a></td>
 			<td><a href="./groupBuyList">groupBuyList</a></td>
-			<td><a href="./inqwriteForm">inqwriteForm</a></td>
-			<td><a href="./InquireBoardlist">InquireBoardlist</a></td>
+			<td><a href="./">request</a></td>
+			<td><a href="./inquireBoardList">inquireBoardList</a></td>
 			<td><a href="./loginMain">login</a></td>
 			<td><a href="./orderConfirmPage">orderConfirmPage</a></td>
 			

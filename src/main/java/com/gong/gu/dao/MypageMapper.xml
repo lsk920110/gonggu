@@ -93,5 +93,15 @@
 	SELECT user_email FROM user_info WHERE user_email = #{param1}
 	
 	</select>
+	
+	<update id="profileUpdate">
+	UPDATE user_info SET user_pw=#{user_pw},user_name= #{user_name},user_birth = #{user_birth},user_address = #{user_address},user_phone = #{user_phone},user_email = #{user_email} 
+	WHERE user_id= #{user_id}
+	</update>
+	
+	
+	<select id="adminuserlist" resultType="hashmap">
+	SELECT * FROM user_info
+	</select>
 
 </mapper>

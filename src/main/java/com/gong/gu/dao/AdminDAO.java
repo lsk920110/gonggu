@@ -15,6 +15,16 @@ public interface AdminDAO {
 
 	void adminInquiry_update2(String strKey, String sta);
 
+	ArrayList<HashMap<String, String>> adgroupbuylist();
+
+	void adminGroupbuy_update(String strKey, String exp, String act);
+
+	void adminGroupbuy_update2(String strKey, String sta);
+
+	int gbcancel_no(String board_no);
+
+	int gbcancel_R(String cancelR);
+
 
 
 }

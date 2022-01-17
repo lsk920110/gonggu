@@ -49,14 +49,20 @@ public class InquireBoardController {
 	
 	 // 문의글 수정페이지 요청
 	 @RequestMapping(value = "/inqupdateForm", method = RequestMethod.GET) 
-	 public String inqupdateForm(Model model, @RequestParam String idx) { 
-		 logger.info("inqupdateForm : {}",idx);
-		 return service.inqupdateForm(model,idx);
+	 public String inqupdateForm(Model model, @RequestParam String board_no) { 
+		 logger.info("inqupdateForm : {}",board_no);
+		 HashMap<String, String> inqboardetail = service.inqupdateForm(board_no);
+		 ArrayList<PhotoDTO> photolist = service.photolist(board_no);
+		 
+		 model.addAttribute("inqboardetail",inqboardetail);
+		 model.addAttribute("photolist",photolist);
+		 
+		 return "inqupdateForm";
 	}
 	 
 	 
 	// 문의글 수정 요청
-	 @RequestMapping(value = "/inqupdate", method = RequestMethod.POST) 
+	 @RequestMapping(value = "/inqupdate", method = RequestMethod.GET) 
 	 public String inqupdate(Model model, MultipartFile[] photos, 
 			 @RequestParam HashMap<String, String> params) { 
 		 logger.info("문의글 수정 요청 : {}", params);
@@ -66,7 +72,7 @@ public class InquireBoardController {
 	 
 	 
 	 //문의글 리스트
-	 @RequestMapping(value = "/inquireBoardlist", method = RequestMethod.GET)
+	 @RequestMapping(value = "/inquireBoardList", method = RequestMethod.GET)
 	 public String inquireBoardlist(Model model) {		
 		 logger.info("list 요청");
 		 
@@ -74,7 +80,7 @@ public class InquireBoardController {
 		logger.info("글의 수 : {}",list.size());
 		model.addAttribute("size", list.size());
 		model.addAttribute("list", list);		
-		return "inquireBoardlist";
+		return "inquireBoardList";
 		
 	}
 		
@@ -82,7 +88,7 @@ public class InquireBoardController {
 		//문의글 상세보기
 		
 		@RequestMapping(value = "/inquireBoardDetail", method = RequestMethod.GET)
-		public String writeForm(Model model, @RequestParam String board_no) {		
+		public String inquireBoardDetail(Model model, @RequestParam String board_no) {		
 			logger.info("detail 요청 : {}",board_no);
 			
 			BoardDTO dto = service.detail(board_no);
@@ -101,7 +107,7 @@ public class InquireBoardController {
 		public String inquireBoardexposure(Model model, @RequestParam String board_no) {		
 			logger.info("비노출 요청 : {}",board_no);		
 			service.exposure(board_no);		
-			return "redirect:/";
+			return "redirect:/inquireBoardList";
 		}
 	 
 

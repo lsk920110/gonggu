@@ -28,7 +28,25 @@
 		UPDATE inquiry_addit SET inquiry_answer = #{param2} WHERE board_no = #{param1}; 
 	</update>
 
+	<select id="adgroupbuylist" resultType="hashmap">
+	select * from board inner join groupbuy_addit using (board_no)
+	</select>
 
+   <update id="adminGroupbuy_update">
+   		UPDATE board SET board_exposure = #{param2},board_active=#{param3} WHERE board_no = #{param1};
+   </update>
 
-
+	<update id="adminGroupbuy_update2">
+	
+		UPDATE groupbuy_addit SET groupbuy_state = #{param2} WHERE board_no = #{param1}; 
+	</update>
+	
+	<update id="gbcancel_no">
+	UPDATE groupbuy_addit SET gourpguy_state = '공구취소' WHERE board_no = #{param1}
+	</update>
+	
+	<update id="gbcancel_R">
+	UPDATE order_info SET order_etc = #{param1} 
+	</update>
+	
 </mapper>

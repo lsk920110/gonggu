@@ -37,13 +37,13 @@ public class InquireBoardService {
 		dto.setBoard_content(params.get("board_content"));
 		dao.inqwrite(dto);
 		
-		int idx = dto.getBoard_no();
-		logger.info("idx: "+idx);
+		int board_no = dto.getBoard_no();
+		logger.info("board_no: "+board_no);
 		
-		if (idx>0) {
-			page = "readirect:/inquireBoardDetail?idx="+idx;
-			inqwrite2(idx,params);
-			saveFile(idx,photos);
+		if (board_no>0) {
+			page = "readirect:/inquireBoardDetail?board_no="+board_no;
+			inqwrite2(board_no,params);
+			saveFile(board_no,photos);
 		}
 
 		return page;
@@ -51,7 +51,7 @@ public class InquireBoardService {
 	
 	
 	// 문의글 사진 파일 저장 (실제 파일을 저장하고 경로를 DB 에 기록)
-	private void saveFile(int idx, MultipartFile[] photos) {
+	private void saveFile(int board_no, MultipartFile[] photos) {
 		for (MultipartFile photo : photos) {
 			String oriFileName = photo.getOriginalFilename();
 			int index = oriFileName.lastIndexOf(".");
@@ -65,7 +65,7 @@ public class InquireBoardService {
 				Path path = Paths.get("C:/upload/"+newFileName);
 				Files.write(path, bytes);
 				logger.info(oriFileName+"사진 올라갔냐!");
-				int asd = dao.inqfilewrite(idx, oriFileName, newFileName);
+				int asd = dao.inqfilewrite(board_no, oriFileName, newFileName);
 				logger.info("사진 업데이트 됬으면 1이상! {}",asd);
 				
 			} catch (Exception e) {
@@ -78,12 +78,12 @@ public class InquireBoardService {
 	
 	// 옵션 DB 글쓰기
 	
-	private void inqwrite2(int idx, HashMap<String, String> params) {
+	private void inqwrite2(int board_no, HashMap<String, String> params) {
 		logger.info("옵션 DB 데이터 넣기 : {}",params);
 	
 			String Category = params.get("Category");
 		
-			int row = dao.inqwrite2(idx,Category);
+			int row = dao.inqwrite2(board_no,Category);
 			logger.info("입력된 건수 : {}",row);
 			
 		} 
@@ -91,10 +91,10 @@ public class InquireBoardService {
 
 
 	// 문의글 수정페이지 요청
-	public String inqupdateForm(Model model, String idx) {
-		logger.info("service 동작");
-		BoardDTO dto = dao.inquireBoardDetail(idx);
-		return null;
+	public HashMap<String, String> inqupdateForm(String board_no) {
+		logger.info("service 동작 :{} 번 글 데이터 요청",board_no);
+		HashMap<String, String> inqboardetail = dao.inqboardetail(board_no);
+		return inqboardetail;
 	}
 	
 
@@ -102,12 +102,12 @@ public class InquireBoardService {
 	// 문의글 수정
 	public String inqupdate(MultipartFile[] photos, HashMap<String, String> params) {
 		
-		int idx = Integer.parseInt(params.get("idx"));
-		String page = "redirect:/inquireBoardDetail?idx="+idx;
+		int board_no = Integer.parseInt(params.get("board_no"));
+		String page = "redirect:/inquireBoardDetail?board_no="+board_no;
 		
 		if (dao.inqupdate(params)>0) {
-			page = "redirect:/inquireBoardDetail?idx="+idx;
-			saveFile(idx, photos);
+			page = "redirect:/inquireBoardDetail?board_no="+board_no;
+			saveFile(board_no, photos);
 		}
 		return page;
 	}
@@ -149,6 +149,8 @@ public class InquireBoardService {
 		
 		return dao.photolist(board_no);
 	}
+
+
 	
 
 

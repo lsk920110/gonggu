@@ -248,9 +248,26 @@ public class MypageController {
 		public HashMap<String, Object> overlayemail(@RequestParam String email) {
 			logger.info("email 중복조회 : {}",email);
 			HashMap<String, Object> emailIdentify = service.emailIdentify(email);
-
-			
 			return emailIdentify;
 		}
+		
+		
+		@RequestMapping(value="/profileupdate" , method = RequestMethod.GET)
+		@ResponseBody
+		public HashMap<String, Object> profileupdate(@RequestParam HashMap<String, String> userupdate) {
+			logger.info("프로필 업데이트 요청을 받았습니다. {}",userupdate);
+			return service.profileUpdate(userupdate);		
+		}
+		
+		
+		@RequestMapping(value = "/adminuserlist", method = RequestMethod.GET)
+		public String adminuserlist(Model model) {
+			logger.info("adminuserlist 입니다.");
+
+			model.addAttribute("adminuserlist",service.adminuserlist());
+			
+			
+			return "adminuserlist";
+		}		
 		
 }

@@ -37,5 +37,27 @@ public class AdminService {
 	   dao.adminInquiry_update(strKey,exp,act);
 	   dao.adminInquiry_update2(strKey,sta);
    }
+
+public ArrayList<HashMap<String, String>> adgroupbuylist() {
+	ArrayList<HashMap<String, String>> adgroupbuylist = new ArrayList<HashMap<String,String>>();
+	adgroupbuylist = dao.adgroupbuylist();
+	logger.info("서비스에 요청게시판 데이터 받아옴 : {}",adgroupbuylist);
+	
+	return adgroupbuylist;
+}
+
+public void adminGroupbuy_update(String strKey, String exp, String act, String sta) {
+	   dao.adminGroupbuy_update(strKey,exp,act);
+	   dao.adminGroupbuy_update2(strKey,sta);	
+}
+
+public int gbcancel(String board_no, String cancelR) {
+	int gbcancel_no = dao.gbcancel_no(board_no);
+	int gbcancel_R = dao.gbcancel_R(cancelR);
+
+	return gbcancel_no + gbcancel_R;
+	
+	
+}
    
 }

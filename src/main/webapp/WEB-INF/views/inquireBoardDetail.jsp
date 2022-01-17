@@ -46,8 +46,8 @@
 	</tr>
 	<tr>
 		<th colspan="2">
-			<input type="button" onclick="location.href='./InquireBoardlist'" value="리스트"/>
-			<input type="button" onclick="location.href='./inqupdate?board_no=${info.board_no}'" value="수정"/>
+			<input type="button" onclick="location.href='./inquireBoardList'" value="리스트"/>
+			<input type="button" onclick="location.href='./inqupdateForm?board_no=${info.board_no}'" value="수정"/>
 			<input type="button" onclick="exposure()" value="삭제"/>			
 		</th>
 	</tr>

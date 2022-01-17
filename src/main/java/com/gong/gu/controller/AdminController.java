@@ -98,6 +98,48 @@ public class AdminController {
       
       return "redirect:/adminInquiry";//
    }
+   
+   
+   
+   //5. 전체 요청 게시글
+   @RequestMapping(value = "/admingroupbuylist", method = RequestMethod.GET)
+   public String admingroupbuylist(Model model) {
+      logger.info("전체 요청 게시글 리스트 불러오기");
+      
+      ArrayList<HashMap<String, String>> adgroupbuylist = service.adgroupbuylist();
+      logger.info("가져온 리수트 수 : {}", adgroupbuylist.size());
+      model.addAttribute("adgroupbuylist", adgroupbuylist);
+      return "admingroupbuylist";
+   }
 
+   //6. 전체 문의 게시글 변경된 데이터 값 보내기
+   @RequestMapping(value = "/adminGroupbuy_update", method = RequestMethod.POST)
+   public String adminGroupbuy_update(Model model, 
+         @RequestParam  HashMap<String, String> params) {
+      logger.info("수정요청 요청 : {}", params);
+
+      for(String strKey : params.keySet()) {
+    	  String strValue = params.get(strKey);
+    	  String exp = strValue.substring(0,1);
+    	  String act = strValue.substring(1,2);
+    	  String sta = strValue.substring(2);
+    	  service.adminGroupbuy_update(strKey,exp,act,sta);
+    	  
+    	  logger.info(strValue+strKey+'/'+exp+'/'+act+'/'+sta);
+      }
+      
+
+      return "redirect:/admingroupbuylist";//
+   }   
+   
+   @RequestMapping(value = "/gbcancel", method = RequestMethod.GET)
+   public String gbcancel(Model model, 
+         @RequestParam String cancelR ,  @RequestParam String board_no) {
+      logger.info("{} 게시글 취소요청 {}",board_no, cancelR);
+      	int success = service.gbcancel(board_no,cancelR);
+      
+
+      return "redirect:/admingroupbuylist";//
+   }   
    
 }
