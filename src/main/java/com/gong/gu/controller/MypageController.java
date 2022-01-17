@@ -260,14 +260,6 @@ public class MypageController {
 		}
 		
 		
-		@RequestMapping(value = "/adminuserlist", method = RequestMethod.GET)
-		public String adminuserlist(Model model) {
-			logger.info("adminuserlist 입니다.");
 
-			model.addAttribute("adminuserlist",service.adminuserlist());
-			
-			
-			return "adminuserlist";
-		}		
 		
 }

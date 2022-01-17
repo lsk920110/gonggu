@@ -222,13 +222,5 @@ public class MypageService {
 		return map;
 	}
 
-	public ArrayList<HashMap<String, String>> adminuserlist() {
-		
-		
-		ArrayList<HashMap<String, String>> adminuserlist = new ArrayList<HashMap<String, String>>();
-		adminuserlist = dao.adminuserlist();
-		logger.info("서비스  : 조회 결과물 {}",adminuserlist);
-		
-		return adminuserlist;
-	}
+	
 }

@@ -6,15 +6,43 @@
 	<title>Insert title here</title>
 	<script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
 	<style>
-	table,th,td {
-		border : 1px solid black;
-		border-collapse : collapse;
-		padding : 5px;
-	}
+		table,th,td {
+			border : 1px solid black;
+			border-collapse : collapse;
+			padding : 5px;
+		}
+		.adminMenu{
+			cursor: pointer;
+			padding: 20px;
+		}
+		.adminMenu:hover{
+			background-color: beige;
+		}
+		#adminMenuBar{
+			text-align: center;
+		}
+		iframe{
+			width: 100%;
+			height: 210px;
+			border-style: none;
+		}
 	</style>
 </head>
 <body>
-	
+	<iframe src="header"></iframe>
+	<div id = "adminMenuBar">
+        <img class="adminMenu" src="resources/img/전체주문내역.png"  alt="전체주문내역" loc="adminOrderList">
+        <img class="adminMenu" src="resources/img/전체문의게시글.png" alt="전체문의게시글" loc="adminInquiry">
+        <img class="adminMenu" src="resources/img/전체요청글.png" alt="전체요청글" loc="adminRequire">
+         <img class="adminMenu" src="resources/img/전체공구게시글.png" alt="전체공구게시글" loc="admingroupbuylist">
+        <img style="background-color: beige" class="adminMenu" src="resources/img/전체회원정보.png" alt="전체회원정보" loc="adminuserlist">
+        <img class="adminMenu" src="resources/img/상품등록.png" alt="상품등록" loc="(상품등록)">
+    </div>
+			
+	<hr/>
+	<br/>
+	<br/>
+	<br/>		
 	
 	<table>
 		<tr>
@@ -43,11 +71,17 @@
 				
 	</table>
 	
-	
+	<br/>
+	<br/>
+	<br/>
+
+	<iframe src="footer"></iframe>
 	
 </body>
 <script>
-	
+	$(".adminMenu").click(function(){
+	    location.href=$(this).attr("loc");
+	});
 
 
 </script>

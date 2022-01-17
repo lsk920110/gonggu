@@ -41,6 +41,4 @@ public interface MypageDAO {
 
 	int profileUpdate(HashMap<String, String> userupdate);
 
-	ArrayList<HashMap<String, String>> adminuserlist();
-
 }

@@ -7,26 +7,47 @@
    <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
    <link rel="stylesheet" href="resources/common.css">
    <style>
-   table ,th,td {
-   	border : 1px solid black;
-   	border-collapse : collapse;
-   	padding : 5px;
-   
-   }
-   
+	   table ,th,td {
+	   	border : 1px solid black;
+	   	border-collapse : collapse;
+	   	padding : 5px;
+	   
+	   }
+		.adminMenu{
+			cursor: pointer;
+			padding: 20px;
+		}
+		.adminMenu:hover{
+			background-color: beige;
+		}
+		#adminMenuBar{
+			text-align: center;
+		}
+		iframe{
+			width: 100%;
+			height: 210px;
+			border-style: none;
+		}   
    
    </style>
 </head>
 <body>
-   <iframe src="header"></iframe>
-   <div>
-      <a href="adminOrderList">전체 주문 내역</a>
-      <a href="adminInquiry">전체 문의게시글</a>
-      <a href="adminRequire">전체 요청글</a>
-      <a href="adminGroupbuy">전체 공구 게시글</a>
-      <a href="adminUserList">전체 회원 정보</a>
-   </div>
-   <h3>전체 문의게시글</h3>
+  	<iframe src="header"></iframe>
+	<div id = "adminMenuBar">
+        <img class="adminMenu" src="resources/img/전체주문내역.png"  alt="전체주문내역" loc="adminOrderList">
+        <img class="adminMenu" src="resources/img/전체문의게시글.png" alt="전체문의게시글" loc="adminInquiry">
+        <img class="adminMenu" src="resources/img/전체요청글.png" alt="전체요청글" loc="adminRequire">
+        <img style="background-color: beige" class="adminMenu" src="resources/img/전체공구게시글.png" alt="전체공구게시글" loc="admingroupbuylist">
+        <img class="adminMenu" src="resources/img/전체회원정보.png" alt="전체회원정보" loc="adminuserlist">
+        <img class="adminMenu" src="resources/img/상품등록.png" alt="상품등록" loc="(상품등록)">
+    </div>
+			
+	<hr/>
+	<br/>
+	<br/>
+	<br/>		
+			
+			
    
    
    
@@ -189,6 +210,9 @@ function cancel(e){
 	
 }
 
+$(".adminMenu").click(function(){
+    location.href=$(this).attr("loc");
+});
 
 </script>
 </html>

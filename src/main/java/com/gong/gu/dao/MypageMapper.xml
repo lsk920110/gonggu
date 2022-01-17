@@ -99,9 +99,5 @@
 	WHERE user_id= #{user_id}
 	</update>
 	
-	
-	<select id="adminuserlist" resultType="hashmap">
-	SELECT * FROM user_info
-	</select>
 
 </mapper>
