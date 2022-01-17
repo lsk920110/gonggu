@@ -73,24 +73,16 @@
             }
 
 
-            /* 세부 영역 */
             /* 1. 헤더 */
-            /* 2.6:1 */
             #MainLogo{ 
                 position: absolute;
                 width: 182px;
                 height: 60px;
                 bottom: 1%;
             }
-            /*
-            #logo_link{
-                position: absolute;
-                width: 182px;
-                height: 60px;
-                bottom: 1%;
-                left: 25%;
+            #MainLogo{
+            	cursor: pointer;
             }
-            */
             #search{
                 position: absolute;
                 bottom: 8%;
@@ -111,7 +103,7 @@
                 right: 17%;
                 cursor: pointer;
             }
-            #login{
+            .login{
                 position: absolute;
                 border: 2px solid rgb(246 225 170);
                 border-radius: 10px;
@@ -125,6 +117,11 @@
                 color: white;
                 text-align: center;
                 line-height: 40px;
+            }
+            .login:hover{
+            	cursor: pointer;
+            	color: rgb(246 225 170);
+            	background-color: white;
             }
 
             /* 2.카테고리 */
@@ -172,7 +169,7 @@
 
             <div id="main_wrap_header">
 	                <div id="main_wrap_header_left" class="headertap">
-	                	<img id="MainLogo" src="resources/img/MainLogo.png" alt="메인로고" loc="(메인페이지)"/>
+	                	<img id="MainLogo" src="resources/img/MainLogo.png" alt="메인로고" loc="./"/>
 	                </div>
                	<form action="search" method="post">
 	               	<div id="main_wrap_header_center" class="headertap">
@@ -181,19 +178,17 @@
 	                </div>
                	</form>
                
-	                <div id="main_wrap_header_right" class="headertap">
-	                    <div id="login">
-	                        <span>로그인</span>
-	                    </div>
+		            <div id="main_wrap_header_right" class="headertap">
+		                <span class="login" loc="loginMain">로그인</span>
 	                </div> 
             </div>
 
 
             <div id="main_wrap_category">
                 <span id="admin_category1" class="admin_category" loc="(요청게시판)">요청게시판</span>
-                <span id="admin_category2" class="admin_category" loc="(공구게시판)">공구게시판</span>
-                <span id="admin_category3" class="admin_category" loc="(문의게시판)">문의게시판</span>
-                <span id="admin_category4" class="admin_category" loc="(마이페이지)">마이페이지</span>
+                <span id="admin_category2" class="admin_category" loc="groupBuyList">공구게시판</span>
+                <span id="admin_category3" class="admin_category" loc="inquireBoardList">문의게시판</span>
+                <span id="admin_category4" class="admin_category" loc="mypage">마이페이지</span>
             </div>
 
         </div>
@@ -210,6 +205,9 @@
         parent.location.href=$(this).attr("loc");//부모창에서 여는 방법//attr로 loc속성을 가져온다.
     });
     $(".admin_category").click(function(){//페이지 이동  
+        parent.location.href=$(this).attr("loc");//부모창에서 여는 방법//attr로 loc속성을 가져온다.
+    });
+    $(".login").click(function(){//페이지 이동  
         parent.location.href=$(this).attr("loc");//부모창에서 여는 방법//attr로 loc속성을 가져온다.
     });
     </script>

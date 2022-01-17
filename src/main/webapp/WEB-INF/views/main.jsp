@@ -11,9 +11,16 @@
 		border-collapse : collapse;
 		padding : 5px;
 	}
+	iframe{
+		width: 100%;
+			height: 210px;
+			border-style: none;
+		} 
 	</style>
 </head>
 <body>
+  	<iframe src="header"></iframe>
+
 	<h1>축하합니다 문제없이 접속하셨읍니다.</h1>
 	<h2>2조의 메인페이지입니다.</h2>
 	<table>
@@ -43,6 +50,7 @@
 	
 	</table>
 
+   <iframe src="footer"></iframe>
 
 	
 </body>
