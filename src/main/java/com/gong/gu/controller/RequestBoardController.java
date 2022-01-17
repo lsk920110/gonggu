@@ -1,6 +1,8 @@
 package com.gong.gu.controller;
 
 
+import java.util.HashMap;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +21,11 @@ import com.gong.gu.service.RequestBoardService;
 @Controller
 public class RequestBoardController {
 	
-	@Autowired RequestBoardService service;
-
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
+	
+	@Autowired RequestBoardService service;
+	
+
 
 	
 	// 요청글쓰기 페이지 요청
@@ -30,6 +34,20 @@ public class RequestBoardController {
 		 logger.info("요청글쓰기 페이지 요청"); 
 		 return "reqwriteForm";
 	 }
+	 
+	 
+	// 요청글쓰기 요청
+	 @RequestMapping(value = "/reqwrite", method = RequestMethod.POST) 
+	 public String inqwrite(Model model, MultipartFile[] photos, 
+			 @RequestParam HashMap<String, String> params) { 
+		 logger.info("요청글쓰기 요청 : {}", params);
+		 logger.info("업로드 할 파일의 수 : {}",photos.length);
+		 return service.reqwrite(photos,params);
+	}
+	
+	 
+	 
+	 
 	 
 
 	 

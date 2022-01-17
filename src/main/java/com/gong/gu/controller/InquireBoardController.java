@@ -1,6 +1,7 @@
 package com.gong.gu.controller;
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.slf4j.Logger;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.gong.gu.dto.BoardDTO;
+import com.gong.gu.dto.PhotoDTO;
 import com.gong.gu.service.InquireBoardService;
 
 
@@ -60,6 +63,46 @@ public class InquireBoardController {
 		 logger.info("업로드 할 파일 : {}",photos);
 		 return service.inqupdate(photos,params);
 	}
+	 
+	 
+	 //문의글 리스트
+	 @RequestMapping(value = "/inquireBoardlist", method = RequestMethod.GET)
+	 public String inquireBoardlist(Model model) {		
+		 logger.info("list 요청");
+		 
+		ArrayList<BoardDTO> list = service.list();
+		logger.info("글의 수 : {}",list.size());
+		model.addAttribute("size", list.size());
+		model.addAttribute("list", list);		
+		return "inquireBoardlist";
+		
+	}
+		
+		
+		//문의글 상세보기
+		
+		@RequestMapping(value = "/inquireBoardDetail", method = RequestMethod.GET)
+		public String writeForm(Model model, @RequestParam String board_no) {		
+			logger.info("detail 요청 : {}",board_no);
+			
+			BoardDTO dto = service.detail(board_no);
+			logger.info("dto : {}",dto.getBoard_content());
+			model.addAttribute("info", dto);
+			
+			ArrayList<PhotoDTO> photos = service.photolist(board_no);
+			logger.info("사진수 : {}", photos.size());
+			model.addAttribute("photos", photos);
+			return "inquireBoardDetail";
+		}		
+		
+		// 문의글 비노출
+		
+		@RequestMapping(value = "/inquireBoardexposure", method = RequestMethod.GET)
+		public String inquireBoardexposure(Model model, @RequestParam String board_no) {		
+			logger.info("비노출 요청 : {}",board_no);		
+			service.exposure(board_no);		
+			return "redirect:/";
+		}
 	 
 
 	

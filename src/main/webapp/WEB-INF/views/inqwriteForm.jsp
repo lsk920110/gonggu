@@ -35,9 +35,9 @@
 			</tr>
 			<tr>
 				<th colspan="2">
-				<button>등록</button>
+				<input type="button" onclick="location.href='./inquireBoardDetail'" value="등록" />
 				<!-- <input type="button" id="regist" value="작성완료"/> -->
-				<input type="button" onclick="location.href='./list'" value="취소" />
+				<input type="button" onclick="location.href='./inquireBoardList'" value="취소" />
 				</th>
 			</tr>
 		</table>

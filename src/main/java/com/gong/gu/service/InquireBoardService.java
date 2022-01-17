@@ -4,6 +4,7 @@ package com.gong.gu.service;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.slf4j.Logger;
@@ -15,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.gong.gu.dao.InquireBoardDAO;
 import com.gong.gu.dto.BoardDTO;
+import com.gong.gu.dto.PhotoDTO;
 
 @Service
 public class InquireBoardService {
@@ -28,7 +30,7 @@ public class InquireBoardService {
 	// 문의글쓰기
 	public String inqwrite(MultipartFile[] photos, HashMap<String, String> params) {
 		
-		String page = "redirect:/inquireBoardList";
+		String page = "redirect:/inquireBoardDetail";
 		
 		BoardDTO dto = new BoardDTO();
 		dto.setBoard_title(params.get("board_title"));
@@ -109,6 +111,45 @@ public class InquireBoardService {
 		}
 		return page;
 	}
+	
+	
+	
+
+	// 문의글 리스트
+	public ArrayList<BoardDTO> list() {
+		logger.info("list 뭐리 요청");
+		return dao.list();
+	}
+
+
+
+
+	// 문의글 상세보기
+	public BoardDTO detail(String board_no) {
+		logger.info("문의글 상세보기 서비스 요청");
+		
+		dao.upHit(board_no);
+		
+		return dao.detail(board_no);
+	}
+
+	// 문의글 비노출
+	
+	public void exposure(String board_no) {
+		logger.info("문의글 비노출 처리 요청");
+		
+		dao.exposure(board_no);
+	}
+
+
+
+
+	public ArrayList<PhotoDTO> photolist(String board_no) {
+		logger.info("포토게시판 리스트 서비스 요청");
+		
+		return dao.photolist(board_no);
+	}
+	
 
 
 
