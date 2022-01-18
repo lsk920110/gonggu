@@ -23,7 +23,7 @@
 <body>
   	<iframe src="header"></iframe>
 	<h3>| 문의게시글 작성하기</h3>
-	<form action="inqupdate" method="post" enctype="multipart/form-data">
+	<form action="inqwrite" method="post" enctype="multipart/form-data">
 		<table>    
 			<tr>
 				<th>
@@ -36,34 +36,29 @@
                     <option value="회원서비스">회원서비스</option>
             		</select>
              	</th>
-             	<!-- 제목 -->
-				<td>
-					<input type="hidden" name="board_no"/>
-					<input type="text" name="board_title" value="${inqboardetail.board_title}"/>
-				</td>
+			
+				
+				<td><input type="text" placeholder="제목을 입력하세요" name="board_title" value="${dto.board_title}"/></td>
 			</tr>
 
 			<tr>
-				<td colspan="2">
-					<textarea name="board_content">${inqboardetail.board_content}</textarea>
-				</td>
+				<th></th>
+				<td><textarea placeholder="내용을 입력하세요 " name="board_content">${dto.board_content}"</textarea></td>
 			</tr>
 			<tr>
-				<td>
-					<c:forEach items="${photolist}" var="photo">
-						<br/><a class="delphoto" id="${photo.photo_newname}">"${photo.photo_oriname}"</a>
+				<th></th>
+				<td><input type="file" name="photos" multiple="multiple"/>
+				<!-- 현재 업로드돈 사진 삭제 -->
+				<c:forEach items="${photos}" var="photo">
+				<img src="/photo/${photo.newFileName}" width="250"/><br/><br/>
 					</c:forEach>
 				</td>
-				<td>
-					<input type="file" name="photos" multiple="multiple"/><br/>
-					<input type="button" onclick="photodel()" value="삭제"/>
-					<input type="hidden" name="delphoto" value=""/>
-				</td>
+				
 			</tr>
 			<tr>
 				<th colspan="2">
 				<button>수정</button>
-				<input type="button" onclick="location.href='./inquireBoardDetail?board_no=${inqboardetail.board_no }'"value="취소" />
+				<input type="button" onclick="location.href='./inquireBoardList'" value="취소" />
 				</th>
 			</tr>
 		</table>

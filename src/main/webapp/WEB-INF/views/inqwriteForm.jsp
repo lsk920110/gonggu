@@ -23,6 +23,7 @@
 	<form action="inqwrite" method="post" enctype="multipart/form-data">
 		<table>    
 			<tr>
+				<th>문의 카테고리</th>
 				<th>
 					<select name="Category">
                     <option value="" disabled selected>카테고리 선택</option>
@@ -33,15 +34,19 @@
                     <option value="회원서비스">회원서비스</option>
             		</select>
              	</th>
-				<td><input type="text" placeholder="제목을 입력하세요" name="board_title"/></td>
 			</tr>
-
 			<tr>
-				<th></th>
+				<th>제목</th>
+				<td>
+					<input type="text" placeholder="제목을 입력하세요" name="board_title"/>
+				</td>
+			</tr>
+			<tr>
+				<th>내용</th>
 				<td><textarea placeholder="내용을 입력하세요 " name="board_content"></textarea></td>
 			</tr>
 			<tr>
-				<th></th>
+				<th>파일등록</th>
 				<td><input type="file" name="photos" multiple="multiple"/></td>
 			</tr>
 			<tr>
