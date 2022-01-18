@@ -6,10 +6,16 @@
 	<title>Insert title here</title>
 	<script src = "https://code.jquery.com/jquery-3.5.0.min.js"></script>
 	<style>
+	iframe{
+		width: 100%;
+			height: 210px;
+			border-style: none;
+	} 	
 	</style>
-	<h2>회원가입</h2>
 </head>
 <body>
+<iframe src="header"></iframe>
+<h2>회원가입</h2>
 <!-- 회원가입페이지 구현 덜된 기능 
 0. gender 라디오 버튼 최초 지정 상태 만들기 
 1. 약관 및 비밀번호 확인 란은  CSS로 만들것 
@@ -44,7 +50,7 @@
 		<tr>
 			<th>성별</th>
 			<td>
-				<input type = "radio" name = "user_gender" value = "남"/>남  &nbsp;&nbsp;&nbsp;&nbsp; 
+				<input type = "radio" name = "user_gender" value = "남" checked/>남  &nbsp;&nbsp;&nbsp;&nbsp; 
 				<input type = "radio" name = "user_gender" value = "여"/>여				
 			</td>
 		</tr>
@@ -100,6 +106,7 @@
 		</tr>
 		</div>
 	</table>
+	<iframe src="footer"></iframe>
 </body>
 <script>
 

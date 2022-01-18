@@ -11,10 +11,15 @@
 		border-collapse: collapse;
 		padding : 5px 10px; 
 	}
+	iframe{
+		width: 100%;
+		height: 210px;
+		border-style: none;
+	} 
 	</style>
 </head>
 <body>
-<!--  취소버튼 생성할 것 > 취소하면 로그인 화면으로 이동  -->
+<iframe src="header"></iframe>
 <h3>비밀번호 찾기</h3>
 	<table>
 		<tr>
@@ -39,6 +44,7 @@
 				</th>
 			</tr>
 		</table>
+<iframe src="footer"></iframe>
 </body>
 <script>
 $('#pwfind').click(function() {

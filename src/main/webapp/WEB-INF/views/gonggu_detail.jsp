@@ -6,6 +6,11 @@
 	<title>Insert title here</title>
 	<script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
 	<style>
+	iframe{
+		width: 100%;
+			height: 210px;
+			border-style: none;
+		} 
 	.category{
 		cursor: pointer;
 		
@@ -34,6 +39,7 @@
 	</style>
 </head>
 <body>
+<iframe src="header"></iframe>
     <div>
         <img class="category" src="resources/img/생활건강.png"  alt="생활/건강">
         <img class="category" src="resources/img/스포츠레저.png" alt="스포츠/레저">
@@ -116,6 +122,7 @@
 	</tr>
 	</c:forEach>
 </table>
+<iframe src="footer"></iframe>
 </body>
 <script></script>
 </html>

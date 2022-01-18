@@ -5,9 +5,16 @@
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
 	<script src = "https://code.jquery.com/jquery-3.5.0.min.js"></script>
-	<style></style>
+	<style>
+	iframe{
+		width: 100%;
+		height: 210px;
+		border-style: none;
+		} 
+	</style>
 </head>
 <body>
+<iframe src="header"></iframe>
 <h2>로그인</h2>
 	<table>
 		<tr>
@@ -28,6 +35,7 @@
 			</th>
 		</tr>
 	</table>
+<iframe src="footer"></iframe>
 </body>
 <script>
 $('#login').click(function() {
