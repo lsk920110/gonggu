@@ -179,21 +179,36 @@
                	</form>
                
 		            <div id="main_wrap_header_right" class="headertap">
-		                <span class="login" loc="loginMain">로그인</span>
+		            	<c:if test="${loginId == 'user' }">
+			                <span class="login" loc="logout">로그아웃</span>		                	            	
+		            	</c:if>
+		            	<c:if test="${loginId == 'unuser' }">
+			                <span class="login" loc="loginMain">로그인</span>		                	            	
+		            	</c:if>
 	                </div> 
             </div>
 
 
             <div id="main_wrap_category">
-                <span id="admin_category1" class="admin_category" loc="(요청게시판)">요청게시판</span>
+                <span id="admin_category1" class="admin_category" loc="RequestBoardlist">요청게시판</span>
                 <span id="admin_category2" class="admin_category" loc="groupBuyList?category=all">공구게시판</span>
                 <span id="admin_category3" class="admin_category" loc="inquireBoardList">문의게시판</span>
-                <span id="admin_category4" class="admin_category" loc="mypage">마이페이지</span>
+                <c:if test="${adminYN == 'N'}">            
+	                <span id="admin_category4" class="admin_category" loc="mypage">마이페이지</span>
+                </c:if>
+                <c:if test="${adminYN == 'Y'}">            
+	                <span id="admin_category4" class="admin_category" loc="adminOrderList">관리자페이지</span>
+                </c:if>
+                <c:if test="${adminYN == 'U'}">            
+	                <span id="admin_category4" class="admin_category" loc="mypage">마이페이지</span>
+                </c:if>                
             </div>
 
         </div>
     </body>
-    <script>    
+    <script>
+    console.log("${loginId}");
+    console.log("${adminYN}");
     $("#MainLogo").click(function(){//페이지 이동  
         parent.location.href=$(this).attr("loc");//부모창에서 여는 방법//attr로 loc속성을 가져온다.
     });

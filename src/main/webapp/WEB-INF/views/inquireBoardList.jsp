@@ -6,9 +6,18 @@
    <title>Insert title here</title>
    <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
       <link rel="stylesheet" href="resources/common.css">
-   <style></style>
+   <style>
+   		iframe{
+			width: 100%;
+			height: 210px;
+			border-style: none;
+		}  
+   
+   </style>
 </head>
 <body>
+  	<iframe src="header"></iframe>
+
 <button onclick="location.href='inqwriteForm'">글쓰기</button>
 <table>
    <tr>
@@ -33,6 +42,8 @@
    </tr>
    </c:forEach>
 </table>
+  	<iframe src="footer"></iframe>
+
 </body>
 <script></script>
 </html>

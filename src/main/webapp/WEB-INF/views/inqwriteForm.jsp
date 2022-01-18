@@ -7,8 +7,18 @@
  <title>Insert title here</title>
  <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
  <link rel="stylesheet" href="resources/common.css">
+ <style>
+ 		iframe{
+			width: 100%;
+			height: 210px;
+			border-style: none;
+		}  
+ 
+ </style>
 </head>
 <body>
+  	<iframe src="header"></iframe>
+
 	<h3>| 문의게시글 작성하기</h3>
 	<form action="inqwrite" method="post" enctype="multipart/form-data">
 		<table>    
@@ -47,6 +57,7 @@
 			</tr>
 		</table>
 	</form>
+  	<iframe src="footer"></iframe>
 	
 </body>
   

@@ -60,8 +60,8 @@
 	
 	<insert id="groupbuywrite2_gba"
 		parameterType="com.gong.gu.dto.Groupbuy_additDTO">
-		INSERT INTO groupbuy_addit(board_no,groupbuy_unitprice,groupbuy_max,groupbuy_due_date,product_category_name,groupbuy_target)
-		VALUES(#{board_no},#{groupbuy_unitprice},#{groupbuy_max},#{groupbuy_due_date},#{product_category_name},#{groupbuy_target})
+		INSERT INTO groupbuy_addit(board_no,groupbuy_unitprice,groupbuy_target,groupbuy_due_date,product_category_name,groupbuy_target)
+		VALUES(#{board_no},#{groupbuy_unitprice},#{groupbuy_target},#{groupbuy_due_date},#{product_category_name},#{groupbuy_target})
 	</insert>	
 
 	<insert id="groupbuywrite2_pho"

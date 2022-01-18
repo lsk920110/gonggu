@@ -4,6 +4,8 @@ package com.gong.gu.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,9 +34,16 @@ public class InquireBoardController {
 	
 	//1.문의글쓰기 페이지 요청
 	 @RequestMapping(value = "/inqwriteForm", method = RequestMethod.GET) 
-	 public String inqwriteForm(Model model) { 
+	 public String inqwriteForm(Model model , HttpSession session) { 
 		 logger.info("문의글쓰기 페이지 요청");
-		 return "inqwriteForm";
+		 String page= "redirect:/inquireBoardList";
+		 
+		 if(session.getAttribute("loginId") != null) {
+			 page = "inqwriteForm";
+		 }
+		 
+		 
+		 return page;
 	}
 	 
 	//2.문의글쓰기 요청

@@ -12,10 +12,16 @@
  		border-collapse : collapse;
  		padding : 5px;
  	}
+ 	iframe{
+			width: 100%;
+			height: 210px;
+			border-style: none;
+		} 
  
  </style>
 </head>
 <body>
+  	<iframe src="header"></iframe>
 	<h3>| 문의게시글 작성하기</h3>
 	<form action="inqupdate" method="post" enctype="multipart/form-data">
 		<table>    
@@ -62,9 +68,8 @@
 			</tr>
 		</table>
 	</form>
+  	<iframe src="footer"></iframe>
 	
-</body>
-  
 </body>
 <script>
 function photodel(){

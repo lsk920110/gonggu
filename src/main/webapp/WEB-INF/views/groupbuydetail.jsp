@@ -96,10 +96,10 @@
 	    <br/>
 	    ${groupbuydetail.board_date } ~ ${groupbuydetail.groupbuy_due_date }
 	    <br/>
-			<progress value="${orderquansum }" max="${groupbuydetail.groupbuy_max}"></progress>
-			<p style="font-size:11px">신청수량:${orderquansum }개 / 목표수량:${groupbuydetail.groupbuy_max}개 </p>		
+			<progress value="${orderquansum }" max="${groupbuydetail.groupbuy_target}"></progress>
+			<p style="font-size:11px">신청수량:${orderquansum }개 / 목표수량:${groupbuydetail.groupbuy_target}개 </p>		
 	    <br/>
-	    신청수량 &nbsp;&nbsp;${orderquansum }개&nbsp;/ 목표수량 ${groupbuydetail.groupbuy_max }
+	    신청수량 &nbsp;&nbsp;${orderquansum }개&nbsp;/ 목표수량 ${groupbuydetail.groupbuy_target }
 	    <br/>
 	    <form action="orderConfirmPage" method="GET">
 		    <input type="number" name="order_quantity" value="1" min="1" max="10"/>

@@ -23,7 +23,7 @@
 
 	<h1>축하합니다 문제없이 접속하셨읍니다.</h1>
 	<h2>2조의 메인페이지입니다.</h2>
-	<table>
+<!-- 	<table>
 		<tr>
 			<th>마이페이지</th>
 			<th>관리자페이지</th>
@@ -44,7 +44,7 @@
 			<td><a href="./orderConfirmPage">orderConfirmPage</a></td>
 			
 		</tr>		
-	
+	 -->
 	
 	
 	

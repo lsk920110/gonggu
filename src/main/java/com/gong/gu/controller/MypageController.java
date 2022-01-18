@@ -35,7 +35,7 @@ public class MypageController {
 	@RequestMapping(value = "/mypage", method = RequestMethod.GET)
 	public String home(Model model, HttpSession session) { 
 		logger.info("헬로우 JSP");
-		String page = "redirect:/";
+		String page = "redirect:/loginMain";
 		if(session.getAttribute("loginId") != null) {
 			page = "redirect:/myorderList";
 		}
@@ -126,12 +126,14 @@ public class MypageController {
 	
 	
 	@RequestMapping(value = "/orderCancel", method = RequestMethod.GET)
-	public String orderCancel(Model model, @RequestParam String order_no) { 
+	public String orderCancel(Model model, @RequestParam String order_no, @RequestParam String frompage) { 
 		logger.info("{} order_no 취소요청",order_no);
 		int row = service.ordercancel(order_no);
-		
-		
-		return "redirect:/orderDetail?order_no="+order_no; 	
+		if(row>0) {
+			logger.info("{} 주문취소 완료",order_no);
+		}
+
+		return "redirect:/orderDetail?order_no="+order_no+"&frompage="+frompage; 	
 	}
 	
 	

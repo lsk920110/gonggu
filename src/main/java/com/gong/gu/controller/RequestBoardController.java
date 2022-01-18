@@ -4,6 +4,8 @@ package com.gong.gu.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,9 +35,14 @@ public class RequestBoardController {
 	
 	// 요청글쓰기 페이지 요청
 	 @RequestMapping(value = "/reqwriteForm", method = RequestMethod.GET) 
-	 public String ReqwriteForm(Model model) { 
+	 public String ReqwriteForm(Model model , HttpSession session) { 
 		 logger.info("요청글쓰기 페이지 요청");
-		 return "reqwriteForm";
+		 String page = "redirect:/RequestBoardlist";
+		 if(session.getAttribute("loginId") != null) {
+			 page = "reqwriteForm";
+		 }
+		 
+		 return page;
 	 }
 	 
 	 
@@ -102,7 +109,7 @@ public class RequestBoardController {
 		public String RequestBoardexposure(Model model, @RequestParam String board_no) {		
 			logger.info("비노출 요청 : {}",board_no);		
 			service.exposure(board_no);		
-			return "redirect:/";
+			return "redirect:/RequestBoardlist";
 		}
 	 
 

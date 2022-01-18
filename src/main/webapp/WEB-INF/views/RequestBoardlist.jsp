@@ -9,6 +9,8 @@
    <style></style>
 </head>
 <body>
+  	<iframe src="header"></iframe>
+
 <button onclick="location.href='reqwriteForm'">글쓰기</button>
 <table>
    <tr>
@@ -20,7 +22,7 @@
       <th>조회수</th>
       <th>노출여부</th>
    </tr>
-   <c:if test="${list eq null || size == 0}">
+   <c:if test="${RequestList eq null || size == 0}">
    <tr><td colspan="5"> 등록된 글이 없습니다.</td></tr>
    </c:if>
    <c:forEach items="${RequestList}" var="RequestList">
@@ -35,6 +37,8 @@
    </tr>
    </c:forEach>
 </table>
+   <iframe src="footer"></iframe>
+
 </body>
 <script></script>
 </html>

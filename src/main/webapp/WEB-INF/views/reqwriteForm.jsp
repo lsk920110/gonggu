@@ -6,8 +6,29 @@
  <meta charset="UTF-8">
  <title>Insert title here</title>
  <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
+ <style>
+	.adminMenu{
+		cursor: pointer;
+		padding: 20px;
+	}
+	.adminMenu:hover{
+		background-color: beige;
+	}
+	#adminMenuBar{
+		text-align: center;
+	}
+	iframe{
+		width: 100%;
+		height: 210px;
+		border-style: none;
+	}   
+
+ 
+ </style>
 </head>
 <body>
+  	<iframe src="header"></iframe>
+
 	<h3>| 요청게시글 작성하기</h3>
 	<form action="reqwrite" method="post" enctype="multipart/form-data">
 		<table>    
@@ -46,9 +67,8 @@
 			</tr>
 		</table>
 	</form>
+  	<iframe src="footer"></iframe>
 	
-</body>
-  
 </body>
 <script></script>
 </html>

@@ -35,13 +35,24 @@
 				<input type = "button" id = "overlay" value = "중복확인"/>
 			</td>
 		</tr>
+		<!-- 비밀번호관련 시작 -->
 		<tr>
 			<th>비밀번호</th>
 			<td>
-				<input type = "password" name = "user_pw"/>
+				<input class="pwconfirmSet"  type = "text" name = "user_pw"/>
 			</td>
 		</tr>
 		<tr>
+			<th rowspan="2">비밀번호확인</th>
+			<td><input class="pwconfirmSet" type="text" name="pwConfirm"  value=""/></td>
+		</tr>
+
+		<tr>		
+			<td id="confirm">		
+			</td>
+		</tr>
+		<!-- 비밀번호관련 끝 -->
+		<tr>		
 			<th>이름</th>
 			<td>
 				<input type = "text" name = "user_name"/>
@@ -64,10 +75,21 @@
 			<th>이메일주소</th>
 			<td>
 				<input type = "text" name = "user_email"/>
-				<input type = "button" id = "certification" value = "인증"/>
+				<input type="button" id="indetify" value="인증"/>
 				<!-- 3. 이메일인증 기능 추가 -->
 			</td>
 		</tr>
+		<tr>
+				<th>
+				</th>
+				<td>
+					<input type="hidden" id="emailIdnum" value=""/>
+					<input type="hidden" id="emailIdbtn" value="확인"/>
+				
+				</td>
+				
+			
+			</tr>
 		<tr>
 			<th>휴대폰번호</th>
 			<td>
@@ -103,6 +125,87 @@
 </body>
 <script>
 
+var pw = '';
+var pwConfirm = '';
+var pw_check = 'T';
+var certifinum = null;
+var certifinum_check = false;
+
+random();
+
+
+// var randomNum = 0;
+function random(){
+    // clearInterval(time);
+    //var cnt = 11;
+    
+    console.log('랜덤창!!');
+    randomNum = Math.floor(Math.random()*1000000);
+    certifinum = randomNum;
+};
+
+$('#indetify').click(function(){
+	console.log('중복체크시작');
+	var email = $('input[name="user_email"]').val();
+	console.log('check email : ',email);
+	
+	$.ajax({
+		type:'get',
+		url :'overlayemail',
+		data:{'email':email},
+		dataType:'json',
+		success:function(data){
+			console.log(data);
+						
+			
+			if(data.emailTF){
+				alert('이미 사용중인 아이디 입니다.');
+
+			} else{
+				alert('메일로 인증번호를 전송했습니다.');
+				$('#emailIdnum').attr('type','text');
+				$('#emailIdbtn').attr('type','button');
+				random();
+				
+				
+				win = window.open('emailPage','최신식 구글 메일','width=1000,height=600');
+			}
+
+		},
+		error:function(e){//에러시 서버에서보낸 에러관련 매개변수이다.
+			console.log('에러...');
+			console.log(e);	
+		}
+	});		
+});
+
+
+
+
+
+
+
+
+
+$('#emailIdbtn').click(function(){
+	$('#emailIdnum').val();
+	if($('#emailIdnum').val() == certifinum){
+		certifinum_check = true;
+		alert('이메일 인증 성공!');
+		$('#emailIdnum').attr('type','hidden');
+		$('#emailIdbtn').attr('type','hidden');
+
+	} else {
+		certifinum_check = false;
+		alert('인증번호좀 똑바로 입력해주세요');
+	}		
+});
+
+//이메일 값이 한번이라도 바뀌면, 체크를 false로
+$('input[name="email"]').keyup(function(e){
+	certifinum_check = false;
+});	
+
 var check = false;
 
 $("#regist").click(function() {
@@ -127,7 +230,10 @@ $("#regist").click(function() {
 		}else if ($user_pw.val() == '') {
 			alert('비밀번호를 입력 해주세요');
 			$user_pw.focus();
-		}else if ($user_name.val() == '') {
+		} else if (pw_check == 'F'){
+			alert('비밀번호확인을 해주세요');
+			$user_pw.focus();
+		} else if ($user_name.val() == '') {
 			alert('이름을 입력 해주세요');
 			$user_name.focus();
 		}else if ($user_gender.val() == '') {
@@ -148,7 +254,9 @@ $("#regist").click(function() {
 		}else if ($user_admin.val() == '') {
 			alert('관리자 정보를 입력하세요');
 			$user_admin.focus();
-		}else{
+		} else if(!certifinum_check){
+			alert('메일 인증이나 하세요');
+		} else{
 			console.log('서버 전송 시작');
 			
 			var param = {'user_id':$user_id.val()};
@@ -217,6 +325,22 @@ $('#overlay').click(function() {
 			console.log(e);
 		}		
 	});		
+});
+
+$('input[class="pwconfirmSet"]').keyup(function(e){
+	pw = $('input[name="user_pw"]').val();
+	pwConfirm = $('input[name="pwConfirm"]').val();
+	
+
+	if(pw==pwConfirm){
+		$('#confirm').html('비밀번호가 일치합니다.');
+		$('#confirm').css({'color':'blue','font-size':'5px'});
+		pw_check = 'T';
+	} else {
+		$('#confirm').html('비밀번호가 일치하지 않습니다..')
+		$('#confirm').css({'color':'red','font-size':'5px'});
+		pw_check = 'F';
+	}
 });
 
 </script>

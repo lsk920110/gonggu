@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,9 +34,22 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value = "/header", method = RequestMethod.GET)
-	public String header(Model model) {
+	public String header(Model model, HttpSession session) {
 		logger.info("헤더 불러오기");
-
+		String loginId = (String) session.getAttribute("loginId");
+		String adminYN = (String) session.getAttribute("admin");
+		if(loginId == null) {
+			loginId = "unuser";
+		} else {
+			loginId = "user";
+		}
+		if( adminYN == null) {
+			adminYN = "U";
+		}
+		model.addAttribute("loginId",loginId);
+		model.addAttribute("adminYN",adminYN);
+		
+		
 		return "header";
 	}
 	

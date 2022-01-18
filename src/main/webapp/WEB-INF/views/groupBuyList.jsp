@@ -51,7 +51,7 @@
         <img class="category" src="resources/img/화장품미용.png" alt="화장품/미용">
         <img class="category" src="resources/img/출산육아.png" alt="출산/육아">
         <img class="category" src="resources/img/식품.png" alt="식품">
-        <img class="category" src="resources/img/여가생활.png" alt="여가/생활">
+        <img class="category" src="resources/img/여가생활.png" alt="여가/생활 편의">
         <img class="category" src="resources/img/기타.png" alt="기타">
     </div>
 

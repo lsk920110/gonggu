@@ -6,9 +6,18 @@
 	<title>Insert title here</title>
 	<script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="resources/css/common.css">
-	<style></style>
+	<style>
+			iframe{
+			width: 100%;
+			height: 210px;
+			border-style: none;
+		}  
+	
+	</style>
 </head>
 <body>
+  	<iframe src="header"></iframe>
+
 <table>
 	<tr>
 		<th>글번호</th>
@@ -52,6 +61,8 @@
 		</th>
 	</tr>
 </table>
+  	<iframe src="footer"></iframe>
+
 </body>
 <script>
 function exposure(){

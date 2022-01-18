@@ -66,6 +66,7 @@ public class MemberController {
 	public String logout(Model model, HttpSession session) {
 		logger.info("로그아웃 요청"); 
 		session.removeAttribute("loginId");
+		session.removeAttribute("admin");
 		return "redirect:/";
 	}
 

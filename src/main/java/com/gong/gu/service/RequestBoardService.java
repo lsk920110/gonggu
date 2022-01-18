@@ -45,7 +45,7 @@ public class RequestBoardService {
 		logger.info("board_no : " +board_no);
 		
 		if (board_no>0) {
-			page = "readirect:/requireBoardDetail?board_no="+board_no;
+			page = "redirect:/RequestBoardDetail?board_no="+board_no;
 			reqwrite2(board_no,params);
 			saveFile(board_no,photos);
 		}

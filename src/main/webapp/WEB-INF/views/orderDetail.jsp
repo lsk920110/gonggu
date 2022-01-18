@@ -6,6 +6,11 @@
 	<title>Insert title here</title>
 	<script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
 	<style>
+		iframe{
+			width: 100%;
+			height: 210px;
+			border-style: none;
+		}	
 		table , th, td {
 			border : 1px solid black;
 			border-collapse : collapse;
@@ -15,6 +20,8 @@
 	</style>
 </head>
 <body>
+<iframe src="header"></iframe>
+
 	<h3>주문번호 ${orderdetail.order_no}</h3>
 	
 	
@@ -60,6 +67,7 @@
 	<input type="button" value="확인" onclick="backPage()"/>
 	<input type="button" id="cancelBtn" value="주문취소" onclick="orderCancel()"/>
 	
+	<iframe src="footer"></iframe>
 	
 </body>
 <script>
@@ -82,7 +90,7 @@
 		var cancel = confirm('주문을 취소하시겠습니까?');
 		console.log(cancel);
 		if(cancel){
-			location.href='./orderCancel?order_no=${orderdetail.order_no}';
+			location.href='./orderCancel?order_no=${orderdetail.order_no}&frompage=${frompage}';
 		}
 	};
 	

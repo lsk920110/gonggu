@@ -6,15 +6,22 @@
 	<title>Insert title here</title>
 	<script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
 	<style>
-	table,th,td {
-		border : 1px solid black;
-		border-collapse : collapse;
-		padding  : 5px;
-	}
+		iframe{
+			width: 100%;
+			height: 210px;
+			border-style: none;
+		}
+		table,th,td {
+			border : 1px solid black;
+			border-collapse : collapse;
+			padding  : 5px;
+		}
 	
 	</style>
 </head>
 <body>
+<iframe src="header"></iframe>
+
 	<h3>주문확인</h3>
 	<hr/>
 	<form action="orderRequest" method="GET">
@@ -61,8 +68,10 @@
 		</table>
 		<input type="hidden" name="frompage" value="groupBuyList"/>
 		<button>신청</button>
-		<input type="button" value="취소" onclick="location.href='/'"/>
+		<input type="button" value="취소" onclick="location.href='./groupbuydetail?board_no=${confirminfo.board_no }'"/>
 	</form>
+	<iframe src="footer"></iframe>
+	
 </body>
 <script>
 	
