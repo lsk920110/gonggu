@@ -38,4 +38,47 @@
 
 
 
+	<!-- 요청글 리스트 -->
+	<select id="RequestList" resultType="hashMap">
+       SELECT * 
+       FROM board INNER JOIN (require_addit) USING (board_no) 
+       WHERE board_exposure = 'Y'
+    </select>
+
+
+
+<!--  요청글 리스트(형민님) 
+
+	<select id="list" resultType="com.gong.gu.dto.BoardDTO">
+		SELECT board_no,board_title,user_id,board_bHit,board_date,board_exposure 
+			FROM board where board_exposure = 'Y' and board_name = '요청게시판'  ORDER BY board_no DESC
+	</select>
+
+ -->
+	
+	<!-- 요청글 상세보기 -->
+	<select id="detail" resultType="com.gong.gu.dto.BoardDTO">
+	SELECT * FROM board WHERE board_no = #{param1}
+	</select>
+
+	<!-- 요청글 조회수 올리기 -->
+
+	<update id="upHit">
+		UPDATE board SET board_bHit = board_bHit+1 WHERE board_no = #{param1}
+	</update>
+	
+	<!-- 글삭제 -->
+	<update id="exposure">
+		update board set board_exposure = 'N' where board_no = #{param1}
+	</update>
+	
+	<!-- 사진 출력 -->
+	<select id="photolist" resultType="com.gong.gu.dto.PhotoDTO">
+		SELECT photo_oriname, photo_newName FROM photo
+			WHERE board_no = #{param1} ORDER BY photo_no DESC
+	</select>
+	
+
+
+
 </mapper>

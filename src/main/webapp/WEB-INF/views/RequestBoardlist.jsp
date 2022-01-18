@@ -5,11 +5,11 @@
    <meta charset="UTF-8">
    <title>Insert title here</title>
    <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
-      <link rel="stylesheet" href="resources/common.css">
+   <link rel="stylesheet" href="resources/common.css">
    <style></style>
 </head>
 <body>
-<button onclick="location.href='inqwriteForm'">글쓰기</button>
+<button onclick="location.href='reqwriteForm'">글쓰기</button>
 <table>
    <tr>
       <th>글번호</th>
@@ -17,19 +17,21 @@
       <th>제목</th>
       <th>작성자</th>
       <th>작성일</th>
+      <th>조회수</th>
       <th>노출여부</th>
    </tr>
-   <c:if test="${InquiryList eq null || size == 0}">
+   <c:if test="${list eq null || size == 0}">
    <tr><td colspan="5"> 등록된 글이 없습니다.</td></tr>
    </c:if>
-   <c:forEach items="${InquiryList}" var="InquiryList">
+   <c:forEach items="${RequestList}" var="RequestList">
    <tr>
-      <td>${InquiryList.board_no}</td>
-      <td>${InquiryList.inquiry_category_name}</td>
-      <td><a href="inquireBoardDetail?board_no=${InquiryList.board_no}">${InquiryList.board_title}</a></td>
-      <td>${InquiryList.user_id}</td>
-      <td>${InquiryList.board_date}</td>
-      <td>${InquiryList.board_exposure}</td>
+      <td>${RequestList.board_no}</td>
+      <td>${RequestList.product_category_name}</td>
+      <td><a href="RequestBoardDetail?board_no=${RequestList.board_no}">${RequestList.board_title}</a></td>
+      <td>${RequestList.user_id}</td>
+      <td>${RequestList.board_date}</td>
+      <td>${RequestList.bHit}</td>
+      <td>${RequestList.board_exposure}</td>
    </tr>
    </c:forEach>
 </table>

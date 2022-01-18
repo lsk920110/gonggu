@@ -30,17 +30,18 @@ public class InquireBoardController {
 	@Autowired InquireBoardService service;
 
 	
-	// 문의글쓰기 페이지 요청
+	//1.문의글쓰기 페이지 요청
 	 @RequestMapping(value = "/inqwriteForm", method = RequestMethod.GET) 
 	 public String inqwriteForm(Model model) { 
 		 logger.info("문의글쓰기 페이지 요청");
 		 return "inqwriteForm";
 	}
 	 
-	// 문의글쓰기 요청
+	//2.문의글쓰기 요청
 	 @RequestMapping(value = "/inqwrite", method = RequestMethod.POST) 
 	 public String inqwrite(Model model, MultipartFile[] photos, 
 			 @RequestParam HashMap<String, String> params) { 
+		 logger.info("문의글쓰기 요청");
 		 logger.info("문의글쓰기 요청 : {}", params);
 		 logger.info("업로드 할 파일의 수 : {}",photos.length);
 		 return service.inqwrite(photos,params);
@@ -62,7 +63,7 @@ public class InquireBoardController {
 	 
 	 
 	// 문의글 수정 요청
-	 @RequestMapping(value = "/inqupdate", method = RequestMethod.GET) 
+	 @RequestMapping(value = "/inqupdate", method = RequestMethod.POST) 
 	 public String inqupdate(Model model, MultipartFile[] photos, 
 			 @RequestParam HashMap<String, String> params) { 
 		 logger.info("문의글 수정 요청 : {}", params);
@@ -70,10 +71,26 @@ public class InquireBoardController {
 		 return service.inqupdate(photos,params);
 	}
 	 
+////////////////////////////////////////////////////////////////////////////////////////////
+	
+	//1. 문의글 리스트 요청하기
+     @RequestMapping(value = "/inquireBoardList", method = RequestMethod.GET)
+     public String inquireBoardList(Model model) {      
+        logger.info("문의글 list 요청");
+        
+        ArrayList<HashMap<String, String>> InquiryList = service.InquiryList();
+        logger.info("글의 수 : {}",InquiryList.size());
+        model.addAttribute("size", InquiryList.size());//왜 넣으신 거지??
+        model.addAttribute("InquiryList", InquiryList);      
+        return "inquireBoardList";
+        
+     }
 	 
+	 
+/*	 
 	 //문의글 리스트
 	 @RequestMapping(value = "/inquireBoardList", method = RequestMethod.GET)
-	 public String inquireBoardlist(Model model) {		
+	 public String inquireBoardList(Model model) {		
 		 logger.info("list 요청");
 		 
 		ArrayList<BoardDTO> list = service.list();
@@ -83,7 +100,7 @@ public class InquireBoardController {
 		return "inquireBoardList";
 		
 	}
-		
+*/		
 		
 		//문의글 상세보기
 		

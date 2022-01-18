@@ -43,12 +43,29 @@
 			where board_no = #{board_no}
 	</update>
 	
+	<!-- 문의글 수정 2(카테고리) -->
+	<update id="inqupdate2" parameterType="HashMap">
+		update from board inner join inquiry_category using (inquiry_category)
+	
+	</update>
+	
 	
 	<!-- 문의글 리스트 -->
-	<select id="list" resultType="com.gong.gu.dto.BoardDTO">
+	<!--  형민님 (전체 게시글 리스트를 불러옴, 테이블 join 안되있음.)
+		<select id="list" resultType="com.gong.gu.dto.BoardDTO">
 		SELECT board_no,board_title,user_id,board_bHit,board_date,board_exposure 
 			FROM board where board_exposure = 'Y'  ORDER BY board_no DESC
-	</select>
+		</select>
+	 -->
+	 
+	<!-- 문의글 리스트 --> 
+	<select id="InquiryList" resultType="hashMap">
+       SELECT * 
+       FROM board INNER JOIN inquiry_addit USING (board_no) 
+       WHERE board_exposure = 'Y'
+    </select>
+	 
+	
 	
 	<!-- 문의글 상세보기 -->
 	<select id="detail" resultType="com.gong.gu.dto.BoardDTO">

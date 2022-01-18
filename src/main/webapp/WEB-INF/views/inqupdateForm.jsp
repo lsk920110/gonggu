@@ -57,7 +57,6 @@
 			<tr>
 				<th colspan="2">
 				<button>수정</button>
-				<!-- <input type="button" id="regist" value="작성완료"/> -->
 				<input type="button" onclick="location.href='./inquireBoardDetail?board_no=${inqboardetail.board_no }'"value="취소" />
 				</th>
 			</tr>

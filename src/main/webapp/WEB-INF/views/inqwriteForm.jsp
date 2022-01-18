@@ -6,6 +6,7 @@
  <meta charset="UTF-8">
  <title>Insert title here</title>
  <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
+ <link rel="stylesheet" href="resources/common.css">
 </head>
 <body>
 	<h3>| 문의게시글 작성하기</h3>
@@ -35,8 +36,12 @@
 			</tr>
 			<tr>
 				<th colspan="2">
+				<!-- 
 				<input type="button" onclick="location.href='./inquireBoardDetail'" value="등록" />
-				<!-- <input type="button" id="regist" value="작성완료"/> -->
+				<input type="button" onclick="location.href='./inquireBoardList'" value="취소" />
+				 -->
+				
+				<button>등록</button>
 				<input type="button" onclick="location.href='./inquireBoardList'" value="취소" />
 				</th>
 			</tr>

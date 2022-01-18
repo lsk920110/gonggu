@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.gong.gu.dao.InquireBoardDAO;
 import com.gong.gu.dto.BoardDTO;
+import com.gong.gu.dto.Inquiry_categoryDTO;
 import com.gong.gu.dto.PhotoDTO;
 
 @Service
@@ -27,10 +28,10 @@ public class InquireBoardService {
 	@Autowired InquireBoardDAO dao;
 
 	
-	// 문의글쓰기
+	//2.문의글쓰기
 	public String inqwrite(MultipartFile[] photos, HashMap<String, String> params) {
 		
-		String page = "redirect:/inquireBoardDetail";
+		String page = "redirect:/inquireBoardList";
 		
 		BoardDTO dto = new BoardDTO();
 		dto.setBoard_title(params.get("board_title"));
@@ -41,7 +42,7 @@ public class InquireBoardService {
 		logger.info("board_no: "+board_no);
 		
 		if (board_no>0) {
-			page = "readirect:/inquireBoardDetail?board_no="+board_no;
+			page = "redirect:/inquireBoardDetail?board_no="+board_no;
 			inqwrite2(board_no,params);
 			saveFile(board_no,photos);
 		}
@@ -50,7 +51,7 @@ public class InquireBoardService {
 	}
 	
 	
-	// 문의글 사진 파일 저장 (실제 파일을 저장하고 경로를 DB 에 기록)
+	//2.문의글 사진 파일 저장 (실제 파일을 저장하고 경로를 DB 에 기록)
 	private void saveFile(int board_no, MultipartFile[] photos) {
 		for (MultipartFile photo : photos) {
 			String oriFileName = photo.getOriginalFilename();
@@ -76,10 +77,9 @@ public class InquireBoardService {
 	}
 	
 	
-	// 옵션 DB 글쓰기
-	
+	//2.옵션 DB 글쓰기 (문의 카테고리 추가)
 	private void inqwrite2(int board_no, HashMap<String, String> params) {
-		logger.info("옵션 DB 데이터 넣기 : {}",params);
+		logger.info("문의 카테고리 데이터 넣기 : {}",params);
 	
 			String Category = params.get("Category");
 		
@@ -113,14 +113,36 @@ public class InquireBoardService {
 	}
 	
 	
+	/*
+	// 문의글 수정(문의 카테고리 수정)
+	private void inqupdate(int inquiry_category_name, HashMap<String, String> params) {
+		logger.info("문의 카테고리 데이터 수정 : {}",params);
 	
+			String Categoryname = params.get("inquiry_category_name");
+		
+			int row = dao.inqupdate2(inquiry_category_name,Categoryname);
+			logger.info("입력된 건수 : {}",row);
+			
+		}
+		
+		 */
+		
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	//1. 문의게시글 요청하기
+   public ArrayList<HashMap<String, String>> InquiryList() {
+   
+      return dao.InquiryList();
+   }
+	
+/*
 	// 문의글 리스트
 	public ArrayList<BoardDTO> list() {
-		logger.info("list 뭐리 요청");
+		logger.info("list 쿼리 요청");
 		return dao.list();
 	}
-
+*/
 
 
 
@@ -133,8 +155,8 @@ public class InquireBoardService {
 		return dao.detail(board_no);
 	}
 
-	// 문의글 비노출
 	
+	// 문의글 비노출
 	public void exposure(String board_no) {
 		logger.info("문의글 비노출 처리 요청");
 		

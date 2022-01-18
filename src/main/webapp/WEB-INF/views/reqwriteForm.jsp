@@ -41,8 +41,7 @@
 			<tr>
 				<th colspan="2">
 				<button>확인</button>
-				<!-- <input type="button" id="regist" value="작성완료"/> -->
-				<input type="button" onclick="location.href='./list'" value="취소" />
+				<input type="button" onclick="location.href='./RequestBoardlist'" value="취소" />
 				</th>
 			</tr>
 		</table>
