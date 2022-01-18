@@ -33,12 +33,18 @@ public interface MypageDAO {
 
 	HashMap<String, String> orderConfirm_user(String loginId);
 
-	HashMap<String, String> orderConfirm_board(int board_no);
+	HashMap<String, String> orderConfirm_board(String board_no);
 
 	void orderrequest(Order_infoDTO orderDTO);
 
 	String emailIdentify(String email);
 
 	int profileUpdate(HashMap<String, String> userupdate);
+
+	HashMap<String, String> groupbuydetail(String board_no);
+
+	String orderquansum(String board_no);
+
+	ArrayList<HashMap<String, String>> photolist(String board_no);
 
 }

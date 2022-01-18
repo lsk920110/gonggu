@@ -186,15 +186,14 @@
 
             <div id="main_wrap_category">
                 <span id="admin_category1" class="admin_category" loc="(요청게시판)">요청게시판</span>
-                <span id="admin_category2" class="admin_category" loc="groupBuyList">공구게시판</span>
+                <span id="admin_category2" class="admin_category" loc="groupBuyList?category=all">공구게시판</span>
                 <span id="admin_category3" class="admin_category" loc="inquireBoardList">문의게시판</span>
                 <span id="admin_category4" class="admin_category" loc="mypage">마이페이지</span>
             </div>
 
         </div>
     </body>
-    <script>
-    
+    <script>    
     $("#MainLogo").click(function(){//페이지 이동  
         parent.location.href=$(this).attr("loc");//부모창에서 여는 방법//attr로 loc속성을 가져온다.
     });
@@ -204,5 +203,6 @@
     $(".login").click(function(){//페이지 이동  
         parent.location.href=$(this).attr("loc");//부모창에서 여는 방법//attr로 loc속성을 가져온다.
     });
+
     </script>
 </html>

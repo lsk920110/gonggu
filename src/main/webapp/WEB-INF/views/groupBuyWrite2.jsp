@@ -6,17 +6,40 @@
 	<title>Insert title here</title>
 	<script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
 	<style>
-	table,th,td{
-		border : 1px solid black;
-		border-collapse : collapse;
-		padding : 5px;
-	
-	}
-	
+		table,th,td {
+			border : 1px solid black;
+			border-collapse : collapse;
+			padding : 5px;
+		}
+		.adminMenu{
+			cursor: pointer;
+			padding: 20px;
+		}
+		.adminMenu:hover{
+			background-color: beige;
+		}
+		#adminMenuBar{
+			text-align: center;
+		}
+		iframe{
+			width: 100%;
+			height: 210px;
+			border-style: none;
+		}
 	
 	</style>
 </head>
 <body>
+	<iframe src="header"></iframe>
+	<div id = "adminMenuBar">
+        <img class="adminMenu" src="resources/img/전체주문내역.png"  alt="전체주문내역" loc="adminOrderList">
+        <img class="adminMenu" src="resources/img/전체문의게시글.png" alt="전체문의게시글" loc="adminInquiry">
+        <img class="adminMenu" src="resources/img/전체요청글.png" alt="전체요청글" loc="adminRequire">
+         <img class="adminMenu" src="resources/img/전체공구게시글.png" alt="전체공구게시글" loc="admingroupbuylist">
+        <img class="adminMenu" src="resources/img/전체회원정보.png" alt="전체회원정보" loc="adminuserlist">
+        <img style="background-color: beige"  class="adminMenu" src="resources/img/상품등록.png" alt="상품등록" loc="groupbuywriteForm2">
+    </div>
+
 	<form action="groupbuywrite2" method="post" enctype="multipart/form-data">
 		<table>    
 			<tr>
@@ -78,6 +101,7 @@
 			
 	</form>
 	
+	<iframe src="footer"></iframe>
 	
 	
 </body>
@@ -88,6 +112,11 @@ $('#open').click(function(){
 	   win = window.open('groupBuyPhoto2','','width=700,height=700'); //주소값,창이름,옵션
 
 	});
+	
+	
+$(".adminMenu").click(function(){
+    location.href=$(this).attr("loc");
+});
 
 
 

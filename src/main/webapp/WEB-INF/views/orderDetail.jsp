@@ -57,7 +57,7 @@
 	
 	<h3 id="orderState">${orderdetail.order_state }</h3>
 
-	<input type="button" value="확인" onclick="location.href='./${frompage}'"/>
+	<input type="button" value="확인" onclick="backPage()"/>
 	<input type="button" id="cancelBtn" value="주문취소" onclick="orderCancel()"/>
 	
 	
@@ -86,7 +86,11 @@
 		}
 	};
 	
-	
+	function backPage(){
+
+		location.href='./${frompage}?category=all';
+		
+	}
 	
 	
 

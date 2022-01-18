@@ -147,7 +147,7 @@ public class MypageService {
 		gbadto.setGroupbuy_unitprice(Integer.parseInt(params.get("groupbuy_unitprice")));
 		gbadto.setGroupbuy_max(Integer.parseInt(params.get("groupbuy_max")));
 		gbadto.setGroupbuy_due_date(Date.valueOf(params.get("groupbuy_due_date")));
-		gbadto.setProduct_category_name("product_category_name");
+		gbadto.setProduct_category_name(params.get("product_category_name"));
 		
 		dao.groupbuywrite2_gba(gbadto);
 		
@@ -173,13 +173,13 @@ public class MypageService {
 		
 	}
 
-	public HashMap<String, String> orderConfirmPage(int board_no, String loginId) {
+	public HashMap<String, String> orderConfirmPage(String board_no, String loginId) {
 		//user_info 에서 user_name,user_address,user_phone,
 		//board JOIN groupbuy_addit 에서 board_no, board_title, unit_price
 		HashMap<String, String> user_info = dao.orderConfirm_user(loginId);
 		logger.info("회원정보 가져오기 {}",user_info);
 		HashMap<String, String> board = dao.orderConfirm_board(board_no);
-		logger.info("회원정보 가져오기 {}",board);
+		logger.info("게시글 정보 가져오기 {}",board);
 
 		HashMap<String, String>orderConfirm_info = new HashMap<String, String>();
 		orderConfirm_info.putAll(user_info);
@@ -220,6 +220,26 @@ public class MypageService {
 		logger.info("성공했니? {}",row);
 		
 		return map;
+	}
+
+	public HashMap<String, String> groupbuydetail(String board_no) {
+		HashMap<String, String> groupbuydetail = dao.groupbuydetail(board_no);
+		
+		return groupbuydetail;
+	}
+
+	public String orderquansum(String board_no) {
+		String orderquansum = dao.orderquansum(board_no);
+		if(orderquansum == null) {
+			orderquansum = "0";
+		}
+		
+		
+		return orderquansum;
+	}
+
+	public ArrayList<HashMap<String, String>> photolist(String board_no) {
+		return dao.photolist(board_no);
 	}
 
 	

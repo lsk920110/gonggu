@@ -32,7 +32,7 @@
         <img style="background-color: beige" class="adminMenu" src="resources/img/전체요청글.png" alt="전체요청글" loc="adminRequire">
          <img class="adminMenu" src="resources/img/전체공구게시글.png" alt="전체공구게시글" loc="admingroupbuylist">
         <img class="adminMenu" src="resources/img/전체회원정보.png" alt="전체회원정보" loc="adminuserlist">
-        <img class="adminMenu" src="resources/img/상품등록.png" alt="상품등록" loc="(상품등록)">
+        <img class="adminMenu" src="resources/img/상품등록.png" alt="상품등록" loc="groupbuywriteForm2">
     </div>
 			
 			

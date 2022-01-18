@@ -32,10 +32,15 @@
 		height: 30px;
 		cursor: pointer;
 	}
+		iframe{
+		width: 100%;
+			height: 210px;
+			border-style: none;
+		} 
 	</style>
 </head>
 <body>
-
+  	<iframe src="header"></iframe>
 
     <div>
         <img class="category" src="resources/img/생활건강.png"  alt="생활/건강">
@@ -116,7 +121,7 @@
 
         </div>
 
-
+   <iframe src="footer"></iframe>
 	
 </body>
 <script>

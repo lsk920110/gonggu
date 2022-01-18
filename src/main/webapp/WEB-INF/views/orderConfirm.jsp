@@ -59,9 +59,12 @@
 				</td>
 			</tr>
 		</table>
+		<input type="hidden" name="frompage" value="groupBuyList"/>
 		<button>신청</button>
 		<input type="button" value="취소" onclick="location.href='/'"/>
 	</form>
 </body>
-<script></script>
+<script>
+	
+</script>
 </html>

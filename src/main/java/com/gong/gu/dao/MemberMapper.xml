@@ -13,10 +13,10 @@
 	<insert id = "join" parameterType="hashmap">
 	INSERT INTO user_info 
 		(user_id, user_pw, user_name, user_gender, user_birth, user_email, user_phone,
-		user_address, user_admin)
+		user_address)
 	VALUES
 		(#{user_id}, #{user_pw}, #{user_name}, #{user_gender}, #{user_birth}, #{user_email}, 
-		#{user_phone}, #{user_address}, #{user_admin})
+		#{user_phone}, #{user_address})
 	</insert>
 	
 	<select id = "login" resultType="hashmap">

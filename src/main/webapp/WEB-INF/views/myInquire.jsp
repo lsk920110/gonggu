@@ -11,11 +11,23 @@
 		border-collapse : collapse ;
 		padding : 5px;
 	}
-	
+		iframe{
+		width: 100%;
+			height: 210px;
+			border-style: none;
+		} 
 	</style>
 </head>
 <body>
-	<iframe>header</iframe>
+	<iframe src="header"></iframe>
+	<div id = "myMenuBar">
+        <img class="myMenu" src="resources/img/전체주문내역.png"  alt="전체주문내역" loc="adminOrderList">
+        <img class="myMenu" src="resources/img/전체문의게시글.png" alt="전체문의게시글" loc="adminInquiry">
+        <img class="myMenu" src="resources/img/전체요청글.png" alt="전체요청글" loc="adminRequire">
+        <img style="background-color: beige" class="myMenu" src="resources/img/전체공구게시글.png" alt="전체공구게시글" loc="admingroupbuylist">
+        <img class="myMenu" src="resources/img/전체회원정보.png" alt="전체회원정보" loc="adminuserlist">
+        <img class="myMenu" src="resources/img/상품등록.png" alt="상품등록" loc="groupbuywriteForm2">
+    </div>
 	<div>
 		<a href="myorderList">내 주문 내역</a>
 		<a href="myWish">찜리스트</a>
@@ -48,9 +60,15 @@
 
 	</table>
 
-	<iframe>footer</iframe>
+	<iframe src="footer"></iframe>
 
 	
 </body>
-<script></script>
+<script>
+
+$(".adminMenu").click(function(){
+    location.href=$(this).attr("loc");
+});
+
+</script>
 </html>

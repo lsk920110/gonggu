@@ -11,11 +11,15 @@
 		border-collapse : collapse ;
 		padding : 5px;
 	}
-	
+	iframe{
+		width: 100%;
+			height: 210px;
+			border-style: none;
+		} 	
 	</style>
 </head>
 <body>
-	<iframe>header</iframe>
+	<iframe src="header"></iframe>
 	<div>
 		<a href="myorderList">내 주문 내역</a>
 		<a href="myWish">찜리스트</a>
@@ -54,7 +58,7 @@
 	
 	
 
-	<iframe>footer</iframe>
+	<iframe src="footer"></iframe>
 
 	
 </body>

@@ -80,13 +80,7 @@
 				<input type = "text" name = "user_address"/>
 			</td>
 		</tr>
-		<tr>
-			<th>관리자</th>
-			<td>
-				<input type = "text" name = "user_admin"/>
-				
-			</td>
-		</tr>
+
 		
 		<!-- <tr>
 		 <th>약관</th>
@@ -97,14 +91,13 @@
 				<input type = "radio" name = "terms" value = "disagree"/>비동의
 			</td>
 		</tr> -->
-		<div class = "button">
 		<tr>
 			<th colspan = "4">
 			<input type = "button" id = "regist" value = "가입"/>
 			<input type= "button" id= "cansel" value = "취소" onclick="location.href='loginMain'"/>
 			</th>
 		</tr>
-		</div>
+
 	</table>
 	<iframe src="footer"></iframe>
 </body>

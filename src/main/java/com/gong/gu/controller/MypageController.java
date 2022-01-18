@@ -192,33 +192,37 @@ public class MypageController {
 		
 		//공구상세 -> 공구신청버튼 -> 주문자정보확인
 		@RequestMapping(value = "/orderConfirmPage", method = RequestMethod.GET)
-		public String orderConfirmPage(Model model, HttpSession session) {
+		public String orderConfirmPage(Model model, HttpSession session, @RequestParam String order_quantity, @RequestParam String board_no) {
 			logger.info("orderConfirmPage 이동");
-			//구매수량
-			String order_quantity = "15";			
-			//board_no (공구게시글)
-			int board_no = 49;
-			//sessionId
+			String page = "redirect:/loginMain?board_no="+board_no;
 			String loginId = (String) session.getAttribute("loginId");
-			HashMap<String, String> confirminfo = service.orderConfirmPage(board_no,loginId);
-			confirminfo.put("order_quantity", order_quantity);
-			logger.info("모델에 태우기 전 마지막 확인 {}",confirminfo);
-			model.addAttribute("confirminfo",confirminfo);
+			if(loginId != null) { // 로그인 했다면,
+				logger.info("{}게시글에 대해서 {}개 구매요청하셨습니다.",board_no,order_quantity);
+				//board_no (공구게시글)
+				
+				//sessionId
+				HashMap<String, String> confirminfo = service.orderConfirmPage(board_no,loginId);
+				confirminfo.put("order_quantity", order_quantity);
+				logger.info("모델에 태우기 전 마지막 확인 {}",confirminfo);
+				model.addAttribute("confirminfo",confirminfo);
+				page= "orderConfirm";
+			}
 			
-			return "orderConfirm";
+			
+			return page;
 		}		
 		
 		
 	 	//주문요청 -> DB저장 -> detail 페이지로 연결
 		@RequestMapping(value = "/orderRequest", method = RequestMethod.GET)
-		public String orderRequest(Model model, @RequestParam HashMap<String, String> params, HttpSession session) {
+		public String orderRequest(Model model, @RequestParam HashMap<String, String> params, @RequestParam String frompage, HttpSession session) {
 			logger.info("주문신청 중입니다.(DB로) {}",params);
 			String loginId = (String) session.getAttribute("loginId");
 			Order_infoDTO orderDTO = new Order_infoDTO();
 			orderDTO = service.orderrequest(params,loginId);
 			model.addAttribute("order_no",orderDTO.getOrder_no());
 			model.addAttribute("loginId",loginId);
-			model.addAttribute("frompage","groupbuy_detail");
+			model.addAttribute("frompage",frompage);
 			
 			return "redirect:/orderDetail";
 		}
@@ -262,9 +266,22 @@ public class MypageController {
 		
 		@RequestMapping(value = "/groupbuydetail", method = RequestMethod.GET)
 		public String groupbuydetail(Model model, @RequestParam String board_no) {
-			logger.info("공구 상세 페이지입니다.");
+			logger.info("공구NO.{} 상세 페이지입니다.",board_no);
+			HashMap<String, String> groupbuydetail =  service.groupbuydetail(board_no);
+			logger.info("모델에 싣기 전에 , 받아온 값 확인 {}",groupbuydetail);
+			model.addAttribute("groupbuydetail",groupbuydetail);
 			
-			return "gonggu_detail";
+			//누적 신청수량 받아오기
+			String orderquansum = service.orderquansum(board_no);
+			logger.info("누적 신청 수량 : {}",orderquansum);
+			model.addAttribute("orderquansum",orderquansum);
+			//관련된 포토 받아오기
+			ArrayList<HashMap<String, String>>photolist = service.photolist(board_no);
+			model.addAttribute("photolist",photolist);
+			
+			
+			
+			return "groupbuydetail";
 		}		
 		
 		

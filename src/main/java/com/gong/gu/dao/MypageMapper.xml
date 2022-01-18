@@ -60,8 +60,8 @@
 	
 	<insert id="groupbuywrite2_gba"
 		parameterType="com.gong.gu.dto.Groupbuy_additDTO">
-		INSERT INTO groupbuy_addit(board_no,groupbuy_unitprice,Groupbuy_max,Groupbuy_due_date,Product_category_name)
-		VALUES(#{board_no},#{groupbuy_unitprice},#{groupbuy_max},#{groupbuy_due_date},#{product_category_name})
+		INSERT INTO groupbuy_addit(board_no,groupbuy_unitprice,groupbuy_max,groupbuy_due_date,product_category_name,groupbuy_target)
+		VALUES(#{board_no},#{groupbuy_unitprice},#{groupbuy_max},#{groupbuy_due_date},#{product_category_name},#{groupbuy_target})
 	</insert>	
 
 	<insert id="groupbuywrite2_pho"
@@ -99,5 +99,16 @@
 	WHERE user_id= #{user_id}
 	</update>
 	
+	<select id="groupbuydetail" resultType="hashmap">
+	SELECT * FROM board INNER JOIN groupbuy_addit USING (board_no) WHERE board_no =  #{param1}
+	</select>
+	
+	<select id="orderquansum" resultType="string">
+	SELECT sum(order_quantity) FROM order_info WHERE board_no = #{param1} AND (order_state = '신청완료' OR order_state = '배송완료');
+	</select>
+	
+	<select id="photolist" resultType="hashmap">
+	SELECT * FROM photo WHERE board_no = #{param1}
+	</select>
 
 </mapper>

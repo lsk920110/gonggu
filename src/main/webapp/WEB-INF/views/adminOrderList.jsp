@@ -32,7 +32,7 @@
         <img class="adminMenu" src="resources/img/전체요청글.png" alt="전체요청글" loc="adminRequire">
         <img class="adminMenu" src="resources/img/전체공구게시글.png" alt="전체공구게시글" loc="admingroupbuylist">
         <img class="adminMenu" src="resources/img/전체회원정보.png" alt="전체회원정보" loc="adminuserlist">
-        <img class="adminMenu" src="resources/img/상품등록.png" alt="상품등록" loc="(상품등록)">
+        <img class="adminMenu" src="resources/img/상품등록.png" alt="상품등록" loc="groupbuywriteForm2">
     </div>
 			
 	<hr/>
@@ -62,7 +62,7 @@
 			<c:forEach items="${adOrderList}" var="adOrderList">
 				<input type="hidden" name="boardNo" value="${adOrderList.board_no}"/>
 					<tr>
-						<th>${adOrderList.order_no}</th>
+						<th><a href="orderDetail?order_no=${adOrderList.order_no}&frompage=adminOrderList">${adOrderList.order_no}</a></th>
 						<th>${adOrderList.board_no}</th>
 						<th>${adOrderList.board_title}</th>
 						<th>${adOrderList.groupbuy_state}</th>
