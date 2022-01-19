@@ -49,7 +49,8 @@
                 width: 100%;
                 height: 80px;
                 top: 90px;
-                z-index: 10;
+                /*z-index: 10;*/
+                z-index: 9;
                 background-color: white;
             }
             #main_container{
@@ -84,16 +85,18 @@
             	cursor: pointer;
             }
             #search{
-                position: absolute;
+                /*position: absolute;*/
                 bottom: 8%;
-                width: 65%;
+                /*width: 65%;*/
+                width: 100%;
                 height: 50px;
                 padding-left: 20px;
                 padding-top: 5px;
                 left: 20%;
-                border-radius: 10px;
-                border: 2px solid rgb(246 225 170);
+                /*border-radius: 10px;*/
+                /*border: 2px solid rgb(246 225 170);*/
                 font-size: 20px;
+                border-style: none;
             }
             #search_icon{
                 position: absolute;
@@ -123,6 +126,7 @@
             	color: rgb(246 225 170);
             	background-color: white;
             }
+           
 
             /* 2.카테고리 */
             .admin_category{
@@ -160,8 +164,60 @@
                 width: 16%;
                 left: 68%;
             }
-
+			
+			#searchButton{
+			
+				/*border-radius: 7px;*/
+				border-radius: 2px;
+			    background-color: rgb(246 225 170);
+			    color: white;
+			    border: 2px solid rgb(246 225 170);
+			    /**/
+			    height: 50px;
+    			width: 100%;
+    			font-size: 20px;
+			}
+			
+			#searchButton:hover{
+			    background-color: white;
+			    color: rgb(246 225 170);
+			    border: white;
+			    height: 50px;
+			    cursor: pointer;
+			}
+			/**/
+           .search_group{
+           		float : left;
+           		height: 50px;
+           		
+           }
            
+            #search_group{
+            	margin:20px;
+            	text-align: center;
+            	border: 2px solid rgb(246 225 170);
+   				height: 50px;
+    			border-radius: 4px;
+            }
+             #search_group1{
+				width: 20%;
+            }
+             #search_group2{
+				width: 70%;
+            }
+             #search_group3{
+				width: 10%;
+            }
+            #search_categori{
+				width: 100%;
+   				height: 50px;
+   				border-style: none;
+    			font-size: 15px;
+    			text-align: center;
+    			border-right: solid 2px rgb(246 225 170);
+            }
+            
+            
         </style>
     </head>
     <body>
@@ -173,8 +229,25 @@
 	                </div>
                	<form action="search" method="post">
 	               	<div id="main_wrap_header_center" class="headertap">
-	                    <input id="search" type="text" name="search" placeholder="검색어를 입력하세요."/>
-	                    <img id="search_icon" src="resources/img/검색.jpg" alt="검색버튼">
+		               		<!-- 추가 -->
+	               		<div id="search_group">
+	               			<div id="search_group1" class="search_group">
+			               		<select name="page" id="search_categori">
+			               			<option value="groupBuyList2?category=all&currpage=1">공구리스트</option>
+			               			<option value="RequestBoardlist?category=all&currpage=1">요청리스트</option>
+			               			<option value="inquireBoardList?category=all&currpage=1">문의리스트</option>
+			               		</select>
+	               			</div>
+		               		<div id="search_group2" class="search_group">
+			                    <input id="search" type="text" name="search" placeholder="검색어를 입력하세요."/>
+			                    <!-- <img id="search_icon" src="resources/img/검색.jpg" alt="검색버튼"> -->		               		
+		               		</div>
+		               		<div id="search_group3" class="search_group">
+		                    	<input id="searchButton" type="submit" value="검색" />		               		
+		               		</div>
+	               		
+	               		</div>
+		                    <!-- 추가 -->
 	                </div>
                	</form>
                
@@ -190,9 +263,9 @@
 
 
             <div id="main_wrap_category">
-                <span id="admin_category1" class="admin_category" loc="RequestBoardlist">요청게시판</span>
+                <span id="admin_category1" class="admin_category" loc="RequestBoardlist?category=all&currpage=1">요청게시판</span>
                 <span id="admin_category2" class="admin_category" loc="groupBuyList?category=all&currpage=1">공구게시판</span>
-                <span id="admin_category3" class="admin_category" loc="inquireBoardList">문의게시판</span>
+                <span id="admin_category3" class="admin_category" loc="inquireBoardList?category=all&currpage=1">문의게시판</span>
                 <c:if test="${adminYN == 'N'}">            
 	                <span id="admin_category4" class="admin_category" loc="mypage">마이페이지</span>
                 </c:if>

@@ -231,11 +231,91 @@ public class AdminController {
 		return "redirect:/adminRequire?currpage="+currpage; 
 	}
    
+	
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+   
+	//6. 검색테스트
+	@RequestMapping(value = "/search", method = RequestMethod.POST)
+    public String search(Model model, @RequestParam String page, @RequestParam String search, HttpSession session) {      
+       logger.info("검색요청 요청");
+       logger.info("카테고리 값 : "+page);
+       logger.info("검색내용 값 : "+search);
+       session.setAttribute("keyword", search);
+
+       return "redirect:/"+page;
+    }
    
    
-   
-   
-   
+	 //6. 검색테스트(공구 리스트 불러오기2)	
+	 @RequestMapping(value = "/groupBuyList2", method = RequestMethod.GET)
+		public String groupBuyList(Model model, HttpSession session, @RequestParam String category, @RequestParam String currpage) { 
+			logger.info("groupBuyList2 요청");
+			logger.info("{}",category);
+			
+			//String loginId = (String)session.getAttribute("loginId");
+			
+			String loginId = "admin01";
+			logger.info("로그인 아이디 : "+loginId);
+			model.addAttribute("loginId", loginId);
+			String list = "";
+			
+			String keyword = (String) session.getAttribute("keyword");
+			logger.info("세션에 저장된 값 : "+keyword);
+			
+			
+			if(keyword != null) {
+				
+				//찜 목록 확인 - loginId에 해당하는 Board_no 반환
+				if(loginId != null) {
+					ArrayList<String> wishlist = service.wishlist_search(loginId);
+					logger.info("찜목록 : {}",wishlist);
+					for (int i = 0; i < wishlist.size(); i++) {
+						list += wishlist.get(i);
+						list += "/";
+					}
+					
+					
+					model.addAttribute("wishlist", list);
+				}
+				
+				int currPage = Integer.parseInt(currpage);	//호출을 요청할 페이지
+				int pagePerCnt = 8; //한 페이지당 몇개씩? 10개씩
+				
+				
+				//카테고리 조회
+				if(category.equals("all")) {
+					int range = service.groupBuyRangeCall_search1(currPage,pagePerCnt,keyword);
+					
+					ArrayList<HashMap<String, String>> listCall = service.groupBuyListCall_search1(currPage,pagePerCnt,keyword);
+					model.addAttribute("groupBuyList", listCall);
+					model.addAttribute("pages",range);
+					model.addAttribute("nowpage",currpage);
+					
+					//ArrayList<HashMap<String, String>> groupBuyList = service.groupBuyList();
+					//model.addAttribute("groupBuyList", groupBuyList);			
+					
+				} else {
+					int range = service.groupBuyRangeCall_search2(currPage,pagePerCnt,category,keyword);
+					
+					
+					ArrayList<HashMap<String, String>> listCall = service.groupBuyListCall_search2(currPage,pagePerCnt,category,keyword);
+					model.addAttribute("groupBuyList", listCall);
+					model.addAttribute("pages",range);
+					model.addAttribute("nowpage",currpage);				
+					
+					
+					//int range = service.groupBuyListCall2(currPage,pagePerCnt);
+					//ArrayList<HashMap<String, String>> groupBuyList2 = service.groupBuyList2(category);
+					//model.addAttribute("groupBuyList", groupBuyList2);								
+				}
+				model.addAttribute("category",category);
+				
+			}
+			
+			
+			return "groupBuyList2"; 
+			
+		}
    
    
    

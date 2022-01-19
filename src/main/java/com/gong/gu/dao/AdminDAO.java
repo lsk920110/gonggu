@@ -62,6 +62,22 @@ public interface AdminDAO {
 	int adGrp_allCount();
 	ArrayList<HashMap<String, String>> adGrp_listCall(int pagePerCnt, int offset);
 
+	
+	
+	
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//6. 검색테스트
+	ArrayList<String> wishlist_search(String loginId);
+	//6-1. 리스트 범위불러오기1
+	int groupBuyRangeCall_search1(String keyword);
+	//6-2. 리스트 불러오기1
+	ArrayList<HashMap<String, String>> groupBuyListCall_search1(int pagePerCnt, int offset, String keyword);
+	//6-3. 리스트 범위불러오기2
+	int groupBuyRangeCall_search2(String category, String keyword);
+	//6-4. 리스트 불러오기2
+	ArrayList<HashMap<String, String>> groupBuyListCall_search2(int pagePerCnt, int offset, String category,
+			String keyword);
+
 
 
 }

@@ -187,4 +187,65 @@ public class AdminService {
 		return listCall;
 	}
 
+	
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	//6. 검색테스트
+	public ArrayList<String> wishlist_search(String loginId) {
+		return dao.wishlist_search(loginId);
+	}
+
+	//6-1. 리스트 범위불러오기1
+	public int groupBuyRangeCall_search1(int currPage, int pagePerCnt, String keyword) {
+		int totalCount = dao.groupBuyRangeCall_search1(keyword); // 일단 테이블 글이 몇개인지? 
+		int range = totalCount%pagePerCnt > 0 ? (totalCount/pagePerCnt) + 1 : (totalCount/pagePerCnt);//만들 수 있는 페이지의 갯수
+
+		return range;
+	}
+
+	//6-2. 리스트 불러오기1
+	public ArrayList<HashMap<String, String>> groupBuyListCall_search1(int currPage, int pagePerCnt, String keyword) {
+		int offset = (currPage -1)* pagePerCnt - 1;//DB에 요청할 인덱스 번호임 , 1:0-7, 2:8-15 이런식으로해야함
+		//1페이지면 limit 10에, offset 0부터 조회
+		//2페이지면 limit 10에, offset 10부터 조회
+		//3페이지면 limit 10에, offset 20부터 조회
+		if(offset < 0) {
+			offset = 0;
+		}
+		
+		ArrayList<HashMap<String, String>> listCall = dao.groupBuyListCall_search1(pagePerCnt,offset, keyword);
+		
+		
+		return listCall;
+	}
+
+	//6-3. 리스트 범위불러오기2
+	public int groupBuyRangeCall_search2(int currPage, int pagePerCnt, String category, String keyword) {
+		int totalCount = dao.groupBuyRangeCall_search2(category, keyword); // 일단 테이블 글이 몇개인지? 
+		int range = totalCount%pagePerCnt > 0 ? (totalCount/pagePerCnt) + 1 : (totalCount/pagePerCnt);//만들 수 있는 페이지의 갯수
+		logger.info("range : {}",range);
+		return range;
+	}
+
+	//6-4. 리스트 불러오기2
+	public ArrayList<HashMap<String, String>> groupBuyListCall_search2(int currPage, int pagePerCnt, String category,
+			String keyword) {
+		
+		logger.info("{}",category);
+		int offset = (currPage -1)* pagePerCnt - 1;//DB에 요청할 인덱스 번호임 , 1:0-7, 2:8-15 이런식으로해야함
+		//1페이지면 limit 10에, offset 0부터 조회
+		//2페이지면 limit 10에, offset 10부터 조회
+		//3페이지면 limit 10에, offset 20부터 조회
+		if(offset < 0) {
+			offset = 0;
+		}
+		logger.info("offset : {}",offset);
+		ArrayList<HashMap<String, String>> listCall = dao.groupBuyListCall_search2(pagePerCnt,offset,category,keyword);
+		logger.info("listCall : {}",listCall);
+		
+		return listCall;
+	}
+
+
+
 }
