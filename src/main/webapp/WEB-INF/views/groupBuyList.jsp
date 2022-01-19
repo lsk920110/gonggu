@@ -5,11 +5,12 @@
 <head>
 	<meta charset="UTF-8">
 	<title>공동구매게시판</title>
-	<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>  
-	<!-- <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script> -->
-	<script src="resources/js/jquery.twbsPagination.js"></script>
+   	<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>  
+	<script src="resources/js/jquery.twbsPagination.js"></script>
+   
+	<!-- <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script> -->
 	<style>
 	
 	#category{
@@ -156,8 +157,10 @@
 						</c:otherwise> 
 					</c:choose>  
 					
+
+						<p class="price">${list.groupbuy_unitprice}<p>	
+
 					
-					<p>가격 : ${list.groupbuy_unitprice}원<p>	
 					
 					<c:if test="${list.sum eq null}">
 						<progress value="0" max="${list.groupbuy_target}"></progress>
@@ -175,21 +178,46 @@
 	</div> 
 	
 	<!-- 페이징 영역 -->
-	<tr>
-		<td colspan="9">
+
 			<div class="container">
 				<nav aria-label="Page navigation" style="text-align:center">
 					<ul class="pagination" id="pagination"></ul>
 				</nav>
 			</div>
-		</td>
-	</tr>
+
 	<!-- 페이징 영역 -->	
 
-
+	<input type="button" onclick="asd()"/>
 	<iframe src="footer"></iframe>
 </body>
 <script>
+/*
+//가격  , 처리
+window.onload = function () {
+	
+
+	function priceToString(price) {
+	    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+	}
+}
+*/
+		var price = document.getElementsByClassName('price');
+		
+		for (var i = 0; i < price.length; i++) {
+			console.log(price[i].innerText);
+			var a = document.getElementsByClassName('price')[i].innerText;
+			var b = a.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+			
+			
+			document.getElementsByClassName('price')[i].innerHTML = "가격  " + b + "원";
+
+
+			
+		};
+		
+
+
+
 
 	//하트 클릭 시 찜 추가/삭제
 	$('.heart').click(function(){
@@ -255,7 +283,7 @@
 		
  		var param = $(this).attr('alt');
 		console.log(param);
- 		location.href='./groupBuyList?category='+param;
+ 		location.href='./groupBuyList?category='+param+"&currpage="+1;
 		
  	});
 
@@ -269,22 +297,26 @@
 		}
 	}
 */
+	var startpage = "${nowpage}";
+	startpage = startpage*1;
 	var totalpage = "${pages}";
-	console.log("totalpage : "+totalpage);
-	/* 페이징에 관한 곳 */
-	$('#pagination').twbsPagination({
-		startPage : "${nowpage}",
-		totalPages : totalpage,
-		visiblePages : 5,
-		onPageClick:function(evt,page){
-			console.log(evt);
-			console.log(page);
-			if("${nowpage}" != page) {
-				location.href="./adminInquiry?currpage="+page;			
+	totalpage = (totalpage*1);
+	console.log(startpage);
+	console.log(totalpage);
+		/* 페이징에 관한 곳 */
+		$('#pagination').twbsPagination({
+			startPage : startpage,
+			totalPages : totalpage,
+			visiblePages : 5,
+			onPageClick:function(evt,page){
+				console.log(evt);
+				console.log(page);
+				if("${nowpage}" != page) {
+					location.href="./groupBuyList?category="+"${category}"+"&currpage="+page;			
+				}
 			}
-		}
-	
-	});	
+		
+		});	
 
 </script>
 </html> 

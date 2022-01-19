@@ -58,91 +58,133 @@ public class AdminService {
    
    
    
-   
-   
-
-   
-   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-public ArrayList<HashMap<String, String>> adgroupbuylist() {
-	ArrayList<HashMap<String, String>> adgroupbuylist = new ArrayList<HashMap<String,String>>();
-	adgroupbuylist = dao.adgroupbuylist();
-	logger.info("서비스에 요청게시판 데이터 받아옴 : {}",adgroupbuylist);
+	   
+	   
 	
-	return adgroupbuylist;
-}
-
-public void adminGroupbuy_update(String strKey, String exp, String act, String sta) {
-	   dao.adminGroupbuy_update(strKey,exp,act);
-	   dao.adminGroupbuy_update2(strKey,sta);	
-}
-
-public int gbcancel(String board_no, String cancelR) {
-	int gbcancel_no = dao.gbcancel_no(board_no);
-	int gbcancel_no_act = dao.gbcancel_no_act(board_no);
-	int gbcancel_R = dao.gbcancel_R(board_no,cancelR);
-
-	return gbcancel_no + gbcancel_no_act + gbcancel_R;
-	
-	
-}
-
-
-public ArrayList<HashMap<String, String>> adminuserlist() {
-	
-	
-	ArrayList<HashMap<String, String>> adminuserlist = new ArrayList<HashMap<String, String>>();
-	adminuserlist = dao.adminuserlist();
-	logger.info("서비스  : 조회 결과물 {}",adminuserlist);
-	
-	return adminuserlist;
-}
-
-
-///////////////////////////////////////
-
-public int adorder_rangecall(int currPage, int pagePerCnt ) {
-
-	int totalCount = dao.adorder_allCount(); // 일단 테이블 글이 몇개인지? 
-	int range = totalCount%pagePerCnt > 0 ? (totalCount/pagePerCnt) + 1 : (totalCount/pagePerCnt);//만들 수 있는 페이지의 갯수
-
-	return range;
-}
-
-public ArrayList<HashMap<String, String>> adorder_listCall(int currPage, int pagePerCnt ) {
-	int offset = (currPage -1)* pagePerCnt - 1;//DB에 요청할 인덱스 번호임 , 1:0-9, 2:10-19 이런식으로해야함
-	//1페이지면 limit 10에, offset 0부터 조회
-	//2페이지면 limit 10에, offset 10부터 조회
-	//3페이지면 limit 10에, offset 20부터 조회
-	if(offset < 0) {
-		offset = 0;
+	   
+	   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	public ArrayList<HashMap<String, String>> adgroupbuylist() {
+		ArrayList<HashMap<String, String>> adgroupbuylist = new ArrayList<HashMap<String,String>>();
+		adgroupbuylist = dao.adgroupbuylist();
+		logger.info("서비스에 요청게시판 데이터 받아옴 : {}",adgroupbuylist);
+		
+		return adgroupbuylist;
 	}
 	
-	ArrayList<HashMap<String, String>> listCall = dao.adorder_listCall(pagePerCnt,offset);
-	
-	
-	return listCall;
-}
-
-public int adInq_rangecall(int currPage, int pagePerCnt) {
-	int totalCount = dao.adInq_allCount(); // 일단 테이블 글이 몇개인지? 
-	int range = totalCount%pagePerCnt > 0 ? (totalCount/pagePerCnt) + 1 : (totalCount/pagePerCnt);//만들 수 있는 페이지의 갯수
-
-	return range;
-}
-
-public ArrayList<HashMap<String, String>> adInqr_listCall(int currPage, int pagePerCnt) {
-	int offset = (currPage -1)* pagePerCnt - 1;//DB에 요청할 인덱스 번호임 , 1:0-9, 2:10-19 이런식으로해야함
-	//1페이지면 limit 10에, offset 0부터 조회
-	//2페이지면 limit 10에, offset 10부터 조회
-	//3페이지면 limit 10에, offset 20부터 조회
-	if(offset < 0) {
-		offset = 0;
+	public void adminGroupbuy_update(String strKey, String exp, String act, String sta) {
+		   dao.adminGroupbuy_update(strKey,exp,act);
+		   dao.adminGroupbuy_update2(strKey,sta);	
 	}
 	
-	ArrayList<HashMap<String, String>> listCall = dao.adInq_listCall(pagePerCnt,offset);
+	public int gbcancel(String board_no, String cancelR) {
+		int gbcancel_no = dao.gbcancel_no(board_no);
+		int gbcancel_no_act = dao.gbcancel_no_act(board_no);
+		int gbcancel_R = dao.gbcancel_R(board_no,cancelR);
+	
+		return gbcancel_no + gbcancel_no_act + gbcancel_R;
+		
+		
+	}
 	
 	
-	return listCall;
-}
+	public ArrayList<HashMap<String, String>> adminuserlist() {
+		
+		
+		ArrayList<HashMap<String, String>> adminuserlist = new ArrayList<HashMap<String, String>>();
+		adminuserlist = dao.adminuserlist();
+		logger.info("서비스  : 조회 결과물 {}",adminuserlist);
+		
+		return adminuserlist;
+	}
+	
+	
+	///////////////////////////////////////
+	
+	public int adorder_rangecall(int currPage, int pagePerCnt ) {
+	
+		int totalCount = dao.adorder_allCount(); // 일단 테이블 글이 몇개인지? 
+		int range = totalCount%pagePerCnt > 0 ? (totalCount/pagePerCnt) + 1 : (totalCount/pagePerCnt);//만들 수 있는 페이지의 갯수
+	
+		return range;
+	}
+	
+	public ArrayList<HashMap<String, String>> adorder_listCall(int currPage, int pagePerCnt ) {
+		int offset = (currPage -1)* pagePerCnt - 1;//DB에 요청할 인덱스 번호임 , 1:0-9, 2:10-19 이런식으로해야함
+		//1페이지면 limit 10에, offset 0부터 조회
+		//2페이지면 limit 10에, offset 10부터 조회
+		//3페이지면 limit 10에, offset 20부터 조회
+		if(offset < 0) {
+			offset = 0;
+		}
+		
+		ArrayList<HashMap<String, String>> listCall = dao.adorder_listCall(pagePerCnt,offset);
+		
+		
+		return listCall;
+	}
+	
+	//관리자 문의게시판 + 페이징
+	public int adInq_rangecall(int currPage, int pagePerCnt) {
+		int totalCount = dao.adInq_allCount(); // 일단 테이블 글이 몇개인지? 
+		int range = totalCount%pagePerCnt > 0 ? (totalCount/pagePerCnt) + 1 : (totalCount/pagePerCnt);//만들 수 있는 페이지의 갯수
+	
+		return range;
+	}
+	
+	public ArrayList<HashMap<String, String>> adInqr_listCall(int currPage, int pagePerCnt) {
+		int offset = (currPage -1)* pagePerCnt - 1;//DB에 요청할 인덱스 번호임 , 1:0-9, 2:10-19 이런식으로해야함
+		//1페이지면 limit 10에, offset 0부터 조회
+		//2페이지면 limit 10에, offset 10부터 조회
+		//3페이지면 limit 10에, offset 20부터 조회
+		if(offset < 0) {
+			offset = 0;
+		}
+		ArrayList<HashMap<String, String>> listCall = dao.adInq_listCall(pagePerCnt,offset);
+		return listCall;
+	}
+	
+	//관리자 요청게시판 + 페이징
+	public int adReq_rangecall(int currPage, int pagePerCnt) {
+		int totalCount = dao.adReq_allCount(); // 일단 테이블 글이 몇개인지? 
+		int range = totalCount%pagePerCnt > 0 ? (totalCount/pagePerCnt) + 1 : (totalCount/pagePerCnt);//만들 수 있는 페이지의 갯수
+	
+		return range;	
+	}
+	
+	public ArrayList<HashMap<String, String>> adReq_listCall(int currPage, int pagePerCnt) {
+		int offset = (currPage -1)* pagePerCnt - 1;//DB에 요청할 인덱스 번호임 , 1:0-9, 2:10-19 이런식으로해야함
+		//1페이지면 limit 10에, offset 0부터 조회
+		//2페이지면 limit 10에, offset 10부터 조회
+		//3페이지면 limit 10에, offset 20부터 조회
+		if(offset < 0) {
+			offset = 0;
+		}
+		
+		ArrayList<HashMap<String, String>> listCall = dao.adReq_listCall(pagePerCnt,offset);
+	
+		return listCall;
+	}
+	
+	//관리자 공구게시판 + 페이징
+	public int adgrp_rangecall(int currPage, int pagePerCnt) {
+		int totalCount = dao.adGrp_allCount(); // 일단 테이블 글이 몇개인지? 
+		int range = totalCount%pagePerCnt > 0 ? (totalCount/pagePerCnt) + 1 : (totalCount/pagePerCnt);//만들 수 있는 페이지의 갯수
+		return range;
+		
+	}
+	
+	
+	//
+	public ArrayList<HashMap<String, String>> adgrp_listCall(int currPage, int pagePerCnt) {
+		int offset = (currPage -1)* pagePerCnt - 1;//DB에 요청할 인덱스 번호임 , 1:0-9, 2:10-19 이런식으로해야함
+		//1페이지면 limit 10에, offset 0부터 조회
+		//2페이지면 limit 10에, offset 10부터 조회
+		//3페이지면 limit 10에, offset 20부터 조회
+		if(offset < 0) {
+			offset = 0;
+		}
+		ArrayList<HashMap<String, String>> listCall = dao.adGrp_listCall(pagePerCnt,offset);
+		return listCall;
+	}
 
 }

@@ -123,20 +123,36 @@ public class AdminController {
 	
 	//3. 전체 요청 게시글
 	@RequestMapping(value = "/adminRequire", method = RequestMethod.GET)
-	public String adRequire(Model model) {
+	public String adminRequire(Model model , @RequestParam String currpage) {
 		logger.info("전체 요청 게시글 리스트 불러오기");
 		
-		ArrayList<HashMap<String, String>> adRequire = service.adRequire();
-		logger.info("가져온 리수트 수 : {}", adRequire.size());
-		model.addAttribute("adRequire", adRequire);
+		
+		int currPage = Integer.parseInt(currpage);	//호출을 요청할 페이지
+		int pagePerCnt = 10; //한 페이지당 몇개씩? 10개씩
+		
+		//1.총 패이지 갯수인 range가 필요함
+		int range = service.adReq_rangecall(currPage,pagePerCnt);
+		//2.리스트가 필요함(10개밖에 안들어있음)
+		ArrayList<HashMap<String, String>> listCall = service.adReq_listCall(currPage,pagePerCnt);
+		model.addAttribute("pages",range);
+		model.addAttribute("adRequire",listCall);
+		model.addAttribute("nowpage",currpage);				
+		
+		
+		
+		
+//		ArrayList<HashMap<String, String>> adRequire = service.adRequire();
+//		logger.info("가져온 리수트 수 : {}", adRequire.size());
+//		model.addAttribute("adRequire", adRequire);
+//		return "adminRequire";
 		return "adminRequire";
 	}
 	
 
 	//4. 전체 문의 게시글 변경된 데이터 값 보내기
 	@RequestMapping(value = "/adminInquiry_update", method = RequestMethod.POST)
-	public String adminInquiry_update(Model model, 
-			 String boardNo,String exposure, String board_active ,String inquiry_answer) {
+	public String adminInquiry_update(Model model,
+			 String boardNo,String exposure, String board_active ,String inquiry_answer, String currpage) {
 		
 		logger.info("boardNo_게시글번호 : {}", boardNo);
 		logger.info("exposure_노출여부 : {}", exposure);
@@ -169,16 +185,15 @@ public class AdminController {
 			
 			service.adminInquiry_update(update_boardNo, update_exposure, update_board_active, update_inquiry_answer);
 
-			//service.adminInquiry_update(m);//세진님
 		}
 		
-		return "redirect:/adminInquiry"; 
+		return "redirect:/adminInquiry?currpage="+currpage; 
 	}
 	
 	//5. 전체 요청 게시글 변경된 데이터 값 보내기
 	@RequestMapping(value = "/adRequire_update", method = RequestMethod.POST)
 	public String adRequire_update(Model model, 
-			 String boardNo,String exposure, String board_active ,String inquiry_answer) {
+			 String boardNo,String exposure, String board_active ,String inquiry_answer, String currpage) {
 		
 		logger.info("boardNo_게시글번호 : {}", boardNo);
 		logger.info("exposure_노출여부 : {}", exposure);
@@ -213,7 +228,7 @@ public class AdminController {
 
 		}
 		
-		return "redirect:/adminRequire"; 
+		return "redirect:/adminRequire?currpage="+currpage; 
 	}
    
    
@@ -241,33 +256,51 @@ public class AdminController {
    
    //5. 전체 공구 게시글
    @RequestMapping(value = "/admingroupbuylist", method = RequestMethod.GET)
-   public String admingroupbuylist(Model model) {
-      logger.info("전체 공구 게시글 리스트 불러오기");
+   public String admingroupbuylist(Model model, @RequestParam String currpage) {
+	    logger.info("전체 공구 게시글 리스트 불러오기");
+
+		int currPage = Integer.parseInt(currpage);	//호출을 요청할 페이지
+		int pagePerCnt = 10; //한 페이지당 몇개씩? 10개씩
+		
+		//1.총 패이지 갯수인 range가 필요함
+		int range = service.adgrp_rangecall(currPage,pagePerCnt);
+		//2.리스트가 필요함(10개밖에 안들어있음)
+		ArrayList<HashMap<String, String>> listCall = service.adgrp_listCall(currPage,pagePerCnt);
+		model.addAttribute("pages",range);
+		model.addAttribute("adgroupbuylist",listCall);
+		model.addAttribute("nowpage",currpage);		
       
-      ArrayList<HashMap<String, String>> adgroupbuylist = service.adgroupbuylist();
-      logger.info("가져온 리수트 수 : {}", adgroupbuylist.size());
-      model.addAttribute("adgroupbuylist", adgroupbuylist);
+      
+      
+//      ArrayList<HashMap<String, String>> adgroupbuylist = service.adgroupbuylist();
+//      logger.info("가져온 리수트 수 : {}", adgroupbuylist.size());
+//      model.addAttribute("adgroupbuylist", adgroupbuylist);
       return "admingroupbuylist";
    }
 
    //6. 전체 공구 게시글 변경된 데이터 값 보내기
    @RequestMapping(value = "/adminGroupbuy_update", method = RequestMethod.POST)
    public String adminGroupbuy_update(Model model, 
-         @RequestParam  HashMap<String, String> params) {
+		   @RequestParam  HashMap<String, String> params) {
       logger.info("수정요청 요청 : {}", params);
 
       for(String strKey : params.keySet()) {
-    	  String strValue = params.get(strKey);
-    	  String exp = strValue.substring(0,1);
-    	  String act = strValue.substring(1,2);
-    	  String sta = strValue.substring(2);
-    	  service.adminGroupbuy_update(strKey,exp,act,sta);
-    	  
-    	  logger.info(strValue+strKey+'/'+exp+'/'+act+'/'+sta);
+    	  if(strKey.equals("currpage")) {
+    		  logger.info("currpage 넘어가");
+    	  } else {
+    		  
+    		  String strValue = params.get(strKey);
+    		  String exp = strValue.substring(0,1);
+    		  String act = strValue.substring(1,2);
+    		  String sta = strValue.substring(2);
+    		  service.adminGroupbuy_update(strKey,exp,act,sta);
+    		  
+    		  logger.info(strValue+strKey+'/'+exp+'/'+act+'/'+sta);
+    	  }
       }
       
 
-      return "redirect:/admingroupbuylist";//
+      return "redirect:/admingroupbuylist?currpage="+params.get("currpage");//
    }   
    
    //7.공구취소

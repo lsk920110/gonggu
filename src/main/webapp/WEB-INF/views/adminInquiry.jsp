@@ -34,10 +34,10 @@
 	<iframe src="header"></iframe>
 	<div id = "adminMenuBar">
         <img class="adminMenu" src="resources/img/전체주문내역.png"  alt="전체주문내역" loc="adminOrderList?currpage=1">
-        <img style="background-color: beige" class="adminMenu" src="resources/img/전체문의게시글.png" alt="전체문의게시글" loc="adminInquiry">
-        <img class="adminMenu" src="resources/img/전체요청글.png" alt="전체요청글" loc="adminRequire">
-        <img class="adminMenu" src="resources/img/전체공구게시글.png" alt="전체공구게시글" loc="admingroupbuylist">
-        <img class="adminMenu" src="resources/img/전체회원정보.png" alt="전체회원정보" loc="adminuserlist">
+        <img style="background-color: beige" class="adminMenu" src="resources/img/전체문의게시글.png" alt="전체문의게시글" loc="adminInquiry?currpage=1">
+        <img class="adminMenu" src="resources/img/전체요청글.png" alt="전체요청글" loc="adminRequire?currpage=1">
+        <img class="adminMenu" src="resources/img/전체공구게시글.png" alt="전체공구게시글" loc="admingroupbuylist?currpage=1">
+        <img class="adminMenu" src="resources/img/전체회원정보.png" alt="전체회원정보" loc="adminuserlist?currpage=1">
         <img class="adminMenu" src="resources/img/상품등록.png" alt="상품등록" loc="groupbuywriteForm2">
     </div>
     <!-- 
@@ -135,6 +135,8 @@
 			</table>	
 			<br/>
 			<input type="submit" value="수정"/>
+			<input type="hidden" name="currpage" value="${nowpage}"/>
+	
 	</form>
 	
 	<br/>
@@ -167,11 +169,13 @@ function selectUpdate(no)
 }
 */
 
-	var totalpage = "${pages}";
-	console.log("totalpage : "+totalpage);
 	/* 페이징에 관한 곳 */
+	var startpage = "${nowpage}";
+	startpage = startpage*1;
+	var totalpage = "${pages}";
+	totalpage = (totalpage*1)-1;
 	$('#pagination').twbsPagination({
-		startPage : "${nowpage}",
+		startPage : startpage,
 		totalPages : totalpage,
 		visiblePages : 5,
 		onPageClick:function(evt,page){

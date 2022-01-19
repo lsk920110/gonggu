@@ -4,7 +4,11 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
-	<script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
+	<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>  
+	<script src="resources/js/jquery.twbsPagination.js"></script>
+	<!-- <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script> -->
 	<link rel="stylesheet" href="resources/common.css">
 	<style>
 		.adminMenu{
@@ -102,9 +106,23 @@
 						</th>	
 					</tr>			
 			</c:forEach>
+						<!-- 페이징 영역 -->
+			<tr>
+				<td colspan="9">
+					<div class="container">
+						<nav aria-label="Page navigation" style="text-align:center">
+							<ul class="pagination" id="pagination"></ul>
+						</nav>
+					</div>
+				</td>
+			</tr>
+			<!-- 페이징 영역 -->		
+			
+			
 		</table>	
 		<br/>
 		<input type="submit" value="수정"/>
+		<input type="hidden" name="currpage" value="${nowpage}"/>
 	
 	</form>
 
@@ -119,5 +137,28 @@
 	$(".adminMenu").click(function(){
 	    location.href=$(this).attr("loc");
 	});
+	
+	
+	/* 페이징에 관한 곳 */
+	var startpage = "${nowpage}";
+	startpage = startpage*1;
+	var totalpage = "${pages}";
+	totalpage = (totalpage*1)-1;
+	$('#pagination').twbsPagination({
+		startPage : startpage,
+		totalPages : totalpage,
+		visiblePages : 5,
+		onPageClick:function(evt,page){
+			console.log(evt);
+			console.log(page);
+			if("${nowpage}" != page) {
+				location.href="./adminRequire?currpage="+page;			
+			}
+		}
+
+	});
+	
+	
+	
 </script>
 </html>

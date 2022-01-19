@@ -100,7 +100,7 @@ public class GroupBuyBoardController {
 			}
 			
 			int currPage = Integer.parseInt(currpage);	//호출을 요청할 페이지
-			int pagePerCnt = 10; //한 페이지당 몇개씩? 10개씩
+			int pagePerCnt = 8; //한 페이지당 몇개씩? 10개씩
 			
 			
 			//카테고리 조회
@@ -108,17 +108,28 @@ public class GroupBuyBoardController {
 				int range = service.groupBuyRangeCall1(currPage,pagePerCnt);
 				
 				ArrayList<HashMap<String, String>> listCall = service.groupBuyListCall1(currPage,pagePerCnt);
-				model.addAttribute("groupBuyList", listCall);			
+				model.addAttribute("groupBuyList", listCall);
+				model.addAttribute("pages",range);
+				model.addAttribute("nowpage",currpage);
 
 				//ArrayList<HashMap<String, String>> groupBuyList = service.groupBuyList();
 				//model.addAttribute("groupBuyList", groupBuyList);			
 				
 			} else {
+				int range = service.groupBuyRangeCall2(currPage,pagePerCnt,category);
+
+				
+				ArrayList<HashMap<String, String>> listCall = service.groupBuyListCall2(currPage,pagePerCnt,category);
+				model.addAttribute("groupBuyList", listCall);
+				model.addAttribute("pages",range);
+				model.addAttribute("nowpage",currpage);				
+				
+				
 				//int range = service.groupBuyListCall2(currPage,pagePerCnt);
 				//ArrayList<HashMap<String, String>> groupBuyList2 = service.groupBuyList2(category);
 				//model.addAttribute("groupBuyList", groupBuyList2);								
 			}
-			
+			model.addAttribute("category",category);
 			return "groupBuyList"; 
 			
 		}

@@ -191,7 +191,7 @@
 
             <div id="main_wrap_category">
                 <span id="admin_category1" class="admin_category" loc="RequestBoardlist">요청게시판</span>
-                <span id="admin_category2" class="admin_category" loc="groupBuyList?category=all">공구게시판</span>
+                <span id="admin_category2" class="admin_category" loc="groupBuyList?category=all&currpage=1">공구게시판</span>
                 <span id="admin_category3" class="admin_category" loc="inquireBoardList">문의게시판</span>
                 <c:if test="${adminYN == 'N'}">            
 	                <span id="admin_category4" class="admin_category" loc="mypage">마이페이지</span>

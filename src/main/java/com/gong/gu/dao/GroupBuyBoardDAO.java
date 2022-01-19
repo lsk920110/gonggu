@@ -33,5 +33,9 @@ public interface GroupBuyBoardDAO {
 
 	ArrayList<HashMap<String, String>> groupBuyListCall1(int pagePerCnt, int offset);
 
+	int groupBuyRangeCall2(String category);
+
+	ArrayList<HashMap<String, String>> groupBuyListCall2(int pagePerCnt, int offset, String category);
+
 
 }

@@ -92,17 +92,39 @@
 	
 	
 	<select id="groupBuyRangeCall1" resultType="int">
-	select count (board_no) from board where board_name = '공구게시판'
+	<!-- select count (board_no) from board where board_name = '공구게시판' -->
+	SELECT count(board_no) FROM board INNER JOIN photo USING (board_no) WHERE photo_thum = 'Y' AND board_exposure ='Y'
+	
+	
 	</select>
 	<select id="groupBuyListCall1" resultType="hashmap">
-		SELECT b.board_no, b.board_title, p.photo_newname, ga.groupbuy_state, ga.groupbuy_target, ga.groupbuy_unitprice, sum(oi.order_quantity) as sum
+		SELECT b.board_no, b.board_title, p.photo_newname, ga.groupbuy_state, ga.groupbuy_target, ga.groupbuy_unitprice , sum(oi.order_quantity )
 		FROM board b
 		LEFT JOIN groupbuy_addit ga USING (board_no)
 		LEFT JOIN photo p USING (board_no)
 		left join order_info oi USING (board_no)
-		where p.photo_thum = 'Y' and board_exposure = 'Y' and (oi.order_state = '신청완료' or oi.order_state is null)
-		group by board_no 
+		where p.photo_thum = 'Y' and board_exposure = 'Y'
+		group by board_no
 		ORDER BY b.board_no DESC LIMIT #{param1} offset #{param2}
 	</select>
+
+	<select id="groupBuyRangeCall2" resultType="int">
+	<!-- select count (board_no) from board where board_name = '공구게시판' -->
+	SELECT count(board_no) FROM board INNER JOIN photo USING (board_no) INNER JOIN groupbuy_addit ga USING (board_no)
+	WHERE photo_thum = 'Y' AND board_exposure ='Y' AND product_category_name = #{param1}
+	
+	
+	</select>
+	<select id="groupBuyListCall2" resultType="hashmap">
+		SELECT b.board_no, b.board_title, p.photo_newname, ga.groupbuy_state, ga.groupbuy_target, ga.groupbuy_unitprice , sum(oi.order_quantity )
+		FROM board b
+		LEFT JOIN groupbuy_addit ga USING (board_no)
+		LEFT JOIN photo p USING (board_no)
+		left join order_info oi USING (board_no)
+		where p.photo_thum = 'Y' and board_exposure = 'Y' AND ga.product_category_name = #{param3} group by board_no
+		ORDER BY b.board_no DESC LIMIT #{param1} offset #{param2}
+	</select>
+
+
 	
 </mapper>

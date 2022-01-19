@@ -90,6 +90,7 @@
 			<!-- 페이징 영역 -->			
 			
 		</table>	
+		<input type="hidden" name="currpage" value="${nowpage}"/>
 	
 	<br/>
 	<br/>
@@ -105,9 +106,11 @@
 	
 	
 	
-	var totalpage = "${pages}";
-	console.log("totalpage : "+totalpage);
 	/* 페이징에 관한 곳 */
+	var startpage = "${nowpage}";
+	startpage = startpage*1;
+	var totalpage = "${pages}";
+	totalpage = (totalpage*1)-1;
 	$('#pagination').twbsPagination({
 		startPage : "${nowpage}",
 		totalPages : totalpage,

@@ -216,7 +216,7 @@ public class GroupBuyBoardService {
 	
 
 	public ArrayList<HashMap<String, String>> groupBuyListCall1(int currPage, int pagePerCnt) {
-		int offset = (currPage -1)* pagePerCnt - 1;//DB에 요청할 인덱스 번호임 , 1:0-9, 2:10-19 이런식으로해야함
+		int offset = (currPage -1)* pagePerCnt - 1;//DB에 요청할 인덱스 번호임 , 1:0-7, 2:8-15 이런식으로해야함
 		//1페이지면 limit 10에, offset 0부터 조회
 		//2페이지면 limit 10에, offset 10부터 조회
 		//3페이지면 limit 10에, offset 20부터 조회
@@ -226,6 +226,34 @@ public class GroupBuyBoardService {
 		
 		ArrayList<HashMap<String, String>> listCall = dao.groupBuyListCall1(pagePerCnt,offset);
 		
+		
+		return listCall;
+	}
+
+
+
+	public int groupBuyRangeCall2(int currPage, int pagePerCnt, String category) {
+		int totalCount = dao.groupBuyRangeCall2(category); // 일단 테이블 글이 몇개인지? 
+		int range = totalCount%pagePerCnt > 0 ? (totalCount/pagePerCnt) + 1 : (totalCount/pagePerCnt);//만들 수 있는 페이지의 갯수
+		logger.info("range : {}",range);
+		return range;
+	}
+
+
+
+	public ArrayList<HashMap<String, String>> groupBuyListCall2(int currPage, int pagePerCnt, String category) {
+		
+		logger.info("{}",category);
+		int offset = (currPage -1)* pagePerCnt - 1;//DB에 요청할 인덱스 번호임 , 1:0-7, 2:8-15 이런식으로해야함
+		//1페이지면 limit 10에, offset 0부터 조회
+		//2페이지면 limit 10에, offset 10부터 조회
+		//3페이지면 limit 10에, offset 20부터 조회
+		if(offset < 0) {
+			offset = 0;
+		}
+		logger.info("offset : {}",offset);
+		ArrayList<HashMap<String, String>> listCall = dao.groupBuyListCall2(pagePerCnt,offset,category);
+		logger.info("listCall : {}",listCall);
 		
 		return listCall;
 	}
