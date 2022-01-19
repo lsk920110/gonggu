@@ -51,4 +51,21 @@ public interface MypageDAO {
 
 	ArrayList<HashMap<String, String>> listCall(int pagePerCnt, int offset, String loginId);
 
+	
+	int groupBuyRangeCall1(String loginId);
+
+	ArrayList<HashMap<String, String>> groupBuyListCall1(int pagePerCnt, int offset, String loginId);
+
+	int groupBuyRangeCall2();
+
+	ArrayList<HashMap<String, String>> groupBuyListCall2(int pagePerCnt, int offset);
+
+	ArrayList<String> wishlist(String loginId);
+
+	int wishList_Insert(String loginId, String board_no);
+
+	int wishList_delete(String board_no, String loginId);
+
+	String wishlist2(String board_no, String loginId);
+	
 }

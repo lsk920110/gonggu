@@ -267,4 +267,93 @@ public class MypageService {
 	}
 
 	
+
+
+	public int groupBuyRangeCall1(int currPage, int pagePerCnt, String loginId) {
+		int totalCount = dao.groupBuyRangeCall1(loginId); // 일단 테이블 글이 몇개인지? 
+		int range = totalCount%pagePerCnt > 0 ? (totalCount/pagePerCnt) + 1 : (totalCount/pagePerCnt);//만들 수 있는 페이지의 갯수
+
+		return range;
+	}
+	
+	
+	
+
+	public ArrayList<HashMap<String, String>> groupBuyListCall1(int currPage, int pagePerCnt, String loginId) {
+		int offset = (currPage -1)* pagePerCnt - 1;//DB에 요청할 인덱스 번호임 , 1:0-7, 2:8-15 이런식으로해야함
+		//1페이지면 limit 10에, offset 0부터 조회
+		//2페이지면 limit 10에, offset 10부터 조회
+		//3페이지면 limit 10에, offset 20부터 조회
+		if(offset < 0) {
+			offset = 0;
+		}
+		
+		ArrayList<HashMap<String, String>> listCall = dao.groupBuyListCall1(pagePerCnt,offset,loginId);
+		
+		
+		return listCall;
+	}
+
+
+
+	public int groupBuyRangeCall2(int currPage, int pagePerCnt) {
+		int totalCount = dao.groupBuyRangeCall2(); // 일단 테이블 글이 몇개인지? 
+		int range = totalCount%pagePerCnt > 0 ? (totalCount/pagePerCnt) + 1 : (totalCount/pagePerCnt);//만들 수 있는 페이지의 갯수
+		logger.info("range : {}",range);
+		return range;
+	}
+
+
+
+	public ArrayList<HashMap<String, String>> groupBuyListCall2(int currPage, int pagePerCnt) {
+		
+		int offset = (currPage -1)* pagePerCnt - 1;//DB에 요청할 인덱스 번호임 , 1:0-7, 2:8-15 이런식으로해야함
+		//1페이지면 limit 10에, offset 0부터 조회
+		//2페이지면 limit 10에, offset 10부터 조회
+		//3페이지면 limit 10에, offset 20부터 조회
+		if(offset < 0) {
+			offset = 0;
+		}
+		logger.info("offset : {}",offset);
+		ArrayList<HashMap<String, String>> listCall = dao.groupBuyListCall2(pagePerCnt,offset);
+		logger.info("listCall : {}",listCall);
+		
+		return listCall;
+	}
+
+
+	//찜 목록 확인
+	public ArrayList<String> wishlist(String loginId) {
+		
+		return dao.wishlist(loginId);
+	}
+
+
+
+	public int wishList_Insert(String loginId, String board_no) {
+		
+		int row = dao.wishList_Insert(loginId,board_no);
+		logger.info(" 입력된 건수 : {}",row);
+		return row;
+	}
+
+
+
+	public int wishList_delete(String board_no, String loginId) {
+		
+		return dao.wishList_delete(board_no,loginId);
+		
+	}
+
+
+
+	public String wishlist2(String loginId, String board_no) {
+		String wishlist2 = dao.wishlist2(board_no,loginId);
+		return wishlist2;
+	}
+
+	
+	
+	
+	
 }

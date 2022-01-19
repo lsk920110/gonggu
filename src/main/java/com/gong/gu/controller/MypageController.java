@@ -81,8 +81,43 @@ public class MypageController {
 	
 	
 	@RequestMapping(value = "/myWish", method = RequestMethod.GET)
-	public String myWish(Model model,  HttpSession session) { 
-		logger.info("myWish 요청");
+	public String myWish(Model model, HttpSession session, @RequestParam String currpage) { 
+		logger.info("groupBuyList 요청");
+
+		
+		//String loginId = (String)session.getAttribute("loginId");
+		
+		String loginId = (String) session.getAttribute("loginId");
+		logger.info("로그인 아이디 : "+loginId);
+		model.addAttribute("loginId", loginId);
+		String list = "";
+		
+		//찜 목록 확인 - loginId에 해당하는 Board_no 반환
+		if(loginId != null) {
+			ArrayList<String> wishlist = service.wishlist(loginId);
+			logger.info("찜목록 : {}",wishlist);
+			for (int i = 0; i < wishlist.size(); i++) {
+				list += wishlist.get(i);
+				list += "/";
+			}
+			
+			
+			model.addAttribute("wishlist", list);
+		}
+		
+		int currPage = Integer.parseInt(currpage);	//호출을 요청할 페이지
+		int pagePerCnt = 8; //한 페이지당 몇개씩? 10개씩
+		
+		
+
+			int range = service.groupBuyRangeCall1(currPage,pagePerCnt,loginId);
+			
+			ArrayList<HashMap<String, String>> listCall = service.groupBuyListCall1(currPage,pagePerCnt,loginId);
+			model.addAttribute("groupBuyList", listCall);
+			model.addAttribute("pages",range);
+			model.addAttribute("nowpage",currpage);
+
+
 
 		return "myWish"; 	
 	}

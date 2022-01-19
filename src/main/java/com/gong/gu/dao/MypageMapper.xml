@@ -123,4 +123,70 @@
 		ORDER BY oi.order_no DESC LIMIT #{param1} offset #{param2}
 	</select>
 
+
+
+
+	<!-- 찜여부확인 -->
+	<select id="wishlist" resultType="String" >
+		SELECT board_no FROM wishlist WHERE user_id = #{param1}
+	</select>
+	
+	
+	<!-- 찜 추가/삭제 -->
+	
+	<!-- 찜 하트 클릭 시 찜여부확인 -->
+	<select id="wishlist2" resultType="String" >
+		SELECT board_no FROM wishlist WHERE board_no = #{param1} AND user_id = #{param2}
+	</select>
+	
+	<insert id="wishList_Insert" >
+		INSERT INTO wishlist(user_id,board_no) VALUES (#{param1}, #{param2})
+	</insert>
+	
+	<delete id="wishList_delete">
+		DELETE FROM wishlist WHERE board_no = #{param1} AND user_id = #{param2}
+	</delete>
+	
+	
+	
+	<select id="groupBuyRangeCall1" resultType="int">
+	<!-- select count (board_no) from board where board_name = '공구게시판' -->
+	SELECT count(board_no) FROM board INNER JOIN photo USING (board_no) WHERE photo_thum = 'Y' AND board_exposure ='Y'
+	
+	
+	</select>
+	<select id="groupBuyListCall1" resultType="hashmap">
+		SELECT b.board_no, b.board_title, p.photo_newname, ga.groupbuy_state, ga.groupbuy_target, ga.groupbuy_unitprice , sum(oi.order_quantity )
+		FROM board b
+		LEFT JOIN groupbuy_addit ga USING (board_no)
+		LEFT JOIN photo p USING (board_no)
+		left join order_info oi USING (board_no)
+		where p.photo_thum = 'Y' and board_exposure = 'Y'
+		group by board_no
+		ORDER BY b.board_no DESC LIMIT #{param1} offset #{param2}
+	</select>
+
+	<select id="groupBuyRangeCall2" resultType="int">
+	<!-- select count (board_no) from board where board_name = '공구게시판' -->
+	SELECT count(board_no) FROM board INNER JOIN photo USING (board_no) INNER JOIN groupbuy_addit ga USING (board_no)
+	WHERE photo_thum = 'Y' AND board_exposure ='Y' WHERE user_id = #{param1}
+	
+	
+	</select>
+	<select id="groupBuyListCall2" resultType="hashmap">
+		SELECT b.board_no, b.board_title, p.photo_newname, ga.groupbuy_state, ga.groupbuy_target, ga.groupbuy_unitprice , sum(oi.order_quantity )
+		FROM board b
+		LEFT JOIN groupbuy_addit ga USING (board_no)
+		LEFT JOIN photo p USING (board_no)
+		left join order_info oi USING (board_no)
+		where p.photo_thum = 'Y' and board_exposure = 'Y' group by board_no and user_id = #{param3}
+		ORDER BY b.board_no DESC LIMIT #{param1} offset #{param2}
+	</select>
+
+
+
+
+
+
+
 </mapper>
