@@ -104,9 +104,9 @@ public class InquireBoardController {
 			//2.리스트가 필요함(10개밖에 안들어있음)
 			ArrayList<HashMap<String, String>> listCall = service.list_listCall(currPage,pagePerCnt);
 			model.addAttribute("pages",range);
-			model.addAttribute("adOrderList",listCall);
+			model.addAttribute("InquiryList",listCall);
 			model.addAttribute("nowpage",currpage);
-			page = "adminOrderList";			
+			page = "inquireBoardList";			
 
 		return page;
 		

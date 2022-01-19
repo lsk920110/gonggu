@@ -59,7 +59,7 @@
 
 	<tr>
 		<th colspan="2">
-			<input type="button" onclick="location.href='./inquireBoardList'" value="리스트"/>
+			<input type="button" onclick="location.href='./inquireBoardList?currpage=1'" value="리스트"/>
 			<input type="button" class="identify" onclick="location.href='./inqupdateForm?board_no=${info.board_no}'" value="수정"/>
 			<input type="button" class="identify" onclick="exposure()" value="삭제"/>			
 		</th>

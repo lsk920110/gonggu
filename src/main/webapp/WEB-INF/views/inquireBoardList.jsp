@@ -54,6 +54,15 @@
    </tr>
    </c:forEach>
 </table>
+	<!-- 페이징 영역 -->
+
+			<div class="container">
+				<nav aria-label="Page navigation" style="text-align:center">
+					<ul class="pagination" id="pagination"></ul>
+				</nav>
+			</div>
+
+	<!-- 페이징 영역 -->	
   	<iframe src="footer"></iframe>
   	
 
@@ -61,9 +70,9 @@
 </body>
 <script>
 var session = "${sessionScope.loginId}";
-console.log(a);
+console.log(session);
 
-if(a == ''){
+if(session == ''){
 	console.log('비로그인');
 }
 
@@ -81,7 +90,7 @@ if(a == ''){
   	var startpage = "${nowpage}";
     startpage = startpage*1;
     var totalpage = "${pages}";
-    totalpage = (totalpage*1);
+    totalpage = (totalpage*1) -1 ;
     console.log(startpage);
     console.log(totalpage);
        /* 페이징에 관한 곳 */
@@ -93,7 +102,7 @@ if(a == ''){
              console.log(evt);
              console.log(page);
              if("${nowpage}" != page) {
-                location.href="./groupBuyList?category="+"${category}"+"&currpage="+page;         
+                location.href="./inquireBoardList"+"?currpage="+page;         
              }
           }
        
