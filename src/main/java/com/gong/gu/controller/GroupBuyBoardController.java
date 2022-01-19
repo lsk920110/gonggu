@@ -75,7 +75,7 @@ public class GroupBuyBoardController {
 	 
 	 //공구 리스트 불러오기	
 	 @RequestMapping(value = "/groupBuyList", method = RequestMethod.GET)
-		public String groupBuyList(Model model, HttpSession session, @RequestParam String category) { 
+		public String groupBuyList(Model model, HttpSession session, @RequestParam String category, @RequestParam String currpage) { 
 			logger.info("groupBuyList 요청");
 			logger.info("{}",category);
 			
@@ -87,24 +87,36 @@ public class GroupBuyBoardController {
 			String list = "";
 			
 			//찜 목록 확인 - loginId에 해당하는 Board_no 반환
-//			if(loginId != null) {
-//				ArrayList<String> wishlist = service.wishlist(loginId);
-//				logger.info("찜목록 : {}",wishlist);
-//				for (int i = 0; i < wishlist.size(); i++) {
-//					list += wishlist.get(i);
-//					list += "/";
-//				}
-//				
-//				
-//				model.addAttribute("wishlist", list);
-//			}
-//			
+			if(loginId != null) {
+				ArrayList<String> wishlist = service.wishlist(loginId);
+				logger.info("찜목록 : {}",wishlist);
+				for (int i = 0; i < wishlist.size(); i++) {
+					list += wishlist.get(i);
+					list += "/";
+				}
+				
+				
+				model.addAttribute("wishlist", list);
+			}
+			
+			int currPage = Integer.parseInt(currpage);	//호출을 요청할 페이지
+			int pagePerCnt = 10; //한 페이지당 몇개씩? 10개씩
+			
+			
+			//카테고리 조회
 			if(category.equals("all")) {
-				ArrayList<HashMap<String, String>> groupBuyList = service.groupBuyList();
-				model.addAttribute("groupBuyList", groupBuyList);				
+				int range = service.groupBuyRangeCall1(currPage,pagePerCnt);
+				
+				ArrayList<HashMap<String, String>> listCall = service.groupBuyListCall1(currPage,pagePerCnt);
+				model.addAttribute("groupBuyList", listCall);			
+
+				//ArrayList<HashMap<String, String>> groupBuyList = service.groupBuyList();
+				//model.addAttribute("groupBuyList", groupBuyList);			
+				
 			} else {
-				ArrayList<HashMap<String, String>> groupBuyList2 = service.groupBuyList2(category);
-				model.addAttribute("groupBuyList", groupBuyList2);								
+				//int range = service.groupBuyListCall2(currPage,pagePerCnt);
+				//ArrayList<HashMap<String, String>> groupBuyList2 = service.groupBuyList2(category);
+				//model.addAttribute("groupBuyList", groupBuyList2);								
 			}
 			
 			return "groupBuyList"; 
