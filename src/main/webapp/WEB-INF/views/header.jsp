@@ -197,10 +197,10 @@
 	                <span id="admin_category4" class="admin_category" loc="mypage">마이페이지</span>
                 </c:if>
                 <c:if test="${adminYN == 'Y'}">            
-	                <span id="admin_category4" class="admin_category" loc="adminOrderList">관리자페이지</span>
+	                <span id="admin_category4" class="admin_category" loc="adminOrderList?currpage=1">관리자페이지</span>
                 </c:if>
                 <c:if test="${adminYN == 'U'}">            
-	                <span id="admin_category4" class="admin_category" loc="mypage">마이페이지</span>
+	                <span id="admin_category4" class="admin_category" loc="myorderList?currpage=1">마이페이지</span>
                 </c:if>                
             </div>
 

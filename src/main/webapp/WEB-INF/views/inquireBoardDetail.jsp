@@ -29,7 +29,7 @@
 	</tr>
 	<tr>
 		<th>작성자</th>
-		<td>${info.user_id}</td>
+		<td id="user_id">${info.user_id}</td>
 	</tr>
 	<tr>
 		<th>내용</th>
@@ -56,8 +56,8 @@
 	<tr>
 		<th colspan="2">
 			<input type="button" onclick="location.href='./inquireBoardList'" value="리스트"/>
-			<input type="button" onclick="location.href='./inqupdateForm?board_no=${info.board_no}'" value="수정"/>
-			<input type="button" onclick="exposure()" value="삭제"/>			
+			<input type="button" class="identify" onclick="location.href='./inqupdateForm?board_no=${info.board_no}'" value="수정"/>
+			<input type="button" class="identify" onclick="exposure()" value="삭제"/>			
 		</th>
 	</tr>
 </table>
@@ -65,6 +65,18 @@
 
 </body>
 <script>
+console.log("${sessionScope.loginId}");
+console.log($('#user_id').html());
+
+if("${sessionScope.loginId}" != $('#user_id').html()) {
+	$('.identify[type="button"]').attr('type','hidden');
+
+};
+
+
+
+
+
 function exposure(){
 	var yn = confirm("정말 이 글을 삭제 하시겠습니까?");
 	

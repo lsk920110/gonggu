@@ -29,13 +29,14 @@ public class InquireBoardService {
 
 	
 	//2.문의글쓰기
-	public String inqwrite(MultipartFile[] photos, HashMap<String, String> params) {
+	public String inqwrite(HashMap<String, String> params) {
 		
 		String page = "redirect:/inquireBoardList";
 		
 		BoardDTO dto = new BoardDTO();
 		dto.setBoard_title(params.get("board_title"));
 		dto.setBoard_content(params.get("board_content"));
+		dto.setUser_id(params.get("user_id"));
 		dao.inqwrite(dto);
 		
 		int board_no = dto.getBoard_no();
@@ -44,7 +45,7 @@ public class InquireBoardService {
 		if (board_no>0) {
 			page = "redirect:/inquireBoardDetail?board_no="+board_no;
 			inqwrite2(board_no,params);
-			saveFile(board_no,photos);
+			//saveFile(board_no,photos);
 		}
 
 		return page;
@@ -100,14 +101,16 @@ public class InquireBoardService {
 
 
 	// 문의글 수정
-	public String inqupdate(MultipartFile[] photos, HashMap<String, String> params) {
+	public String inqupdate(HashMap<String, String> params) {
 		
 		int board_no = Integer.parseInt(params.get("board_no"));
 		String page = "redirect:/inquireBoardDetail?board_no="+board_no;
 		
 		if (dao.inqupdate(params)>0) {
 			page = "redirect:/inquireBoardDetail?board_no="+board_no;
-			saveFile(board_no, photos);
+			dao.inqupdate2(params);
+			
+			//saveFile(board_no, photos);
 		}
 		return page;
 	}

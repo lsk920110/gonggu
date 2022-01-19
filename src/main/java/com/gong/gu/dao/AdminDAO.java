@@ -46,6 +46,16 @@ public interface AdminDAO {
 
 	ArrayList<HashMap<String, String>> adminuserlist();
 
+	//페이징 : 전체주문
+	int adorder_allCount();
+
+	ArrayList<HashMap<String, String>> adorder_listCall(int pagePerCnt, int offset);
+
+	//페이징 : 전체문의
+	int adInq_allCount();
+
+	ArrayList<HashMap<String, String>> adInq_listCall(int pagePerCnt, int offset);
+
 
 
 }

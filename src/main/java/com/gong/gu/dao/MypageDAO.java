@@ -47,4 +47,8 @@ public interface MypageDAO {
 
 	ArrayList<HashMap<String, String>> photolist(String board_no);
 
+	int allCount(String loginId);
+
+	ArrayList<HashMap<String, String>> listCall(int pagePerCnt, int offset, String loginId);
+
 }

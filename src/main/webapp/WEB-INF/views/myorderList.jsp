@@ -4,7 +4,11 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
-	<script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
+	<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>  
+	<script src="resources/js/jquery.twbsPagination.js"></script>
+	<!-- <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script> -->
 	<style>
 	table,th,td{
 		border : 1px solid black;
@@ -72,18 +76,53 @@
 			<th>${orl.order_etc}</th>		
 		</tr>			
 		</c:forEach>
-
+		
+		<!-- 페이징 영역 -->
+		<tr>
+			<td colspan="7">
+				<div class="container">
+					<nav aria-label="Page navigation" style="text-align:center">
+						<ul class="pagination" id="pagination"></ul>
+					</nav>
+				</div>
+			</td>
+		</tr>
+		<!-- 페이징 영역 -->
 	</table>
+	<div>
+
+	
+	</div>
 
    <iframe src="footer"></iframe>
 	
 </body>
 <script>
-	console.log("${orderList}");
+	//console.log("${orderList}");
 	
 	$(".myMenu").click(function(){
 	    location.href=$(this).attr("loc");
 	});
 
+	
+	var totalpage = "${pages}";
+	console.log("totalpage : "+totalpage);
+	/* 페이징에 관한 곳 */
+	$('#pagination').twbsPagination({
+		startPage : "${nowpage}",
+		totalPages : totalpage,
+		visiblePages : 5,
+		onPageClick:function(evt,page){
+			console.log(evt);
+			console.log(page);
+			if("${nowpage}" != page) {
+				location.href="./myorderList?currpage="+page;			
+			}
+		}
+
+	});
+	
+	
+	
 </script>
 </html>

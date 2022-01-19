@@ -20,7 +20,8 @@
   	<iframe src="header"></iframe>
 
 	<h3>| 문의게시글 작성하기</h3>
-	<form action="inqwrite" method="post" enctype="multipart/form-data">
+	<form action="inqwrite" method="post">
+	<input type="hidden" name="user_id" value="${sessionScope.loginId}"/>
 		<table>    
 			<tr>
 				<th>문의 카테고리</th>
@@ -45,10 +46,10 @@
 				<th>내용</th>
 				<td><textarea placeholder="내용을 입력하세요 " name="board_content"></textarea></td>
 			</tr>
-			<tr>
+<!-- 			<tr>
 				<th>파일등록</th>
 				<td><input type="file" name="photos" multiple="multiple"/></td>
-			</tr>
+			</tr> -->
 			<tr>
 				<th colspan="2">
 				<!-- 

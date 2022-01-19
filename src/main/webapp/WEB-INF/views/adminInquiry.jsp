@@ -4,7 +4,11 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
-	<script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
+	<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>  
+	<script src="resources/js/jquery.twbsPagination.js"></script>
+
 	<link rel="stylesheet" href="resources/common.css">
 	<style>
 		.adminMenu{
@@ -29,7 +33,7 @@
 <body>
 	<iframe src="header"></iframe>
 	<div id = "adminMenuBar">
-        <img class="adminMenu" src="resources/img/전체주문내역.png"  alt="전체주문내역" loc="adminOrderList">
+        <img class="adminMenu" src="resources/img/전체주문내역.png"  alt="전체주문내역" loc="adminOrderList?currpage=1">
         <img style="background-color: beige" class="adminMenu" src="resources/img/전체문의게시글.png" alt="전체문의게시글" loc="adminInquiry">
         <img class="adminMenu" src="resources/img/전체요청글.png" alt="전체요청글" loc="adminRequire">
         <img class="adminMenu" src="resources/img/전체공구게시글.png" alt="전체공구게시글" loc="admingroupbuylist">
@@ -117,7 +121,17 @@
 						 -->
 					</tr>			
 				</c:forEach>
-
+			<!-- 페이징 영역 -->
+			<tr>
+				<td colspan="9">
+					<div class="container">
+						<nav aria-label="Page navigation" style="text-align:center">
+							<ul class="pagination" id="pagination"></ul>
+						</nav>
+					</div>
+				</td>
+			</tr>
+			<!-- 페이징 영역 -->	
 			</table>	
 			<br/>
 			<input type="submit" value="수정"/>
@@ -153,7 +167,22 @@ function selectUpdate(no)
 }
 */
 
+	var totalpage = "${pages}";
+	console.log("totalpage : "+totalpage);
+	/* 페이징에 관한 곳 */
+	$('#pagination').twbsPagination({
+		startPage : "${nowpage}",
+		totalPages : totalpage,
+		visiblePages : 5,
+		onPageClick:function(evt,page){
+			console.log(evt);
+			console.log(page);
+			if("${nowpage}" != page) {
+				location.href="./adminInquiry?currpage="+page;			
+			}
+		}
 	
+	});	
 
 
 

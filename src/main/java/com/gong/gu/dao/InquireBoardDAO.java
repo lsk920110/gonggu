@@ -17,7 +17,7 @@ public interface InquireBoardDAO {
 
 	int inqupdate(HashMap<String, String> params); // 문의게시글 수정
 
-	int inqupdate2(int inquiry_category_name, String categoryname);
+
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 
@@ -34,6 +34,8 @@ public interface InquireBoardDAO {
 	ArrayList<PhotoDTO> photolist(String board_no);
 
 	HashMap<String, String> inqboardetail(String board_no);
+
+	void inqupdate2(HashMap<String, String> params);
 
 
 

@@ -48,12 +48,12 @@ public class InquireBoardController {
 	 
 	//2.문의글쓰기 요청
 	 @RequestMapping(value = "/inqwrite", method = RequestMethod.POST) 
-	 public String inqwrite(Model model, MultipartFile[] photos, 
+	 public String inqwrite(Model model,
 			 @RequestParam HashMap<String, String> params) { 
 		 logger.info("문의글쓰기 요청");
 		 logger.info("문의글쓰기 요청 : {}", params);
-		 logger.info("업로드 할 파일의 수 : {}",photos.length);
-		 return service.inqwrite(photos,params);
+
+		 return service.inqwrite(params);
 	}
 	 
 	
@@ -62,10 +62,10 @@ public class InquireBoardController {
 	 public String inqupdateForm(Model model, @RequestParam String board_no) { 
 		 logger.info("inqupdateForm : {}",board_no);
 		 HashMap<String, String> inqboardetail = service.inqupdateForm(board_no);
-		 ArrayList<PhotoDTO> photolist = service.photolist(board_no);
+		 //ArrayList<PhotoDTO> photolist = service.photolist(board_no);
 		 
 		 model.addAttribute("inqboardetail",inqboardetail);
-		 model.addAttribute("photolist",photolist);
+		 //model.addAttribute("photolist",photolist);
 		 
 		 return "inqupdateForm";
 	}
@@ -73,11 +73,9 @@ public class InquireBoardController {
 	 
 	// 문의글 수정 요청
 	 @RequestMapping(value = "/inqupdate", method = RequestMethod.POST) 
-	 public String inqupdate(Model model, MultipartFile[] photos, 
-			 @RequestParam HashMap<String, String> params) { 
+	 public String inqupdate(Model model, @RequestParam HashMap<String, String> params) { 
 		 logger.info("문의글 수정 요청 : {}", params);
-		 logger.info("업로드 할 파일 : {}",photos);
-		 return service.inqupdate(photos,params);
+		 return service.inqupdate(params);
 	}
 	 
 ////////////////////////////////////////////////////////////////////////////////////////////

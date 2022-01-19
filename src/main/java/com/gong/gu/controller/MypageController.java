@@ -37,7 +37,7 @@ public class MypageController {
 		logger.info("헬로우 JSP");
 		String page = "redirect:/loginMain";
 		if(session.getAttribute("loginId") != null) {
-			page = "redirect:/myorderList";
+			page = "redirect:/myorderList?currpage=1";
 		}
 	
 		return page; 
@@ -45,15 +45,36 @@ public class MypageController {
 	}
 	
 	@RequestMapping(value = "/myorderList", method = RequestMethod.GET)
-	public String myorderList(Model model, HttpSession session) { 
+	public String myorderList(Model model, HttpSession session, @RequestParam String currpage) { 
 		logger.info("myorderList 요청");
 		String loginId = (String)session.getAttribute("loginId");
 		String page = "/";
+		
+//		int currPage = 0;
+//		if(currpage == "0") {
+//			currPage = 1;
+//		}
+		
+		int currPage = Integer.parseInt(currpage);	//호출을 요청할 페이지
+		int pagePerCnt = 10; //한 페이지당 몇개씩? 10개씩
+		
 		if(loginId != null) {
-			ArrayList<HashMap<String, String>> orderList = service.orderlist(loginId);
-			model.addAttribute("orderList", orderList);	
-			page = "myorderList";
+			//1.총 패이지 갯수인 range가 필요함
+			int range = service.rangecall(currPage,pagePerCnt,loginId);
+			//2.리스트가 필요함(10개밖에 안들어있음)
+			ArrayList<HashMap<String, String>> listCall = service.listCall(currPage,pagePerCnt,loginId);
+			model.addAttribute("pages",range);
+			model.addAttribute("orderList",listCall);
+			model.addAttribute("nowpage",currpage);
+			page = "myorderList";			
 		}
+		
+		
+//		if(loginId != null) {
+//			ArrayList<HashMap<String, String>> orderList = service.orderlist(loginId);
+//			model.addAttribute("orderList", orderList);	
+//			page = "myorderList";
+//		}
 		return page; 
 		
 	}

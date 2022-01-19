@@ -23,11 +23,12 @@
 <body>
   	<iframe src="header"></iframe>
 	<h3>| 문의게시글 작성하기</h3>
-	<form action="inqwrite" method="post" enctype="multipart/form-data">
+	<form action="inqupdate" method="post">
+		<input type="hidden" name="board_no" value="${inqboardetail.board_no }"/>
 		<table>    
 			<tr>
 				<th>
-					<select name="Category">
+					<select name="inquiry_category_name">
                     <option value="" disabled selected>카테고리 선택</option>
                     <option value="배송문의">배송문의</option>
                     <option value="반품/교환/환불">반품/교환/환불</option>
@@ -38,14 +39,14 @@
              	</th>
 			
 				
-				<td><input type="text" placeholder="제목을 입력하세요" name="board_title" value="${dto.board_title}"/></td>
+				<td><input type="text" placeholder="제목을 입력하세요" name="board_title" value="${inqboardetail.board_title}"/></td>
 			</tr>
 
 			<tr>
 				<th></th>
-				<td><textarea placeholder="내용을 입력하세요 " name="board_content">${dto.board_content}"</textarea></td>
+				<td><textarea placeholder="내용을 입력하세요 " name="board_content">${inqboardetail.board_content}"</textarea></td>
 			</tr>
-			<tr>
+<%-- 			<tr>
 				<th></th>
 				<td><input type="file" name="photos" multiple="multiple"/>
 				<!-- 현재 업로드돈 사진 삭제 -->
@@ -54,7 +55,7 @@
 					</c:forEach>
 				</td>
 				
-			</tr>
+			</tr> --%>
 			<tr>
 				<th colspan="2">
 				<button>수정</button>
@@ -77,6 +78,9 @@ function photodel(){
 	
 }
 
+var category = "${inqboardetail.inquiry_category_name}";
+$('select').val(category);
+console.log(category);
 
 
 </script>

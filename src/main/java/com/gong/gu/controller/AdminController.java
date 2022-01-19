@@ -63,25 +63,62 @@ public class AdminController {
 
 	//1. 전체 주문리스트 요청하기
 	@RequestMapping(value = "/adminOrderList", method = RequestMethod.GET)
-	public String adminOrderList(Model model) {
+	public String adminOrderList(Model model, HttpSession session , @RequestParam String currpage) {
 		logger.info("전체주문내역 리스트 불러오기");
 		
-		ArrayList<HashMap<String, String>> adOrderList = service.adOrderList();
-		logger.info("가져온 리수트 수 : {}", adOrderList.size());
-		model.addAttribute("adOrderList", adOrderList);
-		return "adminOrderList";
+//		ArrayList<HashMap<String, String>> adOrderList = service.adOrderList();
+//		logger.info("가져온 리수트 수 : {}", adOrderList.size());
+//		model.addAttribute("adOrderList", adOrderList);
+		String loginId = (String)session.getAttribute("loginId");
+		String page = "/";
+		
+		int currPage = Integer.parseInt(currpage);	//호출을 요청할 페이지
+		int pagePerCnt = 10; //한 페이지당 몇개씩? 10개씩
+		
+		if(loginId != null) {
+			//1.총 패이지 갯수인 range가 필요함
+			int range = service.adorder_rangecall(currPage,pagePerCnt);
+			//2.리스트가 필요함(10개밖에 안들어있음)
+			ArrayList<HashMap<String, String>> listCall = service.adorder_listCall(currPage,pagePerCnt);
+			model.addAttribute("pages",range);
+			model.addAttribute("adOrderList",listCall);
+			model.addAttribute("nowpage",currpage);
+			page = "adminOrderList";			
+		}
+
+		return page;
 	}
 
 	//2. 전체 문의 게시글
 	@RequestMapping(value = "/adminInquiry", method = RequestMethod.GET)
-	public String adminInquiry(Model model) {
+	public String adminInquiry(Model model,HttpSession session , @RequestParam String currpage) {
 		logger.info("전체 문의 게시글 리스트 불러오기");
+		String loginId = (String)session.getAttribute("loginId");		
+		String page = "/";
 		
-		ArrayList<HashMap<String, String>> adInquiry = service.adInquiry();
-		logger.info("가져온 리수트 수 : {}", adInquiry.size());
-		model.addAttribute("adInquiry", adInquiry);
-		model.addAttribute("length",adInquiry.size());
-		return "adminInquiry";
+		int currPage = Integer.parseInt(currpage);	//호출을 요청할 페이지
+		int pagePerCnt = 10; //한 페이지당 몇개씩? 10개씩
+		
+		if(loginId != null) {
+			//1.총 패이지 갯수인 range가 필요함
+			int range = service.adInq_rangecall(currPage,pagePerCnt);
+			//2.리스트가 필요함(10개밖에 안들어있음)
+			ArrayList<HashMap<String, String>> listCall = service.adInqr_listCall(currPage,pagePerCnt);
+			model.addAttribute("pages",range);
+			model.addAttribute("adInquiry",listCall);
+			model.addAttribute("nowpage",currpage);
+			page = "adminInquiry";			
+		}
+
+		return page;		
+		
+		
+		
+//		ArrayList<HashMap<String, String>> adInquiry = service.adInquiry();
+//		logger.info("가져온 리수트 수 : {}", adInquiry.size());
+//		model.addAttribute("adInquiry", adInquiry);
+//		model.addAttribute("length",adInquiry.size());
+//		return "adminInquiry";
 	}
 	
 	//3. 전체 요청 게시글

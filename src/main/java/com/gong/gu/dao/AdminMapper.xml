@@ -95,4 +95,17 @@
 	SELECT * FROM user_info
 	</select>
 	
+	<select id="adorder_allCount" resultType="int">
+	select count (order_no) from order_info
+	</select>
+	<select id="adorder_listCall" resultType="hashmap">
+	SELECT * FROM order_info INNER JOIN board USING (board_no) INNER JOIN groupbuy_addit USING (board_no)ORDER BY order_no DESC LIMIT #{param1} offset #{param2}
+	</select>
+	
+	<select id="adInq_allCount" resultType="int">
+	select count (board_no) from board where board_name = '문의게시판';
+	</select>
+	<select id="adInq_listCall" resultType="hashmap">
+	SELECT * FROM board INNER JOIN inquiry_addit USING (board_no) ORDER BY board_no DESC LIMIT #{param1} offset #{param2}
+	</select>		
 </mapper>

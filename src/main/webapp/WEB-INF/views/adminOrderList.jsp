@@ -4,7 +4,11 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
-	<script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
+	<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>  
+	<script src="resources/js/jquery.twbsPagination.js"></script>
+	<!-- <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script> -->
 	<link rel="stylesheet" href="resources/common.css">
 	<style>
 		.adminMenu{
@@ -27,11 +31,11 @@
 <body>
 	<iframe src="header"></iframe>
 	<div id = "adminMenuBar">
-        <img style="background-color: beige" class="adminMenu" src="resources/img/전체주문내역.png"  alt="전체주문내역" loc="adminOrderList">
-        <img class="adminMenu" src="resources/img/전체문의게시글.png" alt="전체문의게시글" loc="adminInquiry">
-        <img class="adminMenu" src="resources/img/전체요청글.png" alt="전체요청글" loc="adminRequire">
-        <img class="adminMenu" src="resources/img/전체공구게시글.png" alt="전체공구게시글" loc="admingroupbuylist">
-        <img class="adminMenu" src="resources/img/전체회원정보.png" alt="전체회원정보" loc="adminuserlist">
+        <img style="background-color: beige" class="adminMenu" src="resources/img/전체주문내역.png"  alt="전체주문내역" loc="adminOrderList?currpage=1">
+        <img class="adminMenu" src="resources/img/전체문의게시글.png" alt="전체문의게시글" loc="adminInquiry?currpage=1">
+        <img class="adminMenu" src="resources/img/전체요청글.png" alt="전체요청글" loc="adminRequire?currpage=1">
+        <img class="adminMenu" src="resources/img/전체공구게시글.png" alt="전체공구게시글" loc="admingroupbuylist?currpage=1">
+        <img class="adminMenu" src="resources/img/전체회원정보.png" alt="전체회원정보" loc="adminuserlist?currpage=1">
         <img class="adminMenu" src="resources/img/상품등록.png" alt="상품등록" loc="groupbuywriteForm2">
     </div>
 			
@@ -73,6 +77,18 @@
 						<th>${adOrderList.order_etc}</th>
 					</tr>			
 			</c:forEach>
+			<!-- 페이징 영역 -->
+			<tr>
+				<td colspan="9">
+					<div class="container">
+						<nav aria-label="Page navigation" style="text-align:center">
+							<ul class="pagination" id="pagination"></ul>
+						</nav>
+					</div>
+				</td>
+			</tr>
+			<!-- 페이징 영역 -->			
+			
 		</table>	
 	
 	<br/>
@@ -85,6 +101,25 @@
 <script>
 	$(".adminMenu").click(function(){
 	    location.href=$(this).attr("loc");
+	});
+	
+	
+	
+	var totalpage = "${pages}";
+	console.log("totalpage : "+totalpage);
+	/* 페이징에 관한 곳 */
+	$('#pagination').twbsPagination({
+		startPage : "${nowpage}",
+		totalPages : totalpage,
+		visiblePages : 5,
+		onPageClick:function(evt,page){
+			console.log(evt);
+			console.log(page);
+			if("${nowpage}" != page) {
+				location.href="./adminOrderList?currpage="+page;			
+			}
+		}
+
 	});
 </script>
 </html>

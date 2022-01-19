@@ -10,14 +10,16 @@
 		SELECT 
 		oi.order_no, oi.order_date, b.board_title, ga.groupbuy_state, oi.order_state , oi.order_quantity , oi.order_etc
 		FROM order_info oi INNER JOIN board b USING (board_no) INNER JOIN groupbuy_addit ga USING (board_no) WHERE oi.user_id = #{param1}
+		ORDER BY oi.order_no DESC
+	
 	</select>
 
 	<select id="inquirelist" resultType="hashmap">
-		SELECT * FROM board INNER JOIN inquiry_addit USING (board_no) WHERE user_id = #{param1}
+		SELECT * FROM board INNER JOIN inquiry_addit USING (board_no) WHERE user_id = #{param1} ORDER BY board_no DESC
 	</select>
 
 	<select id="requirelist" resultType="hashmap">
-		SELECT * FROM board INNER JOIN require_addit USING (board_no) WHERE user_id = #{param1}
+		SELECT * FROM board INNER JOIN require_addit USING (board_no) WHERE user_id = #{param1} ORDER BY board_no DESC
 	</select>
 	
 	
@@ -109,6 +111,16 @@
 	
 	<select id="photolist" resultType="hashmap">
 	SELECT * FROM photo WHERE board_no = #{param1}
+	</select>
+	
+	<select id="allCount" resultType="int">
+	select count (order_no) from order_info where user_id=#{param1}
+	</select>
+	<select id="listCall" resultType="hashmap">
+		SELECT 
+		oi.order_no, oi.order_date, b.board_title, ga.groupbuy_state, oi.order_state , oi.order_quantity , oi.order_etc
+		FROM order_info oi INNER JOIN board b USING (board_no) INNER JOIN groupbuy_addit ga USING (board_no) WHERE oi.user_id = #{param3}
+		ORDER BY oi.order_no DESC LIMIT #{param1} offset #{param2}
 	</select>
 
 </mapper>
