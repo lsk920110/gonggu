@@ -37,6 +37,10 @@ public interface InquireBoardDAO {
 
 	void inqupdate2(HashMap<String, String> params);
 
+	int list_allCount();
+
+	ArrayList<HashMap<String, String>> list_listCall(int pagePerCnt, int offset);
+
 
 
 

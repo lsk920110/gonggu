@@ -35,7 +35,8 @@
 		<th>내용</th>
 		<td>${info.board_content}</td>
 	</tr>
-	<tr>
+	<!--
+		<tr>
 		<th>사진</th>
 		<td>
 			<c:forEach items="${photos}" var="photo">
@@ -43,6 +44,7 @@
 			</c:forEach>				
 		</td>
 	</tr>
+	
 	<tr>
 		<td>
 		</td>
@@ -53,6 +55,8 @@
 			</c:forEach>
 		</td>
 	</tr>
+	-->
+
 	<tr>
 		<th colspan="2">
 			<input type="button" onclick="location.href='./inquireBoardList'" value="리스트"/>

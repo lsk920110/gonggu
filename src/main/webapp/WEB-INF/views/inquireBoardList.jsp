@@ -4,7 +4,10 @@
 <head>
    <meta charset="UTF-8">
    <title>Insert title here</title>
-   <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
+   <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>  
+	<script src="resources/js/jquery.twbsPagination.js"></script>
       <link rel="stylesheet" href="resources/common.css">
    <style>
    		iframe{
@@ -75,7 +78,26 @@ if(a == ''){
   		
   	};
   	
-
+  	var startpage = "${nowpage}";
+    startpage = startpage*1;
+    var totalpage = "${pages}";
+    totalpage = (totalpage*1);
+    console.log(startpage);
+    console.log(totalpage);
+       /* 페이징에 관한 곳 */
+       $('#pagination').twbsPagination({
+          startPage : startpage,
+          totalPages : totalpage,
+          visiblePages : 5,
+          onPageClick:function(evt,page){
+             console.log(evt);
+             console.log(page);
+             if("${nowpage}" != page) {
+                location.href="./groupBuyList?category="+"${category}"+"&currpage="+page;         
+             }
+          }
+       
+       });
 
 </script>
 </html>

@@ -52,6 +52,8 @@ public class InquireBoardService {
 	}
 	
 	
+	/*
+	
 	//2.문의글 사진 파일 저장 (실제 파일을 저장하고 경로를 DB 에 기록)
 	private void saveFile(int board_no, MultipartFile[] photos) {
 		for (MultipartFile photo : photos) {
@@ -76,6 +78,7 @@ public class InquireBoardService {
 			
 		}
 	}
+	*/
 	
 	
 	//2.옵션 DB 글쓰기 (문의 카테고리 추가)
@@ -173,6 +176,32 @@ public class InquireBoardService {
 		logger.info("포토게시판 리스트 서비스 요청");
 		
 		return dao.photolist(board_no);
+	}
+
+
+	public int list_rangecall(int currPage, int pagePerCnt) {
+		
+		int totalCount = dao.list_allCount(); // 일단 테이블 글이 몇개인지? 
+		logger.info("totalCount : {}" , totalCount);
+		int range = totalCount%pagePerCnt > 0 ? (totalCount/pagePerCnt) + 1 : (totalCount/pagePerCnt);//만들 수 있는 페이지의 갯수
+		logger.info("range : {} " , range);
+		return range;
+	}
+
+
+	public ArrayList<HashMap<String, String>> list_listCall(int currPage, int pagePerCnt) {
+		int offset = (currPage -1)* pagePerCnt - 1;//DB에 요청할 인덱스 번호임 , 1:0-9, 2:10-19 이런식으로해야함
+		//1페이지면 limit 10에, offset 0부터 조회
+		//2페이지면 limit 10에, offset 10부터 조회
+		//3페이지면 limit 10에, offset 20부터 조회
+		if(offset < 0) {
+			offset = 0;
+		}
+		
+		logger.info("offset : {} " , offset);
+		ArrayList<HashMap<String, String>> listCall = dao.list_listCall(pagePerCnt,offset);
+		
+		return listCall;
 	}
 
 

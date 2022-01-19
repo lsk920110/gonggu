@@ -44,7 +44,7 @@
 
 			<tr>
 				<th></th>
-				<td><textarea placeholder="내용을 입력하세요 " name="board_content">${inqboardetail.board_content}"</textarea></td>
+				<td><textarea placeholder="내용을 입력하세요 " name="board_content">${inqboardetail.board_content}</textarea></td>
 			</tr>
 <%-- 			<tr>
 				<th></th>

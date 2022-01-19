@@ -82,14 +82,39 @@ public class InquireBoardController {
 	
 	//1. 문의글 리스트 요청하기
      @RequestMapping(value = "/inquireBoardList", method = RequestMethod.GET)
-     public String inquireBoardList(Model model) {      
+     public String inquireBoardList(Model model ,  @RequestParam String currpage) {      
         logger.info("문의글 list 요청");
         
-        ArrayList<HashMap<String, String>> InquiryList = service.InquiryList();
-        logger.info("글의 수 : {}",InquiryList.size());
-        model.addAttribute("size", InquiryList.size());//왜 넣으신 거지??
-        model.addAttribute("InquiryList", InquiryList);      
-        return "inquireBoardList";
+        // ArrayList<HashMap<String, String>> InquiryList = service.InquiryList();
+        // logger.info("글의 수 : {}",InquiryList.size());
+        // model.addAttribute("size", InquiryList.size());//왜 넣으신 거지??
+        // model.addAttribute("InquiryList", InquiryList);      
+        // return "inquireBoardList";
+        
+		String page = "/";
+		
+		int currPage = Integer.parseInt(currpage);	//호출을 요청할 페이지
+		logger.info("currpage : {} " , currpage);
+		int pagePerCnt = 10; //한 페이지당 몇개씩? 10개씩
+		logger.info("pagePerCnt : {} " , pagePerCnt);
+			//1.총 패이지 갯수인 range가 필요함
+		
+			int range = service.list_rangecall(currPage,pagePerCnt);
+			logger.info("range : {} " , range);
+			//2.리스트가 필요함(10개밖에 안들어있음)
+			ArrayList<HashMap<String, String>> listCall = service.list_listCall(currPage,pagePerCnt);
+			model.addAttribute("pages",range);
+			model.addAttribute("adOrderList",listCall);
+			model.addAttribute("nowpage",currpage);
+			page = "adminOrderList";			
+
+		return page;
+		
+	
+			
+			
+			
+        
         
      }
 	 
@@ -108,6 +133,13 @@ public class InquireBoardController {
 		
 	}
 */		
+     
+     
+     
+     
+     
+     
+     
 		
 		//문의글 상세보기
 		

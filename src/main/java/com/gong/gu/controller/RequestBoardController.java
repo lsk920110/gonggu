@@ -38,6 +38,7 @@ public class RequestBoardController {
 	 public String ReqwriteForm(Model model , HttpSession session) { 
 		 logger.info("요청글쓰기 페이지 요청");
 		 String page = "redirect:/RequestBoardlist";
+		 
 		 if(session.getAttribute("loginId") != null) {
 			 page = "reqwriteForm";
 		 }
@@ -48,12 +49,37 @@ public class RequestBoardController {
 	 
 	// 요청글쓰기 요청
 	 @RequestMapping(value = "/reqwrite", method = RequestMethod.POST) 
-	 public String reqwrite(Model model, MultipartFile[] photos, 
+	 public String reqwrite(Model model, 
 			@RequestParam HashMap<String, String> params) { 
+		 logger.info("요청글쓰기 요청 : {}");
 		 logger.info("요청글쓰기 요청 : {}", params);
-		 logger.info("업로드 할 파일의 수 : {}",photos.length);
-		 return service.reqwrite(photos,params);
+		 
+		 return service.reqwrite(params);
 		}
+	 
+	 
+	 
+	 // 요청글 수정페이지 요청
+	 @RequestMapping(value = "/requpdateForm", method = RequestMethod.GET) 
+	 public String requpdateForm(Model model, @RequestParam String board_no) { 
+		 logger.info("requpdateForm : {}",board_no);
+		 HashMap<String, String> RequestBoardDetail = service.requpdateForm(board_no);
+		 
+		 model.addAttribute("RequestBoardDetail", RequestBoardDetail);
+		 
+		return "requpdateForm";
+	}
+	 
+	 
+	 // 요청글 수정 요청
+	 @RequestMapping(value = "/requpdate", method = RequestMethod.POST) 
+	 public String inqupdate(Model model, @RequestParam HashMap<String, String> params) { 
+		 logger.info("문의글 수정 요청 : {}", params);
+		 return service.requpdate(params);
+	}
+	 
+	 
+	 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	 
 	
@@ -73,19 +99,44 @@ public class RequestBoardController {
 	}
 */		
 	 
-	//2. 요청글 리스트
-     @RequestMapping(value = "/RequestBoardlist", method = RequestMethod.GET)
-     public String RequestBoardlist(Model model) {      
-        logger.info("요청글 list 요청");
-        
-        ArrayList<HashMap<String, String>> RequestList = service.RequestList();
-         logger.info("글의 수 : {}",RequestList.size());
-         model.addAttribute("size", RequestList.size());//왜 넣으신 거지??
-         model.addAttribute("RequestList", RequestList);  
-       return "RequestBoardlist";
-       
-    }
 	 
+		//2. 요청글 리스트
+	     @RequestMapping(value = "/RequestBoardlist", method = RequestMethod.GET)
+	     public String RequestBoardlist(Model model , @RequestParam String currpage) {      
+	        logger.info("요청글 list 요청");
+	        
+	        
+//	        ArrayList<HashMap<String, String>> RequestList = service.RequestList();
+//	        logger.info("글의 수 : {}",RequestList.size());
+//	         model.addAttribute("size", RequestList.size());//왜 넣으신 거지??
+//	         model.addAttribute("RequestList", RequestList);  
+//	         return "RequestBoardlist";
+	        
+	        String page = "/";
+	        int currPage = Integer.parseInt(currpage);	//호출을 요청할 페이지
+	        logger.info("currPage 선언");
+			int pagePerCnt = 10; //한 페이지당 몇개씩? 10개씩
+			
+				//1.총 패이지 갯수인 range가 필요함
+				int range = service.RequestBoardlist_rangecall(currPage,pagePerCnt);
+				
+				//2.리스트가 필요함(10개밖에 안들어있음)
+				ArrayList<HashMap<String, String>> listCall = service.RequestBoardlist_listCall(currPage,pagePerCnt);
+				model.addAttribute("pages",range);
+				model.addAttribute("RequestBoardlist",listCall);
+				model.addAttribute("nowpage",currpage);
+				logger.info("listcall : {}" , listCall);
+				logger.info("currPage : {}" , currPage);
+				logger.info("pagePerCnt : {} ", pagePerCnt);
+				logger.info("range : {} " , range);
+				
+				page = "RequestBoardlist";			
+
+			return page;
+	        
+	       
+	    }
+		 
 		
 		//요청글 상세보기
 		

@@ -15,7 +15,7 @@
 		insert into board
 			(user_id,board_title,board_content,board_name)
 		values
-			('admin01',#{board_title},#{board_content},'요청게시판')
+			(#{user_id},#{board_title},#{board_content},'요청게시판')
 	</insert>
 	
 	<!-- 요청글 파일올리기 -->
@@ -33,6 +33,28 @@
 		values
 			(#{param1},#{param2})
 	</insert>
+	
+	
+	<!-- 요청글 수정 -->
+	<update id="requpdate" parameterType="HashMap">
+		update board set 
+			board_title = #{board_title}
+			,board_content = #{board_content}
+			where board_no = #{board_no}
+	</update>
+	
+	<!-- 요청글 수정 2(카테고리) -->
+	<update id="requpdate2" parameterType="HashMap">
+		update require_addit set product_category_name = #{product_category_name} where board_no = #{board_no}
+	</update>
+	
+	
+	<select id="RequestBoardDetail" resultType="hashmap">
+		SELECT *
+		FROM board b INNER JOIN require_addit ia 
+		USING (board_no) WHERE board_no = #{param1}
+
+	</select>
 
 
 
@@ -78,6 +100,14 @@
 			WHERE board_no = #{param1} ORDER BY photo_no DESC
 	</select>
 	
+	
+	<select id="RequestBoardlist_allCount" resultType="int">
+	select count (board_no) from board where board_name = '요청게시판';
+	</select>
+	
+	<select id="RequestBoardlist_listCall" resultType="hashmap">
+		SELECT * FROM board INNER JOIN require_addit USING (board_no) ORDER BY board_no DESC LIMIT 10 offset #{param2}
+	</select>
 
 
 
