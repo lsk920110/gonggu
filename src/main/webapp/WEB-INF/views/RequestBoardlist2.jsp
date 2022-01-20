@@ -72,7 +72,7 @@
   	         console.log(evt);
   	         console.log(page);
   	         if("${nowpage}" != page) {
-  	            location.href="./RequestBoardlist?currpage="+page;         
+  	            location.href="./RequestBoardlist2?currpage="+page;         
   	         }
   	      }
   	   

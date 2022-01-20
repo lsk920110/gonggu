@@ -234,8 +234,8 @@
 	               			<div id="search_group1" class="search_group">
 			               		<select name="page" id="search_categori">
 			               			<option value="groupBuyList2?category=all&currpage=1">공구리스트</option>
-			               			<option value="RequestBoardlist?category=all&currpage=1">요청리스트</option>
-			               			<option value="inquireBoardList?category=all&currpage=1">문의리스트</option>
+			               			<option value="RequestBoardlist2?category=all&currpage=1">요청리스트</option>
+			               			<option value="inquireBoardList2?category=all&currpage=1">문의리스트</option>
 			               		</select>
 	               			</div>
 		               		<div id="search_group2" class="search_group">

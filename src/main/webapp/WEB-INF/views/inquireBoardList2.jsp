@@ -102,7 +102,7 @@ if(session == ''){
              console.log(evt);
              console.log(page);
              if("${nowpage}" != page) {
-                location.href="./inquireBoardList"+"?currpage="+page;         
+                location.href="./inquireBoardList2"+"?currpage="+page;         
              }
           }
        

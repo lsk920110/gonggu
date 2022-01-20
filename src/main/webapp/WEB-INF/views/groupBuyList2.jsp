@@ -312,7 +312,7 @@ window.onload = function () {
 				console.log(evt);
 				console.log(page);
 				if("${nowpage}" != page) {
-					location.href="./groupBuyList?category="+"${category}"+"&currpage="+page;			
+					location.href="./groupBuyList2?category="+"${category}"+"&currpage="+page;			
 				}
 			}
 		
