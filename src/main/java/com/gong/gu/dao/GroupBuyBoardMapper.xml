@@ -98,11 +98,12 @@
 	
 	</select>
 	<select id="groupBuyListCall1" resultType="hashmap">
-		SELECT b.board_no, b.board_title, p.photo_newname, ga.groupbuy_state, ga.groupbuy_target, ga.groupbuy_unitprice , sum(oi.order_quantity) as sum
+		SELECT *
 		FROM board b
 		LEFT JOIN groupbuy_addit ga USING (board_no)
 		LEFT JOIN photo p USING (board_no)
-		left join order_info oi USING (board_no)
+		LEFT  JOIN order_info oi USING (board_no)
+		LEFT JOIN order_quan USING (board_no)
 		where p.photo_thum = 'Y' and board_exposure = 'Y'
 		group by board_no
 		ORDER BY b.board_no DESC LIMIT #{param1} offset #{param2}
@@ -116,11 +117,12 @@
 	
 	</select>
 	<select id="groupBuyListCall2" resultType="hashmap">
-		SELECT b.board_no, b.board_title, p.photo_newname, ga.groupbuy_state, ga.groupbuy_target, ga.groupbuy_unitprice , sum(oi.order_quantity) as sum
+		SELECT *
 		FROM board b
 		LEFT JOIN groupbuy_addit ga USING (board_no)
 		LEFT JOIN photo p USING (board_no)
-		left join order_info oi USING (board_no)
+		LEFT  JOIN order_info oi USING (board_no)
+		LEFT JOIN order_quan USING (board_no)
 		where p.photo_thum = 'Y' and board_exposure = 'Y' AND ga.product_category_name = #{param3} group by board_no
 		ORDER BY b.board_no DESC LIMIT #{param1} offset #{param2}
 	</select>

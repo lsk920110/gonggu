@@ -359,6 +359,24 @@ public class MypageController {
 				logger.info("{} reply 리스트 불러오기",board_no);
 				ArrayList<HashMap<String, String>> list= service.reply_call(board_no);
 				
+				for (HashMap<String, String> list_date : list) {
+					logger.info("list date {}",String.valueOf(list_date.get("reply_date")));
+					
+
+					String dateYear = (String.valueOf(list_date.get("reply_date"))).substring(0, 4);
+					logger.info("dateYear {}",dateYear);
+
+					String dateMonth = (String.valueOf(list_date.get("reply_date"))).substring(5,7);
+					logger.info("dateMonth {}",dateMonth);
+
+					String dateDate = (String.valueOf(list_date.get("reply_date"))).substring(8,10);
+					logger.info("dateDate {}",dateDate);
+
+					String newDate = dateYear+"년 "+dateMonth+"월"+dateDate+"일";
+					list_date.put("reply_date", newDate);
+
+				}
+				
 				logger.info("list  {}",list);
 				map.put("list", list);
 				map.put("count", list.size());

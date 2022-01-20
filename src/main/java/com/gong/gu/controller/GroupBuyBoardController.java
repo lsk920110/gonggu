@@ -107,10 +107,20 @@ public class GroupBuyBoardController {
 				int range = service.groupBuyRangeCall1(currPage,pagePerCnt);
 				
 				ArrayList<HashMap<String, String>> listCall = service.groupBuyListCall1(currPage,pagePerCnt);
-				model.addAttribute("groupBuyList", listCall);
 				model.addAttribute("pages",range);
 				model.addAttribute("nowpage",currpage);
-
+				for (HashMap<String, String> map : listCall) {
+					boolean keyYN = map.containsKey("sum(order_quantity)");
+					if(keyYN == false) {
+						map.put("sum1", "0");						
+					} else {
+						map.put("sum1", String.valueOf(map.get("sum(order_quantity)")));
+					}
+					logger.info("{}",map);
+				} 
+				model.addAttribute("groupBuyList", listCall);
+				
+				logger.info("{}",listCall);
 				//ArrayList<HashMap<String, String>> groupBuyList = service.groupBuyList();
 				//model.addAttribute("groupBuyList", groupBuyList);			
 				
@@ -122,6 +132,7 @@ public class GroupBuyBoardController {
 				model.addAttribute("groupBuyList", listCall);
 				model.addAttribute("pages",range);
 				model.addAttribute("nowpage",currpage);				
+				logger.info("{}",listCall);
 				
 				
 				//int range = service.groupBuyListCall2(currPage,pagePerCnt);
