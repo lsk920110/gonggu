@@ -21,12 +21,14 @@
                 top: 0px;
                 z-index: 10;
                 background-color: white;
+                min-width: 1280px;
             }
             #main_wrap_header_left{
                 position: absolute;
                 /* border: 1px solid black; */
                 width: 20%;
                 height: 100%;
+                min-width: 200px;
             }
             #main_wrap_header_center{
                 position: absolute;
@@ -34,6 +36,7 @@
                 width: 59.8%;
                 height: 100%;
                 left: 20%;
+                min-width: 700px;
             }
             #main_wrap_header_right{
                 position: absolute;
@@ -41,6 +44,7 @@
                 width: 20%;
                 height: 100%;
                 right: 0%;
+                min-width: 200px;
             }
             #main_wrap_category{
                 position: sticky;
@@ -52,6 +56,7 @@
                 /*z-index: 10;*/
                 z-index: 9;
                 background-color: white;
+                min-width: 1280px;
             }
             #main_container{
                 position: absolute;
@@ -220,7 +225,7 @@
             
         </style>
     </head>
-    <body>
+    <body style="overflow-x: hidden">
         <div id="main_wrap">
 
             <div id="main_wrap_header">

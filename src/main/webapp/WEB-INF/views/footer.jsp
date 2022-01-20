@@ -26,11 +26,14 @@
                 line-height: 0px;
                 text-align: center;
             }
+            #main_footer{
+            	min-width: 1280px;
+            }
 		
 	
 	</style>
 </head>
-<body>
+<body style="overflow-x: hidden">
 	<hr/>
 	<br/>
 	<div id="main_footer">
