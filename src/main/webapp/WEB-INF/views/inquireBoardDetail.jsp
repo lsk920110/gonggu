@@ -65,19 +65,39 @@
 		</th>
 	</tr>
 </table>
+
+
+		<table>
+			<thead>
+				<tr>
+					<td colspan="3">
+						<textarea class="adminbutton" name="reply_comment"></textarea><input class="adminbutton" type="button" onclick="reply_write()" value="저장"/>
+						<input type="hidden" name="user_id" value="${sessionScope.loginId}"/>
+						<input type="hidden" name="board_no" value="${info.board_no}"/>	
+					</td>
+				</tr>
+			</thead>
+			<tbody id="reply">
+			</tbody>
+		</table>	
+
   	<iframe src="footer"></iframe>
 
 </body>
 <script>
 console.log("${sessionScope.loginId}");
 console.log($('#user_id').html());
+console.log("${sessionScope.admin}");
 
 if("${sessionScope.loginId}" != $('#user_id').html()) {
 	$('.identify[type="button"]').attr('type','hidden');
 
 };
 
+if("${sessionScope.admin}" != 'Y') {
+	$('.adminbutton').css('display','none');
 
+};
 
 
 
@@ -118,5 +138,104 @@ if(files.length>0){//업로드된 파일이 있을 경우
 }else{		//업로드 된 파일이 없을 경우
 	$("#area").html("<p>업로드 된 파일이 없습니다.</p>");
 }
+
+
+
+
+
+
+
+
+
+/* reply 기능 */
+
+
+
+$.ajax({
+	type : 'GET',
+	url : 'reply_call',
+	data : {'board_no':"${info.board_no}"},
+	dataType : 'JSON',
+	success : function(data){
+		console.log(data);
+		//ajax 는 페이지를 새로고치하지 않기 때문에, 적용된 내용을 확인하기 위해서는 리스트를 다시 그려야 한다.
+		//listCall();
+		listDraw(data.list);
+	},
+	error : function(e){
+		console.log(e);
+	}
+});
+
+
+function listDraw(list){
+	var content = '';
+
+	//list.forEach(function(item,idx)) 으로 해도 된다.
+	for(var i = 0; i<list.length; i++){
+		//console.log(list[i]);
+		content += '<tr>';
+		content += '<td>'+list[i].user_id+'</td>';
+		content += '<td>'+list[i].reply_comment+'</td>';
+		content += '<td>'+list[i].reply_date+'</td>';		
+		content += '</tr>';
+		
+	}
+	
+	$("#reply").empty();
+	$("#reply").append(content);
+}
+
+
+function reply_write(){
+
+	var loginId = "${sessionScope.loginId}";
+
+	var $reply_comment = $('textarea[name="reply_comment"]');
+	var $user_id = $('input[name="user_id"]');
+	var $board_no = $('input[name="board_no"]');
+		
+	var reply = {}
+	reply.reply_comment = $reply_comment.val();			
+	reply.user_id = $user_id.val();
+	reply.board_no = $board_no.val();
+	reply.board_name = '문의게시판';
+	console.log(reply);
+		$.ajax({
+			type : 'GET',
+			url : 'reply_write',
+			data : reply,
+			dataType : 'JSON',
+			success : function(data){
+				
+				if(data.msg == 'fail'){
+					alert('로그인 후 이용 가능한 서비스입니다.');
+				} else {
+					console.log(data.msg);
+					//ajax 는 페이지를 새로고치하지 않기 때문에, 적용된 내용을 확인하기 위해서는 리스트를 다시 그려야 한다.
+					//listCall();
+					listDraw(data.list);
+					$('textarea[name="reply_comment"]').val('');
+					alert('댓글이 정상적으로 등록되었습니다.');
+				}
+				
+			},
+			error : function(e){
+				console.log(e);
+			}
+		});		
+}
+
+
+
+
+
+
+
+
+
+
+
+
 </script>
 </html>

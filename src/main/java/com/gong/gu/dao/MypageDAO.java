@@ -67,5 +67,17 @@ public interface MypageDAO {
 	int wishList_delete(String board_no, String loginId);
 
 	String wishlist2(String board_no, String loginId);
+
+	ArrayList<HashMap<String, String>> reply_call(String board_no);
+
+	void reply_write(HashMap<String, String> reply);
+
+	int groupBuyRangeCall_wish(String loginId);
+
+	ArrayList<HashMap<String, String>> groupBuyListCall_wish(int pagePerCnt, int offset, String loginId);
+
+	void groupbuydetail_upHit(String board_no);
+
+	void answercomplete(HashMap<String, String> reply);
 	
 }

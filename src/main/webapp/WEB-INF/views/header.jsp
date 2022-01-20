@@ -273,7 +273,7 @@
 	                <span id="admin_category4" class="admin_category" loc="adminOrderList?currpage=1">관리자페이지</span>
                 </c:if>
                 <c:if test="${adminYN == 'U'}">            
-	                <span id="admin_category4" class="admin_category" loc="myorderList?currpage=1">마이페이지</span>
+	                <span id="admin_category4" class="admin_category" onclick="reqlogin()" loc="mypage">마이페이지</span>
                 </c:if>                
             </div>
 
@@ -291,6 +291,10 @@
     $(".login").click(function(){//페이지 이동  
         parent.location.href=$(this).attr("loc");//부모창에서 여는 방법//attr로 loc속성을 가져온다.
     });
+    
+    function reqlogin(){
+    	alert ('로그인이 필요할 서비스입니다.');
+    };
 
     </script>
 </html>

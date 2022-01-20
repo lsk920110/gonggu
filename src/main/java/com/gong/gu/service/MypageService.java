@@ -148,7 +148,7 @@ public class MypageService {
 		gbadto.setGroupbuy_max(Integer.parseInt(params.get("groupbuy_max")));
 		gbadto.setGroupbuy_due_date(Date.valueOf(params.get("groupbuy_due_date")));
 		gbadto.setProduct_category_name(params.get("product_category_name"));
-		
+		gbadto.setGroupbuy_target(Integer.parseInt(params.get("groupbuy_max")));
 		dao.groupbuywrite2_gba(gbadto);
 		
 		
@@ -223,7 +223,9 @@ public class MypageService {
 	}
 
 	public HashMap<String, String> groupbuydetail(String board_no) {
+		dao.groupbuydetail_upHit(board_no);
 		HashMap<String, String> groupbuydetail = dao.groupbuydetail(board_no);
+		//조회수 업
 		
 		return groupbuydetail;
 	}
@@ -351,6 +353,43 @@ public class MypageService {
 		String wishlist2 = dao.wishlist2(board_no,loginId);
 		return wishlist2;
 	}
+
+	public ArrayList<HashMap<String, String>> reply_call(String board_no) {
+		logger.info("reply_call : DAO호출");
+		
+		return dao.reply_call(board_no);
+	}
+
+	public void reply_write(HashMap<String, String> reply) {
+		dao.reply_write(reply);
+		if(reply.get("board_name").equals("문의게시판")) {
+			dao.answercomplete(reply);
+			
+		}
+	}
+
+	public int groupBuyRangeCall_wish(int currPage, int pagePerCnt, String loginId) {
+		int totalCount = dao.groupBuyRangeCall_wish(loginId); // 일단 테이블 글이 몇개인지? 
+		int range = totalCount%pagePerCnt > 0 ? (totalCount/pagePerCnt) + 1 : (totalCount/pagePerCnt);//만들 수 있는 페이지의 갯수
+
+		return range;
+	}
+
+	public ArrayList<HashMap<String, String>> groupBuyListCall_wish(int currPage, int pagePerCnt, String loginId) {
+		int offset = (currPage -1)* pagePerCnt - 1;//DB에 요청할 인덱스 번호임 , 1:0-7, 2:8-15 이런식으로해야함
+		//1페이지면 limit 10에, offset 0부터 조회
+		//2페이지면 limit 10에, offset 10부터 조회
+		//3페이지면 limit 10에, offset 20부터 조회
+		if(offset < 0) {
+			offset = 0;
+		}
+		
+		ArrayList<HashMap<String, String>> listCall = dao.groupBuyListCall_wish(pagePerCnt,offset,loginId);
+		
+		
+		return listCall;
+	}
+
 
 	
 	

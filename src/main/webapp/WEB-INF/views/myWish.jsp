@@ -109,6 +109,7 @@
 	        
 	    <div id="board3">
 		<c:forEach items="${groupBuyList}" var="list">
+
 			<div id="board1">	
 				<c:set var="board__no" value="${list.board_no}"/>
 	
@@ -178,6 +179,7 @@
 					</c:if>	
 				</div>	
 			</div>
+
 		</c:forEach>
 		</div>
 	</div> 
