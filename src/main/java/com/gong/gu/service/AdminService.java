@@ -190,7 +190,7 @@ public class AdminService {
 	
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	//6. 검색테스트
+	// 검색테스트
 	public ArrayList<String> wishlist_search(String loginId) {
 		return dao.wishlist_search(loginId);
 	}
@@ -219,7 +219,7 @@ public class AdminService {
 		return listCall;
 	}
 
-	//6-3. 리스트 범위불러오기2
+	//6-3. 공구 리스트 범위불러오기2
 	public int groupBuyRangeCall_search2(int currPage, int pagePerCnt, String category, String keyword) {
 		int totalCount = dao.groupBuyRangeCall_search2(category, keyword); // 일단 테이블 글이 몇개인지? 
 		int range = totalCount%pagePerCnt > 0 ? (totalCount/pagePerCnt) + 1 : (totalCount/pagePerCnt);//만들 수 있는 페이지의 갯수
@@ -227,7 +227,7 @@ public class AdminService {
 		return range;
 	}
 
-	//6-4. 리스트 불러오기2
+	//6-4. 공구 리스트 불러오기2
 	public ArrayList<HashMap<String, String>> groupBuyListCall_search2(int currPage, int pagePerCnt, String category,
 			String keyword) {
 		
@@ -242,6 +242,59 @@ public class AdminService {
 		logger.info("offset : {}",offset);
 		ArrayList<HashMap<String, String>> listCall = dao.groupBuyListCall_search2(pagePerCnt,offset,category,keyword);
 		logger.info("listCall : {}",listCall);
+		
+		return listCall;
+	}
+
+	//7-1. 문의글 리스트 범위불러오기
+	public int list_rangecall_search(int currPage, int pagePerCnt, String keyword) {
+		
+		int totalCount = dao.list_rangecall_search(keyword); // 일단 테이블 글이 몇개인지? 
+		logger.info("totalCount : {}" , totalCount);
+		int range = totalCount%pagePerCnt > 0 ? (totalCount/pagePerCnt) + 1 : (totalCount/pagePerCnt);//만들 수 있는 페이지의 갯수
+		logger.info("range : {} " , range);
+		return range;
+	}
+
+	//7-2. 문의글 리스트 불러오기
+	public ArrayList<HashMap<String, String>> list_listCall_search(int currPage, int pagePerCnt, String keyword) {
+		int offset = (currPage -1)* pagePerCnt - 1;//DB에 요청할 인덱스 번호임 , 1:0-9, 2:10-19 이런식으로해야함
+		//1페이지면 limit 10에, offset 0부터 조회
+		//2페이지면 limit 10에, offset 10부터 조회
+		//3페이지면 limit 10에, offset 20부터 조회
+		if(offset < 0) {
+			offset = 0;
+		}
+		
+		logger.info("offset : {} " , offset);
+		ArrayList<HashMap<String, String>> listCall = dao.list_listCall_search(pagePerCnt,offset, keyword);
+		
+		return listCall;
+	}
+
+	//8-1. 요청글 리스트 범위 불러오기 
+	public int RequestBoardlist_rangecall_search(int currPage, int pagePerCnt, String keyword) {
+		int totalCount = dao.RequestBoardlist_rangecall_search(keyword); // 일단 테이블 글이 몇개인지? 
+		logger.info("totalCount : {}" , totalCount);
+		
+		int range = totalCount%pagePerCnt > 0 ? (totalCount/pagePerCnt) + 1 : (totalCount/pagePerCnt);//만들 수 있는 페이지의 갯수
+		logger.info("range : {}" , range);
+
+		return range;
+	}
+
+	//8-2. 요청글 리스트 불러오기
+	public ArrayList<HashMap<String, String>> RequestBoardlist_listCall_search(int currPage, int pagePerCnt,
+			String keyword) {
+		int offset = (currPage -1)* pagePerCnt - 1;//DB에 요청할 인덱스 번호임 , 1:0-9, 2:10-19 이런식으로해야함
+		logger.info("currpage : {}" , currPage);
+		if(offset < 0) {
+			offset = 0;
+		}
+		
+		logger.info("offset : {}" , offset);
+		ArrayList<HashMap<String, String>> listCall = dao.RequestBoardlist_listCall_search(pagePerCnt,offset,keyword);
+		logger.info("listcall 쿼리문 실행");
 		
 		return listCall;
 	}

@@ -171,16 +171,19 @@
 
 	<!-- 검색테스트 -->
 
-	<!-- 찜여부확인 -->
+	<!-- 6. 찜여부확인 -->
 	<select id="wishlist_search" resultType="String" >
 		SELECT board_no FROM wishlist WHERE user_id = #{param1}
 	</select>
 
+
+	<!-- 6-1. (검색)공구게시글 불러오기1 -->
 	<select id="groupBuyRangeCall_search1" resultType="int">
 		SELECT count(board_no) FROM board INNER JOIN photo USING (board_no) 
 			WHERE photo_thum = 'Y' AND board_exposure ='Y' AND board_title like '%' #{param1} '%'
 	</select>
 
+	<!-- 6-2. (검색)공구게시글 불러오기2 -->
 	<select id="groupBuyListCall_search1" resultType="hashmap">
 		SELECT b.board_no, b.board_title, p.photo_newname, ga.groupbuy_state, ga.groupbuy_target, ga.groupbuy_unitprice , sum(oi.order_quantity )
 		FROM board b
@@ -192,12 +195,14 @@
 		ORDER BY b.board_no DESC LIMIT #{param1} offset #{param2}
 	</select>
 
+	<!-- 6-3. (검색)공구게시글 불러오기3 -->
 	<select id="groupBuyRangeCall_search2" resultType="int">
 	<!-- select count (board_no) from board where board_name = '공구게시판' -->
 	SELECT count(board_no) FROM board INNER JOIN photo USING (board_no) INNER JOIN groupbuy_addit ga USING (board_no)
 	WHERE photo_thum = 'Y' AND board_exposure ='Y' AND product_category_name = #{param1} AND board_title like '%' #{param2} '%'
 	</select>
 
+	<!-- 6-4. (검색)공구게시글 불러오기4 -->
 	<select id="groupBuyListCall_search2" resultType="hashmap">
 		SELECT b.board_no, b.board_title, p.photo_newname, ga.groupbuy_state, ga.groupbuy_target, ga.groupbuy_unitprice , sum(oi.order_quantity )
 		FROM board b
@@ -211,9 +216,25 @@
 
 
 
+	<!-- 7-1. (검색) 문의글 리스트 불러오기 -->
+	<select id="list_rangecall_search" resultType="int">
+		select count (board_no) from board where board_name = '문의게시판' AND board_title like '%' #{param1} '%'
+	</select>
 
+	<!-- 7-2. (검색) 문의글 리스트 불러오기 -->
+	<select id="list_listCall_search" resultType="hashmap">
+		SELECT * FROM board INNER JOIN inquiry_addit USING (board_no) WHERE board_title like '%' #{param3} '%' ORDER BY board_no DESC LIMIT #{param1} offset #{param2}
+	</select>
 
-
+	<!-- 8-1. (검색)요청글 리스트 범위 불러오기 -->
+	<select id="RequestBoardlist_allCount" resultType="int">
+	select count (board_no) from board where board_name = '요청게시판' AND board_title like '%' #{param1} '%'
+	</select>
+	
+	<!-- 8-2. (검색)요청글 리스트 불러오기-->
+	<select id="RequestBoardlist_listCall" resultType="hashmap">
+		SELECT * FROM board INNER JOIN require_addit USING (board_no) WHERE board_title like '%' #{param3} '%' ORDER BY board_no DESC LIMIT 10 offset #{param2}
+	</select>
 	
 	
 </mapper>

@@ -234,7 +234,7 @@ public class AdminController {
 	
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
    
-	//6. 검색테스트
+	// 검색테스트
 	@RequestMapping(value = "/search", method = RequestMethod.POST)
     public String search(Model model, @RequestParam String page, @RequestParam String search, HttpSession session) {      
        logger.info("검색요청 요청");
@@ -318,8 +318,84 @@ public class AdminController {
 		}
    
    
-   
-   
+	 //7. 검색리스트 불러오기(문의게시글(inq) 리스트 불러오기)
+	 @RequestMapping(value = "/inquireBoardList2", method = RequestMethod.GET)
+     public String inquireBoardList2(Model model ,  @RequestParam String currpage, HttpSession session) {      
+        logger.info("검색 문의글 list 요청");
+        
+        // ArrayList<HashMap<String, String>> InquiryList = service.InquiryList();
+        // logger.info("글의 수 : {}",InquiryList.size());
+        // model.addAttribute("size", InquiryList.size());//왜 넣으신 거지??
+        // model.addAttribute("InquiryList", InquiryList);      
+        // return "inquireBoardList";
+        
+		String page = "/";
+		
+		String keyword = (String) session.getAttribute("keyword");
+		logger.info("세션에 저장된 값 : "+keyword);
+		
+		int currPage = Integer.parseInt(currpage);	//호출을 요청할 페이지
+		logger.info("currpage : {} " , currpage);
+		int pagePerCnt = 10; //한 페이지당 몇개씩? 10개씩
+		logger.info("pagePerCnt : {} " , pagePerCnt);
+		//1.총 패이지 갯수인 range가 필요함
+	
+		int range = service.list_rangecall_search(currPage,pagePerCnt, keyword);
+		logger.info("range : {} " , range);
+		//2.리스트가 필요함(10개밖에 안들어있음)
+		ArrayList<HashMap<String, String>> listCall = service.list_listCall_search(currPage,pagePerCnt, keyword);
+		model.addAttribute("pages",range);
+		model.addAttribute("InquiryList",listCall);
+		model.addAttribute("nowpage",currpage);
+		page = "inquireBoardList2";			
+
+		return page;
+		
+        
+     }
+	 
+	 
+	 //8. 검색 리스트 불러오기(요청 게시글(req) 리스트 불러오기)
+	 @RequestMapping(value = "/RequestBoardlist2", method = RequestMethod.GET)
+     public String RequestBoardlist2(Model model , @RequestParam String currpage, HttpSession session) {      
+        logger.info("요청글 list 요청");
+        
+        
+//        ArrayList<HashMap<String, String>> RequestList = service.RequestList();
+//        logger.info("글의 수 : {}",RequestList.size());
+//         model.addAttribute("size", RequestList.size());//왜 넣으신 거지??
+//         model.addAttribute("RequestList", RequestList);  
+//         return "RequestBoardlist";
+
+		String keyword = (String) session.getAttribute("keyword");
+		logger.info("세션에 저장된 값 : "+keyword);        
+        
+        
+        String page = "/";
+        int currPage = Integer.parseInt(currpage);	//호출을 요청할 페이지
+        logger.info("currPage 선언");
+		int pagePerCnt = 10; //한 페이지당 몇개씩? 10개씩
+		
+		
+		//1.총 패이지 갯수인 range가 필요함
+		int range = service.RequestBoardlist_rangecall_search(currPage,pagePerCnt, keyword);
+		
+		//2.리스트가 필요함(10개밖에 안들어있음)
+		ArrayList<HashMap<String, String>> listCall = service.RequestBoardlist_listCall_search(currPage,pagePerCnt, keyword);
+		model.addAttribute("pages",range);
+		model.addAttribute("RequestBoardlist",listCall);
+		model.addAttribute("nowpage",currpage);
+		logger.info("listcall : {}" , listCall);
+		logger.info("currPage : {}" , currPage);
+		logger.info("pagePerCnt : {} ", pagePerCnt);
+		logger.info("range : {} " , range);
+		
+		page = "RequestBoardlist2";			
+
+		return page;
+        
+       
+    }
    
    
    

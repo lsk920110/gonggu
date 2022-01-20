@@ -78,6 +78,18 @@ public interface AdminDAO {
 	ArrayList<HashMap<String, String>> groupBuyListCall_search2(int pagePerCnt, int offset, String category,
 			String keyword);
 
+	//7-1. 문의글 리스트 범위 불러오기
+	int list_rangecall_search(String keyword);
+	
+	//7-2. 문의글 리스트 불러오기
+	ArrayList<HashMap<String, String>> list_listCall_search(int pagePerCnt, int offset, String keyword);
+
+	//8-1. 요청글 리스트 범위 불러오기
+	int RequestBoardlist_rangecall_search(String keyword);
+
+	//8-2. 요청글 리스트 불러오기
+	ArrayList<HashMap<String, String>> RequestBoardlist_listCall_search(int pagePerCnt, int offset, String keyword);
+
 
 
 }
