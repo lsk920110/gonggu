@@ -79,9 +79,8 @@ public class GroupBuyBoardController {
 			logger.info("groupBuyList 요청");
 			logger.info("{}",category);
 			
-			//String loginId = (String)session.getAttribute("loginId");
+			String loginId = (String)session.getAttribute("loginId");
 			
-			String loginId = "admin01";
 			logger.info("로그인 아이디 : "+loginId);
 			model.addAttribute("loginId", loginId);
 			String list = "";

@@ -110,9 +110,9 @@ public class MypageController {
 		
 		
 
-			int range = service.groupBuyRangeCall1(currPage,pagePerCnt,loginId);
+			int range = service.groupBuyRangeCall_wish(currPage,pagePerCnt,loginId);
 			
-			ArrayList<HashMap<String, String>> listCall = service.groupBuyListCall1(currPage,pagePerCnt,loginId);
+			ArrayList<HashMap<String, String>> listCall = service.groupBuyListCall_wish(currPage,pagePerCnt,loginId);
 			model.addAttribute("groupBuyList", listCall);
 			model.addAttribute("pages",range);
 			model.addAttribute("nowpage",currpage);
@@ -227,7 +227,7 @@ public class MypageController {
 	
 	 @RequestMapping(value = "/groupbuywrite2", method = RequestMethod.POST) 
 	 public String groupbuywrite2(Model model, @RequestParam HashMap<String, String> params, HttpSession session) { 
-		 logger.info("공구게시판 글쓰기 페이지 요청");
+		 logger.info("공구게시판 글쓰기 요청");
 		 logger.info("{}",params);
 		 
 		 String board_name = "공구게시판";
@@ -343,9 +343,39 @@ public class MypageController {
 		}		
 		
 		
+		/////리플기능 관련
 		
+		@RequestMapping(value="/reply_call" , method = RequestMethod.GET)
+		public @ResponseBody HashMap<String, Object> reply_call(HttpSession session, @RequestParam String board_no) {
+			
+			HashMap<String, Object> map = new HashMap<String, Object>();
+
+				logger.info("{} reply 리스트 불러오기",board_no);
+				ArrayList<HashMap<String, String>> list= service.reply_call(board_no);
+				
+				logger.info("list  {}",list);
+				map.put("list", list);
+				map.put("count", list.size());
+			return map;
+		}
 		
-		
+		@RequestMapping(value="/reply_write" , method = RequestMethod.GET)
+		public @ResponseBody HashMap<String, Object> reply_write(HttpSession session, @RequestParam HashMap<String, String> reply) {
+			
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			
+			if(session.getAttribute("loginId") != null) {
+				
+				logger.info("{} reply 등록하기",reply);
+				service.reply_write(reply);
+				map.put("msg", "success");
+				map.put("list",service.reply_call(reply.get("board_no")));
+			} else {
+				map.put("msg", "fail");
+			}
+			
+			return map;
+		}		
 
 		
 }

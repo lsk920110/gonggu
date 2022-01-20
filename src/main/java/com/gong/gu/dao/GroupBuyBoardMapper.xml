@@ -38,7 +38,7 @@
 
 
 	<!-- 공구리스트 불러오기 -->
-	<select id="groupBuyList" resultType="hashmap">
+<!-- <select id="groupBuyList" resultType="hashmap">
 		
 		SELECT b.board_no, b.board_title, p.photo_newname, ga.groupbuy_state, ga.groupbuy_target, ga.groupbuy_unitprice, sum(oi.order_quantity) as sum
 		FROM board b
@@ -51,7 +51,6 @@
 				
 	</select>
 	
-	<!-- 카테고리별 공구리스트 불러오기 -->
 	<select id="groupBuyList2" resultType="hashmap">
 	
 		SELECT 
@@ -67,6 +66,7 @@
 		ORDER BY b.board_no DESC;
 				
 	</select>
+-->
 	
 	<!-- 찜여부확인 -->
 	<select id="wishlist" resultType="String" >
@@ -98,7 +98,7 @@
 	
 	</select>
 	<select id="groupBuyListCall1" resultType="hashmap">
-		SELECT b.board_no, b.board_title, p.photo_newname, ga.groupbuy_state, ga.groupbuy_target, ga.groupbuy_unitprice , sum(oi.order_quantity )
+		SELECT b.board_no, b.board_title, p.photo_newname, ga.groupbuy_state, ga.groupbuy_target, ga.groupbuy_unitprice , sum(oi.order_quantity) as sum
 		FROM board b
 		LEFT JOIN groupbuy_addit ga USING (board_no)
 		LEFT JOIN photo p USING (board_no)
@@ -116,7 +116,7 @@
 	
 	</select>
 	<select id="groupBuyListCall2" resultType="hashmap">
-		SELECT b.board_no, b.board_title, p.photo_newname, ga.groupbuy_state, ga.groupbuy_target, ga.groupbuy_unitprice , sum(oi.order_quantity )
+		SELECT b.board_no, b.board_title, p.photo_newname, ga.groupbuy_state, ga.groupbuy_target, ga.groupbuy_unitprice , sum(oi.order_quantity) as sum
 		FROM board b
 		LEFT JOIN groupbuy_addit ga USING (board_no)
 		LEFT JOIN photo p USING (board_no)

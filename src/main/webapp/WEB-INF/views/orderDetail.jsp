@@ -96,7 +96,7 @@
 	
 	function backPage(){
 
-		location.href='./${frompage}?category=all';
+		location.href='./${frompage}?category=all&currpage=1';
 		
 	}
 	

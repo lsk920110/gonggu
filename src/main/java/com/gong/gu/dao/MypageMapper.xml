@@ -62,8 +62,8 @@
 	
 	<insert id="groupbuywrite2_gba"
 		parameterType="com.gong.gu.dto.Groupbuy_additDTO">
-		INSERT INTO groupbuy_addit(board_no,groupbuy_unitprice,groupbuy_target,groupbuy_due_date,product_category_name,groupbuy_target)
-		VALUES(#{board_no},#{groupbuy_unitprice},#{groupbuy_target},#{groupbuy_due_date},#{product_category_name},#{groupbuy_target})
+		INSERT INTO groupbuy_addit(board_no,groupbuy_unitprice,groupbuy_target,groupbuy_due_date,product_category_name,groupbuy_max)
+		VALUES(#{board_no},#{groupbuy_unitprice},#{groupbuy_target},#{groupbuy_due_date},#{product_category_name},#{groupbuy_max})
 	</insert>	
 
 	<insert id="groupbuywrite2_pho"
@@ -104,6 +104,13 @@
 	<select id="groupbuydetail" resultType="hashmap">
 	SELECT * FROM board INNER JOIN groupbuy_addit USING (board_no) WHERE board_no =  #{param1}
 	</select>
+	
+	<update id="groupbuydetail_upHit">
+	update board set board_bHit = board_bHit+1 where board_no = #{param1}
+	
+	</update>
+	
+	
 	
 	<select id="orderquansum" resultType="string">
 	SELECT sum(order_quantity) FROM order_info WHERE board_no = #{param1} AND (order_state = '신청완료' OR order_state = '배송완료');
@@ -184,9 +191,39 @@
 	</select>
 
 
+	<select id="reply_call" resultType="hashmap">
+		SELECT * FROM reply WHERE board_no = #{param1}
+	
+	</select>
+
+	<select id="reply_write" parameterType="hashmap">
+	INSERT INTO reply (user_id,board_no,reply_comment,reply_exposure) 
+	VALUES(#{user_id},#{board_no},#{reply_comment},'Y')
+	</select>
 
 
 
-
+	<select id="groupBuyRangeCall_wish" resultType="int">
+	<!-- select count (board_no) from board where board_name = '공구게시판' -->
+	SELECT count(board_no) FROM board INNER JOIN photo USING (board_no) INNER JOIN wishlist w USING (board_no) 
+	WHERE photo_thum = 'Y' AND board_exposure ='Y' AND w.user_id = #{param3}
+	
+	</select>
+	<select id="groupBuyListCall_wish" resultType="hashmap">
+			SELECT * , sum(oi.order_quantity )
+		FROM board b
+		LEFT JOIN groupbuy_addit ga USING (board_no)
+		LEFT JOIN photo p USING (board_no)
+		left join order_info oi USING (board_no)
+		INNER JOIN wishlist w USING (board_no)
+		where p.photo_thum = 'Y' and board_exposure = 'Y' AND w.user_id = 'lsk1234'
+		group by board_no
+		ORDER BY b.board_no DESC LIMIT #{param1} offset #{param2}
+	</select>
+	
+	
+	<update id="answercomplete" parameterType="hashmap">
+	update inquiry_addit set inquiry_answer = 'Y' where board_no = #{board_no}
+	</update>
 
 </mapper>
