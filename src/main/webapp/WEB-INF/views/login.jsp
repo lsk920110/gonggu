@@ -11,12 +11,24 @@
 		height: 210px;
 		border-style: none;
 		} 
+	.alllogin{
+		width: 250px;
+		height: 300px;
+		text-align: center;
+		top: 20px;	
+		margin : auto;
+		}			
+	.login {
+		text-align: center;
+		}	
 	</style>
 </head>
 <body>
 <iframe src="header"></iframe>
-<h2>로그인</h2>
+<div class = "alllogin">
+<div class = "login">
 	<table>
+	<h2>로그인</h2>	
 		<tr>
 			<th>ID</th>
 			<td><input type = "text" id = "user_id" /></td>
@@ -35,6 +47,8 @@
 			</th>
 		</tr>
 	</table>
+</div>
+</div>
 <iframe src="footer"></iframe>
 </body>
 <script>

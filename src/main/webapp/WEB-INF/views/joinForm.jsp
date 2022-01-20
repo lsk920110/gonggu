@@ -10,23 +10,28 @@
 		width: 100%;
 			height: 210px;
 			border-style: none;
-	} 	
+	} 
+	.alllogin{
+		width: 750px;
+		height: 400px;
+		text-align: center;
+		top: 20px;	
+		margin : auto;
+		}			
+	.login {
+		width: 400px;
+		height: 200px;
+		top: 10px;	
+		margin : auto;
+		left : 300px;
+		}			
 	</style>
 </head>
 <body>
 <iframe src="header"></iframe>
+<div class = "alllogin">
+<div class = "login">
 <h2>회원가입</h2>
-<!-- 회원가입페이지 구현 덜된 기능 
-0. gender 라디오 버튼 최초 지정 상태 만들기 
-1. 약관 및 비밀번호 확인 란은  CSS로 만들것 
-2. 하이퍼링크 > 로그인페이지 이상없을시 ./login으로 수정 바람 ; loginMain수정 및 이동완료 확인! 
-3. 이메일인증 기능 추가
-4. 부트스트랩 
-- 버튼 이쁘게 
-5. 아이디/ 비밀번호 기준 넣기.....................
-
-※ 문제점 
-성별을 선택하지 않아도 워닝이 안뜨고 가입이 되버림 -->
 	<table>
 		<tr>
 			<th>아이디</th>
@@ -46,7 +51,6 @@
 			<th rowspan="2">비밀번호확인</th>
 			<td><input class="pwconfirmSet" type="text" name="pwConfirm"  value=""/></td>
 		</tr>
-
 		<tr>		
 			<td id="confirm">		
 			</td>
@@ -68,7 +72,9 @@
 		<tr>
 			<th>생년월일</th>
 			<td>
-				<input type = "text" name = "user_birth"/>예시)1900-00-00
+				<input type = "text" name = "user_birth"/>
+			</br>	
+			예시)1900-00-00
 			</td>
 		</tr>
 		<tr>
@@ -76,7 +82,6 @@
 			<td>
 				<input type = "text" name = "user_email"/>
 				<input type="button" id="indetify" value="인증"/>
-				<!-- 3. 이메일인증 기능 추가 -->
 			</td>
 		</tr>
 		<tr>
@@ -93,7 +98,9 @@
 		<tr>
 			<th>휴대폰번호</th>
 			<td>
-				<input type = "text" name = "user_phone"/>예시)010-1111-2222
+				<input type = "text" name = "user_phone"/>
+				</br>
+				예시)010-1111-2222
 			</td>
 		</tr>
 		<tr>
@@ -119,9 +126,10 @@
 			<input type= "button" id= "cansel" value = "취소" onclick="location.href='loginMain'"/>
 			</th>
 		</tr>
-
 	</table>
-	<iframe src="footer"></iframe>
+</div>
+</div>	
+<iframe src="footer"></iframe>
 </body>
 <script>
 

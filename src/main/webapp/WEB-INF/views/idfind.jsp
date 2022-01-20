@@ -15,17 +15,33 @@
 		width: 100%;
 		height: 210px;
 		border-style: none;
-	} 	
+	}
+	.alllogin{
+		width: 700px;
+		height: 300px;
+		text-align: center;
+		top: 10px;	
+		margin : auto;
+		}			
+	.login {
+		width: 320px;
+		height: 300px;
+		top: 10px;	
+		margin : auto;
+		left : 300px;
+		}	 	
 	</style>
 </head>
 <body>
 <iframe src="header"></iframe>
-<h3>아이디 찾기</h3>
+<div class = "alllogin">
+<div class = "login">
 	<table>
+	<h3>아이디 찾기</h3>
 		<tr>
 			<th>이름</th>
 			<td>
-    				<input type = "text" name = "user_name"/> 
+    		<input type = "text" name = "user_name"/> 
 			</td>   
 		</tr>
 		<tr>
@@ -52,6 +68,8 @@
 		<input type = "button" id = "fingpass" value = "비밀번호 찾기" 
 			onclick = "location.href='pwfind'"/>
 		</tr>
+	</div>
+</div>
 <iframe src="footer"></iframe>		
 </body>
 <script>
@@ -75,7 +93,7 @@
 				location.href = './loginMain';
 			}else{
 				alert('입력하신 정보가 일치 하지 않습니다. 다시 확인 후 입력바랍니다.');
-			}34
+			}
 		},
 		error : function (e) {
 			console.log(e);
