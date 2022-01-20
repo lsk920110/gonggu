@@ -229,14 +229,20 @@ public class MypageController {
 	 public String groupbuywrite2(Model model, @RequestParam HashMap<String, String> params, HttpSession session) { 
 		 logger.info("공구게시판 글쓰기 요청");
 		 logger.info("{}",params);
-		 
+		 String page = "";
 		 String board_name = "공구게시판";
 		 String loginId = (String) session.getAttribute("loginId");
-		 service.groupbuywrite2(loginId, params, board_name);
-		 //service.groupbuywrite2();
+		 if(loginId == null) {
+			 page = "/";
+		 } else {
+			 service.groupbuywrite2(loginId, params, board_name);
+			 //service.groupbuywrite2();
+			 page = "redirect:/admingroupbuylist?currpage=1";
+		 }
 		 
 		 
-		 return "/main";
+		 
+		 return page;
 	}	
 	 
 	 

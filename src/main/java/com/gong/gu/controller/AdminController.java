@@ -473,7 +473,7 @@ public class AdminController {
       	}
       
 
-      return "redirect:/admingroupbuylist";//
+      return "redirect:/admingroupbuylist?currpage=1";//
    }   
    
    

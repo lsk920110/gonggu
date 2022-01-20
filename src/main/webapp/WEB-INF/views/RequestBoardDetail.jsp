@@ -153,7 +153,7 @@ if(files.length>0){//업로드된 파일이 있을 경우
 
 	$.ajax({
 		type : 'GET',
-		url : 'request_reply_call',
+		url : 'reply_call',
 		data : {'board_no':"${info.board_no}"},
 		dataType : 'JSON',
 		success : function(data){
@@ -196,14 +196,14 @@ if(files.length>0){//업로드된 파일이 있을 경우
 		var $board_no = $('input[name="board_no"]');
 			
 		var reply = {}
-		reply.reply_content = $reply_content.val();			
+		reply.reply_comment = $reply_comment.val();			
 		reply.user_id = $user_id.val();
 		reply.board_no = $board_no.val();
 		reply.board_name = '요청게시판';
 		console.log(reply);
 			$.ajax({
 				type : 'GET',
-				url : 'request_reply_write',
+				url : 'reply_write',
 				data : reply,
 				dataType : 'JSON',
 				success : function(data){

@@ -74,7 +74,7 @@
 			<tr>
 				<th colspan="2">
 				<button>수정</button>
-				<input type="button" onclick="location.href='./RequestBoardlist'" value="취소" />
+				<input type="button" onclick="location.href='./RequestBoardDetail?board_no='+'${RequestBoardDetail.board_no}'" value="취소" />
 				</th>
 			</tr>
 		</table>

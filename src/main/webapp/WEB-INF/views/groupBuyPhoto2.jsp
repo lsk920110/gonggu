@@ -32,7 +32,7 @@
 				<a href="#" class="${phl}" onclick="delPhoto()">삭제</a>
 				<br/><br/>
 			</c:forEach>
-			<input type="button" onclick="toOpener()" value="엄마! 받어!!"/>
+			<input type="button" onclick="toOpener()" value="사진등록"/>
 			
 		</div>
 
@@ -78,7 +78,7 @@
 					html += '<img src="/photo/'+remainPhoto_img[i].className+'""' +' width="250px"/>';
 					html += '<input type="hidden" name="photo'+[i+1]+'" value="'+remainPhoto_img[i].className+'"/>';
 				}
-				
+				opener.photocnt += 1;
 	
 				
 				/* if(remainPhoto_img[i].className == clickPic){

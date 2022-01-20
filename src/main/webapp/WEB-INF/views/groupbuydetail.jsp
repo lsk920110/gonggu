@@ -151,7 +151,7 @@
 					    <form action="orderConfirmPage" method="GET">
 						    <input type="number" name="order_quantity" value="1" min="1" max="10"/>
 						    <input type="hidden" name="board_no" value="${groupbuydetail.board_no}"/>
-						    <input class="btn" type="button" onclick="submit('${sessionScope.loginId}')" value="신청"/>
+						    <input id="sinchung" class="btn" type="button" onclick="submit('${sessionScope.loginId}')" value="신청"/>
 						    <!-- <input type="submit" value="구매"/> -->	    
 					    </form>
 					</div>
@@ -203,12 +203,17 @@
 	<iframe src="footer"></iframe>
 </body>
 <script>
-/*
-	var price = document.getElementsById('price');
-	console.log(price.innerText);
+	if($('.icon').html() != '모집중'){
+		$('#sinchung').hide();
+		$('input[name="order_quantity"]').hide();	
+	} 
+
+
+	var price = document.getElementById('price');
+	var a = price.innerText;
 	var b = a.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-	document.getElementsById('price').innerHTML = "가격  " + b + "원";
-*/
+	document.getElementById('price').innerHTML = "가격  " + b + "원";
+
 
 
 	//var loginId = "${sessionScope.loginId}";
@@ -229,8 +234,14 @@
 	$('input[type="number"]').click(function(){
 		var quan = $(this).val();
 		quan *=1;
-		console.log(unitPrice * quan)
-		$('#price').html(unitPrice * quan + ' 원');
+		sumprice = unitPrice * quan
+		var b = sumprice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+		document.getElementById('price').innerHTML = '가격' + b + '원';
+/* 		var price = document.getElementById('price');
+		var a = price.innerText;
+		document.getElementById('price').innerHTML = "가격" + b + "원"; */
+		
+		//$('#price').html(unitPrice * quan + ' 원');
 	});
 	/* 키보드로 변경한경우 */
 	$('input[type="number"]').keyup(function(){

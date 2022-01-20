@@ -23,8 +23,9 @@
       <th>카테고리</th>
       <th>제목</th>
       <th>작성자</th>
-      <th>작성일</th>
       <th>조회수</th>
+      <th>작성일</th>
+      <th>선정여부</th>
    </tr>
    <c:if test="${RequestBoardlist eq null || size == 0}">
    <tr><td colspan="6"> 등록된 글이 없습니다.</td></tr>
@@ -35,14 +36,15 @@
       <td>${RequestList.product_category_name}</td>
       <td><a href="RequestBoardDetail?board_no=${RequestList.board_no}">${RequestList.board_title}</a></td>
       <td>${RequestList.user_id}</td>
-      <td>${RequestList.board_date}</td>
       <td>${RequestList.board_bHit}</td>
+      <td>${RequestList.board_date}</td>
+      <td>${RequestList.board_select}</td>
    </tr>
    </c:forEach>
    
     <!-- 페이징 영역 -->
 			<tr>
-				<td colspan="6">
+				<td colspan="7">
 					<div class="container">
 						<nav aria-label="Page navigation" style="text-align:center">
 							<ul class="pagination" id="pagination"></ul>
@@ -56,6 +58,12 @@
 
 </body>
 <script>
+	var nologin = "${loginYN}";
+
+	if(nologin == 'N'){
+		alert('로그인이 필요한 서비스입니다');
+	}
+	
 	
   	var startpage = "${nowpage}";
   	startpage = startpage*1;

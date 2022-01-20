@@ -37,10 +37,14 @@ public class RequestBoardController {
 	 @RequestMapping(value = "/reqwriteForm", method = RequestMethod.GET) 
 	 public String ReqwriteForm(Model model , HttpSession session) { 
 		 logger.info("요청글쓰기 페이지 요청");
-		 String page = "redirect:/RequestBoardlist";
+		 String page = "redirect:/RequestBoardlist?currpage=1&loginYN=N";
 		 
 		 if(session.getAttribute("loginId") != null) {
 			 page = "reqwriteForm";
+			 model.addAttribute("loginYN","Y");
+
+		 } else {
+
 		 }
 		 
 		 return page;
@@ -160,7 +164,7 @@ public class RequestBoardController {
 		public String RequestBoardexposure(Model model, @RequestParam String board_no) {		
 			logger.info("비노출 요청 : {}",board_no);		
 			service.exposure(board_no);		
-			return "redirect:/RequestBoardlist";
+			return "redirect:/RequestBoardlist?currpage=1";
 		}
 	 
 

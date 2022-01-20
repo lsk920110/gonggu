@@ -33,9 +33,9 @@
 <body>
 	<iframe src="header"></iframe>
 	<div id = "myMenuBar">
-        <img class="myMenu" src="resources/img/전체주문내역.png"  alt="전체주문내역" loc="myorderList">
-        <img style="background-color: beige" class="myMenu" src="resources/img/전체문의게시글.png" alt="전체문의게시글" loc="myInquire">
-        <img class="myMenu" src="resources/img/전체요청글.png" alt="전체요청글" loc="myRequire">
+        <img class="myMenu" src="resources/img/전체주문내역.png"  alt="전체주문내역" loc="myorderList?currpage=1">
+        <img style="background-color: beige" class="myMenu" src="resources/img/전체문의게시글.png" alt="전체문의게시글" loc="myInquire?currpage=1">
+        <img class="myMenu" src="resources/img/전체요청글.png" alt="전체요청글" loc="myRequire?currpage=1">
         <img class="myMenu" src="resources/img/전체공구게시글.png" alt="전체공구게시글" loc="myWish?currpage=1">
         <img class="myMenu" src="resources/img/전체회원정보.png" alt="전체회원정보" loc="myProfile">
     </div>

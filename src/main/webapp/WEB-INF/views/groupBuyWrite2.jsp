@@ -32,11 +32,11 @@
 <body>
 	<iframe src="header"></iframe>
 	<div id = "adminMenuBar">
-        <img class="adminMenu" src="resources/img/전체주문내역.png"  alt="전체주문내역" loc="adminOrderList">
-        <img class="adminMenu" src="resources/img/전체문의게시글.png" alt="전체문의게시글" loc="adminInquiry">
-        <img class="adminMenu" src="resources/img/전체요청글.png" alt="전체요청글" loc="adminRequire">
-         <img class="adminMenu" src="resources/img/전체공구게시글.png" alt="전체공구게시글" loc="admingroupbuylist">
-        <img class="adminMenu" src="resources/img/전체회원정보.png" alt="전체회원정보" loc="adminuserlist">
+        <img class="adminMenu" src="resources/img/전체주문내역.png"  alt="전체주문내역" loc="adminOrderList?currpage=1">
+        <img class="adminMenu" src="resources/img/전체문의게시글.png" alt="전체문의게시글" loc="adminInquiry?currpage=1">
+        <img class="adminMenu" src="resources/img/전체요청글.png" alt="전체요청글" loc="adminRequire?currpage=1">
+         <img class="adminMenu" src="resources/img/전체공구게시글.png" alt="전체공구게시글" loc="admingroupbuylist?currpage=1">
+        <img class="adminMenu" src="resources/img/전체회원정보.png" alt="전체회원정보" loc="adminuserlist??currpage=1">
         <img style="background-color: beige"  class="adminMenu" src="resources/img/상품등록.png" alt="상품등록" loc="groupbuywriteForm2">
     </div>
 
@@ -92,8 +92,11 @@
 			
 			
 			<input type="button" id="open" value="사진추가" />
+			
 			<button>작성완료</button>
-			<input type="button" onclick="location.href='./list'" value="취소" />
+			<input type="button" id="submit" value="작성완료"/>
+			
+			<input type="button" onclick="location.href='./adminOrderList?currpage=1'" value="취소" />
 			
 			<div id="fromChild">
 			
@@ -106,7 +109,9 @@
 	
 </body>
 <script>
+var photocnt = 0;
 
+$('button').hide();
 
 $('#open').click(function(){
 	   win = window.open('groupBuyPhoto2','','width=700,height=700'); //주소값,창이름,옵션
@@ -117,6 +122,39 @@ $('#open').click(function(){
 $(".adminMenu").click(function(){
     location.href=$(this).attr("loc");
 });
+
+
+$('#submit').click(function(){
+	if($('select[name="product_category_name"]').val() == null){
+		alert('카테고리를 입력 해주세요');
+	}
+	else if($('input[name="board_title"]').val() == ''){
+		alert('제목을 입력하세요');
+	}
+	else if($('input[name="groupbuy_due_date"]').val() == ''){
+		alert('날짜를 입력하세요');
+	}
+	else if($('input[name="groupbuy_target"]').val() == ''){
+		alert('목표수량을 입력하세요');
+	}
+	else if($('input[name="groupbuy_max"]').val() == ''){
+		alert('최대수량을 입력하세요');
+	}
+	else if($('input[name="groupbuy_unitprice"]').val() == ''){
+		alert('금액을 입력하세요');
+	}
+	else if($('textarea').val()== ''){
+		alert('내용을 입력하세요');
+	}
+	else if(photocnt == 0){
+		alert('사진을 최소 1장 이상 업로드해주세요');
+	}
+	else{
+		document.getElementsByTagName('button')[0].click();		
+	}
+});
+
+
 
 
 
