@@ -37,17 +37,8 @@ public class RequestBoardController {
 	 @RequestMapping(value = "/reqwriteForm", method = RequestMethod.GET) 
 	 public String ReqwriteForm(Model model , HttpSession session) { 
 		 logger.info("요청글쓰기 페이지 요청");
-		 String page = "redirect:/RequestBoardlist?currpage=1&loginYN=N";
-		 
-		 if(session.getAttribute("loginId") != null) {
-			 page = "reqwriteForm";
-			 model.addAttribute("loginYN","Y");
 
-		 } else {
-
-		 }
-		 
-		 return page;
+		 return "reqwriteForm";
 	 }
 	 
 	 
@@ -151,6 +142,10 @@ public class RequestBoardController {
 			BoardDTO dto = service.detail(board_no);
 			logger.info("dto : {}",dto.getBoard_content());
 			model.addAttribute("info", dto);
+			
+			HashMap<String, String> additdetail = service.additdetail(board_no);
+			logger.info("addit detail : {}",additdetail);
+			model.addAttribute("addit",additdetail);
 			
 			ArrayList<PhotoDTO> photos = service.photolist(board_no);
 			logger.info("사진수 : {}", photos.size());

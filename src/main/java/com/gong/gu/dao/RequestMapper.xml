@@ -108,6 +108,11 @@
 	<select id="RequestBoardlist_listCall" resultType="hashmap">
 		SELECT * FROM board INNER JOIN require_addit USING (board_no) ORDER BY board_no DESC LIMIT 10 offset #{param2}
 	</select>
+	
+	<select id="additdetail" resultType="hashmap">
+	SELECT * FROM require_addit WHERE board_no =  #{param1}
+	</select>
+	
 
 
 

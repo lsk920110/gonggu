@@ -15,41 +15,53 @@
 	
 	#category{
 		text-align : center;
+		min-width : 1570px;
 	}
 	.category{
 		cursor: pointer;
-		
+		margin-left : 20px;
+		margin-right : 20px;
 	}
-	#board1{
+	.board1{
 		text-align : center;
 		width: 20%;
-		height: 350px;
+		height: 600px;
 		display: inline-block;
-		
 	}
 	
-	#board2{
-		margin-top:20px;
-		margin-bottom:20px;
-		width: 100%;
+	.board2{
+		width: 255px;
 		text-align : center;
-		height: 170px;
+		margin: 0 auto;
+		height: 160px;
 	}
 	
 	#all{
 		text-align : center;
 		width: auto;
 		height: auto;
+		min-width: 1296px;
+		
 	}
-	#boardimg{
+	.boardimg{
 		width: 255px;
 		height: 300px;
+		margin-bottom: 15px;
 	}
-	#boardtitle{
+	.boardtitle{
 		font-size: 18px;
 		text-decoration:none; /*<a> 태그의 기본 꾸밈 효과(밑줄 등)을 없애기*/
 		color: black; 
-		font-weight : bold;
+		/**/
+        display: block;
+        color: black;
+        width: 250px;
+        font-weight: bolder !important;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+       	text-align:Center;
+      
 	}
 	
 	.heart{
@@ -102,9 +114,8 @@
     <div id="all">   
 	    <c:set var="wish_list" value="${wishlist}"/>
 	        
-	    <div id="board3">
 		<c:forEach items="${groupBuyList}" var="list">
-			<div id="board1">	
+			<div class="board1">	
 				<c:set var="board__no" value="${list.board_no}"/>
 	
 						
@@ -124,24 +135,24 @@
 				<c:choose>
 					<c:when test="${list.groupbuy_state eq '공구완료'}">
 						<a href="groupbuydetail?board_no=${list.board_no}">
-							<img style="filter:grayscale(100%)" id="boardimg" src="/photo/${list.photo_newname}" alt="상품이미지"/> 
+							<img style="filter:grayscale(100%)" class="boardimg" src="/photo/${list.photo_newname}" alt="상품이미지"/> 
 						</a><br/>
 					</c:when>
 					<c:when test="${list.groupbuy_state eq '공구실패'}">
 						<a href="groupbuydetail?board_no=${list.board_no}">
-							<img style="filter:grayscale(100%)" id="boardimg" src="/photo/${list.photo_newname}" alt="상품이미지"/> 
+							<img style="filter:grayscale(100%)" class="boardimg" src="/photo/${list.photo_newname}" alt="상품이미지"/> 
 						</a><br/>
 					</c:when>
 					<c:otherwise> 
 						<a href="groupbuydetail?board_no=${list.board_no}">
-							<img id="boardimg" src="/photo/${list.photo_newname}" alt="상품이미지"/> 
+							<img class="boardimg" src="/photo/${list.photo_newname}" alt="상품이미지"/> 
 						</a><br/>
 					</c:otherwise> 
 				</c:choose>  
 				
 			
-				<div id="board2">
-					<a id="boardtitle" href="groupbuydetail?board_no=${list.board_no}">${list.board_title}</a><br/>
+				<div class="board2">
+					<a class="boardtitle" href="groupbuydetail?board_no=${list.board_no}">${list.board_title}</a><br/>
 				   
 					
 					
@@ -162,19 +173,19 @@
 
 					
 					
-					<c:if test="${list.sum eq null}">
+					<c:if test="${list.sum1 eq null}">
 						<progress value="0" max="${list.groupbuy_target}"></progress>
 						<p style="font-size:13px">신청수량:0개 / 목표수량:${list.groupbuy_target}개 </p>		
 					</c:if>
 					
-					<c:if test="${list.sum ne null}">
-						<progress value="${list.sum}" max="${list.groupbuy_target}"></progress>
-						<p style="font-size:13px">신청수량:${list.sum}개 / 목표수량:${list.groupbuy_target}개 </p>		
+					<c:if test="${list.sum1 ne null}">
+						<progress value="${list.sum1}" max="${list.groupbuy_target}"></progress>
+						<p style="font-size:13px">신청수량:${list.sum1}개 / 목표수량:${list.groupbuy_target}개 </p>		
 					</c:if>	
 				</div>	
 			</div>
 		</c:forEach>
-		</div>
+		
 	</div> 
 	
 	<!-- 페이징 영역 -->
@@ -188,19 +199,11 @@
 	<!-- 페이징 영역 -->	
 
 	<input type="button" onclick="asd()"/>
+	
 	<iframe src="footer"></iframe>
 </body>
 <script>
-/*
-//가격  , 처리
-window.onload = function () {
-	
 
-	function priceToString(price) {
-	    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-	}
-}
-*/
 		var price = document.getElementsByClassName('price');
 		
 		for (var i = 0; i < price.length; i++) {
@@ -287,16 +290,7 @@ window.onload = function () {
 		
  	});
 
-/*
-	//가격  , 처리
-	window.onload = function () {
-		
-	
-		function priceToString(price) {
-		    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-		}
-	}
-*/
+
 	var startpage = "${nowpage}";
 	startpage = startpage*1;
 	var totalpage = "${pages}";

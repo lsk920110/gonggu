@@ -203,6 +203,12 @@ public class RequestBoardService {
 			}
 
 
+			public HashMap<String, String> additdetail(String board_no) {
+				HashMap<String, String> additdetail = dao.additdetail(board_no);
+				return additdetail;
+			}
+
+
 
 
 

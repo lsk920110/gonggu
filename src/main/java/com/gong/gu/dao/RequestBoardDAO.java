@@ -39,6 +39,8 @@ public interface RequestBoardDAO {
 
 	ArrayList<HashMap<String, String>> RequestBoardlist_listCall(int pagePerCnt, int offset);
 
+	HashMap<String, String> additdetail(String board_no);
+
 
 
 

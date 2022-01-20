@@ -7,148 +7,195 @@
 	<script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="resources/common.css">
 	<style>
-			iframe{
-			width: 100%;
-			height: 210px;
-			border-style: none;
-		}   
-	
-	
+	iframe{
+		width: 100%;
+		height: 210px;
+		border-style: none;
+	}   
+		
+	.table{
+	   	margin-left: auto;
+	   	margin-right: auto;
+	   	min-width: 1296px;
+  	}
+	textarea {
+	    width: 1100px;
+	    height: 50px;
+	    resize: none;
+	}
+	.icon{
+	    width:70px;
+	    height:20px;
+        border-radius: 10px;
+        color: white;
+        font-size:14px;
+        text-align:center;
+	}
+	.none{
+		border-top:1px solid #ffffff;
+		border-left:1px solid #ffffff;
+		border-right:1px solid #ffffff;
+	}
+	.none2{
+		border-left:1px solid #ffffff;
+		border-right:1px solid #ffffff;
+	}
 	</style>
 </head>
 <body>
   	<iframe src="header"></iframe>
+	
+	
+		
+		
+	<table class="table">
+		<tr class="none">
+			<c:choose>
+			<c:when test="${addit.board_select eq '선정완료'}">
+				<td class="none"><div class="icon" style="background-color: rgb(41, 166, 204)">${addit.board_select}</div></td>
+			</c:when>
+			<c:when test="${addit.board_select eq '선정실패'}">
+				<td class="none"><div class="icon" style="background-color: rgb(204, 41, 41)">${addit.board_select}</div></td>
+			</c:when>
+			<c:when test="${addit.board_select eq '진행중'}">
+				<td class="none"><div class="icon" style="background-color: rgb(53, 236, 181)">${addit.board_select}</div></td>
+			</c:when>
+			</c:choose>
+		
+		</tr>
+		
+		<tr>
+			<th>글번호</th>
+			<td>${info.board_no}</td>
+		</tr>
+		<tr>
+			<th>제목</th>
+			<td>${info.board_title} <b>(${info.bHit})</b></td>
+		</tr>
+		<tr>
+			<th>작성자</th>
+			<td id="user_id">${info.user_id}</td>
+		</tr>
+		<tr>
+			<th>내용</th>
+			<td>${info.board_content}</td>
+		</tr>
+		
+	
+	
+		<!--  
+		<tr>
+			<th>사진</th>
+			<td>
+				<c:forEach items="${photos}" var="photo">
+					<img src="/photo/${photo.photo_newname}" width="250px"/><br/><br/>
+				</c:forEach>				
+			</td>
+		</tr>
+		
+		<tr>
+			<td>
+			</td>
+			<td>
+				사진리스트<div id="area"></div>
+				<c:forEach items="${photos}" var="downloadphoto">
+				<a href="downloadphoto?board_no=${photo.board_no}">	${downloadphoto.photo_newname}</a>
+				</c:forEach>
+			</td>
+		</tr>
+		-->
+	
+		
+		<tr>
+			<th colspan="2">
+				
+				<input type="button" onclick="location.href='./RequestBoardlist?currpage=1'" value="목록"/>
+				
+				<input type="button" class="identify" onclick="location.href='./requpdateForm?board_no=${info.board_no}'" value="수정"/>
+				<input type="button" class="identify" onclick="exposure()" value="삭제"/>			
+			</th>
+		</tr>
+		
+		
+		
+	</table>
 
-<table>
-	<tr>
-		<th>글번호</th>
-		<td>${info.board_no}</td>
-	</tr>
-	<tr>
-		<th>제목</th>
-		<td>${info.board_title} <b>(${info.bHit})</b></td>
-	</tr>
-	<tr>
-		<th>작성자</th>
-		<td id="user_id">${info.user_id}</td>
-	</tr>
-	<tr>
-		<th>내용</th>
-		<td>${info.board_content}</td>
-	</tr>
-	
-	
-	
-	<!--  
-	<tr>
-		<th>사진</th>
-		<td>
-			<c:forEach items="${photos}" var="photo">
-				<img src="/photo/${photo.photo_newname}" width="250px"/><br/><br/>
-			</c:forEach>				
-		</td>
-	</tr>
-	
-	<tr>
-		<td>
-		</td>
-		<td>
-			사진리스트<div id="area"></div>
-			<c:forEach items="${photos}" var="downloadphoto">
-			<a href="downloadphoto?board_no=${photo.board_no}">	${downloadphoto.photo_newname}</a>
-			</c:forEach>
-		</td>
-	</tr>
-	-->
-	
-	
-	<tr>
-		<th colspan="2">
-			
-			<input type="button" onclick="location.href='./RequestBoardlist?currpage=1'" value="리스트"/>
-			
-			<input type="button" class="identify" onclick="location.href='./requpdateForm?board_no=${info.board_no}'" value="수정"/>
-			<input type="button" class="identify" onclick="exposure()" value="삭제"/>			
-		</th>
-	</tr>
-	
-	
-	
-</table>
 
 
-
-		<table>
+		<table class="table">
 			<thead>
 				<tr>
 					<td colspan="3">
-						<textarea name="reply_comment"></textarea><input type="button" onclick="reply_write()" value="저장"/>
+						<textarea name="reply_comment"></textarea>
+						<input type="button" onclick="reply_write()" value="저장"/>
+						
 						<input type="hidden" name="user_id" value="${sessionScope.loginId}"/>
-						<input type="hidden" name="board_no" value="${info.board_no}"/>	
+						<input type="hidden" name="board_no" value="${groupbuydetail.board_no}"/>	
 					</td>
 				</tr>
 			</thead>
-			<tbody id="reply">
+ 			<tbody id="reply">			
 			</tbody>
 		</table>	
+		
 
    <iframe src="footer"></iframe>
 
 </body>
 <script>
-
-console.log("${sessionScope.loginId}");
-console.log($('#user_id').html());
-
-if("${sessionScope.loginId}" != $('#user_id').html()) {
-	$('.identify[type="button"]').attr('type','hidden');
-
-};
-
-
-
-function exposure(){
-	var yn = confirm("정말 이 글을 삭제 하시겠습니까?");
 	
-	if(yn){
-		location.href='./RequestBoardexposure?board_no=${info.board_no}';
-	}
+	console.log("${sessionScope.loginId}");
+	console.log($('#user_id').html());
 	
-}
-
-var files = [];
-
-<c:forEach items="${photos}" var="photo">
-files.push("${photo}");
-</c:forEach>
-
-console.log(files);
-
-if(files.length>0){//업로드된 파일이 있을 경우
+	if("${sessionScope.loginId}" != $('#user_id').html()) {
+		$('.identify[type="button"]').attr('type','hidden');
 	
-	var content="";
+	};
 	
-	for(var i=0; i<files.length;i++){			
-		console.log("fileName : "+files[i]);//풀 파일명
-		//확장자만 추출(마지막에 있는 . 의 취를 찾아 substring 으로 잘라낸다.)
-		var ext = files[i].substring(files[i].lastIndexOf(".")+1);
-		console.log("ext : "+ext);
+	
+	
+	function exposure(){
+		var yn = confirm("정말 이 글을 삭제 하시겠습니까?");
 		
-		content += '<a href="/photo/'+files[i]+'"/>'+files[i]+' 다운로드 <a>';
-		content += '<br/>';			
+		if(yn){
+			location.href='./RequestBoardexposure?board_no=${info.board_no}';
+		}
+		
 	}
 	
-	$("#area").html(content);
+	var files = [];
 	
+	<c:forEach items="${photos}" var="photo">
+	files.push("${photo}");
+	</c:forEach>
+	
+	console.log(files);
+	
+	if(files.length>0){//업로드된 파일이 있을 경우
+		
+		var content="";
+		
+		for(var i=0; i<files.length;i++){			
+			console.log("fileName : "+files[i]);//풀 파일명
+			//확장자만 추출(마지막에 있는 . 의 취를 찾아 substring 으로 잘라낸다.)
+			var ext = files[i].substring(files[i].lastIndexOf(".")+1);
+			console.log("ext : "+ext);
 			
-}else{		//업로드 된 파일이 없을 경우
-	$("#area").html("<p>업로드 된 파일이 없습니다.</p>");
-}
-
-
-
-/* reply 기능 */
-
+			content += '<a href="/photo/'+files[i]+'"/>'+files[i]+' 다운로드 <a>';
+			content += '<br/>';			
+		}
+		
+		$("#area").html(content);
+		
+				
+	}else{		//업로드 된 파일이 없을 경우
+		$("#area").html("<p>업로드 된 파일이 없습니다.</p>");
+	}
+	
+	
+	
+	/* reply 기능 */
+	
 
 
 	$.ajax({
@@ -175,9 +222,9 @@ if(files.length>0){//업로드된 파일이 있을 경우
 		for(var i = 0; i<list.length; i++){
 			//console.log(list[i]);
 			content += '<tr>';
-			content += '<td>'+list[i].user_id+'</td>';
-			content += '<td>'+list[i].reply_comment+'</td>';
-			content += '<td>'+list[i].reply_date+'</td>';		
+			content += '<td class="none2">'+list[i].user_id+'</td>';
+			content += '<td class="none2">'+list[i].reply_comment+'</td>';
+			content += '<td class="none2">'+list[i].reply_date+'</td>';		
 			content += '</tr>';
 			
 		}

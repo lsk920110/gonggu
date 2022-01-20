@@ -11,51 +11,93 @@
 	<script src="resources/js/jquery.twbsPagination.js"></script>
 	
    <link rel="stylesheet" href="resources/common.css">
-   <style></style>
+   <style>
+   #table{
+	   	margin-left: auto;
+	   	margin-right: auto;
+	   	min-width: 1296px;
+   }
+   	.icon{
+	    width:70px;
+	    height:20px;
+        border-radius: 10px;
+        color: white;
+        font-size:14px;
+        text-align:center;
+	}
+	#none{
+		border-top:1px solid #ffffff;
+		border-left:1px solid #ffffff;
+		border-right:1px solid #ffffff;
+	}
+
+   </style>
 </head>
 <body>
   	<iframe src="header"></iframe>
-
-<button onclick="location.href='reqwriteForm'">글쓰기</button>
-<table>
-   <tr>
-      <th>글번호</th>
-      <th>카테고리</th>
-      <th>제목</th>
-      <th>작성자</th>
-      <th>작성일</th>
-      <th>조회수</th>
-   </tr>
-   <c:if test="${RequestBoardlist eq null || size == 0}">
-   <tr><td colspan="6"> 등록된 글이 없습니다.</td></tr>
-   </c:if>
-   <c:forEach items="${RequestBoardlist}" var="RequestList">
-   <tr>
-      <td>${RequestList.board_no}</td>
-      <td>${RequestList.product_category_name}</td>
-      <td><a href="RequestBoardDetail?board_no=${RequestList.board_no}">${RequestList.board_title}</a></td>
-      <td>${RequestList.user_id}</td>
-      <td>${RequestList.board_date}</td>
-      <td>${RequestList.board_bHit}</td>
-   </tr>
-   </c:forEach>
-   
-    <!-- 페이징 영역 -->
-			<tr>
-				<td colspan="6">
-					<div class="container">
-						<nav aria-label="Page navigation" style="text-align:center">
-							<ul class="pagination" id="pagination"></ul>
-						</nav>
-					</div>
-				</td>
-			</tr>
-	<!-- 페이징 영역 -->		
-</table>
+	
+	<table id="table">
+		<tr>
+			<td id="none"><button onclick="location.href='reqwriteForm'">글쓰기</button></td>
+			<td id="none" colspan="6"></td>
+	   </tr>
+	   <tr>
+	      <th>글번호</th>
+	      <th>카테고리</th>
+	      <th>제목</th>
+	      <th>작성자</th>
+	      <th>조회수</th>
+	      <th>작성일</th>
+	      <th>선정여부</th>
+	   </tr>
+	   <c:if test="${RequestBoardlist eq null || size == 0}">
+	   <tr><td colspan="6"> 등록된 글이 없습니다.</td></tr>
+	   </c:if>
+	   <c:forEach items="${RequestBoardlist}" var="RequestList">
+	   <tr>
+	      <td>${RequestList.board_no}</td>
+	      <td>${RequestList.product_category_name}</td>
+	      <td><a href="RequestBoardDetail?board_no=${RequestList.board_no}">${RequestList.board_title}</a></td>
+	      <td>${RequestList.user_id}</td>
+	      <td>${RequestList.board_bHit}</td>
+	      <td>${RequestList.board_date}</td>
+	      
+		<c:choose>
+			<c:when test="${RequestList.board_select eq '선정완료'}">
+				<td> <div class="icon" style="background-color: rgb(41, 166, 204)">${RequestList.board_select}</div></td>
+			</c:when>
+			<c:when test="${RequestList.board_select eq '선정실패'}">
+				<td> <div class="icon" style="background-color: rgb(204, 41, 41)">${RequestList.board_select}</div></td>
+			</c:when>
+			<c:when test="${RequestList.board_select eq '진행중'}">
+				<td> <div class="icon" style="background-color: rgb(53, 236, 181)">${RequestList.board_select}</div></td>
+			</c:when>
+		</c:choose>
+	   </tr>
+	   </c:forEach>
+	   
+	    <!-- 페이징 영역 -->
+				<tr>
+					<td colspan="7">
+						<div class="container">
+							<nav aria-label="Page navigation" style="text-align:center">
+								<ul class="pagination" id="pagination"></ul>
+							</nav>
+						</div>
+					</td>
+				</tr>
+		<!-- 페이징 영역 -->		
+	</table>
    <iframe src="footer"></iframe>
 
 </body>
 <script>
+	var nologin = "${loginYN}";
+
+	if(nologin == 'N'){
+		alert('로그인이 필요한 서비스입니다');
+	}
+	
 	
   	var startpage = "${nowpage}";
   	startpage = startpage*1;
@@ -72,7 +114,7 @@
   	         console.log(evt);
   	         console.log(page);
   	         if("${nowpage}" != page) {
-  	            location.href="./RequestBoardlist2?currpage="+page;         
+  	            location.href="./RequestBoardlist?currpage="+page;         
   	         }
   	      }
   	   
