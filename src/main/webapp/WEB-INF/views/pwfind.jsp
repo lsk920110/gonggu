@@ -16,12 +16,28 @@
 		height: 210px;
 		border-style: none;
 	} 
+	.alllogin{
+		width: 700px;
+		height: 300px;
+		text-align: center;
+		top: 20px;	
+		margin : auto;
+		}			
+	.login {
+		width: 400px;
+		height: 200px;
+		top: 20px;	
+		margin : auto;
+		left : 300px;
+		}		
 	</style>
 </head>
 <body>
 <iframe src="header"></iframe>
-<h3>비밀번호 찾기</h3>
+<div class = "alllogin">
+<div class = "login">
 	<table>
+	<h3>비밀번호 찾기</h3>
 		<tr>
 			<th>아이디</th>
 			<td>
@@ -44,6 +60,8 @@
 				</th>
 			</tr>
 		</table>
+	</div>
+</div>
 <iframe src="footer"></iframe>
 </body>
 <script>
