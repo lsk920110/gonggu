@@ -235,14 +235,14 @@ public class AdminController {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
    
 	// 검색테스트
-	@RequestMapping(value = "/search", method = RequestMethod.POST)
+	@RequestMapping(value = "/search", method = RequestMethod.GET)
     public String search(Model model, @RequestParam String page, @RequestParam String search, HttpSession session) {      
        logger.info("검색요청 요청");
        logger.info("카테고리 값 : "+page);
        logger.info("검색내용 값 : "+search);
        session.setAttribute("keyword", search);
 
-       return "redirect:/"+page;
+       return "redirect:/"+page+"&currpage=1";
     }
    
    

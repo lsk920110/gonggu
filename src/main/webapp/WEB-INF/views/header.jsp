@@ -227,7 +227,7 @@
 	                <div id="main_wrap_header_left" class="headertap">
 	                	<img id="MainLogo" src="resources/img/MainLogo.png" alt="메인로고" loc="./"/>
 	                </div>
-               	<form action="search" method="post">
+<!--                	<form action="search" method="post"> -->
 	               	<div id="main_wrap_header_center" class="headertap">
 		               		<!-- 추가 -->
 	               		<div id="search_group">
@@ -249,7 +249,7 @@
 	               		</div>
 		                    <!-- 추가 -->
 	                </div>
-               	</form>
+<!--                	</form> -->
                
 		            <div id="main_wrap_header_right" class="headertap">
 		            	<c:if test="${loginId == 'user' }">
@@ -296,5 +296,17 @@
     	alert ('로그인이 필요할 서비스입니다.');
     };
 
+    
+    $('#searchButton').click(function(){
+    	var page = $('select[name="page"]').val();
+    	var search = $('input[name="search"]').val();
+    	
+    	//새창에서 열기
+    	//win = window.open('search?page='+page+'&search='+search,'','width=700 height=700');
+		//부모창에서 열기
+    	parent.location.href='search?page='+page+'&search='+search;//부모창에서 여는 방법//attr로 loc속성을 가져온다.
+		//코드리뷰 : search라는 요청을 보내라 page파람에 page변수를 담아서, search파람에 search 라는 변수를 담아서
+    	
+    });
     </script>
 </html>
