@@ -148,7 +148,7 @@ public class MypageService {
 		gbadto.setGroupbuy_max(Integer.parseInt(params.get("groupbuy_max")));
 		gbadto.setGroupbuy_due_date(Date.valueOf(params.get("groupbuy_due_date")));
 		gbadto.setProduct_category_name(params.get("product_category_name"));
-		gbadto.setGroupbuy_target(Integer.parseInt(params.get("groupbuy_max")));
+		gbadto.setGroupbuy_target(Integer.parseInt(params.get("groupbuy_target")));
 		dao.groupbuywrite2_gba(gbadto);
 		
 		

@@ -93,7 +93,7 @@
 					<input type="hidden"  name ="boardNo"  value ="${adInquiry.board_no}">
 					<tr>
 						<th>${adInquiry.board_no}</th>
-						<th> <div class="board_title">${adInquiry.board_title}</div></th>
+						<th> <div class="board_title"><a class="boardtitle" href="inquireBoardDetail?board_no=${adInquiry.board_no}">${adInquiry.board_title}</a></div></th>
 						<th>${adInquiry.user_id}</th>		
 						<th>${adInquiry.inquiry_category_name}</th>
 						<th><fmt:formatDate value="${adInquiry.board_date }" pattern="yyyy. MM. dd"/></th>	

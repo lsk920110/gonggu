@@ -92,7 +92,7 @@
             <c:forEach items="${adgroupbuylist}" var="adgroupbuy">  
                <tr class="${adgroupbuy.board_no}">
                   <th>${adgroupbuy.board_no}</th>
-                  <th><div class="board_title">${adgroupbuy.board_title}</div></th>  
+                  <th><div class="board_title"><a href="groupbuydetail?board_no=${adgroupbuy.board_no}">${adgroupbuy.board_title}</a></div></th>  
                   <th>${adgroupbuy.product_category_name}</th>
                   <th><fmt:formatDate value="${adgroupbuy.board_date}" pattern="yyyy. MM. dd"/></th>
                   <th>

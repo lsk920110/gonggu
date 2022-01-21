@@ -84,7 +84,7 @@
 				<input type="hidden" name="boardNo" value="${adRequire.board_no}"/>
 					<tr>
 						<th>${adRequire.board_no}</th>
-						<th><div class="board_title">${adRequire.board_title}</div></th>
+						<th><div class="board_title"><a href="RequestBoardDetail?board_no=${adRequire.board_no}&frompage=myorderList">${adRequire.board_title}</a></div></th>
 						<th>${adRequire.user_id}</th>		
 						<th>${adRequire.product_category_name}</th>
 						<th><fmt:formatDate value="${adRequire.board_date}" pattern="yyyy. MM. dd"/></th>

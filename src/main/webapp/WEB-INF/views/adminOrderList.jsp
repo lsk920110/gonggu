@@ -84,7 +84,7 @@
 					<tr>
 						<th><a href="orderDetail?order_no=${adOrderList.order_no}&frompage=adminOrderList">${adOrderList.order_no}</a></th>
 						<th>${adOrderList.board_no}</th>
-						<th><div class="board_title">${adOrderList.board_title}</div></th>
+						<th><div class="board_title"><a href="groupbuydetail?board_no=${adOrderList.board_no}">${adOrderList.board_title}</a></div></th>
 						<th>${adOrderList.groupbuy_state}</th>
 						<th>${adOrderList.user_id}</th>
 						<th><fmt:formatDate value="${adOrderList.order_date}" pattern="yyyy. MM. dd"/></th>						

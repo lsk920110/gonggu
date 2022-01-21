@@ -68,7 +68,7 @@
 		<tr>
 			<th>${reL.board_no}</th>
 			<th>${reL.product_category_name}</th>
-			<th>${reL.board_title}</th>		
+			<th><a href="RequestBoardDetail?board_no=${reL.board_no}&frompage=myorderList">${reL.board_title}</a></th>		
 			<th>${reL.board_bHit}</th>
 			<th>${reL.board_date }</th>
 			<th>${reL.board_select}</th>		

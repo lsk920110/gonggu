@@ -69,7 +69,7 @@
 		<tr>
 			<th>${iqL.board_no}</th>
 			<th>${iqL.inquiry_category_name}</th>
-			<th>${iqL.board_title}</th>		
+			<th><a class="boardtitle" href="inquireBoardDetail?board_no=${iqL.board_no}">${iqL.board_title}</a></th>		
 			<th>${iqL.board_date }</th>
 			<th>${iqL.inquiry_answer}</th>		
 		</tr>			

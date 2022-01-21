@@ -73,7 +73,7 @@
 		<tr>
 			<th><a href="orderDetail?order_no=${orl.order_no}&frompage=myorderList">${orl.order_no}</a></th>
 			<th>${orl.order_date}</th>
-			<th>${orl.board_title}</th>		
+			<th><a href="groupbuydetail?board_no=${orl.board_no}&frompage=myorderList">${orl.board_title}</a></th>		
 			<th>${orl.groupbuy_state}</th>	
 			<th>${orl.order_state}</th>		
 			<th>${orl.order_quantity }</th>
