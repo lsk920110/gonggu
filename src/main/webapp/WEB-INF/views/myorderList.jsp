@@ -31,7 +31,11 @@
 		#myMenuBar{
 			text-align: center;
 		}		
-	
+		 table{
+         margin-left: auto;
+         margin-right: auto;
+         min-width: 1296px;
+    }		
 	</style>
 </head>
 <body>

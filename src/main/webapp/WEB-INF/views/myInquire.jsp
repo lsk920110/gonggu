@@ -28,10 +28,16 @@
 			height: 210px;
 			border-style: none;
 		}
+		 table{
+         margin-left: auto;
+         margin-right: auto;
+         min-width: 1296px;
+    }
 	</style>
 </head>
 <body>
 	<iframe src="header"></iframe>
+	<div class = "allmyMenuBar">
 	<div id = "myMenuBar">
         <img class="myMenu" src="resources/img/전체주문내역.png"  alt="전체주문내역" loc="myorderList?currpage=1">
         <img style="background-color: beige" class="myMenu" src="resources/img/전체문의게시글.png" alt="전체문의게시글" loc="myInquire?currpage=1">
@@ -70,7 +76,7 @@
 		</c:forEach>
 
 	</table>
-
+</div>
 	<iframe src="footer"></iframe>
 
 	

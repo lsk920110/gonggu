@@ -26,6 +26,11 @@
 			width: 100%;
 			border-style: none;
 		}
+		table{
+         margin-left: auto;
+         margin-right: auto;
+         min-width: 1296px;
+    }  		
 	</style>
 </head>
 <body>
