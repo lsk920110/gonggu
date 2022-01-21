@@ -73,7 +73,7 @@
 				<th>카테고리</th>
 				<th>등록일자</th>
 				<th>비노출</th>
-				<th>비활성화</th>
+				<th style="display : none">비활성화</th>
 				<th>현황</th>
 			</tr>
 			
@@ -101,7 +101,7 @@
 							</select>
 						</th>	
 						
-						<th>
+						<th style="display : none">
 							<select name="board_active">
 								<option value="Y"
 								<c:if test="${adRequire.board_active eq 'Y'}">selected</c:if>
@@ -113,17 +113,27 @@
 						</th>	
 						
 						<th>
-							<select name="inquiry_answer">
-								<option value="Y"
-								<c:if test="${adRequire.board_select eq 'Y'}">selected</c:if>
+							<select name="requiry_answer">
+								<option value="선정완료"
+								<c:if test="${adRequire.board_select eq '선정완료'}">selected</c:if>
 								>선정완료</option>
-			                    <option value="N"
-			                    <c:if test="${adRequire.board_select eq 'N'}">selected</c:if>
-			                    >선정 중</option>
+			                    <option value="선정실패"
+			                    <c:if test="${adRequire.board_select eq '선정실패'}">selected</c:if>
+			                    >선정실패</option>
+			                    <option value="진행중"
+			                    <c:if test="${adRequire.board_select eq '진행중'}">selected</c:if>
+			                    >진행중</option>
 							</select>
 						</th>	
 					</tr>			
 			</c:forEach>
+			<tr style="text-align : right">
+				<td colspan="9">
+					<input type="submit" value="수정"/>
+					<input type="hidden" name="currpage" value="${nowpage}"/>
+				</td>
+			</tr>
+			
 						<!-- 페이징 영역 -->
 			<tr>
 				<td colspan="9">
@@ -139,8 +149,6 @@
 			
 		</table>	
 		<br/>
-		<input type="submit" value="수정"/>
-		<input type="hidden" name="currpage" value="${nowpage}"/>
 	
 	</form>
 

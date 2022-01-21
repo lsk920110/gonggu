@@ -185,8 +185,8 @@
 		
 		  
 		<input type="button" onclick="location.href='./groupBuyList?category=all&currpage=1'" value="목록"/>
-		<input style="margin-left:1100px"type="button" onclick="" value="삭제"/>
-		
+		<!-- <input style="margin-left:1100px"type="button" onclick="" value="삭제"/>
+		 -->
 		
 		<br/>
 		
@@ -212,10 +212,12 @@
 	<iframe src="footer"></iframe>
 </body>
 <script>
-	if($('.icon').html() != '모집중'){
+	if($('.icon').html() == '공구실패' || "${groupbuydetail.board_active}" == 'N'){
 		$('#sinchung').hide();
 		$('input[name="order_quantity"]').hide();	
-	} 
+	}
+	
+
 
 
 	var price = document.getElementById('price');

@@ -82,7 +82,7 @@
 					<th>카테고리</th>
 					<th>등록일자</th>
 					<th>비노출</th>
-					<th>비활성화</th>
+					<th style="display : none">비활성화</th>
 					<th>현황</th>
 				</tr>
 				
@@ -110,7 +110,7 @@
 							</select>
 						</th>	
 							
-						<th>
+						<th  style="display : none">
 							<select class="${adInquiry.board_no}" name="board_active">
 								<option value="Y"
 								<c:if test="${adInquiry.board_active eq 'Y'}">selected</c:if>
@@ -138,6 +138,13 @@
 						 -->
 					</tr>			
 				</c:forEach>
+			<tr style="text-align : right">
+				<td colspan="9">
+					<input type="submit" value="수정"/>
+					<input type="hidden" name="currpage" value="${nowpage}"/>
+				</td>
+			</tr>
+				
 			<!-- 페이징 영역 -->
 			<tr>
 				<td colspan="9">
@@ -151,8 +158,7 @@
 			<!-- 페이징 영역 -->	
 			</table>	
 			<br/>
-			<input type="submit" value="수정"/>
-			<input type="hidden" name="currpage" value="${nowpage}"/>
+
 	
 	</form>
 	

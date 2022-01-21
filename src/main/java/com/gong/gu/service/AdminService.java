@@ -44,11 +44,11 @@ public class AdminService {
 	
 	//5. 전체 요청 게시글 변경된 데이터 값 보내기
 	public void adRequire_update(String update_boardNo, String update_exposure, String update_board_active,
-			String update_inquiry_answer) {
+			String update_requiry_answer) {
 		
 		dao.adRequire_update(update_boardNo, update_exposure, update_board_active);
 		
-		dao.adRequire_update2(update_boardNo, update_inquiry_answer);
+		dao.adRequire_update2(update_boardNo, update_requiry_answer);
 		logger.info(update_boardNo+" 번 게시글 수정 성공");
 		
 	}

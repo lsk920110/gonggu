@@ -193,16 +193,16 @@ public class AdminController {
 	//5. 전체 요청 게시글 변경된 데이터 값 보내기
 	@RequestMapping(value = "/adRequire_update", method = RequestMethod.POST)
 	public String adRequire_update(Model model, 
-			 String boardNo,String exposure, String board_active ,String inquiry_answer, String currpage) {
+			 String boardNo,String exposure, String board_active ,String requiry_answer, String currpage) {
 		
 		logger.info("boardNo_게시글번호 : {}", boardNo);
 		logger.info("exposure_노출여부 : {}", exposure);
 		logger.info("boardActive_활성화여부 : {}", board_active);
-		logger.info("inquiryAnswer_답변여부 : {}", inquiry_answer);
+		logger.info("requiryAnswer답변여부 : {}", requiry_answer);
 		List <Map<String,String>> list = new ArrayList<>();	//?
 		String [] boardNos = boardNo.split(",");
 		String [] board_actives = board_active.split(",");
-		String [] inquiry_answers = inquiry_answer.split(",");
+		String [] requiry_answers = requiry_answer.split(",");
 		String [] exposures = exposure.split(",");
 		
 		for(int i= 0; i<boardNos.length; i++){
@@ -210,7 +210,7 @@ public class AdminController {
 			m.put("boardNo", boardNos[i]);
 			m.put("exposure", exposures[i]);
 			m.put("board_active", board_actives[i]);
-			m.put("inquiry_answer", inquiry_answers[i]);
+			m.put("requiry_answer", requiry_answers[i]);
 			list.add(m);
 		}
 		
@@ -220,11 +220,11 @@ public class AdminController {
 			String update_boardNo = m.get("boardNo");
 			String update_exposure = m.get("exposure");
 			String update_board_active = m.get("board_active");
-			String update_inquiry_answer = m.get("inquiry_answer");
+			String update_requiry_answer = m.get("requiry_answer");
 			
-			logger.info(update_boardNo+"/"+update_exposure+"/"+update_board_active+"/"+update_inquiry_answer);
+			logger.info(update_boardNo+"/"+update_exposure+"/"+update_board_active+"/"+update_requiry_answer);
 			
-			service.adRequire_update(update_boardNo, update_exposure, update_board_active, update_inquiry_answer);
+			service.adRequire_update(update_boardNo, update_exposure, update_board_active, update_requiry_answer);
 
 		}
 		

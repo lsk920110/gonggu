@@ -288,21 +288,21 @@ iframe{ /*헤더 푸터 지정 */
 	<div class="swiper-container monal">
 		<div class="magam-title-name" style="font-size:14pt">마감임박</div>
 			  <div class="swiper-wrapper nomal">
-			  <div class="swiper-slide nomal"><img src="resources/slide/러그_대표사진.png" onclick="location.href='http://localhost:8080/gu/groupbuydetail?board_no=160'"></div>
-			  <div class="swiper-slide nomal"><img src="resources/slide/무로 남녀공용 티셔츠_대표사진.png" onclick="location.href='http://localhost:8080/gu/groupbuydetail?board_no=170'"></div>
-			  <div class="swiper-slide nomal"><img src="resources/slide/바넥스 풀HD 소니이미지센서 블랙박스_대표사진.png" onclick="location.href='http://localhost:8080/gu/groupbuydetail?board_no=208'"></div>
-			  <div class="swiper-slide nomal"><img src="resources/slide/센카 퍼펙트 휩 페이셜 워시 대용량 클렌징 폼.png" onclick="location.href='http://localhost:8080/gu/groupbuydetail?board_no=196'"></div>			  
-			  <div class="swiper-slide nomal"><img src="resources/slide/우디 홈바 확장형 아일랜드 식탁_대표사진.png" onclick="location.href='http://localhost:8080/gu/groupbuydetail?board_no=184'"></div>
-			  <div class="swiper-slide nomal"><img src="resources/slide/떳다그녀 루디크 자켓and슬랙스 SET_대표사진.png" onclick="location.href='http://localhost:8080/gu/groupbuydetail?board_no=191'"></div>		 				  
-			  <div class="swiper-slide nomal"><img src="resources/slide/Apple iPad Air 4세대_대표사진.png" onclick="location.href='http://localhost:8080/gu/groupbuydetail?board_no=185'"></div>
-			  <div class="swiper-slide nomal"><img src="resources/slide/make speed 겨울 방한복_대표사진.png" onclick="location.href='http://localhost:8080/gu/groupbuydetail?board_no=165'"></div>
-			  <div class="swiper-slide nomal"><img src="resources/slide/ricotype_뉴본키트_4종 구성_대표사진.png" onclick="location.href='http://localhost:8080/gu/groupbuydetail?board_no=200'"></div>
-			  <div class="swiper-slide nomal"><img src="resources/slide/다향오리 1등급 훈제 오리 슬라이스_대표사진.png" onclick="location.href='http://localhost:8080/gu/groupbuydetail?board_no=203'"></div>
- 			  <div class="swiper-slide nomal"><img src="resources/slide/에이지투웨니스 시그니처 에센스 커버 팩트_대표사진.png" onclick="location.href='http://localhost:8080/gu/groupbuydetail?board_no=197'"></div>
-			  <div class="swiper-slide nomal"><img src="resources/slide/탐육 함박스테이크 (냉동)_대표사진.png" onclick="location.href='http://localhost:8080/gu/groupbuydetail?board_no=205'"></div>
-			  <div class="swiper-slide nomal"><img src="resources/slide/하이플러스카드 하이패스_대표사진.png" onclick="location.href='http://localhost:8080/gu/groupbuydetail?board_no=210'"></div>		 
- 			  <div class="swiper-slide nomal"><img src="resources/slide/벤디스 여성용 롱 로브 원피스 비치웨어_대표사진.png" onclick="location.href='http://localhost:8080/gu/groupbuydetail?board_no=192'"></div>		 			 		
- 	 		  <div class="swiper-slide nomal"><img src="resources/slide/위닉스 뽀송 제습기.png" onclick="location.href='http://localhost:8080/gu/groupbuydetail?board_no=187'"></div>		 			 		
+			  <div class="swiper-slide nomal"><img src="resources/slide/러그_대표사진.png" onclick="location.href='./groupbuydetail?board_no=160'"></div>
+			  <div class="swiper-slide nomal"><img src="resources/slide/무로 남녀공용 티셔츠_대표사진.png" onclick="location.href='./groupbuydetail?board_no=170'"></div>
+			  <div class="swiper-slide nomal"><img src="resources/slide/바넥스 풀HD 소니이미지센서 블랙박스_대표사진.png" onclick="location.href='./groupbuydetail?board_no=208'"></div>
+			  <div class="swiper-slide nomal"><img src="resources/slide/센카 퍼펙트 휩 페이셜 워시 대용량 클렌징 폼.png" onclick="location.href='./groupbuydetail?board_no=196'"></div>			  
+			  <div class="swiper-slide nomal"><img src="resources/slide/우디 홈바 확장형 아일랜드 식탁_대표사진.png" onclick="location.href='./groupbuydetail?board_no=184'"></div>
+			  <div class="swiper-slide nomal"><img src="resources/slide/떳다그녀 루디크 자켓and슬랙스 SET_대표사진.png" onclick="location.href='./groupbuydetail?board_no=191'"></div>		 				  
+			  <div class="swiper-slide nomal"><img src="resources/slide/Apple iPad Air 4세대_대표사진.png" onclick="location.href='./groupbuydetail?board_no=185'"></div>
+			  <div class="swiper-slide nomal"><img src="resources/slide/make speed 겨울 방한복_대표사진.png" onclick="location.href='./groupbuydetail?board_no=165'"></div>
+			  <div class="swiper-slide nomal"><img src="resources/slide/ricotype_뉴본키트_4종 구성_대표사진.png" onclick="location.href='./groupbuydetail?board_no=200'"></div>
+			  <div class="swiper-slide nomal"><img src="resources/slide/다향오리 1등급 훈제 오리 슬라이스_대표사진.png" onclick="location.href='./groupbuydetail?board_no=203'"></div>
+ 			  <div class="swiper-slide nomal"><img src="resources/slide/에이지투웨니스 시그니처 에센스 커버 팩트_대표사진.png" onclick="location.href='./groupbuydetail?board_no=197'"></div>
+			  <div class="swiper-slide nomal"><img src="resources/slide/탐육 함박스테이크 (냉동)_대표사진.png" onclick="location.href='./groupbuydetail?board_no=205'"></div>
+			  <div class="swiper-slide nomal"><img src="resources/slide/하이플러스카드 하이패스_대표사진.png" onclick="location.href='./groupbuydetail?board_no=210'"></div>		 
+ 			  <div class="swiper-slide nomal"><img src="resources/slide/벤디스 여성용 롱 로브 원피스 비치웨어_대표사진.png" onclick="location.href='./groupbuydetail?board_no=192'"></div>		 			 		
+ 	 		  <div class="swiper-slide nomal"><img src="resources/slide/위닉스 뽀송 제습기.png" onclick="location.href='./groupbuydetail?board_no=187'"></div>		 			 		
  			</div>
 	 <!-- 네비게이션 -->
 	 <div class="swiper-button-next"></div><!-- 다음 버튼 (오른쪽에 있는 버튼) -->
@@ -316,21 +316,21 @@ iframe{ /*헤더 푸터 지정 */
 	<div class="swiper-container big">
 		<div class="recently-title-name" style="font-size:14pt">최근상품</div>
 			  <div class="swiper-wrapper big">
-			  <div class="swiper-slide big"><img src="resources/slide/우디 홈바 확장형 아일랜드 식탁_대표사진.png" onclick="location.href='http://localhost:8080/gu/groupbuydetail?board_no=184'"></div>
-			  <div class="swiper-slide big"><img src="resources/slide/떳다그녀 루디크 자켓and슬랙스 SET_대표사진.png" onclick="location.href='http://localhost:8080/gu/groupbuydetail?board_no=191'"></div>		 				  
-			  <div class="swiper-slide big"><img src="resources/slide/Apple iPad Air 4세대_대표사진.png" onclick="location.href='http://localhost:8080/gu/groupbuydetail?board_no=185'"></div>			  
- 			  <div class="swiper-slide big"><img src="resources/slide/make speed 겨울 방한복_대표사진.png" onclick="location.href='http://localhost:8080/gu/groupbuydetail?board_no=165'"></div>
-			  <div class="swiper-slide big"><img src="resources/slide/ricotype_뉴본키트_4종 구성_대표사진.png" onclick="location.href='http://localhost:8080/gu/groupbuydetail?board_no=200'"></div>
-			  <div class="swiper-slide big"><img src="resources/slide/다향오리 1등급 훈제 오리 슬라이스_대표사진.png" onclick="location.href='http://localhost:8080/gu/groupbuydetail?board_no=203'"></div>
- 			  <div class="swiper-slide big"><img src="resources/slide/에이지투웨니스 시그니처 에센스 커버 팩트_대표사진.png" onclick="location.href='http://localhost:8080/gu/groupbuydetail?board_no=197'"></div>
-			  <div class="swiper-slide big"><img src="resources/slide/탐육 함박스테이크 (냉동)_대표사진.png" onclick="location.href='http://localhost:8080/gu/groupbuydetail?board_no=205'"></div>
-			  <div class="swiper-slide big"><img src="resources/slide/하이플러스카드 하이패스_대표사진.png" onclick="location.href='http://localhost:8080/gu/groupbuydetail?board_no=210'"></div>		 
- 			  <div class="swiper-slide big"><img src="resources/slide/벤디스 여성용 롱 로브 원피스 비치웨어_대표사진.png" onclick="location.href='http://localhost:8080/gu/groupbuydetail?board_no=192'"></div>		 			 		
- 	 		  <div class="swiper-slide big"><img src="resources/slide/위닉스 뽀송 제습기.png" onclick="location.href='http://localhost:8080/gu/groupbuydetail?board_no=187'"></div>		 			 		
- 			  <div class="swiper-slide big"><img src="resources/slide/러그_대표사진.png" onclick="location.href='http://localhost:8080/gu/groupbuydetail?board_no=160'"></div>
-			  <div class="swiper-slide big"><img src="resources/slide/무로 남녀공용 티셔츠_대표사진.png" onclick="location.href='http://localhost:8080/gu/groupbuydetail?board_no=170'"></div>
-			  <div class="swiper-slide big"><img src="resources/slide/바넥스 풀HD 소니이미지센서 블랙박스_대표사진.png" onclick="location.href='http://localhost:8080/gu/groupbuydetail?board_no=208'"></div>
-			  <div class="swiper-slide big"><img src="resources/slide/센카 퍼펙트 휩 페이셜 워시 대용량 클렌징 폼.png" onclick="location.href='http://localhost:8080/gu/groupbuydetail?board_no=196'"></div>			  
+			  <div class="swiper-slide big"><img src="resources/slide/우디 홈바 확장형 아일랜드 식탁_대표사진.png" onclick="location.href='./groupbuydetail?board_no=184'"></div>
+			  <div class="swiper-slide big"><img src="resources/slide/떳다그녀 루디크 자켓and슬랙스 SET_대표사진.png" onclick="location.href='./groupbuydetail?board_no=191'"></div>		 				  
+			  <div class="swiper-slide big"><img src="resources/slide/Apple iPad Air 4세대_대표사진.png" onclick="location.href='./groupbuydetail?board_no=185'"></div>			  
+ 			  <div class="swiper-slide big"><img src="resources/slide/make speed 겨울 방한복_대표사진.png" onclick="location.href='./groupbuydetail?board_no=165'"></div>
+			  <div class="swiper-slide big"><img src="resources/slide/ricotype_뉴본키트_4종 구성_대표사진.png" onclick="location.href='./groupbuydetail?board_no=200'"></div>
+			  <div class="swiper-slide big"><img src="resources/slide/다향오리 1등급 훈제 오리 슬라이스_대표사진.png" onclick="location.href='./groupbuydetail?board_no=203'"></div>
+ 			  <div class="swiper-slide big"><img src="resources/slide/에이지투웨니스 시그니처 에센스 커버 팩트_대표사진.png" onclick="location.href='./groupbuydetail?board_no=197'"></div>
+			  <div class="swiper-slide big"><img src="resources/slide/탐육 함박스테이크 (냉동)_대표사진.png" onclick="location.href='./groupbuydetail?board_no=205'"></div>
+			  <div class="swiper-slide big"><img src="resources/slide/하이플러스카드 하이패스_대표사진.png" onclick="location.href='./groupbuydetail?board_no=210'"></div>		 
+ 			  <div class="swiper-slide big"><img src="resources/slide/벤디스 여성용 롱 로브 원피스 비치웨어_대표사진.png" onclick="location.href='./groupbuydetail?board_no=192'"></div>		 			 		
+ 	 		  <div class="swiper-slide big"><img src="resources/slide/위닉스 뽀송 제습기.png" onclick="location.href='./groupbuydetail?board_no=187'"></div>		 			 		
+ 			  <div class="swiper-slide big"><img src="resources/slide/러그_대표사진.png" onclick="location.href='./groupbuydetail?board_no=160'"></div>
+			  <div class="swiper-slide big"><img src="resources/slide/무로 남녀공용 티셔츠_대표사진.png" onclick="location.href='./groupbuydetail?board_no=170'"></div>
+			  <div class="swiper-slide big"><img src="resources/slide/바넥스 풀HD 소니이미지센서 블랙박스_대표사진.png" onclick="location.href='./groupbuydetail?board_no=208'"></div>
+			  <div class="swiper-slide big"><img src="resources/slide/센카 퍼펙트 휩 페이셜 워시 대용량 클렌징 폼.png" onclick="location.href='./groupbuydetail?board_no=196'"></div>			  
  			</div>
 	 <!-- 네비게이션 -->
 	 <div class="swiper-button-next"></div><!-- 다음 버튼 (오른쪽에 있는 버튼) -->

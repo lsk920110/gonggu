@@ -29,9 +29,9 @@
 	<!-- 요청글쓰기 카테고리별 -->
 	<insert id="reqwrite2">
 		insert into require_addit
-			(board_no, product_category_name)
+			(board_no, product_category_name, board_select)
 		values
-			(#{param1},#{param2})
+			(#{param1},#{param2},'진행중')
 	</insert>
 	
 	
@@ -106,7 +106,7 @@
 	</select>
 	
 	<select id="RequestBoardlist_listCall" resultType="hashmap">
-		SELECT * FROM board INNER JOIN require_addit USING (board_no) ORDER BY board_no DESC LIMIT 10 offset #{param2}
+		SELECT * FROM board INNER JOIN require_addit USING (board_no) WHERE board_exposure = 'Y' ORDER BY board_no DESC LIMIT 10 offset #{param2}
 	</select>
 	
 	<select id="additdetail" resultType="hashmap">

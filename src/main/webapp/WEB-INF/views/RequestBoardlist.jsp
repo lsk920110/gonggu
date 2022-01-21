@@ -51,7 +51,7 @@
 	<table id="table">
 		<tr>
 			<td class="none"><button onclick="reqwrite()">글쓰기</button></td>
-			<td class="none" colspan="6"></td>
+			<td class="none" colspan="7"></td>
 	   </tr>
 	   <tr>
 	      <th>글번호</th>
@@ -63,7 +63,7 @@
 	      <th>선정여부</th>
 	   </tr>
 	   <c:if test="${RequestBoardlist eq null || size == 0}">
-	   <tr><td colspan="6"> 등록된 글이 없습니다.</td></tr>
+	   <tr><td colspan="7"> 등록된 글이 없습니다.</td></tr>
 	   </c:if>
 	   <c:forEach items="${RequestBoardlist}" var="RequestList">
 	   <tr>
