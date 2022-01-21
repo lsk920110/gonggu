@@ -17,6 +17,7 @@
 		text-align: center;
 		top: 20px;	
 		margin : auto;
+		height: 500px;
 		}			
 	.login {
 		width: 400px;
@@ -24,6 +25,11 @@
 		top: 10px;	
 		margin : auto;
 		left : 300px;
+		}
+		table,th,td{
+			border-collapse : collapse ;
+			padding : 5px;
+			border: solid 1px gray;
 		}			
 	</style>
 </head>

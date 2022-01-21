@@ -21,6 +21,12 @@
 	.login {
 		text-align: center;
 		}	
+	table,th,td{
+		border-collapse : collapse ;
+		padding : 5px;
+		border: solid 1px gray;
+	}
+		
 	</style>
 </head>
 <body>

@@ -9,6 +9,7 @@
 		table,th,td{
 			border-collapse : collapse ;
 			padding : 5px;
+			border: solid 1px gray;
 		}
 		.myMenu{
 			cursor: pointer;
@@ -62,17 +63,17 @@
 				<td><input class="pwconfirmSet" type="text" name="pw" value="${myProfile.user_pw}"/></td>
 			</tr>
 			<tr>
-				<th rowspan="2">비밀번호확인</th>
-				<td><input class="pwconfirmSet" type="text" name="pwConfirm"  value="${myProfile.user_pw}"/></td>
+				<th>
+				비밀번호확인
 				
+				</th>
+				<td>
+				<input class="pwconfirmSet" type="text" name="pwConfirm"  value="${myProfile.user_pw}"/>
+				<br/>
+				<div id="confirm"></div>
+				</td>		
 			</tr>
-			<tr>
-				
-				<td id="confirm">
-				
-				</td>
-				
-			</tr>			
+	
 			
 					
 			<tr>
@@ -96,20 +97,12 @@
 				<th>이메일주소</th>
 				<td>
 					<input type="text" name="email"   value="${myProfile.user_email}"/>
-					<input type="button" id="indetify" value="인증"/>
-				</td>
-			</tr>
-			<tr>
-				<th>
-				</th>
-				<td>
+					<input type="button" id="indetify" value="인증"/><br/>
 					<input type="hidden" id="emailIdnum" value=""/>
 					<input type="hidden" id="emailIdbtn" value="확인"/>
-				
 				</td>
-				
-			
 			</tr>
+
 			
 			<tr>
 				<th>성별</th>
