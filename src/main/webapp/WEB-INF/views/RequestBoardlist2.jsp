@@ -9,6 +9,8 @@
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>  
 	<script src="resources/js/jquery.twbsPagination.js"></script>
+	<script src="resources/js/.bootstrap.min.js"></script>
+	<link rel="stylesheet" href="resources/bootstrap.min.css"/>
 	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
    <link rel="stylesheet" href="resources/common.css">
    <style>

@@ -5,6 +5,9 @@
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
 	<script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
+	<script src="resources/js/jquery.twbsPagination.js"></script>
+	<script src="resources/js/.bootstrap.min.js"></script>
+	<link rel="stylesheet" href="resources/bootstrap.min.css"/>
 	<style>
 	table,th,td{
 		border : 1px solid black;

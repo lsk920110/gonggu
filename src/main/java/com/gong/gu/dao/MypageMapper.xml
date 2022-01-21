@@ -38,7 +38,7 @@
 	<select id="orderDetail" resultType="hashmap">
 	SELECT 
 	oi.order_name , oi.order_address, oi.order_phone, oi.order_no, oi.order_date,oi.order_state , oi.order_quantity , 
-	b.board_no , b.board_title, b.board_no
+	b.board_no , b.board_title, b.board_no,
 	ga.groupbuy_state, ga.groupbuy_unitprice
 	FROM order_info oi INNER JOIN board b 
 	USING (board_no) 
