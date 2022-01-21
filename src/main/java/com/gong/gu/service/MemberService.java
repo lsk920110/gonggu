@@ -47,4 +47,9 @@ public class MemberService {
 		return dao.findpw(user_id, user_email);
 	}
 
+	public int temppw(String user_id, String user_email, String user_pw) {
+		return dao.temppw(user_id,user_email,user_pw);
+
+	}
+
 }

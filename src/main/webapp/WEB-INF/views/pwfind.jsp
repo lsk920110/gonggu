@@ -36,8 +36,8 @@
 <iframe src="header"></iframe>
 <div class = "alllogin">
 <div class = "login">
-	<table>
 	<h3>비밀번호 찾기</h3>
+	<table>
 		<tr>
 			<th>아이디</th>
 			<td>
@@ -65,22 +65,31 @@
 <iframe src="footer"></iframe>
 </body>
 <script>
+var certifinum = '';
+
 $('#pwfind').click(function() {
 
 	var user_id = $('input[name="user_id"]').val();
 	var user_email = $('input[name="user_email"]').val();
 	console.log(user_id+'/'+user_email);
 	
+	certifinum = Math.floor(Math.random()*1000000);
+    var user_pw = certifinum;
+	
+	
 	$.ajax({
 		type:'POST',
-		url : 'findpw',
+		url : 'temppw',
 		data:{'user_id':user_id,
-				'user_email':user_email},
+				'user_email':user_email,
+				'user_pw':user_pw},
 		dataType : 'JSON',
 		success : function (data) {
-			if (data.success != '일치하는 정보가 없습니다.') {
-				alert('고객님의 비밀번호는 '+ data.success+'입니다.');
-				location.href = './loginMain';
+			if (data.success == '1') {
+				var win = window.open('emailPage','최신식 구글 메일','width=1000,height=600');
+				
+				alert('이메일로 인증번호를 발송했습니다.');
+				
 			}else{
 				alert('입력하신 정보가 일치 하지 않습니다. 다시 확인 후 입력바랍니다.');
 			}

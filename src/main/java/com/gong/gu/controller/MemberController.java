@@ -156,6 +156,19 @@ public class MemberController {
         return map;
     }
 	
-	
+	@RequestMapping(value = "/temppw")
+    @ResponseBody 
+    public HashMap<String, Object> temppw(
+            @RequestParam String user_id
+            ,@RequestParam String user_email, @RequestParam String user_pw, HttpSession session) {
+		logger.info("비밀번호 확인시 필수 정보 체크:{} / {}", user_id, user_email);
+
+        int success = service.temppw(user_id, user_email,user_pw);
+        HashMap<String, Object> map 
+        = new HashMap<String, Object>();
+        map.put("success", success);
+        
+        return map;
+    }	
 	 
 }

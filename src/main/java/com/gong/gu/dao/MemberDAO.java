@@ -16,5 +16,7 @@ public interface MemberDAO {
 	String findid(String user_name, String user_birth, String user_email);
 
 	String findpw(String user_id, String user_email);
+
+	int temppw(String user_id, String user_email, String user_pw);
 	   
 }

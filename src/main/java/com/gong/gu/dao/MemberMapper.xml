@@ -35,5 +35,9 @@
 		SELECT user_pw FROM user_info 
 		WHERE user_id = #{param1} 
 		AND user_email = #{param2}
-	</select> 
+	</select>
+	
+	<update id="temppw">
+	UPDATE user_info SET user_pw = #{param3} WHERE user_id = #{param1} AND user_email = #{param2}
+	</update>
 </mapper>

@@ -176,7 +176,7 @@ $('#indetify').click(function(){
 				random();
 				
 				
-				win = window.open('emailPage','최신식 구글 메일','width=1000,height=600');
+				var win = window.open('emailPage','최신식 구글 메일','width=1000,height=600');
 			}
 
 		},

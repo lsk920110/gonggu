@@ -9,15 +9,15 @@
 	</style>
 </head>
 <body>
-	<h1>믿기지 않지만 여기는 이메일페이지 입니다.</h1>
+	<h1>이메일페이지 입니다.</h1>
 	<h3></h3>
 
 
 	
 </body>
 <script>
-	var cretifinum = window.opener.certifinum;
-	$('h3').html(cretifinum);
+	var certifinum = window.opener.certifinum;
+	$('h3').html(certifinum);
 
 
 
