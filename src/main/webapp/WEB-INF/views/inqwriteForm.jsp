@@ -8,25 +8,45 @@
  <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
  <link rel="stylesheet" href="resources/common.css">
  <style>
- 		iframe{
-			width: 100%;
-			height: 210px;
-			border-style: none;
-		}  
+	iframe{
+		width: 100%;
+		height: 210px;
+		border-style: none;
+	}
+	textarea {
+	    width: 1100px;
+	    height: 450px;
+	    resize: none;
+	}
+	table{
+	   	margin-left: auto;
+	   	margin-right: auto;
+    }
+
+ 	.category{
+ 		width:150px;
+ 		height:50px;
+ 	}
+ 	.title{
+ 		width: 1099px;
+ 		height:50px;
+ 	}  
  
  </style>
 </head>
 <body>
   	<iframe src="header"></iframe>
 
-	<h3>| 문의게시글 작성하기</h3>
+
 	<form action="inqwrite" method="post">
 	<input type="hidden" name="user_id" value="${sessionScope.loginId}"/>
-		<table>    
+		<table>
 			<tr>
-				<th>문의 카테고리</th>
+				<th colspan="2">문의게시글 작성하기</th>
+			</tr>    
+			<tr>
 				<th>
-					<select name="Category">
+					<select class="category" name="Category">
                     <option value="" disabled selected>카테고리 선택</option>
                     <option value="배송문의">배송문의</option>
                     <option value="반품/교환/환불">반품/교환/환불</option>
@@ -34,12 +54,9 @@
                     <option value="제품문의">제품문의</option>
                     <option value="회원서비스">회원서비스</option>
             		</select>
-             	</th>
-			</tr>
-			<tr>
-				<th>제목</th>
+				</th>
 				<td>
-					<input type="text" placeholder="제목을 입력하세요" name="board_title"/>
+					<input class="title" type="text" placeholder="제목을 입력하세요" name="board_title"/>
 				</td>
 			</tr>
 			<tr>

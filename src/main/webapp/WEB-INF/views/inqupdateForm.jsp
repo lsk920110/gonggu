@@ -17,18 +17,37 @@
 			height: 210px;
 			border-style: none;
 		} 
- 
+ 	textarea {
+	    width: 1100px;
+	    height: 450px;
+	    resize: none;
+	}
+	table{
+	   	margin-left: auto;
+	   	margin-right: auto;
+    }
+
+ 	.category{
+ 		width:150px;
+ 		height:50px;
+ 	}
+ 	.title{
+ 		width: 946px;
+ 		height:50px;
+ 	}
  </style>
 </head>
 <body>
   	<iframe src="header"></iframe>
-	<h3>| 문의게시글 작성하기</h3>
 	<form action="inqupdate" method="post">
 		<input type="hidden" name="board_no" value="${inqboardetail.board_no }"/>
-		<table>    
+		<table>
+			<tr>
+				<th colspan="2">문의게시글 작성하기</th>
+			</tr>
 			<tr>
 				<th>
-					<select name="inquiry_category_name">
+					<select class="category" name="inquiry_category_name">
                     <option value="" disabled selected>카테고리 선택</option>
                     <option value="배송문의">배송문의</option>
                     <option value="반품/교환/환불">반품/교환/환불</option>
@@ -39,12 +58,12 @@
              	</th>
 			
 				
-				<td><input type="text" placeholder="제목을 입력하세요" name="board_title" value="${inqboardetail.board_title}"/></td>
+				<td><input class="title" type="text" placeholder="제목을 입력하세요" name="board_title" value="${inqboardetail.board_title}"/></td>
 			</tr>
 
 			<tr>
-				<th></th>
-				<td><textarea placeholder="내용을 입력하세요 " name="board_content">${inqboardetail.board_content}</textarea></td>
+				
+				<td colspan="2"><textarea placeholder="내용을 입력하세요 " name="board_content">${inqboardetail.board_content}</textarea></td>
 			</tr>
 <%-- 			<tr>
 				<th></th>

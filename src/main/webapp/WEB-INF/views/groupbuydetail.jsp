@@ -4,7 +4,9 @@
 <head>
 	<meta charset="UTF-8">
 	<title>공동구매게시판 상세보기</title>
-	<script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.5.0.min.js">
+	</script>
+	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 	<style>
 	iframe{
 		width: 100%;
@@ -86,7 +88,9 @@
 	    height: 50px;
 	    resize: none;
 	}
-
+	#price{
+		font-size: 20px;
+	}
 
 	</style>
 </head>
@@ -141,8 +145,13 @@
 				    <p style="font-size: 30px; font-weight : bold">${groupbuydetail.board_title }</p>
 				    
 					<span id="price">${groupbuydetail.groupbuy_unitprice}</span>
-				    <br/><br/>
-				    <p style="font-size:20px">${groupbuydetail.board_date } ~ ${groupbuydetail.groupbuy_due_date }</p>
+				    <br/>
+				    
+				    <p style="font-size:28px; margin-left:19px;">				    
+				    <fmt:formatDate value="${groupbuydetail.board_date}" pattern="yyyy. MM. dd"/>~
+				    <fmt:formatDate value="${groupbuydetail.groupbuy_due_date}" pattern="yyyy. MM. dd"/>
+				    </p>
+				    
 					<progress style="font-size:40px" value="${orderquansum }" max="${groupbuydetail.groupbuy_target}"></progress>
 					<p style="font-size:15px; padding-left:100px">신청수량:${orderquansum }개 / 목표수량:${groupbuydetail.groupbuy_target}개 </p>		
 				    <br/>
@@ -212,7 +221,7 @@
 	var price = document.getElementById('price');
 	var a = price.innerText;
 	var b = a.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-	document.getElementById('price').innerHTML = "가격  " + b + "원";
+	document.getElementById('price').innerHTML = "금액 " + b + "원";
 
 
 
@@ -295,9 +304,9 @@
 			//console.log(list[i]);
 
 			content += '<tr>';
-			content += '<td>'+list[i].user_id+'</td>';
-			content += '<td>'+list[i].reply_comment+'</td>';
-			content += '<td>'+list[i].reply_date+'</td>';		
+			content += '<td style="width:200px">'+list[i].user_id+'</td>';
+			content += '<td style="width:500px">'+list[i].reply_comment+'</td>';
+			content += '<td style="width:200px">'+list[i].reply_date+'</td>';		
 			content += '</tr>';
 			
 		}

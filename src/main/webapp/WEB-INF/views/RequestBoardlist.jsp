@@ -9,13 +9,14 @@
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>  
 	<script src="resources/js/jquery.twbsPagination.js"></script>
-	
+	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
    <link rel="stylesheet" href="resources/common.css">
    <style>
    #table{
 	   	margin-left: auto;
 	   	margin-right: auto;
 	   	min-width: 1296px;
+	   	max-width: 1166px;
    }
    	.icon{
 	    width:70px;
@@ -25,10 +26,19 @@
         font-size:14px;
         text-align:center;
 	}
-	#none{
+	.none{
 		border-top:1px solid #ffffff;
 		border-left:1px solid #ffffff;
 		border-right:1px solid #ffffff;
+	}
+	.board_title{
+	    display: block;
+        color: black;
+        width: 350px;
+        font-weight: bolder !important;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
 	}
 
    </style>
@@ -38,8 +48,8 @@
 	
 	<table id="table">
 		<tr>
-			<td id="none"><button onclick="reqwrite()">글쓰기</button></td>
-			<td id="none" colspan="6"></td>
+			<td class="none"><button onclick="reqwrite()">글쓰기</button></td>
+			<td class="none" colspan="6"></td>
 	   </tr>
 	   <tr>
 	      <th>글번호</th>
@@ -57,10 +67,11 @@
 	   <tr>
 	      <td>${RequestList.board_no}</td>
 	      <td>${RequestList.product_category_name}</td>
-	      <td><a href="RequestBoardDetail?board_no=${RequestList.board_no}">${RequestList.board_title}</a></td>
+	      <td><a class="board_title" href="RequestBoardDetail?board_no=${RequestList.board_no}">${RequestList.board_title}</a></td>
 	      <td>${RequestList.user_id}</td>
 	      <td>${RequestList.board_bHit}</td>
-	      <td>${RequestList.board_date}</td>
+	      <td><fmt:formatDate value="${RequestList.board_date}" pattern="yyyy. MM. dd"/></td>
+	      
 	      
 		<c:choose>
 			<c:when test="${RequestList.board_select eq '선정완료'}">

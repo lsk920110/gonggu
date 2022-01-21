@@ -5,13 +5,28 @@
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
 	<script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="resources/css/common.css">
+	<link rel="stylesheet" type="text/css" href="resources/common.css">
 	<style>
-			iframe{
-			width: 100%;
-			height: 210px;
-			border-style: none;
-		}  
+	iframe{
+		width: 100%;
+		height: 210px;
+		border-style: none;
+	} 
+	table{
+	   	margin-left: auto;
+	   	margin-right: auto;
+	   	min-width: 1296px;
+	   	max-width: 1166px;
+  	}
+  	textarea {
+	    width: 1200px;
+	    height: 50px;
+	    resize: none;
+	}
+	.none2{
+		border-left:1px solid #ffffff;
+		border-right:1px solid #ffffff;
+	}
 	
 	</style>
 </head>
@@ -175,9 +190,9 @@ function listDraw(list){
 	for(var i = 0; i<list.length; i++){
 		//console.log(list[i]);
 		content += '<tr>';
-		content += '<td>'+list[i].user_id+'</td>';
-		content += '<td>'+list[i].reply_comment+'</td>';
-		content += '<td>'+list[i].reply_date+'</td>';		
+		content += '<td style="width:200px" class="none2">'+list[i].user_id+'</td>';
+		content += '<td style="width:500px" class="none2">'+list[i].reply_comment+'</td>';
+		content += '<td style="width:200px" class="none2">'+list[i].reply_date+'</td>';		
 		content += '</tr>';
 		
 	}

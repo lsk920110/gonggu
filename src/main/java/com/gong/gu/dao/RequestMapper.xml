@@ -110,7 +110,7 @@
 	</select>
 	
 	<select id="additdetail" resultType="hashmap">
-	SELECT * FROM require_addit WHERE board_no =  #{param1}
+	SELECT * FROM require_addit WHERE board_no = #{param1}
 	</select>
 	
 

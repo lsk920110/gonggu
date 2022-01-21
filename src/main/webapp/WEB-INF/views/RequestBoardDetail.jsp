@@ -17,9 +17,10 @@
 	   	margin-left: auto;
 	   	margin-right: auto;
 	   	min-width: 1296px;
+	   	max-width:1166px;
   	}
 	textarea {
-	    width: 1100px;
+	    width: 1200px;
 	    height: 50px;
 	    resize: none;
 	}
@@ -222,9 +223,9 @@
 		for(var i = 0; i<list.length; i++){
 			//console.log(list[i]);
 			content += '<tr>';
-			content += '<td class="none2">'+list[i].user_id+'</td>';
-			content += '<td class="none2">'+list[i].reply_comment+'</td>';
-			content += '<td class="none2">'+list[i].reply_date+'</td>';		
+			content += '<td style="width:200px" class="none2">'+list[i].user_id+'</td>';
+			content += '<td style="width:500px" class="none2">'+list[i].reply_comment+'</td>';
+			content += '<td style="width:200px" class="none2">'+list[i].reply_date+'</td>';		
 			content += '</tr>';
 			
 		}

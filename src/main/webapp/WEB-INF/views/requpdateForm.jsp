@@ -22,19 +22,37 @@
 		height: 210px;
 		border-style: none;
 	}   
-
- 
+	textarea {
+	    width: 1100px;
+	    height: 450px;
+	    resize: none;
+	}
+	table{
+	   	margin-left: auto;
+	   	margin-right: auto;
+    }
+ 	.category{
+ 		width:150px;
+ 		height:50px;
+ 	}
+ 	.title{
+ 		width: 946px;
+ 		height:50px;
+ 	}
  </style>
 </head>
 <body>
   	<iframe src="header"></iframe>
-	<h3>| 요청게시글 작성하기</h3>
+  
 	<form action="requpdate" method="post">
 		<input type="hidden" name="board_no" value="${RequestBoardDetail.board_no }"/>
-		<table>    
+		<table>
 			<tr>
-				<th>
-					<select name="product_category_name">
+				<th colspan="2">요청게시글 작성하기</th>
+			</tr> 
+			<tr>
+				<td style="width:150px">
+					<select class="category" name="product_category_name">
                     <option value="" disabled selected>카테고리 선택</option>
                     <option value="생활/건강">생활/건강</option>
                     <option value="스포츠/레저">스포츠/레저</option>
@@ -47,14 +65,15 @@
                     <option value="여가/생활 편의">여가/생활 편의</option>
                     <option value="기타">기타</option>
             		</select>
-             	</th>
+             	</td>
              	
-				<td><input type="text" placeholder="제목을 입력하세요" name="board_title" value="${RequestBoardDetail.board_title}"/></td>
+				<td><input class="title" type="text" placeholder="제목을 입력하세요" name="board_title" value="${RequestBoardDetail.board_title}"/></td>
 			</tr>
 
 			<tr>
-				<th></th>
-				<td><textarea placeholder="내용을 입력하세요 " name="board_content">${RequestBoardDetail.board_content}</textarea></td>
+				
+				<td colspan="2"><textarea  placeholder="내용을 입력하세요 " name="board_content">${RequestBoardDetail.board_content}</textarea></td>
+			
 			</tr>
 			
 			
@@ -79,6 +98,7 @@
 			</tr>
 		</table>
 	</form>
+
   	<iframe src="footer"></iframe>
 	
 </body>

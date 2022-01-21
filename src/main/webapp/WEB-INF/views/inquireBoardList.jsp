@@ -8,63 +8,100 @@
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>  
 	<script src="resources/js/jquery.twbsPagination.js"></script>
+	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
       <link rel="stylesheet" href="resources/common.css">
    <style>
-   		iframe{
-			width: 100%;
-			height: 210px;
-			border-style: none;
-		}  
-   
+  	iframe{
+		width: 100%;
+		height: 210px;
+		border-style: none;
+	}  
+   		
+   table{
+	   	margin-left: auto;
+	   	margin-right: auto;
+	   	width:1167px;
+	   	max-width: 1166px;
+    }
+   	#none{
+		border-top:1px solid #ffffff;
+		border-left:1px solid #ffffff;
+		border-right:1px solid #ffffff;
+	}
+	.icon{
+	    width:70px;
+	    height:20px;
+        border-radius: 10px;
+        color: white;
+        font-size:14px;
+        text-align:center;
+	}
+	.board_title{
+	    display: block;
+        color: black;
+        width: 350px;
+        font-weight: bolder !important;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+	}
+	
+	
    </style>
 </head>
 <body>
   	<iframe src="header"></iframe>
 
-<button onclick="inqwrite()">글쓰기</button>
-<table>
-   <tr>
-      <th>글번호</th>
-      <th>카테고리</th>
-      <th>제목</th>
-      <th>작성자</th>
-      <th>작성일</th>
-      <th>답변여부</th>
-   </tr>
-   <c:if test="${InquiryList eq null || size == 0}">
-   <tr><td colspan="5"> 등록된 글이 없습니다.</td></tr>
-   </c:if>
-   <c:forEach items="${InquiryList}" var="InquiryList">
-   <tr>
-      <td>${InquiryList.board_no}</td>
-      <td>${InquiryList.inquiry_category_name}</td>
-      <td><a href="inquireBoardDetail?board_no=${InquiryList.board_no}">${InquiryList.board_title}</a></td>
-      <td>${InquiryList.user_id}</td>
-      <td>${InquiryList.board_date}</td>  
-	  <c:if test="${InquiryList.inquiry_answer == 'Y'}">
-    	  <td>
-	      	답변완료
-	      </td>
-    	</c:if>
-	      <c:if test="${InquiryList.inquiry_answer == 'N'}">
-			<td>
-	      	답변대기
-			</td>
-	      </c:if>
-   </tr>
-   </c:forEach>
-</table>
-	<!-- 페이징 영역 -->
-
-			<div class="container">
-				<nav aria-label="Page navigation" style="text-align:center">
-					<ul class="pagination" id="pagination"></ul>
-				</nav>
-			</div>
-
-	<!-- 페이징 영역 -->	
-  	<iframe src="footer"></iframe>
-  	
+	
+	<table>
+		<tr>
+			<td id="none"><button onclick="inqwrite()">글쓰기</button></td>
+			<td id="none" colspan="5"></td>
+		</tr>
+	   <tr>
+	      <th>글번호</th>
+	      <th>카테고리</th>
+	      <th>제목</th>
+	      <th>작성자</th>
+	      <th>작성일</th>
+	      <th>답변여부</th>
+	   </tr>
+	   <c:if test="${InquiryList eq null || size == 0}">
+	   <tr><td colspan="5"> 등록된 글이 없습니다.</td></tr>
+	   </c:if>
+	   <c:forEach items="${InquiryList}" var="InquiryList">
+	   <tr>
+	      <td>${InquiryList.board_no}</td>
+	      <td>${InquiryList.inquiry_category_name}</td>
+	      <td><a class="board_title" href="inquireBoardDetail?board_no=${InquiryList.board_no}">${InquiryList.board_title}</a></td>
+	      <td>${InquiryList.user_id}</td>
+	      <td><fmt:formatDate value="${InquiryList.board_date}" pattern="yyyy. MM. dd"/></td>
+	      
+	      
+	    <c:choose>
+			<c:when test="${InquiryList.inquiry_answer eq 'Y'}">
+				<td> <div class="icon" style="background-color: rgb(204, 41, 41)">답변완료</div></td>
+			</c:when>
+			<c:when test="${InquiryList.inquiry_answer == 'N'}">
+				<td> <div class="icon" style="background-color: rgb(53, 236, 181)">답변대기</div></td>
+			</c:when>
+		</c:choose>
+	       
+	   </tr>
+	   </c:forEach>
+	</table>
+	
+		<!-- 페이징 영역 -->
+	
+				<div class="container">
+					<nav aria-label="Page navigation" style="text-align:center">
+						<ul class="pagination" id="pagination"></ul>
+					</nav>
+				</div>
+	
+		<!-- 페이징 영역 -->	
+	  	<iframe src="footer"></iframe>
+	  	
 
 
 </body>
