@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Insert title here</title>
+	<title>주문상세</title>
 	<script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
 	<style>
 	.all{
@@ -37,8 +38,8 @@
     }
     .btn{
     	float:right;
-    	width:65px;
-    	height:50px;
+    	width:70px;
+    	height:40px;
     }
 	
 	</style>
@@ -50,46 +51,58 @@
 	<div class="all">
 		<h2 style="display:inline">주문번호</h2><p class="num" style="display:inline">${orderdetail.order_no}</p>
 		<hr/>
+		
+		<h2>구매자 정보</h2>
+		<table>
+			<tr>
+				<th>이름</th>
+				<td>${orderdetail.order_name }</td>
+			</tr>
+			<tr>
+				<th>주소</th>
+				<td>${orderdetail.order_address }</td>
+			</tr>
+			<tr>
+				<th>연락처</th>
+				<td>${orderdetail.order_phone }</td>
+			</tr>			
+		</table>
+		
+		<h2>구매글 정보</h2>
+		<table>
+			<tr>
+				<th>진행상태</th>
+				<th>게시글번호</th>
+				<th>제목</th>
+				<th>수량</th>
+				<th>가격</th>
+			</tr>
+			<tr style="text-align:center;">
+				<td>${orderdetail.groupbuy_state }</td>
+				<td>${orderdetail.board_no }</td>
+				<td>${orderdetail.board_title }</td>
+				<td>${orderdetail.order_quantity }</td>
+				<td>${orderdetail.order_quantity * orderdetail.groupbuy_unitprice }</td>
+			</tr>
+		</table>
+			<c:choose>
+				<c:when test="${orderdetail.order_state eq '취소완료'}">
+					<div style="text-align:center; margin-top:30px;">
+						<img src="./resources/img/취소완료.png" alt="취소완료이미지">
+					</div>
+					<h3 style="text-align:center;"id="orderState">${orderdetail.order_state }</h3>
+				</c:when>
+				<c:otherwise> 
+					<div style="text-align:center; margin-top:30px;">
+						<img src="./resources/img/check.png" alt="체크이미지">
+					</div>
+					<h3 style="text-align:center;"id="orderState">${orderdetail.order_state }</h3>
+				</c:otherwise> 
+			</c:choose>
 	
-	<h2>구매자 정보</h2>
-	<table>
-		<tr>
-			<th>이름</th>
-			<td>${orderdetail.order_name }</td>
-		</tr>
-		<tr>
-			<th>주소</th>
-			<td>${orderdetail.order_address }</td>
-		</tr>
-		<tr>
-			<th>연락처</th>
-			<td>${orderdetail.order_phone }</td>
-		</tr>			
-	</table>
-	
-	<h2>구매글 정보</h2>
-	<table>
-		<tr>
-			<th>진행상태</th>
-			<th>게시글번호</th>
-			<th>제목</th>
-			<th>수량</th>
-			<th>가격</th>
-		</tr>
-		<tr>
-			<td>${orderdetail.groupbuy_state }</td>
-			<td>${orderdetail.board_no }</td>
-			<td>${orderdetail.board_title }</td>
-			<td>${orderdetail.order_quantity }</td>
-			<td>${orderdetail.order_quantity * orderdetail.groupbuy_unitprice }</td>
-		</tr>
-	</table>
-	
-	<h3 style="text-align:center;"id="orderState">${orderdetail.order_state }</h3>
-
-	<input class="btn" type="button" value="확인" onclick="backPage()"/>
-	<input class="btn" type="button" id="cancelBtn" value="주문취소" onclick="orderCancel()"/>
-	
+		<input class="btn" style="margin-left:3px;" type="button" value="확인" onclick="backPage()"/>
+		<input class="btn" type="button" id="cancelBtn" value="주문취소" onclick="orderCancel()"/>
+		
 	</div>
 	<br/>
 	

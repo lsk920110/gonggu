@@ -102,11 +102,11 @@
 <body>
 	<iframe src="header"></iframe>
 	<div id = "myMenuBar">
-        <img class="myMenu" src="resources/img/전체주문내역.png"  alt="전체주문내역" loc="myorderList?currpage=1">
-        <img class="myMenu" src="resources/img/전체문의게시글.png" alt="전체문의게시글" loc="myInquire?currpage=1">
-        <img class="myMenu" src="resources/img/전체요청글.png" alt="전체요청글" loc="myRequire?currpage=1">
-        <img style="background-color: beige" class="myMenu" src="resources/img/전체공구게시글.png" alt="전체공구게시글" loc="myWish?currpage=1">
-        <img class="myMenu" src="resources/img/전체회원정보.png" alt="전체회원정보" loc="myProfile">
+        <img class="myMenu" src="resources/img/my주문내역.png"  alt="my주문내역" loc="myorderList?currpage=1">
+        <img class="myMenu" src="resources/img/my문의글.png" alt="my문의글" loc="myInquire?currpage=1">
+        <img class="myMenu" src="resources/img/my요청글.png" alt="my요청글" loc="myRequire?currpage=1">
+        <img style="background-color: beige"class="myMenu" src="resources/img/my찜리스트.png" alt="my찜리스트" loc="myWish?currpage=1">
+        <img class="myMenu" src="resources/img/my회원정보수정.png" alt="my회원정보수정" loc="myProfile">
     </div>	
     <div id="all">   
 	    <c:set var="wish_list" value="${wishlist}"/>

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
 	<meta charset="UTF-8">
@@ -12,13 +13,13 @@
 	<link rel="stylesheet" href="resources/bootstrap.min.css"/>
 	<!-- <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script> -->
 	<style>
-	table,th,td{
-		border : 1px solid black;
-		border-collapse : collapse ;
-		padding : 5px;
-	}
+		table,th,td{
+			border : 1px solid black;
+			border-collapse : collapse ;
+			padding : 5px;
+		}
 		iframe{
-		width: 100%;
+			width: 100%;
 			height: 210px;
 			border-style: none;
 		} 
@@ -33,21 +34,39 @@
 		#myMenuBar{
 			text-align: center;
 		}		
-		 table{
-         margin-left: auto;
-         margin-right: auto;
-         min-width: 1296px;
-    }		
+		table{
+	         margin-left: auto;
+	         margin-right: auto;
+	         min-width: 1296px;
+    	}
+	     .board_title{
+		    display: block;
+	        color: black;
+	        width: 350px;
+	        font-weight: bolder !important;
+	        overflow: hidden;
+	        text-overflow: ellipsis;
+	        white-space: nowrap;
+		}
+		.etc{
+			display: block;
+	        color: black;
+	        width: 245px;
+	        font-weight: bolder !important;
+	        overflow: hidden;
+	        text-overflow: ellipsis;
+	        white-space: nowrap;
+		}
 	</style>
 </head>
 <body>
   	<iframe src="header"></iframe>
-  	<div id = "myMenuBar">
-        <img style="background-color: beige" class="myMenu" src="resources/img/전체주문내역.png"  alt="전체주문내역" loc="myorderList?currpage=1">
-        <img class="myMenu" src="resources/img/전체문의게시글.png" alt="전체문의게시글" loc="myInquire?currpage=1">
-        <img class="myMenu" src="resources/img/전체요청글.png" alt="전체요청글" loc="myRequire?currpage=1">
-        <img class="myMenu" src="resources/img/전체공구게시글.png" alt="전체공구게시글" loc="myWish?currpage=1">
-        <img class="myMenu" src="resources/img/전체회원정보.png" alt="전체회원정보" loc="myProfile">
+  	<div id = "myMenuBar">  
+		<img style="background-color: beige" class="myMenu" src="resources/img/my주문내역.png"  alt="my주문내역" loc="myorderList?currpage=1">
+        <img class="myMenu" src="resources/img/my문의글.png" alt="my문의글" loc="myInquire?currpage=1">
+        <img class="myMenu" src="resources/img/my요청글.png" alt="my요청글" loc="myRequire?currpage=1">
+        <img class="myMenu" src="resources/img/my찜리스트.png" alt="my찜리스트" loc="myWish?currpage=1">
+        <img class="myMenu" src="resources/img/my회원정보수정.png" alt="my회원정보수정" loc="myProfile">
     </div>
 <!-- 	<div>
 		<a href="myorderList">내 주문 내역</a>
@@ -74,12 +93,12 @@
 		<c:forEach var="orl" items="${orderList}" >
 		<tr>
 			<th><a href="orderDetail?order_no=${orl.order_no}&frompage=myorderList">${orl.order_no}</a></th>
-			<th>${orl.order_date}</th>
-			<th><a href="groupbuydetail?board_no=${orl.board_no}&frompage=myorderList">${orl.board_title}</a></th>		
+			<th><fmt:formatDate value="${orl.order_date}" pattern="yyyy. MM. dd"/></th>
+			<th><div class="board_title"><a href="groupbuydetail?board_no=${orl.board_no}&frompage=myorderList">${orl.board_title}</a></div></th>		
 			<th>${orl.groupbuy_state}</th>	
 			<th>${orl.order_state}</th>		
 			<th>${orl.order_quantity }</th>
-			<th>${orl.order_etc}</th>		
+			<th><div class="etc">${orl.order_etc}</div></th>		
 		</tr>			
 		</c:forEach>
 		

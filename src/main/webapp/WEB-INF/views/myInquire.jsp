@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
 	<meta charset="UTF-8">
@@ -9,13 +10,14 @@
 	<script src="resources/js/.bootstrap.min.js"></script>
 	<link rel="stylesheet" href="resources/bootstrap.min.css"/>
 	<style>
-	table,th,td{
-		border : 1px solid black;
-		border-collapse : collapse ;
-		padding : 5px;
-	}
-
-
+		.onetable{
+			border: none;
+		}
+		table,th,td{
+			border : 1px solid black;
+			border-collapse : collapse ;
+			padding : 5px;
+		}
 		.myMenu{
 			cursor: pointer;
 			padding: 20px;
@@ -31,22 +33,40 @@
 			height: 210px;
 			border-style: none;
 		}
-		 table{
-         margin-left: auto;
-         margin-right: auto;
-         min-width: 1296px;
-    }
+		table{
+	         margin-left: auto;
+	         margin-right: auto;
+	         min-width: 1296px;
+  	    }
+  	    .board_title{
+		    display: block;
+	        color: black;
+	        width: 350px;
+	        font-weight: bolder !important;
+	        overflow: hidden;
+	        text-overflow: ellipsis;
+	        white-space: nowrap;
+		}
+		.icon{
+		    width:70px;
+		    height:20px;
+	        border-radius: 10px;
+	        color: white;
+	        font-size:14px;
+	        text-align:center;
+		}
+
 	</style>
 </head>
 <body>
 	<iframe src="header"></iframe>
 	<div class = "allmyMenuBar">
 	<div id = "myMenuBar">
-        <img class="myMenu" src="resources/img/전체주문내역.png"  alt="전체주문내역" loc="myorderList?currpage=1">
-        <img style="background-color: beige" class="myMenu" src="resources/img/전체문의게시글.png" alt="전체문의게시글" loc="myInquire?currpage=1">
-        <img class="myMenu" src="resources/img/전체요청글.png" alt="전체요청글" loc="myRequire?currpage=1">
-        <img class="myMenu" src="resources/img/전체공구게시글.png" alt="전체공구게시글" loc="myWish?currpage=1">
-        <img class="myMenu" src="resources/img/전체회원정보.png" alt="전체회원정보" loc="myProfile">
+		<img class="myMenu" src="resources/img/my주문내역.png"  alt="my주문내역" loc="myorderList?currpage=1">
+        <img style="background-color: beige" class="myMenu" src="resources/img/my문의글.png" alt="my문의글" loc="myInquire?currpage=1">
+        <img class="myMenu" src="resources/img/my요청글.png" alt="my요청글" loc="myRequire?currpage=1">
+        <img class="myMenu" src="resources/img/my찜리스트.png" alt="my찜리스트" loc="myWish?currpage=1">
+        <img class="myMenu" src="resources/img/my회원정보수정.png" alt="my회원정보수정" loc="myProfile">
     </div>
 <!-- 	<div>
 		<a href="myorderList">내 주문 내역</a>
@@ -55,7 +75,11 @@
 		<a href="myInquire">내가 쓴 문의글</a>
 		<a href="myProfile">회원정보수정</a>
 	</div> -->
-	<h3>문의게시글</h3>
+	<table class="onetable">
+		<tr>
+			<th class="onetable">문의게시글</th>
+		</tr>
+	</table>
 	<table>
 		<tr>
 			<th>글번호</th>
@@ -73,8 +97,16 @@
 			<th>${iqL.board_no}</th>
 			<th>${iqL.inquiry_category_name}</th>
 			<th><a class="boardtitle" href="inquireBoardDetail?board_no=${iqL.board_no}">${iqL.board_title}</a></th>		
-			<th>${iqL.board_date }</th>
-			<th>${iqL.inquiry_answer}</th>		
+			<th><fmt:formatDate value="${iqL.board_date}" pattern="yyyy. MM. dd"/></th>
+			<c:choose>
+				<c:when test="${iqL.inquiry_answer eq 'Y'}">
+					<th> <div class="icon" style="background-color: rgb(204, 41, 41)">답변완료</div></th>
+				</c:when>
+				<c:when test="${iqL.inquiry_answer eq 'N'}">
+					<th> <div class="icon" style="background-color: rgb(53, 236, 181)">답변대기</div></th>
+				</c:when>
+			</c:choose>
+					
 		</tr>			
 		</c:forEach>
 
