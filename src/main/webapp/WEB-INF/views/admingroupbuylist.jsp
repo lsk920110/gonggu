@@ -8,6 +8,7 @@
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>  
 	<script src="resources/js/jquery.twbsPagination.js"></script>
+	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
    
    <!-- <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script> -->
    <link rel="stylesheet" href="resources/common.css">
@@ -34,10 +35,20 @@
 			border-style: none;
 		}   
 		table{
-         margin-left: auto;
-         margin-right: auto;
-         min-width: 1296px;
-    }  
+	         margin-left: auto;
+	         margin-right: auto;
+	         min-width: 1296px;
+   		 }  
+      	 .board_title{
+		    display: block;
+	        color: black;
+	        width: 511px;
+	        font-weight: bolder !important;
+	        overflow: hidden;
+	        text-overflow: ellipsis;
+	        white-space: nowrap;
+		}  	
+	
    </style>
 </head>
 <body>
@@ -59,19 +70,11 @@
 			
    
    
-   
-   
-   
-   
-   
-   
-   
    <form action="adminGroupbuy_update" method="post">
       <table>
             <tr>
                <th>게시글 번호</th>
                <th>제목</th>
-               <th>작성자</th>
                <th>카테고리</th>
                <th>등록일자</th>
                <th>비노출</th>
@@ -83,16 +86,15 @@
             
             <c:if test="${adgroupbuylist eq null || size == 0}">
                <tr>
-                  <td colspan="9">등록된 글이 없습니다.</td>
+                  <td colspan="8">등록된 글이 없습니다.</td>
                </tr>
             </c:if>
             <c:forEach items="${adgroupbuylist}" var="adgroupbuy">  
                <tr class="${adgroupbuy.board_no}">
                   <th>${adgroupbuy.board_no}</th>
-                  <th>${adgroupbuy.board_title}</th>
-                  <th>${adgroupbuy.user_id}</th>      
+                  <th><div class="board_title">${adgroupbuy.board_title}</div></th>  
                   <th>${adgroupbuy.product_category_name}</th>
-                  <th >${adgroupbuy.board_date }</th>
+                  <th><fmt:formatDate value="${adgroupbuy.board_date}" pattern="yyyy. MM. dd"/></th>
                   <th>
                      <select class="exp">
                         <option value="Y"

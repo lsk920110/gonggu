@@ -8,6 +8,7 @@
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>  
 	<script src="resources/js/jquery.twbsPagination.js"></script>
+	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 	<link rel="stylesheet" href="resources/common.css">
 	<style>
@@ -25,14 +26,23 @@
 		
 		iframe{
 			width: 100%;
-   			height: 210px;
+	  			height: 210px;
 			border-style: none;
 		}
 		table{
-         margin-left: auto;
-         margin-right: auto;
-         min-width: 1296px;
-    }  		
+	        margin-left: auto;
+	        margin-right: auto;
+	        min-width: 1296px;
+	        max-width: 1166px;
+	    } 
+	    .board_title{
+		    display: block;
+	        color: black;
+	        width: 432px;
+	        overflow: hidden;
+	        text-overflow: ellipsis;
+	        white-space: nowrap;
+		}  			
 	</style>
 </head>
 <body>
@@ -83,10 +93,10 @@
 					<input type="hidden"  name ="boardNo"  value ="${adInquiry.board_no}">
 					<tr>
 						<th>${adInquiry.board_no}</th>
-						<th>${adInquiry.board_title}</th>
+						<th> <div class="board_title">${adInquiry.board_title}</div></th>
 						<th>${adInquiry.user_id}</th>		
 						<th>${adInquiry.inquiry_category_name}</th>
-						<th>${adInquiry.board_date }</th>
+						<th><fmt:formatDate value="${adInquiry.board_date }" pattern="yyyy. MM. dd"/></th>	
 						<th>
 							<select class="${adInquiry.board_no}" name="exposure">
 								<option value="Y"

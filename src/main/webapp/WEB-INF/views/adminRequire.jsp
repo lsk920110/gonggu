@@ -8,6 +8,7 @@
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>  
 	<script src="resources/js/jquery.twbsPagination.js"></script>
+	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 	<!-- <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script> -->
 	<link rel="stylesheet" href="resources/common.css">
 	<style>
@@ -30,7 +31,17 @@
          margin-left: auto;
          margin-right: auto;
          min-width: 1296px;
-    }  		
+         max-width: 1166px;
+  		 }
+  	 .board_title{
+	    display: block;
+        color: black;
+        width: 434px;
+        font-weight: bolder !important;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+	}  				
 	</style>
 </head>
 <body>
@@ -73,10 +84,10 @@
 				<input type="hidden" name="boardNo" value="${adRequire.board_no}"/>
 					<tr>
 						<th>${adRequire.board_no}</th>
-						<th>${adRequire.board_title}</th>
+						<th><div class="board_title">${adRequire.board_title}</div></th>
 						<th>${adRequire.user_id}</th>		
 						<th>${adRequire.product_category_name}</th>
-						<th>${adRequire.board_date}</th>
+						<th><fmt:formatDate value="${adRequire.board_date}" pattern="yyyy. MM. dd"/></th>
 						<th>
 							<select name="exposure">
 								<option value="Y"

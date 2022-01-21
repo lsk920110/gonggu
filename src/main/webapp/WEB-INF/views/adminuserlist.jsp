@@ -5,6 +5,7 @@
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
 	<script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
+	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 	<style>
 		table,th,td {
 			border : 1px solid black;
@@ -66,7 +67,7 @@
 				<td>${userinfo.user_id }</td>
 				<td>${userinfo.user_name }</td>
 				<td>${userinfo.user_gender }</td>
-				<td>${userinfo.user_birth }</td>
+				<td><fmt:formatDate value="${userinfo.user_birth }" pattern="yyyy. MM. dd"/></td>
 				<td>${userinfo.user_email }</td>
 				<td>${userinfo.user_phone }</td>
 				<td>${userinfo.user_address }</td>

@@ -8,29 +8,40 @@
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>  
 	<script src="resources/js/jquery.twbsPagination.js"></script>
+	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 	<!-- <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script> -->
 	<link rel="stylesheet" href="resources/common.css">
 	<style>
-		.adminMenu{
-			cursor: pointer;
-			padding: 20px;
-		}
-		.adminMenu:hover{
-			background-color: beige;
-		}
-		#adminMenuBar{
-			text-align: center;
-		}
-		iframe{
-			width: 100%;
-			height: 210px;
-			border-style: none;
-		}
-		table{
-         margin-left: auto;
-         margin-right: auto;
-         min-width: 1296px;
-    }  		
+	.adminMenu{
+		cursor: pointer;
+		padding: 20px;
+	}
+	.adminMenu:hover{
+		background-color: beige;
+	}
+	#adminMenuBar{
+		text-align: center;
+	}
+	iframe{
+		width: 100%;
+		height: 210px;
+		border-style: none;
+	}
+	table{
+        margin-left: auto;
+        margin-right: auto;
+        min-width: 1296px;
+        max-width: 1166px;
+ 	 }
+ 	 .board_title{
+	    display: block;
+        color: black;
+        width: 350px;
+        font-weight: bolder !important;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+	}  		
 	</style>
 </head>
 <body>
@@ -73,10 +84,10 @@
 					<tr>
 						<th><a href="orderDetail?order_no=${adOrderList.order_no}&frompage=adminOrderList">${adOrderList.order_no}</a></th>
 						<th>${adOrderList.board_no}</th>
-						<th>${adOrderList.board_title}</th>
+						<th><div class="board_title">${adOrderList.board_title}</div></th>
 						<th>${adOrderList.groupbuy_state}</th>
-						<th>${adOrderList.user_id}</th>		
-						<th>${adOrderList.order_date}</th>
+						<th>${adOrderList.user_id}</th>
+						<th><fmt:formatDate value="${adOrderList.order_date}" pattern="yyyy. MM. dd"/></th>						
 						<th>${adOrderList.order_quantity}</th>
 						<th>${adOrderList.order_state}</th>
 						<th>${adOrderList.order_etc}</th>

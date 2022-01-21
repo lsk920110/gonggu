@@ -6,27 +6,50 @@
 	<title>Insert title here</title>
 	<script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
 	<style>
-		iframe{
-			width: 100%;
-			height: 210px;
-			border-style: none;
-		}	
-		table , th, td {
-			border : 1px solid black;
-			border-collapse : collapse;
-			padding : 5px;
-		}
+	.all{
+		width:1167px;
+		margin: 0 auto;
+	}
+	iframe{
+		width: 100%;
+		height: 210px;
+		border-style: none;
+	}	
+	table , th, td {
+		border : 1px solid black;
+		border-collapse : collapse;
+		padding : 5px;
+	}
+	table{
+	   	margin-left: auto;
+	   	margin-right: auto;
+	   	width:1167px;
+	   	max-width: 1166px;
+    }
+    .num{
+    	font-size:30px;
+    	font-weight: bold;
+    	color: rgb(81, 127, 252);
+    	left: 2px;
+    }
+    th{
+    	background-color: rgb(233, 233, 233);
+    }
+    .btn{
+    	float:right;
+    	width:65px;
+    	height:50px;
+    }
 	
 	</style>
 </head>
 <body>
 <iframe src="header"></iframe>
 
-	<h3>주문번호 ${orderdetail.order_no}</h3>
-	
-	
-	
-	<hr/>
+
+	<div class="all">
+		<h2 style="display:inline">주문번호</h2><p class="num" style="display:inline">${orderdetail.order_no}</p>
+		<hr/>
 	
 	<h2>구매자 정보</h2>
 	<table>
@@ -62,10 +85,13 @@
 		</tr>
 	</table>
 	
-	<h3 id="orderState">${orderdetail.order_state }</h3>
+	<h3 style="text-align:center;"id="orderState">${orderdetail.order_state }</h3>
 
-	<input type="button" value="확인" onclick="backPage()"/>
-	<input type="button" id="cancelBtn" value="주문취소" onclick="orderCancel()"/>
+	<input class="btn" type="button" value="확인" onclick="backPage()"/>
+	<input class="btn" type="button" id="cancelBtn" value="주문취소" onclick="orderCancel()"/>
+	
+	</div>
+	<br/>
 	
 	<iframe src="footer"></iframe>
 	
